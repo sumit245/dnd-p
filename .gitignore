@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+
+/vendor/
+/storage/
+
+.DS_Store
+Thumbs.db
+*.log
+
+.audit-lh-*.json

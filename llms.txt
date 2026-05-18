@@ -1,0 +1,58 @@
+# Dashandots Technology — llms.txt
+# Structured summary for AI language model indexing
+# Spec: https://llmstxt.org/
+
+> Dashandots Technology is a custom software development company based in Gurugram, India.
+> We build enterprise-grade ERP, CRM, TMS, HMS, and custom web/mobile applications for SMEs and growing businesses.
+
+## Company
+
+Dashandots Technology is a software development agency founded to make enterprise technology accessible to small and mid-sized businesses across India and internationally. We deliver end-to-end software — from requirements to deployment and post-launch support.
+
+- **Location:** Gurugram, Haryana, India
+- **Website:** https://dashandots.com/
+- **Contact:** https://dashandots.com/#contact
+- **Email:** dashandots@gmail.com
+
+## Services
+
+### Enterprise Resource Planning (ERP)
+Full-cycle ERP development with modules for inventory management, procurement, production planning, finance & accounting, HR & payroll, and reporting dashboards. Designed for Indian SMEs with GST compliance built in.
+
+### Transport Management System (TMS)
+Fleet tracking, route optimisation, driver management, freight billing, trip sheets, and logistics automation. Used by transport operators and logistics companies across India.
+- Live Demo: https://tms.dashandots.com/login
+
+### Hospital Management System (HMS)
+Comprehensive clinic and hospital software covering patient registration, appointment scheduling, EMR/EHR, billing, pharmacy, laboratory, and inventory.
+- Live Demo: https://hms.dashandots.com/login
+
+### Customer Relationship Management (CRM)
+Sales pipeline, lead tracking, customer lifecycle management, follow-up automation, and reporting for sales teams.
+
+### Custom Web & Mobile Applications
+Full-stack web apps (React, Node.js, PHP, Laravel) and mobile apps (Flutter for iOS and Android). Includes portals, dashboards, and SaaS platforms.
+
+### E-commerce & Portals
+B2B/B2C online stores, dealer portals, multi-vendor marketplaces. Built with GST invoicing, ERP sync, and payment gateway integration for the Indian market.
+
+### Data Analytics & AI
+Business intelligence dashboards, ETL pipelines, ML forecasting, and LLM workflow integrations for data-driven SMEs.
+
+### IoT & Embedded Software
+Firmware development (ESP32, STM32), device-cloud pipelines (MQTT, LoRaWAN), OTA updates, and FreeRTOS-based systems.
+
+## Target Clients
+
+Small and medium enterprises (SMEs), logistics companies, healthcare providers, retail chains, and manufacturing firms in India seeking affordable, robust custom software alternatives to expensive off-the-shelf products.
+
+## Content
+
+- Blog: https://dashandots.com/blog/
+- Portfolio & Live Demos: https://dashandots.com/#portfolio
+- Services Overview: https://dashandots.com/#services
+
+## Usage Permissions
+
+- **AI search citation** (ChatGPT, Perplexity, Google AI Overview, Claude): Permitted
+- **AI training corpus inclusion**: Not permitted — see robots.txt for crawler rules

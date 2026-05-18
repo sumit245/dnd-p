@@ -1,0 +1,124 @@
+<?php
+require __DIR__ . '/../../includes/config.php';
+
+$page['title']       = 'E-commerce & Portal Development Services in India | Dashandots';
+$page['description'] = 'Custom B2B & B2C e-commerce development — multi-vendor marketplaces, dealer portals and self-service platforms. Built on Laravel, React & WooCommerce.';
+$page['canonical']   = SITE_URL . '/services/ecommerce/';
+$page['og_title']    = 'E-commerce & Portal Development | Dashandots Technology';
+$page['og_desc']     = $page['description'];
+
+require __DIR__ . '/../../includes/head.php';
+require __DIR__ . '/../../includes/header.php';
+?>
+
+<main id="main-content">
+  <div class="svc-page">
+
+    <!-- HERO -->
+    <div class="svc-hero">
+      <p class="page-label">E-commerce &amp; Portal Development</p>
+      <h1>E-commerce &amp; Customer Portals That Convert and Retain</h1>
+      <p class="lead">We build high-performance online stores, B2B ordering portals, and multi-vendor marketplaces designed to maximise revenue, reduce operational overhead, and keep customers coming back.</p>
+      <div class="hero-actions">
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Discuss Your Store</a>
+        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline">View Portfolio</a>
+      </div>
+    </div>
+
+    <!-- WHY CUSTOM E-COM -->
+    <h2>Beyond Template Stores</h2>
+    <p class="svc-body-text">Shopify and WooCommerce templates get you live fast — but they hit a ceiling. Custom payment flows, dealer-specific pricing, bulk ordering logic, GST-compliant invoicing, and ERP integration all require custom development. We build stores that handle your actual business rules, not a generic retailer's.</p>
+
+    <div class="svc-feature-grid">
+      <div class="svc-feature-card">
+        <h3>Customer-Specific Pricing</h3>
+        <p>B2B portals with dealer tiers, customer-group discounts, credit limits, and personalised product catalogues — hidden from competitors and the public.</p>
+      </div>
+      <div class="svc-feature-card">
+        <h3>GST-Compliant Invoicing</h3>
+        <p>Automated CGST/SGST/IGST calculation, HSN code mapping, e-invoice generation, and GSTR-1 export — built for India's tax compliance requirements.</p>
+      </div>
+      <div class="svc-feature-card">
+        <h3>ERP &amp; Inventory Sync</h3>
+        <p>Real-time stock sync with your warehouse or ERP. No overselling, no manual updates, no customer disappointment on delivery timelines.</p>
+      </div>
+      <div class="svc-feature-card">
+        <h3>Multi-Vendor Marketplace</h3>
+        <p>Seller onboarding, commission management, payout splits, and dispute resolution — the infrastructure to run a platform business.</p>
+      </div>
+      <div class="svc-feature-card">
+        <h3>Conversion-Optimised UX</h3>
+        <p>Persistent cart, one-click reorder, smart search with filters, guest checkout, and mobile-first design — reducing drop-offs at every stage.</p>
+      </div>
+      <div class="svc-feature-card">
+        <h3>Payment Gateway Ready</h3>
+        <p>Razorpay, PayU, CCAvenue, Stripe, UPI, COD, credit terms — all integrated and tested before go-live, not after.</p>
+      </div>
+    </div>
+
+    <!-- WHAT WE BUILD -->
+    <h2>Platforms We Build</h2>
+    <ul class="svc-includes">
+      <li>B2C online stores (fashion, FMCG, electronics, D2C brands)</li>
+      <li>B2B dealer &amp; distributor portals</li>
+      <li>Multi-vendor marketplaces</li>
+      <li>Subscription &amp; recurring billing platforms</li>
+      <li>Wholesale &amp; bulk ordering portals</li>
+      <li>Product configurators (spec-to-order, custom printing)</li>
+      <li>Customer self-service portals (orders, returns, invoices)</li>
+      <li>Vendor/supplier onboarding portals</li>
+      <li>Auction &amp; reverse auction platforms</li>
+      <li>WooCommerce customisation &amp; migration</li>
+      <li>Headless commerce (Next.js frontend + custom API)</li>
+      <li>Mobile shopping apps (iOS &amp; Android)</li>
+    </ul>
+
+    <!-- KEY FEATURES -->
+    <h2>Features We Commonly Implement</h2>
+    <div class="svc-feature-grid">
+      <div class="svc-feature-card">
+        <h3>Advanced Search &amp; Filters</h3>
+        <p>Elasticsearch-powered product search with category, price, brand, and attribute filters. Autocomplete, spell-correction, and synonym matching included.</p>
+      </div>
+      <div class="svc-feature-card">
+        <h3>Loyalty &amp; Rewards</h3>
+        <p>Points programmes, referral systems, coupon engines, and cashback mechanisms to increase repeat purchases and LTV.</p>
+      </div>
+      <div class="svc-feature-card">
+        <h3>Analytics Dashboard</h3>
+        <p>Real-time sales reporting, funnel visualisation, abandoned cart tracking, and cohort analysis — all in one internal dashboard.</p>
+      </div>
+      <div class="svc-feature-card">
+        <h3>Logistics Integration</h3>
+        <p>Shiprocket, Delhivery, FedEx, Blue Dart, and custom courier APIs for automated label printing, tracking updates, and NDR management.</p>
+      </div>
+    </div>
+
+    <!-- TECH STACK -->
+    <h2>Technology We Use</h2>
+    <ul class="svc-includes">
+      <li>Laravel + React (full custom builds with maximum flexibility)</li>
+      <li>WooCommerce + custom plugins (for businesses with existing WordPress sites)</li>
+      <li>Next.js headless commerce (for performance-critical storefronts)</li>
+      <li>MySQL + Redis (transactional data + session/cache layer)</li>
+      <li>Elasticsearch for product search at scale</li>
+      <li>AWS S3 + CloudFront for image and media delivery</li>
+      <li>Razorpay, PayU, Stripe, CCAvenue payment integrations</li>
+    </ul>
+
+    <!-- CTA -->
+    <div class="svc-cta-strip">
+      <p class="page-label">Ready to Sell Smarter?</p>
+      <h2>Let's Build Your Store or Portal</h2>
+      <p>Tell us about your products, your customers, and your current bottlenecks. We'll design a commerce solution that fits your business model precisely.</p>
+      <div class="hero-actions" style="justify-content:center; margin-top:24px">
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Get a Free Consultation</a>
+        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline">See E-commerce Work</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<?php require __DIR__ . '/../../includes/footer.php'; ?>
+<?php require __DIR__ . '/../../includes/scripts.php'; ?>

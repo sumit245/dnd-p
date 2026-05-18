@@ -1,0 +1,124 @@
+# Dashandots Technology — Apache config
+# Works on localhost (XAMPP) and production
+
+Options -Indexes
+DirectoryIndex index.php index.html
+
+RewriteEngine On
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PRODUCTION REDIRECTS (skip localhost)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# www → non-www
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteCond %{HTTP_HOST} !^localhost$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+# HTTP → HTTPS
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} !^localhost$ [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ═══════════════════════════════════════════════════════════════════════════
+# LEGACY .html → CLEAN URL REDIRECTS (301)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# index.html → /
+RewriteRule ^index\.html$ / [R=301,L]
+
+# Legal pages
+RewriteRule ^privacy-policy\.html$ /dashandots/privacy-policy [R=301,L]
+RewriteRule ^terms\.html$ /dashandots/terms [R=301,L]
+
+# Blog pages
+RewriteRule ^blog/index\.html$ /dashandots/blog [R=301,L]
+RewriteRule ^blog/future-of-custom-erp\.html$ /dashandots/blog/future-of-custom-erp [R=301,L]
+RewriteRule ^blog/mobile-first-design-b2b\.html$ /dashandots/blog/mobile-first-design-b2b [R=301,L]
+
+# Demo pages (old root-level → new /demo/ directory)
+RewriteRule ^demo-erp\.html$ /dashandots/demo/erp [R=301,L]
+RewriteRule ^demo-tms\.html$ /dashandots/demo/tms [R=301,L]
+RewriteRule ^demo-hms\.html$ /dashandots/demo/hms [R=301,L]
+
+# Services
+RewriteRule ^services/erp-development/index\.html$ /dashandots/services/erp-development [R=301,L]
+
+# ═══════════════════════════════════════════════════════════════════════════
+# CLEAN URLs — Strip .php extensions
+# ═══════════════════════════════════════════════════════════════════════════
+
+# If .php is explicitly requested, redirect to extensionless (avoid dupes)
+# Skip POST requests — 301 redirects convert POST→GET, breaking form handlers
+RewriteCond %{REQUEST_METHOD} !POST
+RewriteCond %{THE_REQUEST} \s/dashandots/(.+?)\.php[\s?] [NC]
+RewriteRule ^ /dashandots/%1 [R=301,L]
+
+# Legacy static sitemap → dynamic generator
+RewriteRule ^sitemap\.xml$ sitemap.php [R=301,L]
+
+# Static blog articles: /blog/{slug} when blog/{slug}.php exists
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond blog/$1.php -f
+RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ blog/$1.php [L]
+
+# Dynamic CMS posts: /blog/{slug} → blog/post.php?slug={slug}
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ blog/post.php?slug=$1 [L,QSA]
+
+# Internally rewrite extensionless → .php (if file exists)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L]
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SECURITY
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Block migration and test scripts (defense in depth)
+RewriteRule ^admin/run-(blog-)?migration\.php$ - [F,L]
+RewriteRule ^test_.*\.php$ - [F,L]
+
+# Block dot-files (.env, .git, etc.)
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Error pages
+ErrorDocument 404 /dashandots/404.php
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PERFORMANCE
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
+</IfModule>
+
+# Cache headers
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/html              "access plus 0 seconds"
+    ExpiresByType text/css               "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png              "access plus 1 year"
+    ExpiresByType image/webp             "access plus 1 year"
+    ExpiresByType image/jpeg             "access plus 1 year"
+    ExpiresByType image/svg+xml          "access plus 1 year"
+    ExpiresByType font/woff2             "access plus 1 year"
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    # HSTS — only sent over HTTPS (skipped on localhost HTTP)
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+    Header set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://tagmanager.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://region1.analytics.google.com; frame-src https://www.googletagmanager.com"
+</IfModule>

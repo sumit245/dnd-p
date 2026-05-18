@@ -1,0 +1,14 @@
+# ads.txt file for dashandots.com
+# This website does not sell advertising space
+# No authorized digital sellers
+
+# If you plan to add advertising in the future, add entries here in the format:
+# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+# Where:
+# - google.com = advertising platform domain
+# - pub-0000000000000000 = your publisher ID
+# - DIRECT = relationship type (DIRECT or RESELLER)
+# - f08c47fec0942fa0 = certification authority ID (optional)
+
+# For more information, visit: https://iabtechlab.com/ads-txt/
+
