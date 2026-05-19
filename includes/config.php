@@ -39,7 +39,7 @@ require_once __DIR__ . '/seo.php';
 // Default page context — pages override before including head.php
 $page = [
     'title' => SITE_NAME . ' — ' . SITE_TAGLINE,
-    'description' => 'Custom ERP, CRM, Hotel PMS & project management software developer in Gurugram, Delhi NCR. Mobile apps & management systems for Indian SMEs.',
+    'description' => 'Dashandots builds custom ERP, CRM, Hotel PMS, project management software and mobile apps for Indian SMEs in Gurugram and Delhi NCR, with secure delivery and long-term support.',
     'keywords' => 'custom ERP development India, CRM development company India, business software for Indian SMEs',
     'canonical' => SITE_URL . '/',
     'og_title' => 'Software Developer in India | ERP, CRM, Hotel PMS & Management Systems — ' . SITE_NAME,
