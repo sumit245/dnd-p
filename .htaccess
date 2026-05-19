@@ -27,22 +27,45 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 # index.html → /
 RewriteRule ^index\.html$ / [R=301,L]
 
-# Legal pages
+# Legal pages (localhost → /dashandots/…; production → site root)
+RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
 RewriteRule ^privacy-policy\.html$ /dashandots/privacy-policy [R=301,L]
+RewriteRule ^privacy-policy\.html$ /privacy-policy [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
 RewriteRule ^terms\.html$ /dashandots/terms [R=301,L]
+RewriteRule ^terms\.html$ /terms [R=301,L]
 
 # Blog pages
-RewriteRule ^blog/index\.html$ /dashandots/blog [R=301,L]
+RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
+RewriteRule ^blog/index\.html$ /dashandots/blog/ [R=301,L]
+RewriteRule ^blog/index\.html$ /blog/ [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
 RewriteRule ^blog/future-of-custom-erp\.html$ /dashandots/blog/future-of-custom-erp [R=301,L]
+RewriteRule ^blog/future-of-custom-erp\.html$ /blog/future-of-custom-erp [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
 RewriteRule ^blog/mobile-first-design-b2b\.html$ /dashandots/blog/mobile-first-design-b2b [R=301,L]
+RewriteRule ^blog/mobile-first-design-b2b\.html$ /blog/mobile-first-design-b2b [R=301,L]
 
 # Demo pages (old root-level → new /demo/ directory)
+RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
 RewriteRule ^demo-erp\.html$ /dashandots/demo/erp [R=301,L]
+RewriteRule ^demo-erp\.html$ /demo/erp [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
 RewriteRule ^demo-tms\.html$ /dashandots/demo/tms [R=301,L]
+RewriteRule ^demo-tms\.html$ /demo/tms [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
 RewriteRule ^demo-hms\.html$ /dashandots/demo/hms [R=301,L]
+RewriteRule ^demo-hms\.html$ /demo/hms [R=301,L]
 
 # Services
-RewriteRule ^services/erp-development/index\.html$ /dashandots/services/erp-development [R=301,L]
+RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
+RewriteRule ^services/erp-development/index\.html$ /dashandots/services/erp-development/ [R=301,L]
+RewriteRule ^services/erp-development/index\.html$ /services/erp-development/ [R=301,L]
 
 # ═══════════════════════════════════════════════════════════════════════════
 # CLEAN URLs — Strip .php extensions
@@ -58,9 +81,12 @@ RewriteRule ^ /dashandots/%1 [R=301,L]
 RewriteRule ^sitemap\.xml$ sitemap.php [R=301,L]
 
 # Static blog articles: /blog/{slug} when blog/{slug}.php exists
+RewriteRule ^blog/(future-of-custom-erp|mobile-first-design-b2b)/?$ blog/$1.php [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond blog/$1.php -f
+RewriteCond blog/$1.php -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/blog/$1.php -f
 RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ blog/$1.php [L]
 
 # Dynamic CMS posts: /blog/{slug} → blog/post.php?slug={slug}
@@ -87,6 +113,10 @@ RewriteRule ^test_.*\.php$ - [F,L]
     Order allow,deny
     Deny from all
 </FilesMatch>
+
+<Files ".env">
+    Require all denied
+</Files>
 
 # Error pages
 ErrorDocument 404 /dashandots/404.php
@@ -115,10 +145,11 @@ ErrorDocument 404 /dashandots/404.php
 
 # Security headers
 <IfModule mod_headers.c>
+    Header unset X-Powered-By
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
     # HSTS — only sent over HTTPS (skipped on localhost HTTP)
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
-    Header set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://tagmanager.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://region1.analytics.google.com; frame-src https://www.googletagmanager.com"
+    Header set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://tagmanager.google.com https://www.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://region1.analytics.google.com https://www.clarity.ms https://*.clarity.ms; frame-src https://www.googletagmanager.com"
 </IfModule>

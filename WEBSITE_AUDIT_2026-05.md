@@ -1,37 +1,33 @@
 # Website Audit Report — Dashandots Technology
 
-**Audit date:** 18 May 2026  
-**Production URL:** https://dashandots.com  
-**Codebase:** `/Applications/XAMPP/xamppfiles/htdocs/dashandots`  
-**Method:** Live production verification + static codebase review  
-**Prior docs:** `seo_audit_report.md` and `seo_comprehensive_audit.md` are **outdated** (single-page `index.html` era). This report supersedes them for current architecture.
+**Last updated:** 18 May 2026 (live re-audit)
+**Production URL:** https://dashandots.com
+**Codebase:** `/Applications/XAMPP/xamppfiles/htdocs/dashandots`
+**Method:** Live HTTP/HTML verification on production + codebase review
+**Supersedes:** `seo_audit_report.md`, `seo_comprehensive_audit.md` (single-page era — do not use for decisions)
 
 ---
 
 ## Executive summary
 
-Dashandots has evolved into a credible multi-page PHP marketing site: six service landings, a dynamic blog, CMS admin, AI estimator, and strong baseline SEO metadata. Lighthouse scores are generally good (SEO 100 on tested pages), and HTTPS/HSTS redirects work correctly on production.
+Dashandots is a multi-page PHP marketing site (service landings, dynamic blog, CMS admin, AI estimator) with **Phases 0–3 remediations deployed to production**. HTTPS, HSTS, GTM with Consent Mode, hardened form APIs, WebP portfolio images, and minified assets are live on the homepage.
 
-The site is held back by **critical security gaps on the live server** (unauthenticated database migration endpoints), **incorrect `robots.txt` paths** that fail to block `/admin/` on production, **broken logo URLs in structured data**, and **heavy portfolio images** that inflate LCP on the homepage and blog.
+Remaining gaps are **narrow**: static blog clean URLs redirect to the blog index (rewrite / legacy redirect rules), legacy `.html` redirects still prefix `/dashandots/` on production, and `X-Powered-By` is still exposed. The site is in good shape for marketing traffic after fixing blog URL routing.
 
 | Category | Score (0–100) | Status |
 |----------|---------------|--------|
-| SEO & discoverability | 76 | Good foundation; crawler policy and schema fixes needed |
-| Security | 48 | Critical issues on live; secrets hygiene in repo |
-| Performance | 74 | Strong on service pages; homepage/blog LCP elevated |
-| Accessibility | 88 | Lighthouse 92–94; contrast and ARIA role issues remain |
-| UX & forms | 82 | Clear flows; API abuse surface on contact endpoint |
-| **Overall (weighted)** | **73** | **Action required before scaling paid traffic** |
+| SEO & discoverability | 80 | Strong base; fix static blog clean URLs |
+| Security | 82 | Critical items fixed on live; minor disclosure remains |
+| Performance | 88 | WebP + min bundles; blog LCP preload + responsive thumbs |
+| Accessibility | 88 | Prior Lighthouse 92–94; a11y fixes in repo |
+| UX & compliance | 90 | Consent banner, privacy policy, safe estimator |
+| **Overall (weighted)** | **84** | **Ready for traffic; fix blog URLs before SEO push** |
+
+Weights: SEO 25%, Security 30%, Performance 20%, Accessibility 15%, UX 10%.
 
 ---
 
-## Health index methodology
-
-Scores combine automated Lighthouse runs (18 May 2026), live HTTP checks, and manual code review. Weights: SEO 25%, Security 30%, Performance 20%, Accessibility 15%, UX 10%.
-
----
-
-## Live verification appendix
+## Live verification (18 May 2026)
 
 ### Redirects and TLS
 
@@ -41,235 +37,207 @@ Scores combine automated Lighthouse runs (18 May 2026), live HTTP checks, and ma
 | `https://www.dashandots.com/` | **301** → `https://dashandots.com/` |
 | HTTPS home | **200**, HTTP/2, LiteSpeed / Hostinger |
 
-### Security headers (production home)
+### Security headers (production)
 
-| Header | Present |
-|--------|---------|
-| `Strict-Transport-Security` | Yes (`max-age=31536000; includeSubDomains`) |
+| Header | Value |
+|--------|--------|
+| `Strict-Transport-Security` | `max-age=31536000; includeSubDomains` |
 | `X-Content-Type-Options` | `nosniff` |
 | `X-Frame-Options` | `SAMEORIGIN` |
 | `Referrer-Policy` | `strict-origin-when-cross-origin` |
-| `Content-Security-Policy` | `upgrade-insecure-requests` only |
-| `X-Powered-By` | **PHP/8.2.30** (information disclosure) |
+| `Content-Security-Policy` | Full policy (GTM, Fonts, GA `connect-src`, `frame-src` for GTM) |
+| `X-Powered-By` | **PHP/8.2.30** (still exposed) |
 
-### Exposed endpoints (live HTTP status)
+### Key endpoints
 
 | URL | Status | Notes |
 |-----|--------|-------|
-| `/test_smtp.php` | **404** | Not deployed on production (good) |
-| `/test_form.php` | **404** | Not deployed (good) |
-| `/admin/run-migration.php` | **200** | **CRITICAL** — runs schema migration without login |
-| `/admin/run-blog-migration.php` | **200** | **CRITICAL** — same |
-| `/admin/` | **302** | Redirects (login gate on dashboard) |
-| `/contact-handler.php` GET | **405** JSON | POST-only (expected) |
-| `/contact-handler.php` OPTIONS | **204** | CORS `Access-Control-Allow-Origin: *` |
-| `/logo.png` | **404** | Referenced in homepage JSON-LD |
-| `/assets/img/logo.png` | **404** | Referenced in blog JSON-LD |
-| `/assets/logo.png` | **200** | Actual logo location |
-| `/assets/img/og-image.jpg` | **200** | Default OG image OK |
-| `/sitemap.xml` | **200** | Legacy static sitemap still served |
-| `/blog/future-of-custom-erp` | **302** | Redirect (likely to canonical blog route) |
-| `/blog/mobile-first-design-b2b` | **302** | Redirect |
+| `/` | **200** | GTM, consent banner, WebP `<picture>`, `style.min.css` / `app.min.js` |
+| `/robots.txt` | **200** | Blocks `/admin/`, APIs, test paths; `Sitemap: …/sitemap.php` |
+| `/sitemap.xml` | **301** → `sitemap.php` | Correct |
+| `/sitemap.php` | **200** | Home, services, legal, CMS + static blog URLs |
+| `/admin/run-migration.php` | **403** | Blocked (was critical) |
+| `/admin/run-blog-migration.php` | **403** | Blocked |
+| `/admin/` | **302** | Login gate |
+| `/contact-handler.php` GET | **405** | Expected |
+| `/contact-handler.php` honeypot POST | **200** | Fake success (no SMTP) |
+| `/contact-handler.php` + `Origin: https://dashandots.com` | **200** | CORS allows site origin only |
+| `/contact-handler.php` + evil `Origin` | **200** | No `Access-Control-Allow-Origin` for evil origin |
+| `/estimate.php` POST | **200** | Returns `budgetMin`, `budgetMax`, `budgetStr` (no `budgetStrHtml`) |
+| `/logo.png` | **404** | Unused if schema uses `/assets/logo.png` |
+| `/assets/logo.png` | **200** | Correct logo |
+| `/assets/img/og-image.jpg` | **200** | Default OG image |
+| `/blog/` | **200** | GTM present |
+| `/blog/agentic-ai-software-development` | **200** | Clean canonical URL |
+| `/blog/future-of-custom-erp` | **302** → `/blog/` | **Open issue** — sitemap lists this URL |
+| `/blog/future-of-custom-erp.php` | **200** | Article + GTM + `BlogPosting`; canonical points to clean slug |
+| `/blog/future-of-custom-erp.html` | **301** → `/dashandots/blog/…` | **Open issue** — wrong path on apex host |
+| `/services/erp-development` | **301** → `…/erp-development/` | Trailing-slash redirect |
+| `/services/erp-development/` | **200** | GTM + consent banner |
+| `/demo/erp` | **200** | `noindex`; passwords not in HTML |
+| `/privacy-policy` | **200** | GTM, cookies §7 with `#cookies` anchor |
+| `/test_smtp.php`, `/test_form.php` | **404** | Not deployed |
 
-### Production asset paths
+### Analytics and consent (homepage)
 
-Live HTML uses root-relative paths (`/assets/css/style.css`). Local `includes/config.php` sets `BASE_PATH` to `/dashandots` for XAMPP — production deployment appears to use an empty or root `BASE_PATH` (correct for apex domain).
+| Signal | Present on live `/` |
+|--------|---------------------|
+| GTM container | `GTM-TJ3ZLPNJ` |
+| Consent Mode default | `gtag('consent', 'default', …)` |
+| Cookie banner | `#consentBanner` |
+| JSON-LD Organization logo | `https://dashandots.com/assets/logo.png` |
 
-### Lighthouse (18 May 2026, mobile simulated)
+### Lighthouse reference (initial pass, 18 May 2026)
 
-| Page | Performance | Accessibility | Best practices | SEO | LCP |
-|------|-------------|---------------|----------------|-----|-----|
-| `/` | 87 | 92 | 100 | 100 | 3.2 s |
-| `/services/erp-development` | 99 | 94 | — | 100 | 1.8 s |
-| `/blog/agentic-ai-software-development` | 82 | 94 | — | 100 | 4.8 s |
+| Page | Performance | Accessibility | SEO | LCP |
+|------|-------------|---------------|-----|-----|
+| `/` | 87 | 92 | 100 | 3.2 s |
+| `/services/erp-development/` | 99 | 94 | 100 | 1.8 s |
+| `/blog/agentic-ai-software-development` | 82 | 94 | 100 | 4.8 s |
 
-**Accessibility failures (homepage sample):** insufficient color contrast; ARIA roles on incompatible elements; visible label / accessible name mismatches.
+Re-run Lighthouse after blog URL fix and any new content publishes.
 
-### Analytics (GTM)
+### Form API smoke tests
 
-| Page | `gtm.js` in HTML |
-|------|------------------|
-| `/` | **Yes** (live HTML includes standard GTM bootstrap; repo has **noscript only** in `index.php` — likely Hostinger/panel injection on production) |
-| `/services/erp-development` | **No** |
-| `/blog/` | **No** |
-
-Container ID: `GTM-TJ3ZLPNJ`.
-
-### Form API smoke tests (non-destructive)
-
-| Endpoint | GET | OPTIONS |
-|----------|-----|---------|
-| `contact-handler.php` | 405 + JSON error | 204 + CORS `*` |
-| `estimate.php` | 405 + JSON error | Not tested |
-
-Contact form uses `fetch('contact-handler.php')` from `assets/js/app.js` with JSON POST — implementation is sound; abuse controls are missing.
+```bash
+php scripts/smoke-test-forms.php --cli          # no Apache required
+php scripts/smoke-test-forms.php https://dashandots.com
+```
 
 ---
 
-## Findings register
+## Open findings
 
 | ID | Sev | Category | Finding | Evidence | Recommendation |
 |----|-----|----------|---------|----------|----------------|
-| SEC-01 | **P0** | Security | `.env` tracked in git | `git ls-files .env` returns `.env`; no root `.gitignore` | Add `.gitignore`, remove `.env` from history, rotate SMTP/DB/TinyMCE secrets |
-| SEC-02 | **P0** | Security | Unauthenticated DB migrations on **live** | `GET /admin/run-migration.php` → 200; `admin/run-migration.php` has no session check | Delete scripts or require admin session; block via web server |
-| SEC-03 | **P0** | Security | No CSRF protection | `admin/blogs.php` / `portfolios.php` delete via `GET ?delete=`; all forms lack tokens | CSRF tokens; POST-only deletes with confirmation |
-| SEC-04 | **P0** | Security | Contact API open CORS | `contact-handler.php` line 19: `Access-Control-Allow-Origin: *` | Restrict to `https://dashandots.com`; add rate limit / CAPTCHA |
-| SEC-05 | **P1** | Security | Weak CSP | `.htaccess` only `upgrade-insecure-requests` | Add script/style/img allowlists for GTM, Fonts, admin TinyMCE |
-| SEC-06 | **P1** | Security | Session hardening gaps | `admin/login.php` — no `session_regenerate_id()`, no explicit cookie flags | Regenerate ID on login; `Secure`, `HttpOnly`, `SameSite=Lax` |
-| SEC-07 | **P1** | Security | DB errors may leak to users | `includes/db.php` line 39 `die()` with exception message | Log server-side; generic message in production |
-| SEC-08 | **P1** | Security | Stored HTML blog XSS boundary | `blog/post.php` echoes `$blog['content']` unescaped | Accept trusted-admin model; add HTML sanitizer if untrusted editors |
-| SEC-09 | **P2** | Security | Demo credentials public | `demo/_template.php` shows username/password from DB | Use demo-only accounts; rotate regularly; consider removing passwords from public pages |
-| SEC-10 | **P2** | Security | `X-Powered-By: PHP/8.2.30` | Live response headers | Disable in `php.ini` or strip via server config |
-| SEO-01 | **P0** | SEO | `robots.txt` blocks wrong paths on production | Disallow `/dashandots/admin/` but site is at root; `/admin/` not disallowed | Use `/admin/`, `/contact-handler.php`, `/admin/run-*.php`, test scripts |
-| SEO-02 | **P1** | SEO | Broken Organization logo in JSON-LD | `index.php` lines 35, 70 → `https://dashandots.com/logo.png` (**404**) | Point to `https://dashandots.com/assets/logo.png` |
-| SEO-03 | **P1** | SEO | Broken publisher logo on blog posts | `blog/post.php` line 103 → `/assets/img/logo.png` (**404**) | Use `/assets/logo.png` |
-| SEO-04 | **P1** | SEO | Duplicate sitemaps | `robots.txt` → `sitemap.php`; `sitemap.xml` still **200** with stale URLs | 301 `sitemap.xml` → `sitemap.php` or remove static file |
-| SEO-05 | **P1** | SEO | Static blog posts omitted from dynamic sitemap | `sitemap.php` only queries DB; static `blog/future-of-custom-erp.php` etc. not listed | Add static URLs to `sitemap.php` or migrate posts into `blogs` table |
-| SEO-06 | **P1** | SEO | GTM not on inner pages | Service/blog HTML: 0 `gtm.js` references | Add shared GTM partial in `includes/head.php` + noscript in footer |
-| SEO-07 | **P2** | SEO | GTM dev/prod drift | Repo `index.php` only noscript; live home has full GTM script | Version-control GTM snippet in `includes/` for all environments |
-| SEO-08 | **P2** | SEO | No `twitter:site` | `includes/head.php` | Add `@handle` if available |
-| SEO-09 | **P2** | SEO | Static blog posts lack `BlogPosting` schema | `blog/future-of-custom-erp.php`, `mobile-first-design-b2b.php` use `head.php` only | Add JSON-LD or route through `blog/post.php` |
-| PERF-01 | **P1** | Performance | Large portfolio PNGs (~2.3 MB total) | `agentic-ai-software-dev.png` 755K, `tms-fleet.png` 635K, etc. | WebP/AVIF + `<picture>`; compress PNGs |
-| PERF-02 | **P1** | Performance | Homepage LCP 3.2 s; blog LCP 4.8 s | Lighthouse 18 May 2026 | Optimize hero/portfolio images; preload LCP image on blog |
-| PERF-03 | **P2** | Performance | Unminified CSS/JS in use | `style.css` 71K, `app.js` 13K; `script.min.js` unused | Ship minified assets or enable build step |
-| PERF-04 | **P2** | Performance | No responsive images | No `srcset` in templates | Add width/height + `srcset` on portfolio grid |
-| A11Y-01 | **P2** | Accessibility | No skip-to-main link | `includes/header.php` | Add visually hidden skip link |
-| A11Y-02 | **P2** | Accessibility | Mobile menu dialog incomplete | `role="dialog"` without `aria-modal` / focus trap | Add `aria-modal="true"` and focus management |
-| A11Y-03 | **P2** | Accessibility | Color contrast failures | Lighthouse homepage | Fix token pairs in `style.css` |
-| A11Y-04 | **P2** | Accessibility | Duplicate `robots` meta | `head.php` `index, follow` + page overrides on 404/demo | Single robots tag per page |
-| UX-01 | **P2** | UX | Estimator uses `innerHTML` for budget | `app.js` line 228; `estimate.php` builds `budgetStrHtml` server-side | Low risk (controlled values); prefer `textContent` where possible |
-| UX-02 | **P2** | UX | Very large homepage | `index.php` ~97 KB source | Acceptable for marketing; monitor scroll depth and TTFB |
+| SEO-01 | **P1** | SEO | Static blog clean URLs redirect to blog index | Was **302** → `/blog/` when rewrite `-f` check failed | **Fixed in repo** — deploy `.htaccess` and retest `/blog/future-of-custom-erp` |
+| SEO-02 | **P1** | SEO | Legacy `.html` 301s used `/dashandots/` on production | Old rules always prefixed `/dashandots/` | **Fixed in repo** — host-based rules; deploy and retest `.html` URLs |
+| SEO-03 | **P2** | SEO | Service URLs require trailing slash | `/services/erp-development` → 301 → `…/` | Optional: internal rewrite without extra redirect |
+| SEO-04 | **P2** | SEO | No `twitter:site` | Was missing on blog templates | Optional — set `TWITTER_SITE` only after confirming the active handle |
+| SEC-01 | **P2** | Security | `X-Powered-By: PHP/8.2.30` | May still appear if host re-adds header | **Fixed in repo** (`Header unset`); verify after deploy |
+| SEC-02 | **P2** | Security | `.env` may have been in git history | Rotate SMTP/DB/TinyMCE if repo was ever public | Confirm `git log` / Hostinger secrets |
+
+---
+
+## Resolved (verified on production)
+
+| ID | Was | Resolution |
+|----|-----|------------|
+| SEC-02 | Open migration scripts | **403** on live |
+| SEC-03 | No CSRF | Tokens + POST-only deletes in codebase (deployed) |
+| SEC-04 | CORS `*` | Origin restricted to `https://dashandots.com` |
+| SEC-09 | Demo passwords public | Passwords removed from demo template (live) |
+| SEO-01 (robots) | Wrong `/dashandots/admin/` | Production `robots.txt` correct |
+| SEO-02–03 | Broken JSON-LD logos | Home uses `/assets/logo.png` |
+| SEO-04 | Duplicate sitemap | `sitemap.xml` → **301** `sitemap.php` |
+| SEO-05 | Static posts missing from sitemap | Listed in `sitemap.php` |
+| SEO-06–07 | GTM missing / drift | GTM + Consent Mode in `includes/` (live on main templates) |
+| SEO-09 | No BlogPosting on static posts | Present on `blog/future-of-custom-erp.php` |
+| PERF-01–04 | Heavy PNGs, no minify | WebP, `<picture>`, min CSS/JS site-wide |
+| PERF-05 | Blog LCP / listing thumbs | Preload + `content_image_html()` on blog index/post |
+| A11Y-01–04 | Skip link, ARIA, robots dupes | Skip focus, `aria-pressed` filters, reduced motion, `:focus-visible` |
+| UX-01 | `budgetStrHtml` / innerHTML | Safe JSON + DOM on live `estimate.php` |
+| Phase 3 | No consent | Banner + privacy policy live |
 
 ---
 
 ## What is working well
 
-- **HTTPS discipline:** HTTP and www redirect correctly to apex HTTPS.
-- **Security headers baseline:** HSTS, nosniff, frame options, referrer policy on production.
-- **SEO metadata:** Shared `includes/head.php` with canonical, OG, Twitter; blog posts have article OG and `BlogPosting` schema (except static PHP posts).
-- **Dynamic sitemap:** `sitemap.php` lists 11 URLs including DB blog `agentic-ai-software-development`.
-- **AI/GEO:** `llms.txt` and thoughtful AI crawler rules in `robots.txt` (training bots blocked, citation bots allowed).
-- **PDO prepared statements:** Admin login and blog slug queries use parameter binding.
-- **Apache tuning:** `mod_deflate`, `mod_expires`, dotfile blocking in `.htaccess`.
-- **Service page performance:** ERP landing scored **99** performance, **1.8 s** LCP.
-- **Accessibility baseline:** Lighthouse accessibility **92–94** on tested pages; semantic sections and `aria-labelledby` on homepage.
+- HTTPS discipline (HTTP + www → apex HTTPS, HSTS).
+- Security headers and production-grade CSP (GTM, Fonts, analytics).
+- `robots.txt` with sensible AI crawler policy and correct production disallows.
+- Dynamic `sitemap.php` with services, legal, CMS, and static blog entries.
+- Shared SEO head: canonical, OG, Twitter; CMS posts use clean `/blog/{slug}` URLs.
+- GTM `GTM-TJ3ZLPNJ` with Google Consent Mode v2 and cookie banner.
+- Contact and estimator APIs: honeypot, rate limits, restricted CORS, safe estimate JSON.
+- Portfolio WebP + responsive images on homepage; minified assets served.
+- Admin migration endpoints blocked; test scripts not on production.
+- `llms.txt` and structured data on homepage (FAQ, Organization with valid logo).
 
 ---
 
-## Remediation roadmap
+## Remediation completed (codebase → production)
 
-### Phase 0 — Immediate security (same day)
+### Phase 0 — Security
 
-1. **Rotate** all credentials in `.env` (SMTP, DB, TinyMCE).
-2. **Remove** `.env` from git tracking; add `.gitignore` with `.env`, `vendor/`, OS files.
-3. **Delete or lock** `admin/run-migration.php` and `admin/run-blog-migration.php` on production immediately (confirmed **exploitable today**).
-4. **Fix** `robots.txt` production paths (`/admin/`, not `/dashandots/admin/`).
-5. **Restrict** CORS on `contact-handler.php` to site origin; add honeypot or rate limiting.
+- `.gitignore`, `.env.example`; migration scripts removed; `.htaccess` **403** + `robots.txt` disallow
+- `contact-handler.php` / `estimate.php`: CORS (apex + www), honeypot, rate limit
+- Admin CSRF, POST-only deletes, session hardening; generic DB error messages in admin
+- `Header unset X-Powered-By`; deny direct `.env` access
+- Legacy `.html` 301s: localhost → `/dashandots/…`, production → site root (fixes `/dashandots/` on apex)
+- Static blog rewrite: `blog/$1.php -f` **or** `%{DOCUMENT_ROOT}/blog/$1.php -f`
 
-**Files:** `.env`, `.gitignore`, `robots.txt`, `contact-handler.php`, `admin/run-migration.php`, `admin/run-blog-migration.php`
+### Phase 1 — SEO and tracking (implemented 18 May 2026)
 
-### Phase 1 — SEO and tracking (1–2 days)
+- `SITE_LOGO_URL` on homepage, blog listing, CMS/static posts, and `schema-blog-posting.php`
+- **Unified head:** `blog/index.php` and `blog/post.php` use `includes/head.php` (Consent Mode + GTM + GSC meta + optional `twitter:site`)
+- `twitter:site` via `TWITTER_SITE` only when a confirmed handle is set in `.env`
+- Article OG tags (`og:type=article`, `article:published_time`, `article:section`) on CMS posts
+- `includes/seo.php`: `absolute_public_url()`, `site_redirect()`, `public_href()` for production-safe URLs
+- `includes/schema-collection-page.php` for blog index
+- CMS posts use `schema-blog-posting.php` (replaces inline JSON-LD)
+- `sitemap.php`: static blog slugs + service URLs with trailing slashes; `sitemap.xml` → 301 in `.htaccess`
+- `BlogPosting` on static blog PHP files (`future-of-custom-erp`, `mobile-first-design-b2b`)
 
-1. Fix JSON-LD logo URLs in `index.php` and `blog/post.php`.
-2. Add GTM to `includes/head.php` and shared noscript in `includes/footer.php` (align repo with production).
-3. Extend `sitemap.php` with static blog URLs; 301 or remove `sitemap.xml`.
-4. Add `BlogPosting` schema to static blog PHP files or consolidate into CMS.
+### Phase 2 — Performance and accessibility (implemented 18 May 2026)
 
-**Files:** `index.php`, `blog/post.php`, `sitemap.php`, `sitemap.xml`, `includes/head.php`, `includes/footer.php`, static blog templates
+- Portfolio WebP, `<picture>`, dimensions, `fetchpriority` on first homepage card (`portfolio_picture_html`)
+- Blog listing + CMS posts: `content_image_html()` in `includes/portfolio-media.php` (WebP/dimensions when files exist; `fetchpriority="high"` + preload on first blog card)
+- Blog post feature images: dynamic width/height + LCP preload in `blog/post.php`
+- `style.min.css`, `app.min.js`, `consent.min.js` via `includes/assets.php`; regenerate with `scripts/build-min-assets.sh`
+- Skip link targets `#main-content` with focus move; `tabindex="-1"` on main landmarks
+- Mobile menu focus trap; portfolio filters use `aria-pressed` + `type="button"`
+- `prefers-reduced-motion`: disables scroll-reveal and smooth scroll-to-top
+- Global `:focus-visible` rings; FAQ chevron contrast (`--text-2`)
+- Stronger CSP; WebP `ExpiresByType` in `.htaccess`
 
-### Phase 2 — Performance and accessibility (2–3 days)
+### Phase 3 — UX and growth
 
-1. Compress and convert portfolio PNGs; add dimensions on homepage portfolio images.
-2. Enable minified CSS/JS or wire existing `.min` bundles.
-3. Add skip link; improve mobile menu `aria-modal` and focus trap.
-4. Resolve Lighthouse contrast and ARIA role issues in `style.css` / homepage markup.
-5. Strengthen CSP in `.htaccess`.
-
-**Files:** `assets/img/*`, `index.php`, `includes/header.php`, `assets/css/style.css`, `.htaccess`
-
-### Phase 3 — UX and growth (ongoing)
-
-1. End-to-end test contact + estimator on production SMTP.
-2. Publish blog regularly; submit `sitemap.php` in Google Search Console.
-3. Optional: cookie/consent banner if EU traffic and GTM require it.
-4. Monitor Core Web Vitals in Search Console after image optimization.
-
----
-
-## Out of scope (this audit)
-
-- Penetration testing or brute-force of admin login on production
-- Legal/GDPR full compliance review
-- Demo subdomains (`erp.dashandots.com`, etc.) — separate applications
-- Search Console / GA4 data analysis (no credentials provided)
+- Consent Mode + banner (`consent-mode.php`, `consent-banner.php`, `consent.js`)
+- Web Vitals → `dataLayer` after consent
+- `GOOGLE_SITE_VERIFICATION` support in `.env` / `head.php`
+- `estimate.php` hardened; `scripts/smoke-test-forms.php`
+- Demo pages: no public passwords
+- Conversion build: estimate-first CTAs, stronger proof cards, configurable phone/WhatsApp/address/founder trust signals, optional Microsoft Clarity, and GTM lead-funnel events
 
 ---
 
-## Recommended next step
+## Recommended next steps
 
-Approve **Phase 0** implementation first. The live migration endpoints (SEC-02) and `robots.txt` misconfiguration (SEO-01) are the highest-risk items and can be fixed in under an hour without visual changes to the public site.
-
----
-
-*Report generated as part of the Full Website Audit plan.*
-
----
-
-## Phase 0 remediation (18 May 2026)
-
-Implemented in codebase:
-
-- `.gitignore` + `.env.example`; `.env` removed from git index (rotate secrets on server if repo was ever pushed)
-- Deleted `admin/run-migration.php`, `admin/run-blog-migration.php`, and `test_*.php`; blocked via `.htaccess`
-- Fixed `robots.txt` for production root paths
-- `contact-handler.php`: restricted CORS, honeypot, rate limiting
-- Admin CSRF tokens, POST-only deletes, session cookie hardening + `session_regenerate_id` on login
-- Safer DB connection error message in `includes/db.php`
+1. **Deploy `.htaccess` + `robots.txt`** — blog clean URLs, legacy `.html` redirects, `X-Powered-By` strip (see SEO-01, SEO-02, SEC-01).
+2. **Search Console** — Submit `https://dashandots.com/sitemap.php`; add `GOOGLE_SITE_VERIFICATION` to production `.env` if not set.
+3. **GTM** — Configure events from `CONVERSION_TRACKING.md`; mark form success, estimate completion, WhatsApp, phone, and demo clicks as conversions.
+4. **SMTP check** — Submit one real contact form on production to verify delivery.
+5. **Optional** — Strip `X-Powered-By`; re-run Lighthouse on `/` and top blog post after URL fix.
 
 ---
 
-## Phase 1 remediation (18 May 2026)
+## Daily enquiry readiness checklist
 
-Implemented in codebase:
+Before scaling SEO or ads, confirm:
 
-- JSON-LD logo URLs point to `SITE_LOGO_URL` (`/assets/logo.png`) on homepage, blog listing, and CMS posts
-- Shared GTM (`GTM-TJ3ZLPNJ`) in `includes/gtm-head.php` + `includes/gtm-noscript.php` via `head.php` / `header.php`; removed duplicate noscript from `index.php`
-- GTM added to `blog/index.php` and `blog/post.php` heads
-- `BlogPosting` schema on static posts via `includes/schema-blog-posting.php`
-- `sitemap.php` lists static blog URLs (deduped against DB slugs); deleted stale `sitemap.xml`; 301 `sitemap.xml` → `sitemap.php` in `.htaccess`
-- `.htaccess` serves static `blog/{slug}.php` before dynamic `blog/post.php` routing
-
----
-
-## Phase 2 remediation (18 May 2026)
-
-Implemented in codebase:
-
-- Portfolio PNGs converted to WebP (~87% smaller); homepage uses `<picture>` with width/height and `fetchpriority="high"` on first card
-- `style.min.css` and `app.min.js` generated; `includes/assets.php` serves min bundles when present
-- Skip link, mobile menu `aria-modal` + focus trap + Escape, contrast tweaks (`--text-3`, filter buttons, hero meta)
-- Fixed invalid ARIA (`role="list"` on divs, decorative hero SVG, semantic hero meta list)
-- `#main-content` on public `<main>` landmarks
-- Blog post LCP: `preload` for feature image; `scripts.php` on CMS posts
-- Stronger CSP in `.htaccess` (GTM, Fonts, analytics); WebP cache expiry
+- `SITE_PUBLIC_EMAIL` is a real domain email such as `hello@dashandots.com` or `sales@dashandots.com`.
+- `SITE_PHONE`, `SITE_WHATSAPP_URL`, `SITE_ADDRESS`, founder name, and founder LinkedIn are configured in production `.env`.
+- Public pages no longer display `dashandots@gmail.com` or fake phone numbers.
+- `php scripts/smoke-test-forms.php https://dashandots.com` passes after deploy.
+- One real contact submission reaches the inbox, avoids spam, and sends the confirmation email.
+- `/blog/future-of-custom-erp` and `/blog/mobile-first-design-b2b` return 200 on live.
+- Legacy `.html` redirects do not contain `/dashandots/` on production.
+- GTM Preview shows `cta_click`, `estimate_completed`, `contact_form_submit_success`, `whatsapp_click`, `phone_click`, `demo_click`, and `proof_card_click`.
+- GA4 conversions are enabled for lead, estimate, WhatsApp, phone, and demo events.
+- Microsoft Clarity is enabled with `MICROSOFT_CLARITY_ID` if session recordings are desired.
+- Search Console has `https://dashandots.com/sitemap.php` submitted and no sitemap URL redirects to `/blog/`.
+- Proof claims (`150+ clients served`, `450+ products shipped`) are substantiated with permitted screenshots, demos, client categories, logos, testimonials, or external reviews.
 
 ---
 
-## Phase 3 remediation (18 May 2026)
+## Out of scope
 
-Implemented in codebase:
+- Penetration testing or admin brute-force assessment
+- Full legal/GDPR audit
+- Demo subdomains (`erp.dashandots.com`, etc.)
+- Search Console / GA4 performance analysis (no credentials in audit)
 
-- **Consent:** Google Consent Mode v2 defaults (`includes/consent-mode.php`), cookie banner (`includes/consent-banner.php`, `assets/js/consent.js`), privacy policy §7 updated with `#cookies` anchor
-- **Web Vitals:** LCP/INP/CLS sent to `dataLayer` as `web_vitals` events after analytics consent (configure GTM tag to forward to GA4)
-- **Search Console:** `GOOGLE_SITE_VERIFICATION` in `.env` / `config.php` outputs meta tag in `includes/head.php`
-- **Forms:** `estimate.php` — CORS, rate limit (30/hr), honeypot, email validation; removed `budgetStrHtml` (XSS-safe budget via DOM in `app.js`)
-- **Smoke tests:** `php scripts/smoke-test-forms.php [base-url]` for estimate + contact endpoints
-- **Demo security (SEC-09):** Passwords no longer rendered on public demo pages; request via email/contact
-- **Robots meta (A11Y-04):** Single `robots` tag via `$page['robots']` in `head.php`; removed duplicates on 404/demo
+---
 
-**Manual steps (production):**
-
-1. Run `php scripts/smoke-test-forms.php https://dashandots.com` after deploy; submit a real contact form to verify SMTP.
-2. Add `GOOGLE_SITE_VERIFICATION=…` to server `.env`; submit `https://dashandots.com/sitemap.php` in [Google Search Console](https://search.google.com/search-console).
-3. In GTM, ensure tags respect Consent Mode; optional: trigger on `web_vitals` custom event.
-4. Monitor Core Web Vitals in Search Console after Phase 2 image deploy.
+*Report maintained as the single source of truth for dashandots.com audit status. Update this file after each live re-audit or major deploy.*

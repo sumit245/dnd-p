@@ -32,7 +32,7 @@ $page['active_nav']  = '';
       <h2>1. Who We Are</h2>
       <p>Dashandots Technology ("Dashandots", "we", "us", "our") is a software development and technology consulting
         company based in India. Our website is <a href="https://dashandots.com">dashandots.com</a>. For privacy-related
-        queries, contact us at <a href="mailto:dashandots@gmail.com">dashandots@gmail.com</a>.</p>
+        queries, use the contact form or email us<?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?> at <a href="mailto:<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars(SITE_EMAIL) ?></a><?php endif; ?>.</p>
 
       <h2>2. Information We Collect</h2>
       <h3>Information you provide directly</h3>
@@ -63,7 +63,7 @@ $page['active_nav']  = '';
 
       <h2>4. Data Storage and Security</h2>
       <p>Enquiry data submitted through our contact form is transmitted via encrypted SMTP (TLS) to our business email
-        inbox at dashandots@gmail.com (hosted by Google Workspace / Gmail). We do not store form submissions in a
+        business inbox (hosted by Google Workspace / Gmail). We do not store form submissions in a
         database. Your data is subject to Google's data protection practices.</p>
       <p>We take reasonable technical precautions — including HTTPS, input sanitization, and access controls — to protect
         data in transit.</p>
@@ -81,7 +81,7 @@ $page['active_nav']  = '';
         <li>Request deletion of your data</li>
         <li>Object to or restrict our processing of your data</li>
       </ul>
-      <p>To exercise any of these rights, email us at <a href="mailto:dashandots@gmail.com">dashandots@gmail.com</a>. We
+      <p>To exercise any of these rights, use the contact form<?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?> or email us at <a href="mailto:<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars(SITE_EMAIL) ?></a><?php endif; ?>. We
         will respond within 30 days.</p>
 
       <h2 id="cookies">7. Cookies</h2>
@@ -105,7 +105,8 @@ $page['active_nav']  = '';
       <h2>11. Contact</h2>
       <p>For any privacy-related questions or requests, please contact:</p>
       <p><strong>Dashandots Technology</strong><br>
-        Email: <a href="mailto:dashandots@gmail.com">dashandots@gmail.com</a><br>
+        <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>Email: <a href="mailto:<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars(SITE_EMAIL) ?></a><br><?php endif; ?>
+        <?php if (defined('SITE_ADDRESS') && SITE_ADDRESS !== ''): ?>Address: <?= htmlspecialchars(SITE_ADDRESS) ?><br><?php endif; ?>
         Website: <a href="https://dashandots.com">dashandots.com</a></p>
     </div>
   </main>

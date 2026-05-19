@@ -3,6 +3,7 @@
 <?php require_once __DIR__ . '/env.php'; ?>
 <?php include __DIR__ . '/consent-mode.php'; ?>
 <?php include __DIR__ . '/gtm-head.php'; ?>
+<?php include __DIR__ . '/clarity.php'; ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($page['title']) ?></title>
   <meta name="description" content="<?= htmlspecialchars($page['description']) ?>">
@@ -23,16 +24,29 @@
   <link rel="canonical" href="<?= htmlspecialchars($page['canonical']) ?>">
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website">
+<?php $ogType = $page['og_type'] ?? 'website'; ?>
+  <meta property="og:type" content="<?= htmlspecialchars($ogType, ENT_QUOTES, 'UTF-8') ?>">
   <meta property="og:url" content="<?= htmlspecialchars($page['canonical']) ?>">
   <meta property="og:title" content="<?= htmlspecialchars($page['og_title'] ?? $page['title']) ?>">
   <meta property="og:description" content="<?= htmlspecialchars($page['og_desc'] ?? $page['description']) ?>">
   <meta property="og:image" content="<?= htmlspecialchars($page['og_image']) ?>">
   <meta property="og:site_name" content="<?= SITE_NAME ?>">
   <meta property="og:locale" content="en_IN">
+<?php if ($ogType === 'article' && !empty($page['article_section'])): ?>
+  <meta property="article:section" content="<?= htmlspecialchars($page['article_section'], ENT_QUOTES, 'UTF-8') ?>">
+<?php endif; ?>
+<?php if ($ogType === 'article' && !empty($page['article_published'])): ?>
+  <meta property="article:published_time" content="<?= htmlspecialchars($page['article_published'], ENT_QUOTES, 'UTF-8') ?>">
+<?php endif; ?>
+<?php if ($ogType === 'article' && !empty($page['article_modified'])): ?>
+  <meta property="article:modified_time" content="<?= htmlspecialchars($page['article_modified'], ENT_QUOTES, 'UTF-8') ?>">
+<?php endif; ?>
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
+<?php if (defined('TWITTER_SITE') && TWITTER_SITE !== ''): ?>
+  <meta name="twitter:site" content="<?= htmlspecialchars(TWITTER_SITE, ENT_QUOTES, 'UTF-8') ?>">
+<?php endif; ?>
   <meta name="twitter:title" content="<?= htmlspecialchars($page['og_title'] ?? $page['title']) ?>">
   <meta name="twitter:description" content="<?= htmlspecialchars($page['og_desc'] ?? $page['description']) ?>">
   <meta name="twitter:image" content="<?= htmlspecialchars($page['og_image']) ?>">

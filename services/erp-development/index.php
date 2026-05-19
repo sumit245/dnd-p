@@ -21,11 +21,11 @@ $page['active_nav']  = 'services';
 
     <div class="svc-hero">
       <p class="page-label">Services &rsaquo; ERP &amp; CRM</p>
-      <h1>Custom ERP &amp; CRM Development Services</h1>
-      <p class="lead">Stop working around your software — build software that works around you. We design and deliver bespoke ERP &amp; CRM systems that centralise your operations, eliminate manual processes, and scale with your business.</p>
+      <h1>Custom ERP &amp; CRM development services</h1>
+      <p class="lead">Digitise core operations with ERP &amp; CRM systems designed around your sales, inventory, finance, HR, procurement, and approval workflows.</p>
       <div class="hero-actions">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Discuss Your Requirements</a>
-        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline">Get a Free Estimate</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="erp-hero">Get Instant Estimate</a>
+        <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp" class="btn btn-outline" target="_blank" rel="noopener" data-track="demo" data-demo-slug="erp">See ERP Demo</a>
       </div>
     </div>
 
@@ -78,20 +78,30 @@ $page['active_nav']  = 'services';
       <li>API Integrations (Tally, Shopify, payment gateways)</li>
     </ul>
 
+    <div class="svc-cta-strip">
+      <p class="page-label">Proof before proposal</p>
+      <h2>See the kind of ERP dashboard we can adapt for your workflow.</h2>
+      <p>Review an ERP-style demo, then send us your modules and branches. We will respond with a practical first-phase plan instead of a generic quote.</p>
+      <div class="cta-actions">
+        <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp" class="btn btn-primary" target="_blank" rel="noopener" data-track="demo" data-demo-slug="erp">View ERP Proof</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="erp-proof">Build Something Similar</a>
+      </div>
+    </div>
+
     <h2>CRM development — from lead to long-term customer</h2>
     <p>A custom CRM gives your sales and support teams a single view of every prospect and customer, with the workflows they actually follow rather than a generic pipeline forced on them by off-the-shelf tools.</p>
 
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
-        <h3>Lead &amp; Pipeline Management</h3>
+        <h3>Lead &amp; pipeline management</h3>
         <p>Capture leads from web forms, email, and third-party portals. Track every interaction, set follow-up reminders, and never let a hot prospect go cold.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Quotation &amp; Proposal Automation</h3>
+        <h3>Quotation &amp; proposal automation</h3>
         <p>Generate branded quotations in one click, with product catalogues, pricing rules, and discount approvals baked in. Send, track opens, and convert to orders.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>After-Sales &amp; Support Ticketing</h3>
+        <h3>After-sales &amp; support ticketing</h3>
         <p>Log service requests, assign technicians, track resolution times, and give customers a portal to check their ticket status in real time.</p>
       </div>
     </div>
@@ -107,6 +117,22 @@ $page['active_nav']  = 'services';
       <li><strong>Go-live &amp; Beyond:</strong> Production deployment, data migration, 30-day hypercare, then ongoing support retainers as needed.</li>
     </ul>
 
+    <h2>Migration, support, and risk reduction</h2>
+    <div class="svc-feature-grid">
+      <div class="svc-feature-card">
+        <h3>Excel and legacy migration</h3>
+        <p>We map existing sheets, registers, Tally exports, and legacy databases before import so your team does not restart from zero.</p>
+      </div>
+      <div class="svc-feature-card">
+        <h3>Phased rollout</h3>
+        <p>Most SME ERP projects start with the 2-4 highest-leakage modules, then expand after users are trained and the workflow is stable.</p>
+      </div>
+      <div class="svc-feature-card">
+        <h3>Post-launch support</h3>
+        <p>After go-live, we support bug fixes, user training, reports, small enhancements, and new module planning through structured retainers.</p>
+      </div>
+    </div>
+
     <h2>Industries we've built ERP &amp; CRM systems for</h2>
     <ul class="svc-includes">
       <li>Wholesale &amp; Multi-branch Distribution</li>
@@ -120,11 +146,11 @@ $page['active_nav']  = 'services';
     </ul>
 
     <div class="svc-cta-strip">
-      <h2>Ready to replace spreadsheets and disconnected tools?</h2>
+      <h2>Ready to centralise your ERP and CRM operations?</h2>
       <p>Tell us about your operations and we'll scope a solution — including timeline and budget — at no cost.</p>
       <div class="cta-actions">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Start the Conversation</a>
-        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline">Use the Estimate Wizard</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="erp-final">Get My Free Project Estimate</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="erp-final">Get Instant Estimate</a>
       </div>
     </div>
 

@@ -6,6 +6,8 @@ Allow: /
 
 # Block backend, admin, APIs, and test files (production root)
 Disallow: /admin/
+Disallow: /admin/run-migration.php
+Disallow: /admin/run-blog-migration.php
 Disallow: /contact-handler.php
 Disallow: /estimate.php
 Disallow: /vendor/
@@ -16,6 +18,8 @@ Disallow: /test_session2.php
 
 # Same rules for XAMPP subfolder installs
 Disallow: /dashandots/admin/
+Disallow: /dashandots/admin/run-migration.php
+Disallow: /dashandots/admin/run-blog-migration.php
 Disallow: /dashandots/contact-handler.php
 Disallow: /dashandots/estimate.php
 Disallow: /dashandots/vendor/

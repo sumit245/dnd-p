@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id']) && is_nu
         $stmt->execute([$id]);
         $message = '<div class="alert alert-success">Blog post deleted successfully.</div>';
     } catch (PDOException $e) {
-        $message = '<div class="alert alert-error">Error deleting blog: ' . htmlspecialchars($e->getMessage()) . '</div>';
+        error_log('Blog delete failed: ' . $e->getMessage());
+        $message = '<div class="alert alert-error">Could not delete this post. Please try again.</div>';
     }
 }
 

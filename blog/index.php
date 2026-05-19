@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/portfolio-media.php';
 
 $stmt = $pdo->query('SELECT * FROM blogs WHERE status = \'published\' ORDER BY created_at DESC');
 $blogs = $stmt->fetchAll();
@@ -12,55 +13,34 @@ function getReadTime($blog) {
     return max(1, (int)ceil($words / 200));
 }
 
-// Base URL for share links
-$baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+$page['title'] = 'Blog & Insights — ' . SITE_NAME;
+$page['description'] = 'Read our latest insights, case studies, and guides on custom software development, ERP, CRM, and digital transformation for SMEs.';
+$page['canonical'] = SITE_URL . '/blog/';
+$page['og_title'] = 'Blog & Insights — ' . SITE_NAME;
+$page['og_desc'] = 'Insights, guides and case studies on ERP, CRM, TMS and custom software development. Expert perspectives from Dashandots Technology, India.';
+$page['og_image'] = SITE_URL . '/assets/img/og-image.jpg';
+$page['active_nav'] = 'blog';
+
+$schemaCollection = [
+    'name' => 'Blog & Insights — ' . SITE_NAME,
+    'description' => 'Insights, case studies, and guides on ERP, CRM, TMS, and custom software for growing businesses.',
+    'url' => SITE_URL . '/blog/',
+];
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <?php include __DIR__ . '/../includes/gtm-head.php'; ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog & Insights — Dashandots Technology</title>
-    <meta name="description" content="Read our latest insights, case studies, and guides on custom software development, ERP, CRM, and digital transformation for SMEs.">
-    <link rel="canonical" href="<?php echo SITE_URL; ?>/blog/">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph (T-02) -->
-    <meta property="og:type"        content="website">
-    <meta property="og:title"       content="Blog & Insights — Dashandots Technology">
-    <meta property="og:description" content="Insights, guides and case studies on ERP, CRM, TMS and custom software development. Expert perspectives from Dashandots Technology, India.">
-    <meta property="og:url"         content="<?php echo SITE_URL; ?>/blog/">
-    <meta property="og:image"       content="<?php echo SITE_URL; ?>/assets/img/og-image.jpg">
-
-    <!-- Twitter Cards -->
-    <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:title"       content="Blog & Insights — Dashandots Technology">
-    <meta name="twitter:description" content="Insights, guides and case studies on ERP, CRM, TMS and custom software development. Expert perspectives from Dashandots Technology, India.">
-    <meta name="twitter:image"       content="<?php echo SITE_URL; ?>/assets/img/og-image.jpg">
-
-    <!-- CollectionPage Schema (T-02) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "name": "Blog & Insights — Dashandots Technology",
-      "description": "Insights, case studies, and guides on ERP, CRM, TMS, and custom software for growing businesses.",
-      "url": "<?php echo SITE_URL; ?>/blog/",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Dashandots Technology",
-        "url": "<?php echo SITE_URL; ?>/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "<?php echo SITE_LOGO_URL; ?>"
-        }
-      }
-    }
-    </script>
-
-<?php require_once __DIR__ . '/../includes/assets.php'; ?>
-    <link rel="stylesheet" href="<?= asset_css_href() ?>">
+<?php include __DIR__ . '/../includes/head.php'; ?>
+<?php include __DIR__ . '/../includes/schema-collection-page.php'; ?>
+<?php
+$firstLcpImage = '';
+if (!empty($blogs[0]['feature_image'])) {
+    $firstLcpImage = absolute_public_url($blogs[0]['feature_image']);
+}
+?>
+<?php if ($firstLcpImage !== ''): ?>
+    <link rel="preload" as="image" href="<?= htmlspecialchars($firstLcpImage, ENT_QUOTES, 'UTF-8') ?>">
+<?php endif; ?>
     <style>
         /* ═══════════════════════════════════════════
            BLOG LISTING — STYLES
@@ -270,7 +250,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
 <body>
     <?php include __DIR__ . '/../includes/header.php'; ?>
 
-    <main id="main-content">
+    <main id="main-content" tabindex="-1">
         <section class="blog-header">
             <div class="container">
                 <p class="section-label" style="justify-content:center;">Insights</p>
@@ -282,7 +262,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
         <section class="container">
             <div class="blog-grid">
                 <?php if (!empty($blogs)): ?>
-                    <?php foreach ($blogs as $blog):
+                    <?php foreach ($blogs as $loopIndex => $blog):
                         $postUrl  = SITE_URL . '/blog/' . urlencode($blog['slug']);
                         $readTime = getReadTime($blog);
                         $postTitle = htmlspecialchars($blog['title']);
@@ -295,9 +275,19 @@ $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
                                 <?php if (!empty($blog['category'])): ?>
                                     <span class="blog-cat-pill"><?php echo htmlspecialchars($blog['category']); ?></span>
                                 <?php endif; ?>
-                                <a href="<?php echo BASE_PATH; ?>/blog/<?php echo urlencode($blog['slug']); ?>">
+                                <a href="<?php echo public_href('/blog/' . urlencode($blog['slug'])); ?>">
                                     <?php if (!empty($blog['feature_image'])): ?>
-                                        <img src="<?php echo htmlspecialchars($blog['feature_image']); ?>" alt="<?php echo $postTitle; ?>" loading="lazy">
+                                        <?php
+                                        echo content_image_html(
+                                            absolute_public_url($blog['feature_image']),
+                                            $blog['title'],
+                                            [
+                                                'loading' => $loopIndex === 0 ? 'eager' : 'lazy',
+                                                'fetchpriority' => $loopIndex === 0 ? 'high' : '',
+                                                'style' => 'width:100%;height:100%;object-fit:cover',
+                                            ]
+                                        );
+                                        ?>
                                     <?php else: ?>
                                         <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color: var(--text-2); font-weight: 600; font-size: 18px;">Dashandots</div>
                                     <?php endif; ?>
@@ -316,7 +306,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
                                 </div>
 
                                 <h3 class="blog-h3">
-                                    <a href="<?php echo BASE_PATH; ?>/blog/<?php echo urlencode($blog['slug']); ?>"><?php echo $postTitle; ?></a>
+                                    <a href="<?php echo public_href('/blog/' . urlencode($blog['slug'])); ?>"><?php echo $postTitle; ?></a>
                                 </h3>
 
                                 <p class="blog-excerpt">
@@ -329,7 +319,7 @@ $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
 
                             <!-- Footer: Read more + Share -->
                             <div class="blog-card-footer">
-                                <a href="<?php echo BASE_PATH; ?>/blog/<?php echo urlencode($blog['slug']); ?>" class="blog-readmore">
+                                <a href="<?php echo public_href('/blog/' . urlencode($blog['slug'])); ?>" class="blog-readmore">
                                     Read Article <span>&rarr;</span>
                                 </a>
                                 <div class="blog-share">

@@ -7,8 +7,7 @@
           <img src="<?= BASE_PATH ?>/assets/logo.png" alt="Dashandots Technology logo">
           Dashandots Technology
         </div>
-        <p class="footer-desc">Software development and technology consulting partner for ambitious SMEs and
-          enterprises. Fast, mobile‑first, and built to last.</p>
+        <p class="footer-desc">Custom ERP, CRM, dashboards, portals, and mobile apps for growing businesses that need clearer operations and long-term technical support.</p>
         <div class="footer-social">
           <a href="https://www.linkedin.com/company/102707174/" target="_blank" rel="noopener noreferrer"
             class="footer-soc-link" aria-label="LinkedIn">
@@ -30,23 +29,23 @@
       <div class="footer-col">
         <h4>Services</h4>
         <ul>
-          <li><a href="<?= BASE_PATH ?>/#services">Web &amp; Mobile Apps</a></li>
-          <li><a href="<?= BASE_PATH ?>/#services">ERP &amp; CRM</a></li>
-          <li><a href="<?= BASE_PATH ?>/#services">E‑commerce</a></li>
-          <li><a href="<?= BASE_PATH ?>/#services">Industry Systems</a></li>
-          <li><a href="<?= BASE_PATH ?>/#services">Data &amp; AI</a></li>
-          <li><a href="<?= BASE_PATH ?>/#services">IoT &amp; Embedded</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/erp-development/">ERP &amp; CRM</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/industry-systems/">HMS, TMS &amp; PMS</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/ecommerce/">E‑commerce &amp; Portals</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/data-analytics/">Dashboards &amp; Analytics</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/web-mobile-apps/">Web &amp; Mobile Apps</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/iot-embedded/">IoT &amp; Embedded</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Solutions</h4>
         <ul>
-          <li><a href="<?= BASE_PATH ?>/#solutions">ERP Platform</a></li>
-          <li><a href="<?= BASE_PATH ?>/#solutions">CRM Platform</a></li>
-          <li><a href="<?= BASE_PATH ?>/#solutions">TMS</a></li>
-          <li><a href="<?= BASE_PATH ?>/#solutions">HMS</a></li>
-          <li><a href="<?= BASE_PATH ?>/#solutions">Hotel PMS</a></li>
-          <li><a href="<?= BASE_PATH ?>/#solutions">Finance Software</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/erp-development/">ERP Platform</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/erp-development/">CRM Platform</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/industry-systems/">TMS</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/industry-systems/">HMS</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/industry-systems/">Hotel PMS</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/data-analytics/">Business Dashboards</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -57,7 +56,15 @@
           <li><a href="<?= BASE_PATH ?>/#case-studies">Case Studies</a></li>
           <li><a href="<?= BASE_PATH ?>/blog">Blog</a></li>
           <li><a href="<?= BASE_PATH ?>/#faq">FAQ</a></li>
-          <li><a href="mailto:<?= SITE_EMAIL ?>">Contact</a></li>
+          <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>
+            <li><a href="mailto:<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>" data-track="cta" data-cta-location="footer">Email</a></li>
+          <?php endif; ?>
+          <?php if (defined('SITE_PHONE') && SITE_PHONE !== ''): ?>
+            <li><a href="tel:<?= htmlspecialchars(preg_replace('/\s+/', '', SITE_PHONE), ENT_QUOTES, 'UTF-8') ?>" data-track="phone" data-cta-location="footer">Call</a></li>
+          <?php endif; ?>
+          <?php if (defined('SITE_WHATSAPP_URL') && SITE_WHATSAPP_URL !== ''): ?>
+            <li><a href="<?= htmlspecialchars(SITE_WHATSAPP_URL, ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener" data-track="whatsapp" data-cta-location="footer">WhatsApp</a></li>
+          <?php endif; ?>
         </ul>
       </div>
     </div>

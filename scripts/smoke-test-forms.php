@@ -72,6 +72,36 @@ function http_json(string $url, string $method = 'GET', ?array $body = null): ar
     ];
 }
 
+function http_head(string $url): array
+{
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_NOBODY => true,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HEADER => true,
+        CURLOPT_FOLLOWLOCATION => false,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_CONNECTTIMEOUT => 10,
+    ]);
+    $raw = curl_exec($ch);
+    $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $location = '';
+    if (is_string($raw) && preg_match('/^location:\s*(.+)$/im', $raw, $m)) {
+        $location = trim($m[1]);
+    }
+    $err = curl_error($ch);
+    if (PHP_VERSION_ID < 80500) {
+        curl_close($ch);
+    }
+
+    return [
+        'code' => $code,
+        'location' => $location,
+        'headers' => is_string($raw) ? $raw : '',
+        'error' => $err,
+    ];
+}
+
 /**
  * Run a PHP endpoint in-process (no Apache required).
  */
@@ -81,6 +111,14 @@ function cli_json(string $script, string $method = 'GET', ?array $body = null): 
 
     $prevMethod = $_SERVER['REQUEST_METHOD'] ?? null;
     $_SERVER['REQUEST_METHOD'] = $method;
+    $prevDisplayErrors = ini_get('display_errors');
+    ini_set('display_errors', '0');
+    $previousHandler = set_error_handler(static function (int $severity, string $message): bool {
+        $benign = str_contains($message, 'Cannot modify header information')
+            || str_contains($message, 'Cannot set response code');
+
+        return $benign;
+    });
 
     $inputStream = null;
     if ($body !== null) {
@@ -99,6 +137,8 @@ function cli_json(string $script, string $method = 'GET', ?array $body = null): 
     } catch (Throwable $e) {
         ob_end_clean();
         $_SERVER['REQUEST_METHOD'] = $prevMethod ?? 'GET';
+        restore_error_handler();
+        ini_set('display_errors', (string) $prevDisplayErrors);
         if ($inputStream) {
             stream_wrapper_restore('php');
         }
@@ -116,6 +156,8 @@ function cli_json(string $script, string $method = 'GET', ?array $body = null): 
         stream_wrapper_restore('php');
         CliInputStream::$data = '';
     }
+    restore_error_handler();
+    ini_set('display_errors', (string) $prevDisplayErrors);
 
     $code = http_response_code();
     if ($code === false || $code === 0) {
@@ -133,6 +175,7 @@ function cli_json(string $script, string $method = 'GET', ?array $body = null): 
 final class CliInputStream
 {
     public static string $data = '';
+    public mixed $context;
     private int $pos = 0;
 
     public function stream_open(string $path, string $mode, int $options, ?string &$opened_path): bool
@@ -197,13 +240,69 @@ function run_suite(callable $request): void
     check('contact honeypot success flag', ($contactHp['json']['success'] ?? false) === true, $contactHp['body']);
 
     $bad = $request('contact-handler.php', 'POST', ['foo' => 'bar']);
-    check('contact invalid returns 400', $bad['code'] === 400, 'HTTP ' . $bad['code']);
+    check('contact invalid returns 422', $bad['code'] === 422, 'HTTP ' . $bad['code']);
+}
+
+function run_live_url_suite(string $base): void
+{
+    $staticBlog = http_head($base . '/blog/future-of-custom-erp');
+    check('static blog clean URL returns 200', $staticBlog['code'] === 200, 'HTTP ' . $staticBlog['code'] . ' ' . $staticBlog['location']);
+
+    $staticBlog2 = http_head($base . '/blog/mobile-first-design-b2b');
+    check('second static blog clean URL returns 200', $staticBlog2['code'] === 200, 'HTTP ' . $staticBlog2['code'] . ' ' . $staticBlog2['location']);
+
+    $legacy = http_head($base . '/blog/future-of-custom-erp.html');
+    check('legacy blog html redirects', in_array($legacy['code'], [301, 302], true), 'HTTP ' . $legacy['code']);
+    check('legacy blog html avoids /dashandots/ on production', !str_contains($legacy['location'], '/dashandots/'), $legacy['location']);
+
+    $sitemap = http_head($base . '/sitemap.php');
+    check('sitemap returns 200', $sitemap['code'] === 200, 'HTTP ' . $sitemap['code']);
+
+    $home = http_head($base . '/');
+    check('X-Powered-By absent', stripos($home['headers'], 'x-powered-by:') === false, 'header still present');
 }
 
 if ($mode === 'cli') {
-    echo "Smoke test mode: CLI (workspace " . $root . ")\n\n";
-    http_response_code(200);
-    run_suite(static fn(string $script, string $method, ?array $body = null) => cli_json($script, $method, $body));
+    $sock = stream_socket_server('tcp://127.0.0.1:0', $errno, $errstr);
+    if (!$sock) {
+        echo "Could not allocate local test port: {$errstr}\n";
+        exit(1);
+    }
+    $name = stream_socket_get_name($sock, false);
+    fclose($sock);
+    $port = (int)substr(strrchr((string)$name, ':'), 1);
+
+    $cmd = [PHP_BINARY, '-S', '127.0.0.1:' . $port, '-t', $root];
+    $server = proc_open($cmd, [
+        0 => ['pipe', 'r'],
+        1 => ['file', '/dev/null', 'w'],
+        2 => ['file', '/dev/null', 'w'],
+    ], $pipes, $root);
+    if (!is_resource($server)) {
+        echo "Could not start local PHP test server.\n";
+        exit(1);
+    }
+
+    $base = 'http://127.0.0.1:' . $port;
+    $ready = false;
+    for ($i = 0; $i < 20; $i++) {
+        usleep(100000);
+        if (http_json($base . '/estimate.php', 'GET')['code'] !== 0) {
+            $ready = true;
+            break;
+        }
+    }
+    echo "Smoke test mode: CLI local server ({$base})\n\n";
+    if (!$ready) {
+        echo "  FAIL Local PHP test server did not start.\n";
+        proc_terminate($server);
+        proc_close($server);
+        exit(1);
+    }
+
+    run_suite(static fn(string $script, string $method, ?array $body = null) => http_json($base . '/' . $script, $method, $body));
+    proc_terminate($server);
+    proc_close($server);
 } else {
     echo "Smoke test mode: HTTP ({$base})\n\n";
     $probe = http_json($base . '/estimate.php', 'GET');
@@ -211,6 +310,9 @@ if ($mode === 'cli') {
         echo "  WARN Server unreachable ({$probe['error']}). Start XAMPP or run: php scripts/smoke-test-forms.php --cli\n\n";
     }
     run_suite(static fn(string $script, string $method, ?array $body = null) => http_json($base . '/' . $script, $method, $body));
+    if (preg_match('#^https?://dashandots\.com#', $base)) {
+        run_live_url_suite($base);
+    }
 }
 
 echo "\n{$passed} passed, {$failed} failed.\n";

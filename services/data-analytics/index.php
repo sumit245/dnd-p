@@ -1,8 +1,8 @@
 <?php
 require __DIR__ . '/../../includes/config.php';
 
-$page['title']       = 'Data Analytics, Business Intelligence & AI Solutions in India | Dashandots';
-$page['description'] = 'Custom analytics dashboards, BI reporting and AI-assisted workflows for Indian businesses. Turn raw data into decisions that drive measurable growth.';
+$page['title']       = 'Data Analytics, BI & AI Solutions in India | Dashandots';
+$page['description'] = 'Custom analytics dashboards, BI reporting and AI-assisted workflows for Indian businesses. Turn raw data into clear, decision-ready insights your leadership can act on.';
 $page['canonical']   = SITE_URL . '/services/data-analytics/';
 $page['og_title']    = 'Data Analytics & AI Solutions | Dashandots Technology';
 $page['og_desc']     = $page['description'];
@@ -17,47 +17,47 @@ require __DIR__ . '/../../includes/header.php';
     <!-- HERO -->
     <div class="svc-hero">
       <p class="page-label">Data Analytics &amp; AI</p>
-      <h1>Turn Your Business Data into Decisions That Drive Revenue</h1>
-      <p class="lead">We build real-time analytics dashboards, automated reporting pipelines, and AI-assisted tools that give your team instant visibility — so decisions are made on facts, not gut feeling.</p>
+      <h1>Turn your business data into decisions your leadership can act on</h1>
+      <p class="lead">We build real-time analytics dashboards, automated reporting pipelines, and AI-assisted tools that give leadership reliable visibility across operations, finance, sales, and customer activity.</p>
       <div class="hero-actions">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Talk to a Data Expert</a>
-        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline">See Dashboard Examples</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="analytics-hero">Get Dashboard Scope</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="analytics-hero">Get Instant Estimate</a>
       </div>
     </div>
 
     <!-- THE PROBLEM -->
-    <h2>The Data Problem Most Growing Businesses Face</h2>
-    <p class="svc-body-text">Your ERP has data. Your e-commerce platform has data. Your CRM has data. Your accounts team has data in Excel. But nobody can see all of it in one place, and by the time a report reaches leadership, it's three days old. We solve exactly that — unifying your data sources, automating the pipelines, and presenting insights in real-time dashboards that actually get used.</p>
+    <h2>The data problem most growing businesses face</h2>
+    <p class="svc-body-text">Business data often sits across ERP, e-commerce, CRM, accounting, and operational systems. By the time reports are consolidated manually, leadership is working from delayed information. We unify those sources, automate the pipelines, and present decision-ready insights in real-time dashboards.</p>
 
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
-        <h3>Single Source of Truth</h3>
+        <h3>Single source of truth</h3>
         <p>We aggregate data from your ERP, CRM, sales tools, and databases into one clean data warehouse — eliminating the "which report is correct?" problem.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Real-Time Dashboards</h3>
+        <h3>Real-time dashboards</h3>
         <p>Live KPI screens refreshed every few seconds. Drill down from company-level to branch, team, or individual — all without waiting for someone to run a query.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Automated Reporting</h3>
-        <p>Daily, weekly, and monthly reports delivered to the right inboxes automatically. No manual Excel exports, no missed deadlines, no human error.</p>
+        <h3>Automated reporting</h3>
+        <p>Daily, weekly, and monthly reports delivered to the right inboxes automatically, reducing manual exports, missed deadlines, and reporting errors.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Predictive Forecasting</h3>
+        <h3>Predictive forecasting</h3>
         <p>ML models trained on your historical data to forecast demand, predict churn, flag slow-moving inventory, and surface sales opportunities before they expire.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>AI-Assisted Workflows</h3>
+        <h3>AI-assisted workflows</h3>
         <p>LLM-powered features inside your internal tools — auto-summarise customer notes, classify tickets, extract data from documents, draft personalised communications.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Anomaly Detection</h3>
+        <h3>Anomaly detection</h3>
         <p>Automatic alerts when metrics deviate from expected ranges — unusual spikes in returns, drops in conversion, cost overruns — before they become crises.</p>
       </div>
     </div>
 
     <!-- SOLUTIONS -->
-    <h2>Solutions We Build</h2>
+    <h2>Solutions we build</h2>
     <ul class="svc-includes">
       <li>Executive KPI dashboards (revenue, margins, operational metrics)</li>
       <li>Sales pipeline analytics &amp; forecasting</li>
@@ -73,19 +73,29 @@ require __DIR__ . '/../../includes/header.php';
       <li>Custom ML model development &amp; deployment</li>
     </ul>
 
+    <div class="svc-cta-strip">
+      <p class="page-label">Common dashboard starting points</p>
+      <h2>Start with the report your leadership asks for every week.</h2>
+      <p>Most dashboard builds begin by automating one painful report: sales pipeline, stock aging, branch profitability, dispatch performance, finance summary, or customer follow-up health.</p>
+      <div class="hero-actions" style="justify-content:center; margin-top:24px">
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="analytics-mid">Scope my dashboard</a>
+        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline" data-track="cta" data-cta-location="analytics-mid">See Dashboard Proof</a>
+      </div>
+    </div>
+
     <!-- TECH STACK -->
-    <h2>Technology &amp; Tools We Use</h2>
+    <h2>Technology &amp; tools we use</h2>
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
-        <h3>Data Visualisation</h3>
+        <h3>Data visualisation</h3>
         <p>Custom React dashboards with Recharts, D3.js, or Apache ECharts — or Metabase / Grafana for teams that prefer no-code dashboards.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Data Engineering</h3>
+        <h3>Data engineering</h3>
         <p>Python (Pandas, SQLAlchemy), Apache Airflow for pipeline orchestration, PostgreSQL &amp; MySQL as data warehouses, Redis for real-time caching.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Machine Learning</h3>
+        <h3>Machine learning</h3>
         <p>Scikit-learn, XGBoost, TensorFlow, and PyTorch for predictive models. MLflow for experiment tracking and model versioning.</p>
       </div>
       <div class="svc-feature-card">
@@ -95,7 +105,7 @@ require __DIR__ . '/../../includes/header.php';
     </div>
 
     <!-- HOW WE WORK -->
-    <h2>Our Engagement Process</h2>
+    <h2>Our engagement process</h2>
     <ul class="svc-includes">
       <li>Data audit — we map every data source, its format, quality, and access method</li>
       <li>KPI workshop — we work with leadership to define what success metrics matter most</li>
@@ -107,12 +117,12 @@ require __DIR__ . '/../../includes/header.php';
 
     <!-- CTA -->
     <div class="svc-cta-strip">
-      <p class="page-label">Start Making Data-Driven Decisions</p>
-      <h2>What Would You Do if You Had Perfect Visibility?</h2>
+      <p class="page-label">Make decisions from current data</p>
+      <h2>What could you do with clearer visibility into your operations?</h2>
       <p>Tell us what questions you can't answer today. We'll design a data solution that puts those answers in front of your team every morning.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Book a Data Discovery Call</a>
-        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline">View Our Work</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="analytics-final">Get My Free Project Estimate</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="analytics-final">Get Instant Estimate</a>
       </div>
     </div>
 

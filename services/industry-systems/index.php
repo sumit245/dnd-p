@@ -20,8 +20,8 @@ require __DIR__ . '/../../includes/header.php';
       <h1>Vertical Software Built for Your Industry — Not Adapted from a Generic Template</h1>
       <p class="lead">We build purpose-specific management platforms for hospitals, hotels, logistics operators, and financial services — systems that understand your industry's regulations, workflows, and reporting needs from the ground up.</p>
       <div class="hero-actions">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Discuss Your Requirements</a>
-        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline">View Live Demos</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="industry-hero">Get My Free Project Estimate</a>
+        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline" data-track="cta" data-cta-location="industry-hero">View Live Demos</a>
       </div>
     </div>
 
@@ -65,6 +65,17 @@ require __DIR__ . '/../../includes/header.php';
       <li>NABH documentation support</li>
       <li>MIS reports for hospital management</li>
     </ul>
+
+    <div class="svc-cta-strip">
+      <p class="page-label">Vertical proof</p>
+      <h2>Review HMS, TMS, and ERP-style demos before you enquire.</h2>
+      <p>Use the demos to compare modules, dashboard style, and workflow depth. Then send us your current process and we will suggest the first implementation phase.</p>
+      <div class="hero-actions" style="justify-content:center; margin-top:24px">
+        <a href="<?= BASE_PATH ?>/demo/view.php?slug=hms" class="btn btn-primary" target="_blank" rel="noopener" data-track="demo" data-demo-slug="hms">HMS Demo</a>
+        <a href="<?= BASE_PATH ?>/demo/view.php?slug=tms" class="btn btn-outline" target="_blank" rel="noopener" data-track="demo" data-demo-slug="tms">TMS Demo</a>
+        <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp" class="btn btn-outline" target="_blank" rel="noopener" data-track="demo" data-demo-slug="erp">ERP Demo</a>
+      </div>
+    </div>
 
     <!-- HOTEL PMS -->
     <h2>Hotel Property Management System (PMS)</h2>
@@ -120,8 +131,8 @@ require __DIR__ . '/../../includes/header.php';
       <h2>Ready for a System That Actually Fits?</h2>
       <p>Share your current workflows and pain points. We'll show you how a purpose-built system compares against the generic software you're fighting with today.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Book a Discovery Call</a>
-        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline">View Live Demos</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="industry-final">Get My Free Project Estimate</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="industry-final">Get Rough Cost &amp; Timeline</a>
       </div>
     </div>
 

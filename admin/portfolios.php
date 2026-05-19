@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id']) && is_nu
         $stmt->execute([$id]);
         $message = '<div class="alert alert-success">Portfolio item deleted successfully.</div>';
     } catch (PDOException $e) {
-        $message = '<div class="alert alert-error">Error deleting portfolio: ' . htmlspecialchars($e->getMessage()) . '</div>';
+        error_log('Portfolio delete failed: ' . $e->getMessage());
+        $message = '<div class="alert alert-error">Could not delete this item. Please try again.</div>';
     }
 }
 

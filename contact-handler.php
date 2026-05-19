@@ -148,7 +148,7 @@ function make_confirm_html(string $name): string {
 <style>body{font-family:Arial,sans-serif;color:#111;padding:28px;max-width:560px;margin:0 auto}h2{color:#C8293E}p{line-height:1.7;color:#444}a{color:#C8293E}small{color:#aaa}</style>
 </head><body>
 <h2>Thank you, " . htmlspecialchars($name) . "!</h2>
-<p>We've received your enquiry and will get back to you <strong>within 24 hours</strong> (Mon–Fri).</p>
+<p>We've received your enquiry and will get back to you <strong>within 1 business day</strong>.</p>
 <p>In the meantime, browse our <a href='https://dashandots.com/#portfolio'>portfolio</a> or read our <a href='https://dashandots.com/#faq'>FAQ</a>.</p>
 <hr style='border:none;border-top:1px solid #e8e6e0;margin:24px 0'>
 <small>Dashandots Technology &mdash; <a href='https://dashandots.com'>dashandots.com</a></small>
@@ -262,7 +262,7 @@ try {
         $email, $name,
         "We've received your enquiry — Dashandots Technology",
         make_confirm_html($name),
-        "Thank you {$name}! We'll reply within 24 hours. — Dashandots Technology"
+        "Thank you {$name}! We'll reply within 1 business day. — Dashandots Technology"
     );
     $sent = true;
 } catch (RuntimeException $e) {
@@ -272,7 +272,7 @@ try {
 
 /* ── Response ──────────────────────────────────────────────────────────── */
 if ($sent) {
-    echo json_encode(['success' => true,  'message' => "Thanks {$name}! We'll be in touch within 24 hours."]);
+    echo json_encode(['success' => true,  'message' => "Thanks {$name}! We'll be in touch within 1 business day."]);
 } else {
     http_response_code(500);
     $hint = str_contains($errMsg, 'connect') || str_contains($errMsg, 'ssl')

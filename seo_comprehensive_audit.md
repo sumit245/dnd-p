@@ -1,4 +1,7 @@
 # Comprehensive SEO Audit — Dashandots Technology
+
+> Superseded: this report reflects an earlier local/live state. Use `WEBSITE_AUDIT_2026-05.md` as the current source of truth. Remaining useful themes from this report are clean blog URL verification, content/internal links, image performance, and conversion-oriented service pages.
+
 **URL:** https://dashandots.com  
 **Audit Date:** April 26, 2026  
 **Business Type:** Software Development Agency (SaaS/Services)  

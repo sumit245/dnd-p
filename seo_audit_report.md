@@ -1,5 +1,7 @@
 # SEO Audit — Dashandots Technology
 
+> Superseded: this report was created for an older single-page `index.html` version of the site. Use `WEBSITE_AUDIT_2026-05.md` as the current source of truth. Remaining useful themes from this report are trust proof, team/author signals, internal links, and authority-building content.
+
 **Audit Date:** 25 April 2026
 **URL Audited:** `http://localhost/dashandots/index.html` → Production canonical: `https://dashandots.com/`
 **Auditor:** Antigravity SEO Diagnostic

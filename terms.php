@@ -97,7 +97,8 @@ $page['active_nav']  = '';
       <h2>11. Contact</h2>
       <p>If you have any questions about these Terms, please contact:</p>
       <p><strong>Dashandots Technology</strong><br>
-        Email: <a href="mailto:dashandots@gmail.com">dashandots@gmail.com</a><br>
+        <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>Email: <a href="mailto:<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars(SITE_EMAIL) ?></a><br><?php endif; ?>
+        <?php if (defined('SITE_ADDRESS') && SITE_ADDRESS !== ''): ?>Address: <?= htmlspecialchars(SITE_ADDRESS) ?><br><?php endif; ?>
         Website: <a href="https://dashandots.com">dashandots.com</a></p>
     </div>
   </main>

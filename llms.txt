@@ -12,7 +12,7 @@ Dashandots Technology is a software development agency founded to make enterpris
 - **Location:** Gurugram, Haryana, India
 - **Website:** https://dashandots.com/
 - **Contact:** https://dashandots.com/#contact
-- **Email:** dashandots@gmail.com
+- **Email:** Configure a domain email such as hello@dashandots.com in production
 
 ## Services
 

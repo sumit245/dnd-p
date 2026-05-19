@@ -77,31 +77,40 @@ if (!function_exists('contact_cors_origin')) {
             return '';
         }
 
-        $allowedHosts = [
-            'dashandots.com',
-            'www.dashandots.com',
-            'localhost',
-            '127.0.0.1',
-        ];
-
         $parsed = parse_url($origin);
         if (!is_array($parsed) || empty($parsed['host'])) {
             return '';
         }
 
-        $host = strtolower($parsed['host']);
-        if (!in_array($host, $allowedHosts, true)) {
+        $scheme = strtolower((string)($parsed['scheme'] ?? ''));
+        if ($scheme !== 'http' && $scheme !== 'https') {
             return '';
         }
 
-        if (defined('SITE_URL')) {
-            $site = parse_url(SITE_URL);
-            if (is_array($site) && !empty($site['host']) && $host === strtolower($site['host'])) {
-                return $origin;
-            }
-        }
+        $host = strtolower($parsed['host']);
 
         if ($host === 'localhost' || $host === '127.0.0.1') {
+            return $origin;
+        }
+
+        if (!defined('SITE_URL')) {
+            return '';
+        }
+
+        $site = parse_url(SITE_URL);
+        if (!is_array($site) || empty($site['host'])) {
+            return '';
+        }
+
+        $siteHost = strtolower($site['host']);
+        $allowed = [$siteHost];
+        if (str_starts_with($siteHost, 'www.')) {
+            $allowed[] = substr($siteHost, 4);
+        } else {
+            $allowed[] = 'www.' . $siteHost;
+        }
+
+        if (in_array($host, $allowed, true)) {
             return $origin;
         }
 

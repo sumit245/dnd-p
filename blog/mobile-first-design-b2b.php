@@ -35,7 +35,7 @@ include __DIR__ . '/../includes/schema-blog-posting.php';
       <p>There is a prevailing myth that B2B software is primarily consumed on dual-monitor setups in corporate offices. While this might be true for heavy data-entry tasks, the reality of modern business is highly mobile.</p>
 
       <h2>The Reality of the Modern Worker</h2>
-      <p>Consider the frontline workers: warehouse managers scanning inventory on tablets, sales representatives updating CRM records in transit, or executives approving purchase orders from their phones between meetings. For these critical roles, a desktop-only interface is essentially broken.</p>
+      <p>Consider the frontline workers: warehouse managers scanning inventory on tablets, sales representatives updating <a href="<?= BASE_PATH ?>/services/erp-development/">CRM records</a> in transit, or executives approving purchase orders from their phones between meetings. For these critical roles, a desktop-only interface is essentially broken.</p>
 
       <h2>Designing for Context</h2>
       <p>Mobile-first design in enterprise software isn't just about making things fit on a smaller screen; it's about context. A mobile interface forces designers to prioritize essential information. When you build the mobile view first, you are stripping away the visual clutter and focusing purely on the user's primary objective.</p>
@@ -47,7 +47,7 @@ include __DIR__ . '/../includes/schema-blog-posting.php';
       </ul>
 
       <h2>Conclusion</h2>
-      <p>If your internal tools don't work beautifully on a smartphone, you are throttling your team's productivity. At Dashandots, every custom application we build—from ERPs to client portals—is engineered mobile-first.</p>
+      <p>If your internal tools don't work beautifully on a smartphone, you are throttling your team's productivity. At Dashandots, every custom application we build—from ERPs to <a href="<?= BASE_PATH ?>/services/ecommerce/">client portals</a>—is engineered mobile-first. Use the <a href="<?= BASE_PATH ?>/#ai-brief">estimate wizard</a> to scope the first useful mobile workflow.</p>
 
       <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border);">
         <a href="<?= BASE_PATH ?>/blog" style="color: var(--accent); font-weight: 600; text-decoration: none;">&larr; Back to Blog</a>

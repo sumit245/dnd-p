@@ -58,6 +58,62 @@ function portfolio_image_meta(string $url): ?array
     ];
 }
 
+/**
+ * Normalize absolute or BASE_PATH URLs to a site-relative path for filesystem lookup.
+ */
+function content_image_public_path(string $url): string
+{
+    $url = trim($url);
+    if ($url === '') {
+        return '';
+    }
+
+    if (defined('SITE_URL') && strpos($url, SITE_URL) === 0) {
+        return substr($url, strlen(rtrim(SITE_URL, '/')));
+    }
+
+    return $url;
+}
+
+/**
+ * Responsive image markup for blog/CMS paths (WebP + dimensions when files exist locally).
+ */
+function content_image_html(string $url, string $alt, array $attrs = []): string
+{
+    $path = content_image_public_path($url);
+    if ($path !== '' && portfolio_resolve_filesystem_path($path)) {
+        return portfolio_picture_html($path, $alt, $attrs);
+    }
+
+    $loading = $attrs['loading'] ?? 'lazy';
+    $fetchpriority = $attrs['fetchpriority'] ?? '';
+    $class = $attrs['class'] ?? '';
+    $style = $attrs['style'] ?? 'width:100%;height:100%;object-fit:cover';
+    $width = (int) ($attrs['width'] ?? 800);
+    $height = (int) ($attrs['height'] ?? 450);
+    $safeAlt = htmlspecialchars($alt, ENT_QUOTES, 'UTF-8');
+    $src = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+
+    $extra = '';
+    if ($fetchpriority !== '') {
+        $extra .= ' fetchpriority="' . htmlspecialchars($fetchpriority, ENT_QUOTES, 'UTF-8') . '"';
+    }
+    if ($class !== '') {
+        $extra .= ' class="' . htmlspecialchars($class, ENT_QUOTES, 'UTF-8') . '"';
+    }
+
+    return sprintf(
+        '<img src="%s" alt="%s" width="%d" height="%d" loading="%s" decoding="async"%s style="%s">',
+        $src,
+        $safeAlt,
+        $width,
+        $height,
+        htmlspecialchars($loading, ENT_QUOTES, 'UTF-8'),
+        $extra,
+        htmlspecialchars($style, ENT_QUOTES, 'UTF-8')
+    );
+}
+
 function portfolio_picture_html(string $url, string $alt, array $attrs = []): string
 {
     $meta = portfolio_image_meta($url);

@@ -14,12 +14,12 @@ header('X-Robots-Tag: noindex');
 $staticPages = [
     ['loc' => SITE_URL . '/',                       'changefreq' => 'weekly',  'priority' => '1.0', 'lastmod' => '2026-04-26'],
     ['loc' => SITE_URL . '/blog/',                  'changefreq' => 'weekly',  'priority' => '0.8', 'lastmod' => '2026-04-26'],
-    ['loc' => SITE_URL . '/services/erp-development',     'changefreq' => 'monthly', 'priority' => '0.8', 'lastmod' => '2026-04-26'],
-    ['loc' => SITE_URL . '/services/web-mobile-apps',     'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
-    ['loc' => SITE_URL . '/services/ecommerce',           'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
-    ['loc' => SITE_URL . '/services/industry-systems',    'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
-    ['loc' => SITE_URL . '/services/data-analytics',      'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
-    ['loc' => SITE_URL . '/services/iot-embedded',        'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
+    ['loc' => SITE_URL . '/services/erp-development/',     'changefreq' => 'monthly', 'priority' => '0.8', 'lastmod' => '2026-04-26'],
+    ['loc' => SITE_URL . '/services/web-mobile-apps/',     'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
+    ['loc' => SITE_URL . '/services/ecommerce/',           'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
+    ['loc' => SITE_URL . '/services/industry-systems/',    'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
+    ['loc' => SITE_URL . '/services/data-analytics/',      'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
+    ['loc' => SITE_URL . '/services/iot-embedded/',        'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
     ['loc' => SITE_URL . '/privacy-policy',         'changefreq' => 'yearly',  'priority' => '0.3', 'lastmod' => '2026-04-26'],
     ['loc' => SITE_URL . '/terms',                  'changefreq' => 'yearly',  'priority' => '0.3', 'lastmod' => '2026-04-26'],
 ];

@@ -1,5 +1,5 @@
-<?php 
-require __DIR__ . '/includes/config.php'; 
+<?php
+require __DIR__ . '/includes/config.php';
 require __DIR__ . '/includes/db.php';
 require_once __DIR__ . '/includes/portfolio-media.php';
 
@@ -7,7 +7,7 @@ require_once __DIR__ . '/includes/portfolio-media.php';
 $settings = [];
 $stmt = $pdo->query('SELECT key_name, value FROM site_settings');
 while ($row = $stmt->fetch()) {
-    $settings[$row['key_name']] = $row['value'];
+  $settings[$row['key_name']] = $row['value'];
 }
 
 // Fetch portfolios
@@ -15,13 +15,21 @@ $portfoliosStmt = $pdo->query('SELECT * FROM portfolios ORDER BY created_at ASC'
 $portfolios = $portfoliosStmt->fetchAll();
 
 // Homepage-specific SEO: override title and description for maximum keyword coverage
-$page['title'] = 'Software Developer in India — Custom ERP, CRM & Management Systems | Dashandots';
+$page['title'] = 'Custom ERP & CRM Software Developer in India | Dashandots';
+$heroTitle = trim($settings['hero_title'] ?? '');
+$heroDescription = trim($settings['hero_description'] ?? '');
+if ($heroTitle === '') {
+  $heroTitle = 'Custom ERP & CRM for Growing SMEs';
+}
+if ($heroDescription === '') {
+  $heroDescription = 'Dashandots builds ERP, CRM, dashboard, portal, and mobile platforms for growing businesses — for clearer operations and dependable long-term support.';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<?php include __DIR__ . '/includes/head.php'; ?>
+  <?php include __DIR__ . '/includes/head.php'; ?>
 
   <!-- Schema.org Structured Data (homepage-specific) -->
   <script type="application/ld+json">
@@ -35,7 +43,7 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
       "url":"https://dashandots.com",
       "logo":"<?= SITE_LOGO_URL ?>",
       "description":"Full-cycle software development and technology consulting. Specialising in ERP, CRM, TMS, HMS, Hotel PMS, web and mobile applications for SMEs and enterprises.",
-      "email":"dashandots@gmail.com",
+      <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>"email":"<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>",<?php endif; ?>
       "address":{"@type":"PostalAddress","addressLocality":"Gurugram","addressRegion":"Delhi NCR","addressCountry":"IN"},
       "areaServed":"Worldwide",
       "knowsAbout":["ERP Software","CRM Software","Transport Management System","Hospital Management System","Mobile App Development","Web Development","IoT"]
@@ -66,8 +74,8 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
       "name":"Dashandots Technology",
       "description":"Software development agency specializing in custom ERP, CRM, TMS, HMS, and mobile applications for SMEs in India and globally.",
       "url":"https://dashandots.com",
-      "telephone":"+919876543210",
-      "email":"dashandots@gmail.com",
+      <?php if (defined('SITE_PHONE') && SITE_PHONE !== ''): ?>"telephone":"<?= htmlspecialchars(SITE_PHONE, ENT_QUOTES, 'UTF-8') ?>",<?php endif; ?>
+      <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>"email":"<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>",<?php endif; ?>
       "image":"<?= SITE_LOGO_URL ?>",
       "address":{"@type":"PostalAddress","addressLocality":"Gurugram","addressRegion":"Delhi NCR","addressCountry":"IN"},
       "priceRange":"$$",
@@ -85,30 +93,31 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
 
 <body>
 
-<?php include __DIR__ . '/includes/header.php'; ?>
+  <?php include __DIR__ . '/includes/header.php'; ?>
 
-  <main id="main-content">
+  <main id="main-content" tabindex="-1">
     <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
     <section id="home" aria-labelledby="hero-heading">
       <div class="container">
         <div class="hero-grid">
-          <div class="hero-content reveal">
-            <div class="hero-tag"><span aria-hidden="true"></span>Software · Systems · Scale</div>
-            <h1 id="hero-heading" class="hero-h1"><?php echo htmlspecialchars($settings['hero_title'] ?? 'Enterprise‑grade systems for growing businesses'); ?></h1>
-            <p class="hero-desc"><?php echo htmlspecialchars($settings['hero_description'] ?? 'Dashandots Technology designs and builds fast, mobile‑first ERP, CRM, TMS, HMS, and custom web & mobile platforms for SMEs.'); ?></p>
+          <div class="hero-content reveal visible">
+            <div class="hero-tag"><span aria-hidden="true"></span>Dashboards · Mobile Apps · Custom Software
+            </div>
+            <h1 id="hero-heading" class="hero-h1"><?php echo htmlspecialchars($heroTitle); ?></h1>
+            <p class="hero-desc"><?php echo htmlspecialchars($heroDescription); ?></p>
             <div class="hero-ctas">
-              <a href="#contact" class="btn btn-primary">Start a Project ↗</a>
-              <a href="#portfolio" class="btn btn-outline">View Portfolio</a>
+              <a href="#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="hero">Get Instant
+                Estimate</a>
+              <a href="#portfolio" class="btn btn-outline" data-track="cta" data-cta-location="hero">See Our Work</a>
             </div>
             <ul class="hero-meta">
-              <li class="hero-meta-item">Based in Delhi NCR, India</li>
-              <li class="hero-meta-item">Serving SMEs &amp; Enterprises</li>
-              <li class="hero-meta-item">50+ Projects Delivered</li>
-              <li class="hero-meta-item">8+ Industries</li>
+              <li class="hero-meta-item">150+ Clients Served</li>
+              <li class="hero-meta-item">450+ Projects Delivered</li>
+              <li class="hero-meta-item">5+ Years Experience</li>
             </ul>
           </div>
           <!-- Pure CSS/SVG animated diagram — replaces broken THREE.js -->
-          <div class="hero-diagram reveal reveal-delay-2" aria-hidden="true">
+          <div class="hero-diagram reveal reveal-delay-2 visible" aria-hidden="true">
             <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
               <defs>
                 <style>
@@ -238,19 +247,19 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
               <circle class="center-bg" cx="200" cy="190" r="52" />
               <circle cx="200" cy="190" r="52" fill="none" stroke="#C8293E" stroke-width="1.5" stroke-dasharray="3 3" />
               <text x="200" y="185" font-size="11" font-weight="700" text-anchor="middle" fill="#C8293E"
-                font-family="Inter,Arial,sans-serif" letter-spacing=".06em">CORE</text>
+                font-family="Inter,Arial,sans-serif" letter-spacing=".06em">WE</text>
               <text x="200" y="200" font-size="11" font-weight="700" text-anchor="middle" fill="#C8293E"
-                font-family="Inter,Arial,sans-serif" letter-spacing=".06em">PLATFORM</text>
+                font-family="Inter,Arial,sans-serif" letter-spacing=".06em">BUILD</text>
               <!-- satellite nodes -->
               <g class="n1 node-pill">
                 <rect x="28" y="66" width="104" height="32" rx="16" fill="white" stroke="#E8E6E0" stroke-width="1" />
                 <text x="80" y="86" font-size="11" font-weight="600" text-anchor="middle" fill="#333"
-                  font-family="Inter,Arial,sans-serif">Web &amp; Mobile</text>
+                  font-family="Inter,Arial,sans-serif">Websites</text>
               </g>
               <g class="n2 node-pill">
                 <rect x="278" y="56" width="92" height="32" rx="16" fill="white" stroke="#E8E6E0" stroke-width="1" />
                 <text x="324" y="76" font-size="11" font-weight="600" text-anchor="middle" fill="#333"
-                  font-family="Inter,Arial,sans-serif">CRM &amp; CX</text>
+                  font-family="Inter,Arial,sans-serif">Mobile Apps</text>
               </g>
               <g class="n3 node-pill">
                 <rect x="18" y="272" width="110" height="32" rx="16" fill="white" stroke="#E8E6E0" stroke-width="1" />
@@ -263,9 +272,9 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
                   font-family="Inter,Arial,sans-serif">Analytics &amp; AI</text>
               </g>
               <g class="n5 node-pill">
-                <rect x="148" y="28" width="104" height="32" rx="16" fill="#C8293E" />
-                <text x="200" y="48" font-size="11" font-weight="600" text-anchor="middle" fill="white"
-                  font-family="Inter,Arial,sans-serif">ERP / TMS / HMS</text>
+                <rect x="148" y="28" width="104" height="32" rx="16" fill="white" stroke="#E8E6E0" stroke-width="1" />
+                <text x="200" y="48" font-size="11" font-weight="600" text-anchor="middle" fill="#333"
+                  font-family="Inter,Arial,sans-serif">Dashboards</text>
               </g>
             </svg>
           </div>
@@ -274,26 +283,36 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
     </section>
 
     <!-- ═══════════════════════════════ TRUST BAR ═══════════════════════════════ -->
+    <!-- TODO: Replace contents same repetitive contents look forced -->
     <div class="trust-bar" role="region" aria-label="Company highlights">
       <div class="container">
         <div class="trust-inner">
-          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>50+ Projects Delivered</span>
-          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>8+ Industry Verticals</span>
-          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>ERP · CRM · TMS · HMS · PMS</span>
-          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>Based in India &middot; Serving
+          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>150+ Clients Served</span>
+          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>450+ Projects Delivered</span>
+          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>ERP · CRM · TMS · HMS ·
+            Dashboards</span>
+          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>Serving
             Globally</span>
-          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>Enterprise‑grade Quality</span>
+          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>Open to Long-Term Support</span>
         </div>
       </div>
     </div>
 
-    <!-- ═══════════════════════════════ AEO TL;DR BLOCK ═══════════════════════════════ -->
-    <div class="container reveal">
-      <div style="background: var(--surface-2); border-left: 4px solid var(--accent); padding: 24px; border-radius: var(--r-sm); margin: 60px auto 20px; max-width: 900px;">
-        <h2 style="font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 12px;">Executive Summary</h2>
-        <p style="font-size: 18px; color: var(--text-1); line-height: 1.6; margin: 0;"><strong>Dashandots Technology is a custom software development company based in Gurugram, Delhi NCR, India, specialising in ERP, CRM, Hotel PMS, and mobile app development for SMEs globally.</strong> We design, build, and support enterprise-grade management systems — including hospital management software (HMS), transport management systems (TMS), hotel management systems (PMS), and project management platforms — with the speed and transparency that growing businesses require.</p>
+    <section class="estimate-jump" aria-labelledby="estimate-jump-heading">
+      <div class="container">
+        <div class="estimate-jump-inner reveal">
+          <div>
+            <p class="section-label">Not ready to call?</p>
+            <h2 id="estimate-jump-heading">Find what your project needs.</h2>
+            <p>Budget uncertainty is one of the most common reasons software projects stall before they even start.
+              Answer five questions and get a realistic budget range, delivery timeline, and a shareable project
+              brief — all in under two minutes, no commitments needed.</p>
+          </div>
+          <a href="#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="estimate-jump">Get Instant
+            Estimate</a>
+        </div>
       </div>
-    </div>
+    </section>
 
     <!-- ═══════════════════════════════ ABOUT ═══════════════════════════════ -->
     <section id="about" aria-labelledby="about-heading">
@@ -301,34 +320,48 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
         <div class="about-grid">
           <div class="reveal">
             <p class="section-label">About us</p>
-            <h2 id="about-heading" class="section-title">Software Development Company in Delhi NCR, India &mdash; Enterprise Quality, SME Speed.</h2>
-            <p class="section-sub"><?php echo nl2br(htmlspecialchars($settings['about_us_text'] ?? 'Dashandots Technology is a full‑cycle software development and technology consulting company based in India.')); ?></p>
+            <h2 id="about-heading" class="section-title">We build for owners who don't fit in a template.</h2>
+            <p class="section-sub">
+              <?php echo nl2br(htmlspecialchars($settings['about_us_text'] ?? 'Dashandots Technology is an end-to-end software development and technology consulting company based in India.')); ?>
+            </p>
             <div class="about-cards">
               <div class="about-card">
                 <h3>Our Mission</h3>
-                <p>To simplify complex business processes using technology and deliver enterprise‑grade digital
-                  solutions accessible to SMEs.</p>
+                <p>To simplify complex business processes using technology and make well-engineered software
+                  accessible to SMEs.</p>
               </div>
               <div class="about-card">
                 <h3>Our Vision</h3>
-                <p>To be the most trusted technology partner for businesses who want long‑term, outcome‑driven digital
-                  platforms.</p>
+                <p>To be the most trusted technology partner for businesses who want long‑term digital platforms
+                  that keep paying back after launch.</p>
               </div>
             </div>
             <div class="about-stat-row">
               <div class="about-stat">
-                <div class="num">50+</div>
+                <div class="num">450+</div>
                 <div class="label">Projects Delivered</div>
               </div>
               <div class="about-stat">
-                <div class="num">8+</div>
-                <div class="label">Industries Served</div>
+                <div class="num">150+</div>
+                <div class="label">Clients Served</div>
               </div>
               <div class="about-stat">
                 <div class="num">5+</div>
                 <div class="label">Years Experience</div>
               </div>
             </div>
+            <?php if (defined('SITE_FOUNDER_NAME') && SITE_FOUNDER_NAME !== ''): ?>
+              <div class="founder-card">
+                <p class="section-label">Founder-led discovery</p>
+                <h3><?= htmlspecialchars(SITE_FOUNDER_NAME) ?></h3>
+                <p><?= htmlspecialchars(SITE_FOUNDER_TITLE) ?>. High-intent enquiries can start with a founder-led
+                  workflow review before detailed scoping.</p>
+                <?php if (defined('SITE_FOUNDER_LINKEDIN') && SITE_FOUNDER_LINKEDIN !== ''): ?>
+                  <a href="<?= htmlspecialchars(SITE_FOUNDER_LINKEDIN, ENT_QUOTES, 'UTF-8') ?>" target="_blank"
+                    rel="noopener">View LinkedIn profile &rarr;</a>
+                <?php endif; ?>
+              </div>
+            <?php endif; ?>
           </div>
           <div class="about-right reveal reveal-delay-1">
             <div class="diff-item">
@@ -340,7 +373,8 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
                 </svg></div>
               <div>
                 <h3>End‑to‑end capabilities</h3>
-                <p>Web, mobile, ERP/CRM, TMS, HMS, hotel PMS, finance, IoT &mdash; all under one roof.</p>
+                <p>ERP, CRM, dashboards, portals, mobile apps, HMS, TMS, and hotel PMS under one practical delivery
+                  team.</p>
               </div>
             </div>
             <div class="diff-item">
@@ -390,9 +424,10 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
       <div class="container">
         <div class="reveal">
           <p class="section-label">Services</p>
-          <h2 id="services-heading" class="section-title">Custom ERP, CRM &amp; Mobile App Development Services.</h2>
-          <p class="section-sub">From concept to launch and beyond &mdash; we design, build, and support custom software
-            that runs your business.</p>
+          <h2 id="services-heading" class="section-title">Build the business platform your operations actually need.
+          </h2>
+          <p class="section-sub">Start with the system you need most: ERP, CRM, portal, dashboard, mobile app, HMS, TMS,
+            or PMS. We scope it around the way your team already works.</p>
         </div>
         <div class="services-grid">
           <article class="service-card reveal">
@@ -503,7 +538,7 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
               </svg></div>
             <h3>IoT &amp; Embedded Software</h3>
             <p class="service-tag">MATLAB · LabVIEW · Keil · Arduino · Device‑cloud</p>
-            <p>Connect devices, sensors, and backend systems with robust firmware and IoT dashboards that scale with
+            <p>Connect devices, sensors, and backend systems with reliable firmware and IoT dashboards that scale with
               your operations.</p>
             <ul class="service-list" aria-label="Includes">
               <li>Embedded firmware &amp; control systems</li>
@@ -518,17 +553,28 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
           <div class="hww-steps">
             <div class="step">
               <div class="step-num">1</div>
-              <div class="step-label"><strong>Discover &amp; Plan</strong>Align on goals, scope &amp; delivery roadmap</div>
+              <div class="step-label"><strong>Discover &amp; Plan</strong>Align on goals, scope &amp; delivery roadmap
+              </div>
             </div>
             <div class="step">
               <div class="step-num">2</div>
-              <div class="step-label"><strong>Build &amp; Iterate</strong>Develop in sprints with regular client demos</div>
+              <div class="step-label"><strong>Build &amp; Iterate</strong>Develop in sprints with regular client demos
+              </div>
             </div>
             <div class="step">
               <div class="step-num">3</div>
-              <div class="step-label"><strong>Deploy &amp; Support</strong>Go live, train your team &amp; support long‑term</div>
+              <div class="step-label"><strong>Deploy &amp; Support</strong>Go live, train your team &amp; support
+                long‑term</div>
             </div>
           </div>
+        </div>
+        <div class="mid-cta reveal">
+          <div>
+            <h3>Want to know what this would cost for your workflow?</h3>
+            <p>Generate a rough budget and timeline before booking a call.</p>
+          </div>
+          <a href="#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="after-services">Get Instant
+            Estimate</a>
         </div>
       </div>
     </section>
@@ -761,6 +807,15 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
                 class="sol-tag">Tally</span></div>
           </article>
         </div>
+        <div class="mid-cta reveal">
+          <div>
+            <h3>Not sure which system to build first?</h3>
+            <p>We usually start with the workflow causing the most leakage: sales, stock, billing, dispatch, reporting,
+              or follow-ups.</p>
+          </div>
+          <a href="#contact" class="btn btn-primary" data-track="cta" data-cta-location="after-solutions">Book Free
+            Consultation</a>
+        </div>
       </div>
     </section>
 
@@ -775,51 +830,65 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
             </p>
           </div>
           <div class="portfolio-filters" role="group" aria-label="Filter portfolio">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="erp">ERP/CRM</button>
-            <button class="filter-btn" data-filter="tms">TMS</button>
-            <button class="filter-btn" data-filter="hms">HMS</button>
-            <button class="filter-btn" data-filter="web">Web &amp; Mobile</button>
+            <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="filter-btn" data-filter="erp" aria-pressed="false">ERP/CRM</button>
+            <button type="button" class="filter-btn" data-filter="tms" aria-pressed="false">TMS</button>
+            <button type="button" class="filter-btn" data-filter="hms" aria-pressed="false">HMS</button>
+            <button type="button" class="filter-btn" data-filter="web" aria-pressed="false">Web &amp; Mobile</button>
           </div>
         </div>
         <div class="portfolio-grid">
           <?php if (!empty($portfolios)): ?>
             <?php foreach ($portfolios as $index => $portfolio): ?>
-              <?php 
-                $delayClass = $index > 0 ? 'reveal-delay-' . min($index, 3) : ''; 
-                $slugUpper = strtoupper($portfolio['slug']);
+              <?php
+              $delayClass = $index > 0 ? 'reveal-delay-' . min($index, 3) : '';
+              $slugUpper = strtoupper($portfolio['slug']);
               ?>
-              <article class="portfolio-card reveal <?php echo $delayClass; ?>" data-type="<?php echo htmlspecialchars($portfolio['slug']); ?>">
+              <article class="portfolio-card reveal <?php echo $delayClass; ?>"
+                data-type="<?php echo htmlspecialchars($portfolio['slug']); ?>">
                 <div class="port-thumb" style="background:none; padding: 0;">
                   <span class="port-type" style="z-index:2;"><?php echo htmlspecialchars($slugUpper); ?></span>
                   <?php if (!empty($portfolio['image_path'])): ?>
                     <?php
-                      echo portfolio_picture_html(
-                          $portfolio['image_path'],
-                          $portfolio['title'] . ' mockup',
-                          [
-                              'loading' => $index === 0 ? 'eager' : 'lazy',
-                              'fetchpriority' => $index === 0 ? 'high' : '',
-                          ]
-                      );
+                    echo portfolio_picture_html(
+                      $portfolio['image_path'],
+                      $portfolio['title'] . ' mockup',
+                      [
+                        'loading' => $index === 0 ? 'eager' : 'lazy',
+                        'fetchpriority' => $index === 0 ? 'high' : '',
+                      ]
+                    );
                     ?>
                   <?php else: ?>
-                    <div style="width: 100%; height: 100%; background: var(--surface-2); display: flex; align-items: center; justify-content: center; color: var(--text-2);">No Image</div>
+                    <div
+                      style="width: 100%; height: 100%; background: var(--surface-2); display: flex; align-items: center; justify-content: center; color: var(--text-2);">
+                      No Image</div>
                   <?php endif; ?>
                 </div>
                 <div class="port-body">
                   <h3><?php echo htmlspecialchars($portfolio['title']); ?></h3>
                   <p class="port-cat"><?php echo htmlspecialchars($slugUpper); ?></p>
                   <p><?php echo htmlspecialchars($portfolio['short_description']); ?></p>
-                  <a href="<?= BASE_PATH ?>/demo/view.php?slug=<?php echo urlencode($portfolio['slug']); ?>" class="port-demo-link" target="_blank" rel="noopener">
+                  <a href="<?= BASE_PATH ?>/demo/view.php?slug=<?php echo urlencode($portfolio['slug']); ?>"
+                    class="port-demo-link" target="_blank" rel="noopener" data-track="demo"
+                    data-demo-slug="<?php echo htmlspecialchars($portfolio['slug']); ?>">
                     View Demo &rarr;
                   </a>
                 </div>
               </article>
             <?php endforeach; ?>
           <?php else: ?>
-            <p style="text-align:center; grid-column: 1 / -1; padding: 40px; color: var(--text-2);">New portfolio updates coming soon.</p>
+            <p style="text-align:center; grid-column: 1 / -1; padding: 40px; color: var(--text-2);">New portfolio updates
+              coming soon.</p>
           <?php endif; ?>
+        </div>
+        <div class="mid-cta reveal">
+          <div>
+            <h3>Need an ERP, CRM, HMS, TMS, or portal like these?</h3>
+            <p>Share your workflow and we will suggest the quickest useful first phase.</p>
+          </div>
+          <a href="#contact" class="btn btn-primary" data-track="cta" data-cta-location="after-portfolio">Build
+            Something Similar</a>
         </div>
       </div>
     </section>
@@ -831,19 +900,74 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
           <p class="section-label">Case Studies</p>
           <h2 id="cs-heading" class="section-title">Outcomes our clients see in practice.</h2>
         </div>
-        <div class="cs-grid">
-          <article class="cs-card reveal">
+        <div class="cs-grid proof-grid">
+          <article class="cs-card reveal proof-card" data-track="proof-card" data-proof-type="tms">
             <p class="cs-meta">TMS · Logistics &amp; Transport</p>
-            <h3>Faster dispatch planning for logistics provider</h3>
-            <p>Automated trip creation and routing reduced dispatch planning time from hours to minutes while improving
-              on‑time delivery rates and driver utilisation across the fleet.</p>
+            <h3>Faster dispatch planning for transport teams</h3>
+            <p><strong>Problem:</strong> manual trip planning and billing delays. <strong>Solution:</strong> TMS with
+              trips, route visibility, POD capture, and billing workflows. <strong>Result:</strong> dispatch work moves
+              from scattered calls and sheets into one operational dashboard.</p>
+            <a href="<?= BASE_PATH ?>/demo/view.php?slug=tms" class="proof-link" target="_blank" rel="noopener"
+              data-track="demo" data-demo-slug="tms">View TMS proof &rarr;</a>
           </article>
-          <article class="cs-card reveal reveal-delay-1">
+          <article class="cs-card reveal reveal-delay-1 proof-card" data-track="proof-card" data-proof-type="hms">
+            <p class="cs-meta">HMS · Healthcare</p>
+            <h3>Cleaner patient, billing, pharmacy, and appointment flow</h3>
+            <p><strong>Problem:</strong> fragmented OPD/IPD records and slow billing. <strong>Solution:</strong> HMS
+              modules for registration, scheduling, billing, pharmacy, and reports. <strong>Result:</strong> staff work
+              from a shared patient journey instead of disconnected registers.</p>
+            <a href="<?= BASE_PATH ?>/demo/view.php?slug=hms" class="proof-link" target="_blank" rel="noopener"
+              data-track="demo" data-demo-slug="hms">View HMS proof &rarr;</a>
+          </article>
+          <article class="cs-card reveal reveal-delay-2 proof-card" data-track="proof-card" data-proof-type="erp">
+            <p class="cs-meta">ERP · Inventory &amp; Operations</p>
+            <h3>One place for inventory, sales, purchases, finance, and approvals</h3>
+            <p><strong>Problem:</strong> owners could not see live stock, orders, payments, and branch performance.
+              <strong>Solution:</strong> modular ERP dashboard with role-based access. <strong>Result:</strong>
+              decisions move from delayed reports to current business data.
+            </p>
+            <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp" class="proof-link" target="_blank" rel="noopener"
+              data-track="demo" data-demo-slug="erp">View ERP proof &rarr;</a>
+          </article>
+          <article class="cs-card reveal proof-card" data-track="proof-card" data-proof-type="portal">
+            <p class="cs-meta">Portal · Dealers &amp; Customers</p>
+            <h3>Self-service ordering and customer visibility</h3>
+            <p><strong>Problem:</strong> repeat orders, invoices, and follow-ups stayed on phone calls.
+              <strong>Solution:</strong> dealer or customer portal with pricing, order status, invoices, and support.
+              <strong>Result:</strong> fewer manual follow-ups and cleaner repeat transactions.
+            </p>
+            <a href="<?= BASE_PATH ?>/services/ecommerce/" class="proof-link" data-track="proof-card"
+              data-proof-type="portal-detail">Build a portal &rarr;</a>
+          </article>
+          <article class="cs-card reveal reveal-delay-1 proof-card" data-track="proof-card" data-proof-type="analytics">
+            <p class="cs-meta">Dashboards · Analytics</p>
+            <h3>Live KPIs instead of manual Excel reporting</h3>
+            <p><strong>Problem:</strong> leadership reporting was delayed across ERP, accounts, and sales systems.
+              <strong>Solution:</strong> BI dashboards and automated reports. <strong>Result:</strong> leadership gets
+              daily visibility into revenue, stock, margins, sales, and operations.
+            </p>
+            <a href="<?= BASE_PATH ?>/services/data-analytics/" class="proof-link" data-track="proof-card"
+              data-proof-type="analytics-detail">Scope dashboards &rarr;</a>
+          </article>
+          <article class="cs-card reveal reveal-delay-2 proof-card" data-track="proof-card" data-proof-type="pms">
             <p class="cs-meta">PMS · Hospitality</p>
-            <h3>Higher booking conversions for hotel group</h3>
-            <p>A modern booking engine and integrated PMS improved conversion rates and reduced over‑booking incidents,
-              while giving front‑desk staff real‑time room and guest visibility.</p>
+            <h3>Reservations, housekeeping, billing, and guest workflows in sync</h3>
+            <p><strong>Problem:</strong> front desk, housekeeping, POS, and OTA bookings operated separately.
+              <strong>Solution:</strong> hotel PMS with operational modules and reporting. <strong>Result:</strong>
+              fewer booking mistakes and clearer day-to-day room control.
+            </p>
+            <a href="<?= BASE_PATH ?>/services/industry-systems/" class="proof-link" data-track="proof-card"
+              data-proof-type="pms-detail">Explore PMS systems &rarr;</a>
           </article>
+        </div>
+        <div class="mid-cta reveal">
+          <div>
+            <h3>Have a similar workflow problem?</h3>
+            <p>Send a short requirement and we will respond with the likely first phase, timeline, and rough budget
+              range.</p>
+          </div>
+          <a href="#contact" class="btn btn-primary" data-track="cta" data-cta-location="after-proof">Build Something
+            Similar</a>
         </div>
       </div>
     </section>
@@ -853,7 +977,7 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
       <div class="container">
         <div class="reveal">
           <p class="section-label">Resources</p>
-          <h2 id="resources-heading" class="section-title">Guides &amp; insights for digital transformation.</h2>
+          <h2 id="resources-heading" class="section-title">Guides &amp; insights for growing businesses.</h2>
           <p class="section-sub">Practical frameworks and perspectives on ERP, CRM, and software strategy for growing
             businesses.</p>
         </div>
@@ -923,7 +1047,7 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
       <div class="container">
         <div class="reveal">
           <p class="section-label">Why choose us</p>
-          <h2 id="why-heading" class="section-title">A partner focused on outcomes, not just deliveries.</h2>
+          <h2 id="why-heading" class="section-title">A partner focused on outcomes, not just deliverables.</h2>
         </div>
         <div class="why-grid">
           <div class="why-card reveal">
@@ -962,7 +1086,8 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
 
         <!-- ═══════════════════════════════ COMPARISON TABLE ═══════════════════════════════ -->
         <div class="reveal">
-          <h3 style="margin: 60px 0 24px; font-size: 24px; text-align: center; color: var(--text-1);">How We Compare</h3>
+          <h3 style="margin: 60px 0 24px; font-size: 24px; text-align: center; color: var(--text-1);">How We Compare
+          </h3>
           <div class="dnd-comparison-table-wrapper">
             <table class="dnd-comparison-table">
               <thead>
@@ -1086,18 +1211,24 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
                 <line x1="5" y1="12" x2="19" y2="12" />
               </svg></button>
             <div class="faq-a">
-              <div class="faq-a-inner">Yes. Dashandots Technology is based in Gurugram, Delhi NCR. We are a full-cycle custom software development company serving clients across Delhi, the rest of India, and globally. Our core services include ERP development, CRM systems, mobile app development, hotel management software (PMS), hospital management software (HMS), and transport management systems (TMS).</div>
+              <div class="faq-a-inner">Yes. Dashandots Technology is based in Gurugram, Delhi NCR. We are a full-cycle
+                custom software development company serving clients across Delhi, the rest of India, and globally. Our
+                core services include ERP development, CRM systems, mobile app development, hotel management software
+                (PMS), hospital management software (HMS), and transport management systems (TMS).</div>
             </div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">Do you build hotel management software and property management systems (PMS)?<svg
-                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" aria-hidden="true">
+            <button class="faq-q" aria-expanded="false">Do you build hotel management software and property management
+              systems (PMS)?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <line x1="12" y1="5" x2="12" y2="19" />
                 <line x1="5" y1="12" x2="19" y2="12" />
               </svg></button>
             <div class="faq-a">
-              <div class="faq-a-inner">Yes. Our Hotel PMS is a complete hotel management system covering reservations, front-office, housekeeping, POS, and guest management. We build custom hotel management software tailored to boutique hotels, hotel chains, and resorts across India — fully integrated with billing, GST, and channel management.</div>
+              <div class="faq-a-inner">Yes. Our Hotel PMS is a complete hotel management system covering reservations,
+                front-office, housekeeping, POS, and guest management. We build custom hotel management software
+                tailored to boutique hotels, hotel chains, and resorts across India — fully integrated with billing,
+                GST, and channel management.</div>
             </div>
           </div>
           <div class="faq-item">
@@ -1108,7 +1239,10 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
                 <line x1="5" y1="12" x2="19" y2="12" />
               </svg></button>
             <div class="faq-a">
-              <div class="faq-a-inner">Absolutely. We build custom project management software and task-tracking platforms as standalone tools or integrated modules within your ERP or CRM. Whether you need agile sprint boards, milestone tracking, resource planning, or client-facing project portals — we design and develop the solution from scratch to match your exact workflow.</div>
+              <div class="faq-a-inner">Absolutely. We build custom project management software and task-tracking
+                platforms as standalone tools or integrated modules within your ERP or CRM. Whether you need agile
+                sprint boards, milestone tracking, resource planning, or client-facing project portals — we design and
+                develop the solution from scratch to match your exact workflow.</div>
             </div>
           </div>
         </div>
@@ -1474,10 +1608,12 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
       <div class="container">
         <div class="strip-inner">
           <div>
-            <h2>Ready to build something great?</h2>
-            <p>Tell us about your project and we'll come back with a detailed proposal within 24 hours.</p>
+            <h2>Ready to centralise your business operations?</h2>
+            <p>Tell us about your workflow and we'll respond within 1 business day with the likely approach, timeline,
+              and rough budget range.</p>
           </div>
-          <a href="#contact" class="btn btn-white">Start a Project ↗</a>
+          <a href="#contact" class="btn btn-white" data-track="cta" data-cta-location="contact-strip">Get My Free
+            Project Estimate</a>
         </div>
       </div>
     </div>
@@ -1487,14 +1623,14 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
       <div class="container">
         <div class="reveal" style="text-align:center;margin-bottom:16px">
           <p class="section-label">Contact</p>
-          <h2 id="contact-heading" class="section-title">Tell us about your project.</h2>
-          <p class="section-sub" style="margin:0 auto">We review every enquiry and respond within 24 hours with a
-            tailored response.</p>
+          <h2 id="contact-heading" class="section-title">Get a free project estimate.</h2>
+          <p class="section-sub" style="margin:0 auto">We respond within 1 business day with suggested approach,
+            estimated timeline, and rough budget range. No spam. No obligation.</p>
         </div>
         <div class="contact-grid">
           <!-- FORM -->
           <div class="contact-form-wrap reveal">
-            <h3>Send an enquiry</h3>
+            <h3>Send your requirement</h3>
             <form id="contactForm" novalidate>
               <div class="hp-field" aria-hidden="true">
                 <label for="website">Website</label>
@@ -1545,9 +1681,10 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
                   required></textarea>
               </div>
               <button type="submit" class="form-submit" id="submitBtn">
-                <span class="btn-text">Send Enquiry →</span>
+                <span class="btn-text">Get My Free Project Estimate →</span>
                 <span class="spinner" aria-hidden="true"></span>
               </button>
+              <p class="form-reassurance">We respond within 1 business day. No spam. No obligation.</p>
               <div class="form-status" id="formStatus" role="alert" aria-live="polite"></div>
             </form>
           </div>
@@ -1555,34 +1692,82 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
           <div class="contact-info reveal reveal-delay-1">
             <h3>Get in touch directly</h3>
             <div class="contact-detail-list">
-              <div class="contact-detail">
-                <div class="cd-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" stroke="#C8293E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="5" width="18" height="13" rx="2" />
-                    <path d="M2 7 L11 13 L20 7" />
-                  </svg></div>
-                <div>
-                  <div class="cd-label">Email</div>
-                  <div class="cd-value"><a href="#contact" id="emailLink" data-u="dashandots" data-d="gmail.com">dashandots&#64;gmail&#46;com</a></div>
-                  <script>
-                    (function(){
-                      var el = document.getElementById('emailLink');
-                      if(el){ var e = el.dataset.u+'@'+el.dataset.d; el.href='mailto:'+e; }
-                    })();
-                  </script>
+              <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>
+                <div class="contact-detail">
+                  <div class="cd-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
+                      fill="none" stroke="#C8293E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="5" width="18" height="13" rx="2" />
+                      <path d="M2 7 L11 13 L20 7" />
+                    </svg></div>
+                  <div>
+                    <div class="cd-label">Email</div>
+                    <div class="cd-value"><a href="mailto:<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>"
+                        data-track="cta" data-cta-location="contact-info"><?= htmlspecialchars(SITE_EMAIL) ?></a></div>
+                  </div>
                 </div>
-              </div>
-              <div class="contact-detail">
-                <div class="cd-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" stroke="#C8293E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M11 2 C7.5 2 5 4.7 5 8 C5 12.5 11 20 11 20 C11 20 17 12.5 17 8 C17 4.7 14.5 2 11 2 Z" />
-                    <circle cx="11" cy="8" r="2.5" />
-                  </svg></div>
-                <div>
-                  <div class="cd-label">Location</div>
-                  <div class="cd-value">India &mdash; Serving clients globally</div>
+              <?php endif; ?>
+              <?php if (defined('SITE_PHONE') && SITE_PHONE !== ''): ?>
+                <div class="contact-detail">
+                  <div class="cd-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
+                      fill="none" stroke="#C8293E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <path
+                        d="M6 2 L10 6 L8 9 C9.5 12 12 14.5 15 16 L18 14 L22 18 C20.5 21 17.5 21.5 14 20 C8 17.5 4.5 14 2 8 C.5 4.5 3 2.8 6 2 Z" />
+                    </svg></div>
+                  <div>
+                    <div class="cd-label">Phone</div>
+                    <div class="cd-value"><a
+                        href="tel:<?= htmlspecialchars(preg_replace('/\s+/', '', SITE_PHONE), ENT_QUOTES, 'UTF-8') ?>"
+                        data-track="phone" data-cta-location="contact-info"><?= htmlspecialchars(SITE_PHONE) ?></a></div>
+                  </div>
                 </div>
-              </div>
+              <?php endif; ?>
+              <?php if (defined('SITE_WHATSAPP_URL') && SITE_WHATSAPP_URL !== ''): ?>
+                <div class="contact-detail">
+                  <div class="cd-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
+                      fill="none" stroke="#C8293E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M11 2 A8 8 0 0 1 19 10 A8 8 0 0 1 7 17 L3 18 L4 14 A8 8 0 0 1 11 2 Z" />
+                      <path d="M8 8 C8.5 11 10.5 13 14 14" />
+                    </svg></div>
+                  <div>
+                    <div class="cd-label">WhatsApp</div>
+                    <div class="cd-value"><a href="<?= htmlspecialchars(SITE_WHATSAPP_URL, ENT_QUOTES, 'UTF-8') ?>"
+                        target="_blank" rel="noopener" data-track="whatsapp" data-cta-location="contact-info">Talk to a
+                        software consultant</a></div>
+                  </div>
+                </div>
+              <?php endif; ?>
+              <?php if (defined('SITE_ADDRESS') && SITE_ADDRESS !== ''): ?>
+                <div class="contact-detail">
+                  <div class="cd-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
+                      fill="none" stroke="#C8293E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M11 2 C7.5 2 5 4.7 5 8 C5 12.5 11 20 11 20 C11 20 17 12.5 17 8 C17 4.7 14.5 2 11 2 Z" />
+                      <circle cx="11" cy="8" r="2.5" />
+                    </svg></div>
+                  <div>
+                    <div class="cd-label">Location</div>
+                    <div class="cd-value"><?= htmlspecialchars(SITE_ADDRESS) ?></div>
+                  </div>
+                </div>
+              <?php endif; ?>
+              <?php if (defined('SITE_FOUNDER_NAME') && SITE_FOUNDER_NAME !== ''): ?>
+                <div class="contact-detail founder-detail">
+                  <div class="cd-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
+                      fill="none" stroke="#C8293E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="11" cy="7" r="4" />
+                      <path d="M3 20 C4.5 15 17.5 15 19 20" />
+                    </svg></div>
+                  <div>
+                    <div class="cd-label">Founder-led discovery</div>
+                    <div class="cd-value">
+                      <?= htmlspecialchars(SITE_FOUNDER_NAME) ?> · <?= htmlspecialchars(SITE_FOUNDER_TITLE) ?>
+                      <?php if (defined('SITE_FOUNDER_LINKEDIN') && SITE_FOUNDER_LINKEDIN !== ''): ?>
+                        <br><a href="<?= htmlspecialchars(SITE_FOUNDER_LINKEDIN, ENT_QUOTES, 'UTF-8') ?>" target="_blank"
+                          rel="noopener">View LinkedIn</a>
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                </div>
+              <?php endif; ?>
               <div class="contact-detail">
                 <div class="cd-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
                     fill="none" stroke="#C8293E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -1645,8 +1830,9 @@ $page['title'] = 'Software Developer in India — Custom ERP, CRM & Management S
     </section>
   </main>
 
-<?php include __DIR__ . '/includes/footer.php'; ?>
-<?php include __DIR__ . '/includes/scripts.php'; ?>
+  <?php include __DIR__ . '/includes/footer.php'; ?>
+  <?php include __DIR__ . '/includes/scripts.php'; ?>
 
 </body>
+
 </html>

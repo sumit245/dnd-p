@@ -1,6 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
+  const mainContent = document.getElementById('main-content');
+  const skipLink = document.querySelector('.skip-link');
+  if (mainContent && !mainContent.hasAttribute('tabindex')) {
+    mainContent.setAttribute('tabindex', '-1');
+  }
+  if (skipLink && mainContent) {
+    skipLink.addEventListener('click', () => {
+      requestAnimationFrame(() => mainContent.focus({ preventScroll: false }));
+    });
+  }
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const pushEvent = (event, payload = {}) => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event, ...payload });
+  };
+
+  document.querySelectorAll('[data-track]').forEach(el => {
+    el.addEventListener('click', () => {
+      const trackType = el.dataset.track;
+      const payload = {
+        cta_text: (el.textContent || '').trim(),
+        cta_location: el.dataset.ctaLocation || '',
+        destination: el.getAttribute('href') || '',
+        page_path: window.location.pathname
+      };
+
+      if (trackType === 'whatsapp') {
+        pushEvent('whatsapp_click', payload);
+      } else if (trackType === 'phone') {
+        pushEvent('phone_click', payload);
+      } else if (trackType === 'demo') {
+        pushEvent('demo_click', { ...payload, demo_slug: el.dataset.demoSlug || '' });
+      } else if (trackType === 'proof-card') {
+        pushEvent('proof_card_click', { ...payload, proof_type: el.dataset.proofType || '' });
+      } else {
+        pushEvent('cta_click', payload);
+      }
+    });
+  });
+
   // ── Navbar scroll ──
   const navbar = document.getElementById('navbar');
   const backToTop = document.getElementById('backToTop');
@@ -11,9 +53,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
+  const mobileStickyCta = document.querySelector('.mobile-sticky-cta');
+  const mobileStickyBlockers = Array.from(document.querySelectorAll('#home, .trust-bar, .estimate-jump'));
+  const hasVisibleStickyBlocker = () => mobileStickyBlockers.some(el => {
+    const rect = el.getBoundingClientRect();
+    return rect.bottom > 90 && rect.top < window.innerHeight - 90;
+  });
+  const updateMobileStickyCta = () => {
+    if (!mobileStickyCta) return;
+    const revealAfter = Math.max(window.innerHeight * 1.15, 720);
+    const shouldShow = window.innerWidth <= 768 && window.scrollY > revealAfter && !hasVisibleStickyBlocker();
+    mobileStickyCta.classList.toggle('is-visible', shouldShow);
+  };
+  updateMobileStickyCta();
+  window.addEventListener('scroll', updateMobileStickyCta, { passive: true });
+  window.addEventListener('resize', updateMobileStickyCta);
+
   // ── Back to top ──
   if (backToTop) {
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    });
   }
 
   // ── Mobile menu (dialog + focus trap) ──
@@ -113,8 +173,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── Portfolio filter ──
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        const isActive = b === btn;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
       const filter = btn.dataset.filter;
       document.querySelectorAll('.portfolio-card').forEach(card => {
         card.style.display = (filter === 'all' || card.dataset.type === filter) ? '' : 'none';
@@ -137,15 +200,21 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!name || !email || !message) {
         status.className = 'form-status error';
         status.textContent = 'Please fill in all required fields (name, email, and message).';
+        pushEvent('contact_form_submit_error', { error_type: 'client_validation', page_path: window.location.pathname });
         return;
       }
       const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRx.test(email)) {
         status.className = 'form-status error';
         status.textContent = 'Please enter a valid email address.';
+        pushEvent('contact_form_submit_error', { error_type: 'invalid_email', page_path: window.location.pathname });
         return;
       }
 
+      pushEvent('contact_form_submit_attempt', {
+        service: form.service.value,
+        page_path: window.location.pathname
+      });
       btn.classList.add('loading');
       btn.disabled = true;
       status.className = 'form-status';
@@ -168,14 +237,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await res.json();
         if (data.success) {
           status.className = 'form-status success';
-          status.textContent = '✓ Thank you! Your enquiry has been received. We\'ll be in touch within 24 hours.';
+          status.textContent = '✓ Thank you! Your enquiry has been received. We\'ll respond within 1 business day with next steps.';
+          pushEvent('contact_form_submit_success', {
+            service: payload.service,
+            page_path: window.location.pathname
+          });
           form.reset();
         } else {
           throw new Error(data.message || 'Server error');
         }
       } catch (err) {
         status.className = 'form-status error';
-        status.textContent = 'Something went wrong. Please email us directly at dashandots' + '@' + 'gmail.com';
+        status.textContent = 'Something went wrong. Please try again, or use the direct contact options on this page.';
+        pushEvent('contact_form_submit_error', {
+          error_type: 'server_or_network',
+          error_message: err && err.message ? err.message : '',
+          page_path: window.location.pathname
+        });
       } finally {
         btn.classList.remove('loading');
         btn.disabled = false;
@@ -249,6 +327,10 @@ document.addEventListener('DOMContentLoaded', () => {
         card.classList.add('selected');
         wizardData.type = card.dataset.type;
         document.getElementById('step1Next').disabled = false;
+        pushEvent('estimate_started', {
+          project_type: wizardData.type,
+          page_path: window.location.pathname
+        });
       });
     });
 
@@ -257,6 +339,11 @@ document.addEventListener('DOMContentLoaded', () => {
       el.classList.add('selected');
       wizardData.scale = el.dataset.scale;
       document.getElementById('step2Next').disabled = false;
+      pushEvent('estimate_step_completed', {
+        step: 'scale',
+        scale: wizardData.scale,
+        page_path: window.location.pathname
+      });
     };
 
     window.toggleCheck = function(el) {
@@ -307,6 +394,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('resTech').textContent = data.tech;
         document.getElementById('resNotes').textContent = data.notes;
         wizardData._briefText = data.briefText;
+        pushEvent('estimate_completed', {
+          project_type: data.type,
+          budget_min: data.budgetMin,
+          budget_max: data.budgetMax,
+          timeline: data.timelineStr,
+          complexity: data.complexity,
+          page_path: window.location.pathname
+        });
 
         document.querySelectorAll('.wizard-pane').forEach(p => p.classList.remove('active'));
         document.getElementById('wizResultPane').style.display = 'block';
@@ -372,4 +467,3 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   /* ═══════════════════════════════ END WIZARD ═══════════════════════════════ */
 });
-

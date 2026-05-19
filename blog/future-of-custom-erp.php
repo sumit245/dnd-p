@@ -39,7 +39,7 @@ include __DIR__ . '/../includes/schema-blog-posting.php';
       <p>Furthermore, standard ERPs come with recurring per-user licensing fees. As your team grows, your software budget balloons exponentially, creating a penalty for growth.</p>
 
       <h2>The Custom Advantage</h2>
-      <p>Custom ERP development, once seen as a luxury, is now a strategic necessity for fast-scaling businesses. Modern web frameworks (like Laravel, Node.js, and React) have significantly reduced the time and cost required to build enterprise-grade systems from scratch.</p>
+      <p><a href="<?= BASE_PATH ?>/services/erp-development/">Custom ERP development</a>, once seen as a luxury, is now a strategic necessity for fast-scaling businesses. Modern web frameworks have significantly reduced the time and cost required to build enterprise-grade systems from scratch.</p>
       <p>With a custom ERP:</p>
       <ul>
         <li><strong>You own the intellectual property.</strong> No monthly user licenses.</li>
@@ -48,7 +48,7 @@ include __DIR__ . '/../includes/schema-blog-posting.php';
       </ul>
 
       <h2>Conclusion</h2>
-      <p>In a hyper-competitive market, your operational agility is your primary advantage. Dashandots Technology specializes in scoping, building, and deploying bespoke ERP solutions that act as the digital central nervous system for your business. It's time to stop renting software and start investing in digital assets.</p>
+      <p>In a hyper-competitive market, your operational agility is your primary advantage. Dashandots Technology specializes in scoping, building, and deploying bespoke ERP solutions that act as the digital central nervous system for your business. Review our <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp">ERP demo</a> or use the <a href="<?= BASE_PATH ?>/#ai-brief">estimate wizard</a> to get a rough timeline and budget.</p>
 
       <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border);">
         <a href="<?= BASE_PATH ?>/blog" style="color: var(--accent); font-weight: 600; text-decoration: none;">&larr; Back to Blog</a>
