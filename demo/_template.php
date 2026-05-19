@@ -4,6 +4,7 @@
  * Included by erp.php / tms.php / hms.php after they set $portfolio + $page.
  * Requires: $portfolio (row from `portfolios` table), $page (set for head.php).
  */
+require_once __DIR__ . '/../includes/portfolio-media.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,6 +104,8 @@
     }
     $hasMain    = !empty($portfolio['image_path']);
     $hasGallery = count($galleryUrls) > 0;
+    $mainImageMeta = $hasMain ? portfolio_image_meta($portfolio['image_path']) : null;
+    $mainImageSrc = asset_url($mainImageMeta['webp'] ?? ($portfolio['image_path'] ?? ''));
   ?>
 
   <?php if ($hasMain || $hasGallery): ?>
@@ -116,9 +119,11 @@
         <div class="demo-gallery-main">
           <img
             id="demoMainImg"
-            src="<?= htmlspecialchars($portfolio['image_path']) ?>"
+            src="<?= htmlspecialchars($mainImageSrc) ?>"
             alt="<?= htmlspecialchars($portfolio['title']) ?> — dashboard overview"
             class="demo-main-img"
+            width="<?= (int) ($mainImageMeta['width'] ?? 1200) ?>"
+            height="<?= (int) ($mainImageMeta['height'] ?? 800) ?>"
             loading="eager">
         </div>
         <?php endif; ?>
@@ -127,15 +132,21 @@
         <!-- Thumbnail column -->
         <div class="demo-gallery-thumbs" role="list" aria-label="Screenshot gallery">
           <?php foreach (array_slice($galleryUrls, 0, 6) as $i => $url): ?>
+          <?php
+            $thumbMeta = portfolio_image_meta($url);
+            $thumbSrc = asset_url($thumbMeta['webp'] ?? $url);
+          ?>
           <button
             class="demo-thumb"
-            onclick="demoSetMain(this, '<?= htmlspecialchars($url, ENT_QUOTES) ?>')"
+            onclick="demoSetMain(this, '<?= htmlspecialchars($thumbSrc, ENT_QUOTES) ?>')"
             type="button"
             role="listitem"
             aria-label="View screenshot <?= $i + 1 ?>">
             <img
-              src="<?= htmlspecialchars($url) ?>"
+              src="<?= htmlspecialchars($thumbSrc) ?>"
               alt="<?= htmlspecialchars($portfolio['title']) ?> screenshot <?= $i + 1 ?>"
+              width="<?= (int) ($thumbMeta['width'] ?? 320) ?>"
+              height="<?= (int) ($thumbMeta['height'] ?? 220) ?>"
               loading="lazy">
           </button>
           <?php endforeach; ?>

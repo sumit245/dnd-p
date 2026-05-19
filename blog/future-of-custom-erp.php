@@ -51,7 +51,7 @@ include __DIR__ . '/../includes/schema-blog-posting.php';
       <p>In a hyper-competitive market, your operational agility is your primary advantage. Dashandots Technology specializes in scoping, building, and deploying bespoke ERP solutions that act as the digital central nervous system for your business. Review our <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp">ERP demo</a> or use the <a href="<?= BASE_PATH ?>/#ai-brief">estimate wizard</a> to get a rough timeline and budget.</p>
 
       <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border);">
-        <a href="<?= BASE_PATH ?>/blog" style="color: var(--accent); font-weight: 600; text-decoration: none;">&larr; Back to Blog</a>
+        <a href="<?= BASE_PATH ?>/blog/" style="color: var(--accent); font-weight: 600; text-decoration: none;">&larr; Back to Blog</a>
       </div>
     </article>
   </main>

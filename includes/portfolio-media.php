@@ -2,6 +2,7 @@
 /**
  * Portfolio image helpers — WebP + dimensions for LCP/CLS.
  */
+require_once __DIR__ . '/assets.php';
 
 function portfolio_resolve_filesystem_path(string $url): ?string
 {
@@ -92,7 +93,7 @@ function content_image_html(string $url, string $alt, array $attrs = []): string
     $width = (int) ($attrs['width'] ?? 800);
     $height = (int) ($attrs['height'] ?? 450);
     $safeAlt = htmlspecialchars($alt, ENT_QUOTES, 'UTF-8');
-    $src = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+    $src = htmlspecialchars(asset_url($url), ENT_QUOTES, 'UTF-8');
 
     $extra = '';
     if ($fetchpriority !== '') {
@@ -136,7 +137,7 @@ function portfolio_picture_html(string $url, string $alt, array $attrs = []): st
 
     $img = sprintf(
         '<img src="%s" alt="%s" width="%d" height="%d" loading="%s" decoding="async"%s style="%s">',
-        htmlspecialchars($url, ENT_QUOTES, 'UTF-8'),
+        htmlspecialchars(asset_url($url), ENT_QUOTES, 'UTF-8'),
         $safeAlt,
         $width,
         $height,
@@ -148,7 +149,7 @@ function portfolio_picture_html(string $url, string $alt, array $attrs = []): st
     if (!empty($meta['webp'])) {
         return sprintf(
             '<picture><source srcset="%s" type="image/webp">%s</picture>',
-            htmlspecialchars($meta['webp'], ENT_QUOTES, 'UTF-8'),
+            htmlspecialchars(asset_url($meta['webp']), ENT_QUOTES, 'UTF-8'),
             $img
         );
     }

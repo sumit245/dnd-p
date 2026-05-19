@@ -1,9 +1,6 @@
   <meta charset="UTF-8">
 <?php require_once __DIR__ . '/assets.php'; ?>
 <?php require_once __DIR__ . '/env.php'; ?>
-<?php include __DIR__ . '/consent-mode.php'; ?>
-<?php include __DIR__ . '/gtm-head.php'; ?>
-<?php include __DIR__ . '/clarity.php'; ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($page['title']) ?></title>
   <meta name="description" content="<?= htmlspecialchars($page['description']) ?>">
@@ -52,16 +49,22 @@
   <meta name="twitter:image" content="<?= htmlspecialchars($page['og_image']) ?>">
 
   <!-- Favicon -->
-  <link rel="icon" href="<?= BASE_PATH ?>/assets/logo.png" type="image/png">
-  <link rel="apple-touch-icon" href="<?= BASE_PATH ?>/assets/logo.png">
+  <link rel="icon" href="<?= asset_url('/assets/logo-64.webp') ?>" type="image/webp">
+  <link rel="apple-touch-icon" href="<?= asset_url('/assets/apple-touch-icon.png') ?>">
 
-  <!-- Fonts -->
-  <link rel="preload"
-    href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2"
-    as="font" type="font/woff2" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <!-- Critical CSS -->
+<?php include __DIR__ . '/critical-css.php'; ?>
+
+  <!-- Resource hints -->
+<?php if (asset_cdn_base() !== ''): ?>
+  <link rel="preconnect" href="<?= htmlspecialchars(asset_cdn_base(), ENT_QUOTES, 'UTF-8') ?>" crossorigin>
+<?php endif; ?>
+
+<?php foreach (($page['preload_images'] ?? []) as $preloadImage): ?>
+  <link rel="preload" href="<?= htmlspecialchars(asset_url($preloadImage), ENT_QUOTES, 'UTF-8') ?>" as="image" fetchpriority="high">
+<?php endforeach; ?>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="<?= asset_css_href() ?>">
+<?php $stylesheetHref = asset_css_href(); ?>
+  <link rel="preload" href="<?= htmlspecialchars($stylesheetHref, ENT_QUOTES, 'UTF-8') ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="<?= htmlspecialchars($stylesheetHref, ENT_QUOTES, 'UTF-8') ?>"></noscript>

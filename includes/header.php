@@ -1,11 +1,15 @@
 <?php include __DIR__ . '/gtm-noscript.php'; ?>
+<?php require_once __DIR__ . '/assets.php'; ?>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <!-- ═══════════════════════════════ NAVBAR ═══════════════════════════════ -->
 <header>
   <nav class="navbar" id="navbar" aria-label="Primary navigation">
     <div class="nav-inner">
       <a href="<?= BASE_PATH ?>/" class="nav-logo" aria-label="Dashandots Technology home">
-        <img src="<?= BASE_PATH ?>/assets/logo.png" alt="Dashandots Technology logo">
+        <picture>
+          <source srcset="<?= asset_url('/assets/logo-64.webp') ?>" type="image/webp">
+          <img src="<?= asset_url('/assets/logo-64.png') ?>" alt="Dashandots Technology logo" width="64" height="64">
+        </picture>
         <span>Dashandots</span>
       </a>
       <ul class="nav-links">
@@ -15,7 +19,7 @@
         <li><a href="<?= BASE_PATH ?>/#industries">Industries</a></li>
         <li><a href="<?= BASE_PATH ?>/#solutions">Solutions</a></li>
         <li><a href="<?= BASE_PATH ?>/#portfolio" <?= ($page['active_nav'] ?? '') === 'portfolio' ? ' class="active"' : '' ?>>Portfolio</a></li>
-        <li><a href="<?= BASE_PATH ?>/blog" <?= ($page['active_nav'] ?? '') === 'blog' ? ' class="active"' : '' ?>>Blog</a>
+        <li><a href="<?= BASE_PATH ?>/blog/" <?= ($page['active_nav'] ?? '') === 'blog' ? ' class="active"' : '' ?>>Blog</a>
         </li>
       </ul>
       <div class="nav-actions">
@@ -37,7 +41,7 @@
     <a href="<?= BASE_PATH ?>/#solutions" class="mobile-link">Solutions</a>
     <a href="<?= BASE_PATH ?>/#industries" class="mobile-link">Industries</a>
     <a href="<?= BASE_PATH ?>/#portfolio" class="mobile-link">Portfolio</a>
-    <a href="<?= BASE_PATH ?>/blog" class="mobile-link">Blog</a>
+    <a href="<?= BASE_PATH ?>/blog/" class="mobile-link">Blog</a>
     <a href="<?= BASE_PATH ?>/#about" class="mobile-link">About</a>
     <a href="<?= BASE_PATH ?>/#faq" class="mobile-link">FAQ</a>
     <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="mobile-menu">Get Instant Estimate</a>

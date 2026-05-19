@@ -50,7 +50,7 @@ include __DIR__ . '/../includes/schema-blog-posting.php';
       <p>If your internal tools don't work beautifully on a smartphone, you are throttling your team's productivity. At Dashandots, every custom application we build—from ERPs to <a href="<?= BASE_PATH ?>/services/ecommerce/">client portals</a>—is engineered mobile-first. Use the <a href="<?= BASE_PATH ?>/#ai-brief">estimate wizard</a> to scope the first useful mobile workflow.</p>
 
       <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border);">
-        <a href="<?= BASE_PATH ?>/blog" style="color: var(--accent); font-weight: 600; text-decoration: none;">&larr; Back to Blog</a>
+        <a href="<?= BASE_PATH ?>/blog/" style="color: var(--accent); font-weight: 600; text-decoration: none;">&larr; Back to Blog</a>
       </div>
     </article>
   </main>

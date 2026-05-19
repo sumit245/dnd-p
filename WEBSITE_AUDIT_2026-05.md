@@ -223,6 +223,8 @@ Before scaling SEO or ads, confirm:
 - One real contact submission reaches the inbox, avoids spam, and sends the confirmation email.
 - `/blog/future-of-custom-erp` and `/blog/mobile-first-design-b2b` return 200 on live.
 - Legacy `.html` redirects do not contain `/dashandots/` on production.
+- `ASSET_CDN_URL` is set in production when using a pull CDN such as Cloudflare, Bunny.net, Fastly, or CloudFront.
+- Static asset responses include long-lived cache headers: `public, max-age=31536000, immutable`.
 - GTM Preview shows `cta_click`, `estimate_completed`, `contact_form_submit_success`, `whatsapp_click`, `phone_click`, `demo_click`, and `proof_card_click`.
 - GA4 conversions are enabled for lead, estimate, WhatsApp, phone, and demo events.
 - Microsoft Clarity is enabled with `MICROSOFT_CLARITY_ID` if session recordings are desired.

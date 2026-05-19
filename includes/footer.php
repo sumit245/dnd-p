@@ -1,10 +1,14 @@
 <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<?php require_once __DIR__ . '/assets.php'; ?>
 <footer>
   <div class="container">
     <div class="footer-grid">
       <div>
         <div class="footer-brand">
-          <img src="<?= BASE_PATH ?>/assets/logo.png" alt="Dashandots Technology logo">
+          <picture>
+            <source srcset="<?= asset_url('/assets/logo-64.webp') ?>" type="image/webp">
+            <img src="<?= asset_url('/assets/logo-64.png') ?>" alt="Dashandots Technology logo" width="64" height="64">
+          </picture>
           Dashandots Technology
         </div>
         <p class="footer-desc">Custom ERP, CRM, dashboards, portals, and mobile apps for growing businesses that need clearer operations and long-term technical support.</p>
@@ -54,7 +58,7 @@
           <li><a href="<?= BASE_PATH ?>/#about">About Us</a></li>
           <li><a href="<?= BASE_PATH ?>/#portfolio">Portfolio</a></li>
           <li><a href="<?= BASE_PATH ?>/#case-studies">Case Studies</a></li>
-          <li><a href="<?= BASE_PATH ?>/blog">Blog</a></li>
+          <li><a href="<?= BASE_PATH ?>/blog/">Blog</a></li>
           <li><a href="<?= BASE_PATH ?>/#faq">FAQ</a></li>
           <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>
             <li><a href="mailto:<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>" data-track="cta" data-cta-location="footer">Email</a></li>

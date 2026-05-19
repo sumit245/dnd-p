@@ -1,24 +1,89 @@
 <?php
 require __DIR__ . '/../../includes/config.php';
 
-$page['title']       = 'Data Analytics, BI & AI Solutions in India | Dashandots';
-$page['description'] = 'Custom analytics dashboards, BI reporting and AI-assisted workflows for Indian businesses. Turn raw data into clear, decision-ready insights your leadership can act on.';
+$page['title']       = 'Data Analytics Services & BI Dashboard Development India | Dashandots';
+$page['description'] = 'Data analytics services, BI dashboard development, business intelligence reporting, data visualization and AI analytics solutions for Indian SMEs and growing businesses.';
+$page['keywords']    = 'data analytics services India, BI dashboard development India, business intelligence reporting, data visualization dashboards, AI analytics solutions';
 $page['canonical']   = SITE_URL . '/services/data-analytics/';
-$page['og_title']    = 'Data Analytics & AI Solutions | Dashandots Technology';
+$page['og_title']    = 'Data Analytics Services & BI Dashboard Development | Dashandots Technology';
 $page['og_desc']     = $page['description'];
 
-require __DIR__ . '/../../includes/head.php';
-require __DIR__ . '/../../includes/header.php';
+$serviceSchemaProvider = [
+  '@type' => 'Organization',
+  '@id' => SITE_URL . '/#organization',
+  'name' => SITE_NAME,
+  'url' => SITE_URL . '/',
+  'logo' => SITE_LOGO_URL,
+];
+if (defined('SITE_ADDRESS') && SITE_ADDRESS !== '') {
+  $serviceSchemaProvider['address'] = [
+    '@type' => 'PostalAddress',
+    'streetAddress' => SITE_ADDRESS,
+    'addressCountry' => 'IN'
+  ];
+}
+
+$serviceSchema = [
+  '@context' => 'https://schema.org',
+  '@type' => 'Service',
+  '@id' => SITE_URL . '/services/data-analytics/#service',
+  'name' => 'Data Analytics Services and BI Dashboard Development',
+  'serviceType' => [
+    'Data analytics services',
+    'Business intelligence dashboard development',
+    'Data visualization',
+    'AI analytics solutions',
+    'Automated reporting'
+  ],
+  'description' => $page['description'],
+  'url' => $page['canonical'],
+  'provider' => $serviceSchemaProvider,
+  'areaServed' => [
+    ['@type' => 'Country', 'name' => 'India'],
+    ['@type' => 'AdministrativeArea', 'name' => 'Delhi NCR']
+  ],
+  'audience' => [
+    '@type' => 'BusinessAudience',
+    'audienceType' => 'SMEs and growing businesses'
+  ],
+  'offers' => [
+    '@type' => 'Offer',
+    'availability' => 'https://schema.org/InStock',
+    'priceSpecification' => [
+      '@type' => 'PriceSpecification',
+      'priceCurrency' => 'INR',
+      'description' => 'Custom scope, timeline, and budget are estimated after discovery.'
+    ],
+    'url' => SITE_URL . '/#ai-brief'
+  ],
+  'hasOfferCatalog' => [
+    '@type' => 'OfferCatalog',
+    'name' => 'Data analytics and BI services',
+    'itemListElement' => [
+      ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Executive KPI dashboard development']],
+      ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Business intelligence reporting automation']],
+      ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Data warehouse and ETL pipeline setup']],
+      ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'AI analytics and predictive forecasting']]
+    ]
+  ]
+];
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php require __DIR__ . '/../../includes/head.php'; ?>
+</head>
+<body>
+<?php require __DIR__ . '/../../includes/header.php'; ?>
 
 <main id="main-content">
   <div class="svc-page">
 
     <!-- HERO -->
     <div class="svc-hero">
-      <p class="page-label">Data Analytics &amp; AI</p>
-      <h1>Turn your business data into decisions your leadership can act on</h1>
-      <p class="lead">We build real-time analytics dashboards, automated reporting pipelines, and AI-assisted tools that give leadership reliable visibility across operations, finance, sales, and customer activity.</p>
+      <p class="page-label">Data Analytics Services &amp; BI Dashboards</p>
+      <h1>Data analytics services and BI dashboard development for clearer business decisions</h1>
+      <p class="lead">We build real-time BI dashboards, business intelligence reporting systems, automated data pipelines, and AI analytics tools that give leadership reliable visibility across operations, finance, sales, and customer activity.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="analytics-hero">Get Dashboard Scope</a>
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="analytics-hero">Get Instant Estimate</a>
@@ -26,8 +91,8 @@ require __DIR__ . '/../../includes/header.php';
     </div>
 
     <!-- THE PROBLEM -->
-    <h2>The data problem most growing businesses face</h2>
-    <p class="svc-body-text">Business data often sits across ERP, e-commerce, CRM, accounting, and operational systems. By the time reports are consolidated manually, leadership is working from delayed information. We unify those sources, automate the pipelines, and present decision-ready insights in real-time dashboards.</p>
+    <h2>The data analytics problem most growing businesses face</h2>
+    <p class="svc-body-text">Business data often sits across ERP, e-commerce, CRM, accounting, and operational systems. By the time reports are consolidated manually, leadership is working from delayed information. We unify those sources, automate the data pipelines, and present decision-ready insights in real-time BI dashboards.</p>
 
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
@@ -35,11 +100,11 @@ require __DIR__ . '/../../includes/header.php';
         <p>We aggregate data from your ERP, CRM, sales tools, and databases into one clean data warehouse — eliminating the "which report is correct?" problem.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Real-time dashboards</h3>
+        <h3>Real-time BI dashboards</h3>
         <p>Live KPI screens refreshed every few seconds. Drill down from company-level to branch, team, or individual — all without waiting for someone to run a query.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Automated reporting</h3>
+        <h3>Business intelligence reporting automation</h3>
         <p>Daily, weekly, and monthly reports delivered to the right inboxes automatically, reducing manual exports, missed deadlines, and reporting errors.</p>
       </div>
       <div class="svc-feature-card">
@@ -47,7 +112,7 @@ require __DIR__ . '/../../includes/header.php';
         <p>ML models trained on your historical data to forecast demand, predict churn, flag slow-moving inventory, and surface sales opportunities before they expire.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>AI-assisted workflows</h3>
+        <h3>AI analytics and assisted workflows</h3>
         <p>LLM-powered features inside your internal tools — auto-summarise customer notes, classify tickets, extract data from documents, draft personalised communications.</p>
       </div>
       <div class="svc-feature-card">
@@ -57,14 +122,14 @@ require __DIR__ . '/../../includes/header.php';
     </div>
 
     <!-- SOLUTIONS -->
-    <h2>Solutions we build</h2>
+    <h2>Data analytics and business intelligence solutions we build</h2>
     <ul class="svc-includes">
-      <li>Executive KPI dashboards (revenue, margins, operational metrics)</li>
-      <li>Sales pipeline analytics &amp; forecasting</li>
+      <li>Executive KPI dashboards for revenue, margins, and operational metrics</li>
+      <li>Sales pipeline analytics and predictive forecasting</li>
       <li>Inventory &amp; supply chain analytics</li>
       <li>Customer behaviour &amp; cohort analysis</li>
       <li>Fleet &amp; logistics performance dashboards</li>
-      <li>Financial reporting automation (P&amp;L, cash flow, budget vs actuals)</li>
+      <li>Financial business intelligence reporting for P&amp;L, cash flow, and budget vs actuals</li>
       <li>HR &amp; workforce analytics</li>
       <li>Marketing attribution &amp; campaign performance tracking</li>
       <li>ETL pipelines &amp; data warehouse setup</li>
@@ -129,5 +194,10 @@ require __DIR__ . '/../../includes/header.php';
   </div>
 </main>
 
+<script type="application/ld+json">
+<?= json_encode($serviceSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
+</script>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>
 <?php require __DIR__ . '/../../includes/scripts.php'; ?>
+</body>
+</html>

@@ -16,6 +16,7 @@ $portfolios = $portfoliosStmt->fetchAll();
 
 // Homepage-specific SEO: override title and description for maximum keyword coverage
 $page['title'] = 'Custom ERP & CRM Software Developer in India | Dashandots';
+$page['preload_images'] = ['/assets/img/hero-corporate-bg.webp'];
 $heroTitle = trim($settings['hero_title'] ?? '');
 $heroDescription = trim($settings['hero_description'] ?? '');
 if ($heroTitle === '') {
