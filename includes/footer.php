@@ -56,7 +56,7 @@
         <h4>Company</h4>
         <ul>
           <li><a href="<?= BASE_PATH ?>/#about">About Us</a></li>
-          <li><a href="<?= BASE_PATH ?>/#portfolio">Portfolio</a></li>
+          <li><a href="<?= BASE_PATH ?>/portfolio">Portfolio</a></li>
           <li><a href="<?= BASE_PATH ?>/#case-studies">Case Studies</a></li>
           <li><a href="<?= BASE_PATH ?>/blog/">Blog</a></li>
           <li><a href="<?= BASE_PATH ?>/#faq">FAQ</a></li>

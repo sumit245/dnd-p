@@ -21,7 +21,7 @@ require __DIR__ . '/../../includes/header.php';
       <p class="lead">From responsive web portals to native-quality cross-platform mobile apps, we design and engineer digital products that are fast, secure, and built to grow with your business.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Start Your Project</a>
-        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline">See Our Work</a>
+        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline">See Our Work</a>
       </div>
     </div>
 
@@ -126,7 +126,7 @@ require __DIR__ . '/../../includes/header.php';
       <p>Share your concept with us. We'll map out the technical approach, give you an honest timeline, and send a detailed proposal — no obligation.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Get a Free Estimate</a>
-        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline">View Case Studies</a>
+        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline">View Case Studies</a>
       </div>
     </div>
 

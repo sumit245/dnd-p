@@ -43,6 +43,20 @@ function asset_url(string $pathOrUrl, ?int $version = null): string
     return $version !== null ? $url . '?v=' . $version : $url;
 }
 
+/**
+ * Public URL for a page-specific asset, preferring a sibling .min.css/.min.js when present.
+ * $publicPath is site-relative, e.g. '/assets/css/portfolio.css'.
+ */
+function asset_prefer_min(string $publicPath): string
+{
+    $root = dirname(__DIR__);
+    $min = preg_replace('/\.(css|js)$/', '.min.$1', $publicPath);
+    $file = ($min !== null && $min !== $publicPath && is_file($root . $min)) ? $min : $publicPath;
+    $version = is_file($root . $file) ? filemtime($root . $file) : null;
+
+    return asset_url($file, $version);
+}
+
 function asset_css_href(): string
 {
     $min = __DIR__ . '/../assets/css/style.min.css';

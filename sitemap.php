@@ -14,6 +14,7 @@ header('X-Robots-Tag: noindex');
 $staticPages = [
     ['loc' => SITE_URL . '/',                       'changefreq' => 'weekly',  'priority' => '1.0', 'lastmod' => '2026-04-26'],
     ['loc' => SITE_URL . '/blog/',                  'changefreq' => 'weekly',  'priority' => '0.8', 'lastmod' => '2026-04-26'],
+    ['loc' => SITE_URL . '/portfolio',              'changefreq' => 'weekly',  'priority' => '0.8', 'lastmod' => '2026-09-12'],
     ['loc' => SITE_URL . '/services/erp-development/',     'changefreq' => 'monthly', 'priority' => '0.8', 'lastmod' => '2026-04-26'],
     ['loc' => SITE_URL . '/services/web-mobile-apps/',     'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
     ['loc' => SITE_URL . '/services/ecommerce/',           'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2026-04-26'],
@@ -49,6 +50,23 @@ try {
     // Silently skip DB errors — static pages still output
 }
 
+// ── Portfolio / product pages from DB (only those with a live URL) ──
+$portfolioPages = [];
+try {
+    $stmt = $pdo->query("SELECT slug, updated_at, created_at FROM portfolios WHERE (demo_url IS NOT NULL AND demo_url <> '') OR (detailed_description IS NOT NULL AND detailed_description <> '') ORDER BY sort_order ASC, created_at ASC");
+    while ($row = $stmt->fetch()) {
+        $lastmod = !empty($row['updated_at']) ? $row['updated_at'] : $row['created_at'];
+        $portfolioPages[] = [
+            'loc'        => SITE_URL . '/demo/' . rawurlencode($row['slug']),
+            'changefreq' => 'monthly',
+            'priority'   => '0.7',
+            'lastmod'    => date('Y-m-d', strtotime($lastmod)),
+        ];
+    }
+} catch (PDOException $e) {
+    // Silently skip
+}
+
 foreach ($staticBlogPages as $static) {
     if (!empty($dbSlugs[$static['slug']])) {
         continue;
@@ -72,7 +90,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<?php foreach (array_merge($staticPages, $blogPosts) as $url): ?>
+<?php foreach (array_merge($staticPages, $portfolioPages, $blogPosts) as $url): ?>
   <url>
     <loc><?php echo htmlspecialchars($url['loc']); ?></loc>
     <lastmod><?php echo $url['lastmod']; ?></lastmod>

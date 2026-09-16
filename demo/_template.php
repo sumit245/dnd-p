@@ -5,6 +5,7 @@
  * Requires: $portfolio (row from `portfolios` table), $page (set for head.php).
  */
 require_once __DIR__ . '/../includes/portfolio-media.php';
+$isMobileApp = ($portfolio['category'] ?? '') === 'mobile';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +25,7 @@ require_once __DIR__ . '/../includes/portfolio-media.php';
 
     <!-- Single-row: back link · title · badge -->
     <div class="demo-hero-topbar">
-      <a href="<?= BASE_PATH ?>/#portfolio" class="demo-back-link">
+      <a href="<?= BASE_PATH ?>/portfolio" class="demo-back-link">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M19 12H5M12 5l-7 7 7 7"/>
         </svg>
@@ -37,7 +38,7 @@ require_once __DIR__ . '/../includes/portfolio-media.php';
         <svg width="7" height="7" viewBox="0 0 8 8" fill="currentColor" aria-hidden="true">
           <circle cx="4" cy="4" r="4"/>
         </svg>
-        Live Demo Available
+        <?= $isMobileApp ? 'Live on Google Play' : 'Live Demo Available' ?>
       </div>
     </div>
 
@@ -57,7 +58,7 @@ require_once __DIR__ . '/../includes/portfolio-media.php';
     <!-- Credentials + Launch CTA -->
     <div class="demo-creds-card">
 
-      <p class="demo-creds-title">Demo Credentials</p>
+      <p class="demo-creds-title"><?= $isMobileApp ? 'Try the App' : 'Demo Credentials' ?></p>
 
       <?php if (!empty($portfolio['username'])): ?>
         <div class="demo-creds-row">
@@ -68,7 +69,7 @@ require_once __DIR__ . '/../includes/portfolio-media.php';
       <?php endif; ?>
 
       <p class="demo-creds-note">
-        Demo passwords are not published on this page. Email
+        <?= $isMobileApp ? 'Want a guided walkthrough or a white-labelled version for your business? Email' : 'Demo passwords are not published on this page. Email' ?>
         <a href="mailto:<?= htmlspecialchars(SITE_EMAIL) ?>"><?= htmlspecialchars(SITE_EMAIL) ?></a>
         or use the <a href="<?= BASE_PATH ?>/#contact">contact form</a> to request full demo access.
       </p>
@@ -77,7 +78,7 @@ require_once __DIR__ . '/../includes/portfolio-media.php';
         <a href="<?= htmlspecialchars($portfolio['demo_url']) ?>"
            target="_blank" rel="noopener noreferrer"
            class="demo-launch-btn">
-          Launch Live Demo
+          <?= $isMobileApp ? 'Get it on Google Play' : 'Launch Live Demo' ?>
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
             <polyline points="15 3 21 3 21 9"/>
@@ -168,7 +169,8 @@ require_once __DIR__ . '/../includes/portfolio-media.php';
 
       <?php if (!empty(trim(strip_tags($portfolio['detailed_description'] ?? '')))): ?>
         <div class="demo-rich-text">
-          <?= $portfolio['detailed_description'] ?>
+          <?php // Content is authored with root-relative links; prefix BASE_PATH so they work on localhost too. ?>
+          <?= str_replace('href="/demo/', 'href="' . BASE_PATH . '/demo/', $portfolio['detailed_description']) ?>
         </div>
       <?php else: ?>
         <div class="demo-empty-state">

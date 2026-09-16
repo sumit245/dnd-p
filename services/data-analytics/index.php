@@ -144,7 +144,7 @@ $serviceSchema = [
       <p>Most dashboard builds begin by automating one painful report: sales pipeline, stock aging, branch profitability, dispatch performance, finance summary, or customer follow-up health.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="analytics-mid">Scope my dashboard</a>
-        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline" data-track="cta" data-cta-location="analytics-mid">See Dashboard Proof</a>
+        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="analytics-mid">See Dashboard Proof</a>
       </div>
     </div>
 

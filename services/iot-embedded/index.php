@@ -21,7 +21,7 @@ require __DIR__ . '/../../includes/header.php';
       <p class="lead">From firmware on the chip to the cloud platform and the mobile app your customer uses to monitor it — we engineer the full IoT stack, so your connected product works the way you imagined it.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Discuss Your IoT Project</a>
-        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline">See Our Work</a>
+        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline">See Our Work</a>
       </div>
     </div>
 
@@ -125,7 +125,7 @@ require __DIR__ . '/../../includes/header.php';
       <p>Whether you have hardware already chosen or are starting from a concept, we can take your connected product from prototype to production-scale deployment.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Start the Conversation</a>
-        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline">View Portfolio</a>
+        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline">View Portfolio</a>
       </div>
     </div>
 

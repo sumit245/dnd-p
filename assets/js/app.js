@@ -171,19 +171,36 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── Portfolio filter ──
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        const isActive = b === btn;
-        b.classList.toggle('active', isActive);
-        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-      });
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('.portfolio-card').forEach(card => {
-        card.style.display = (filter === 'all' || card.dataset.type === filter) ? '' : 'none';
+  // ── Portfolio (home): show the first 6 cards matching the chosen industry ──
+  const HOME_PORTFOLIO_MAX = 6;
+  const homeCards = document.querySelectorAll('#portfolio .portfolio-card');
+  const homeFilterBtns = document.querySelectorAll('#portfolio button.filter-btn');
+  const viewAllLink = document.getElementById('portfolioViewAll');
+  if (homeCards.length && homeFilterBtns.length) {
+    const viewAllBase = viewAllLink ? viewAllLink.getAttribute('href').split('?')[0] : '';
+    homeFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        homeFilterBtns.forEach(b => {
+          const on = b === btn;
+          b.classList.toggle('active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        let shown = 0;
+        homeCards.forEach(card => {
+          const match = filter === 'all' || card.dataset.industry === filter;
+          const show = match && shown < HOME_PORTFOLIO_MAX;
+          if (show) shown++;
+          card.hidden = !show;
+          if (show) card.classList.add('visible');
+        });
+        if (viewAllLink) {
+          viewAllLink.href = viewAllBase + (filter === 'all' ? '' : '?industry=' + encodeURIComponent(filter));
+        }
+        pushEvent('portfolio_filter', { filter, page_path: window.location.pathname });
       });
     });
-  });
+  }
 
   // ── Contact form with AJAX to PHP backend ──
   const contactForm = document.getElementById('contactForm');
@@ -275,23 +292,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ═══════════════════════════════ AI BRIEF WIZARD ═══════════════════════════════ */
   // Only init wizard if present on page
-  function setBudgetDisplay(el, minL, maxL, fallbackText) {
-    if (!el) return;
-    el.textContent = '';
-    if (minL == null || maxL == null) {
-      el.textContent = fallbackText || '—';
-      return;
-    }
-    const rupee = document.createElement('em');
-    rupee.textContent = '₹';
-    el.appendChild(rupee);
-    el.appendChild(document.createTextNode(String(minL) + 'L – '));
-    const rupee2 = document.createElement('em');
-    rupee2.textContent = '₹';
-    el.appendChild(rupee2);
-    el.appendChild(document.createTextNode(String(maxL) + 'L'));
-  }
-
   if (document.getElementById('wizPane1')) {
     const wizardData = { type: '', scale: '', features: [], integrations: [], name: '', email: '', company: '', phone: '', idea: '', _briefText: '' };
     let currentStep = 1;
@@ -372,7 +372,8 @@ document.addEventListener('DOMContentLoaded', () => {
       wizardData.idea = document.getElementById('wizIdea').value.trim();
 
       const btn = document.querySelector('button[onclick="generateBrief()"]');
-      if (btn) { btn.classList.add('loading'); btn.disabled = true; }
+      const btnLabel = btn ? btn.textContent : '';
+      if (btn) { btn.classList.add('loading'); btn.disabled = true; btn.textContent = 'Generating your brief…'; }
 
       fetch('estimate.php', {
         method: 'POST',
@@ -381,12 +382,11 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .then(res => res.json())
       .then(data => {
-        if (btn) { btn.classList.remove('loading'); btn.disabled = false; }
+        if (btn) { btn.classList.remove('loading'); btn.disabled = false; btn.textContent = btnLabel; }
         if (data.error) { alert('Error: ' + data.error); return; }
 
         document.getElementById('resProjectType').textContent = data.type;
         document.getElementById('resClientName').textContent = data.clientName;
-        setBudgetDisplay(document.getElementById('resBudget'), data.budgetMin, data.budgetMax, data.budgetStr);
         document.getElementById('resTimeline').textContent = data.timelineStr;
         document.getElementById('resComplexity').textContent = data.complexity;
         document.getElementById('resSummary').textContent = data.summary;
@@ -396,8 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
         wizardData._briefText = data.briefText;
         pushEvent('estimate_completed', {
           project_type: data.type,
-          budget_min: data.budgetMin,
-          budget_max: data.budgetMax,
+          source: data.source,
           timeline: data.timelineStr,
           complexity: data.complexity,
           page_path: window.location.pathname
@@ -409,9 +408,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('wizResultPane').scrollIntoView({ behavior: 'smooth', block: 'start' });
       })
       .catch(err => {
-        if (btn) { btn.classList.remove('loading'); btn.disabled = false; }
+        if (btn) { btn.classList.remove('loading'); btn.disabled = false; btn.textContent = btnLabel; }
         console.error(err);
-        alert('Something went wrong calculating the estimate.');
+        alert('Something went wrong generating your brief. Please try again.');
       });
     };
 

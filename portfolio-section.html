@@ -1,0 +1,302 @@
+<title>Dashandots Client Portfolio</title>
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   PREVIEW SHELL ONLY — copied verbatim from assets/css/style.css.
+   Do NOT paste this block into the site; it is already there.
+   ══════════════════════════════════════════════════════════════════════ */
+:root{
+  --accent:#C8293E; --accent-dark:#9E1E2F; --accent-light:#FEF2F4;
+  --bg:#FAFAF8; --surface:#FFFFFF; --surface-2:#F4F3EF;
+  --text-1:#111111; --text-2:#4A4A4A; --text-3:#6B6B6B;
+  --border:rgba(0,0,0,.07); --border-2:rgba(0,0,0,.13);
+  --shadow-sm:0 1px 4px rgba(0,0,0,.06); --shadow-md:0 4px 20px rgba(0,0,0,.08);
+  --shadow-lg:0 12px 48px rgba(0,0,0,.1);
+  --r-sm:8px; --r-md:12px; --r-lg:18px; --r-xl:28px;
+  --max:1200px; --nav-h:68px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text-1);line-height:1.6;-webkit-font-smoothing:antialiased}
+section{padding:96px 0}
+.container{max-width:var(--max);margin:0 auto;padding:0 24px}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.section-title{font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1.18;letter-spacing:-.02em;color:var(--text-1);margin-bottom:18px}
+.portfolio-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px}
+.portfolio-filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{font-family:inherit;font-size:13px;font-weight:500;padding:7px 16px;border-radius:100px;background:var(--surface-2);color:var(--text-1);border:.5px solid var(--border-2);transition:all .2s;cursor:pointer}
+.filter-btn.active,.filter-btn:hover{background:var(--text-1);color:#fff;border-color:var(--text-1)}
+.filter-btn:focus-visible{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.portfolio-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all .3s}
+.portfolio-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.port-thumb{height:180px;background:linear-gradient(135deg,var(--surface-2) 0%,var(--surface) 100%);display:flex;align-items:center;justify-content:center;border-bottom:.5px solid var(--border);position:relative}
+.port-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.port-type{position:absolute;top:12px;right:12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:var(--text-1);color:#fff;padding:4px 10px;border-radius:100px;z-index:2}
+.port-body{padding:20px}
+.port-body h3{font-size:15px;font-weight:700;margin-bottom:4px}
+.port-cat{font-size:12px;color:var(--accent);font-weight:500;margin-bottom:10px}
+.port-body p{font-size:13px;color:var(--text-2);line-height:1.6;margin-bottom:14px}
+.port-demo-link{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;transition:gap .2s}
+.port-demo-link:hover{gap:10px}
+@media(max-width:768px){
+  section{padding:48px 0}
+  .container{padding:0 16px}
+  .section-title{font-size:clamp(24px,7vw,34px);line-height:1.14}
+  .portfolio-grid{grid-template-columns:1fr;gap:14px;margin-top:28px}
+  .portfolio-header{flex-direction:column;align-items:flex-start;gap:16px;margin-bottom:28px}
+  .portfolio-card{border-radius:10px}
+  .portfolio-filters{width:100%;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none}
+  .portfolio-filters::-webkit-scrollbar{display:none}
+  .filter-btn{flex:0 0 auto}
+}
+@media(min-width:769px) and (max-width:1024px){.portfolio-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ══════════════════════════════════════════════════════════════════════
+   ADD THESE 4 RULES TO assets/css/style.css  (everything above already exists)
+   ══════════════════════════════════════════════════════════════════════ */
+.client-tile{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 13%,var(--surface)) 0%,var(--surface) 100%)}
+.client-tile span{width:52px;height:52px;border-radius:14px;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;letter-spacing:-.02em}
+.client-tile em{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.port-access{display:inline-flex;align-items:center;gap:6px;margin-left:14px;font-size:11px;font-weight:600;color:var(--text-3);white-space:nowrap}
+</style>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PASTE FROM HERE  →  replaces the <section id="portfolio"> block in index.php
+     ══════════════════════════════════════════════════════════════════════ -->
+<section id="portfolio" aria-labelledby="portfolio-heading">
+  <div class="container">
+    <div class="portfolio-header reveal">
+      <div>
+        <p class="section-label">Portfolio</p>
+        <h2 id="portfolio-heading" class="section-title">Clients running our systems.</h2>
+      </div>
+      <div class="portfolio-filters" role="group" aria-label="Filter portfolio">
+        <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="filter-btn" data-filter="erp" aria-pressed="false">ERP</button>
+        <button type="button" class="filter-btn" data-filter="tms" aria-pressed="false">TMS</button>
+        <button type="button" class="filter-btn" data-filter="web" aria-pressed="false">Web &amp; Mobile</button>
+        <button type="button" class="filter-btn" data-filter="lms" aria-pressed="false">LMS</button>
+        <button type="button" class="filter-btn" data-filter="pos" aria-pressed="false">POS</button>
+        <button type="button" class="filter-btn" data-filter="hr" aria-pressed="false">HR</button>
+      </div>
+    </div>
+
+    <div class="portfolio-grid">
+
+      <article class="portfolio-card reveal" data-type="web" style="--c:#E8552E">
+        <div class="port-thumb">
+          <span class="port-type">Apps · ERP</span>
+          <!-- swap for: <img src="assets/img/clients/feasti.jpg" alt="Feasti platform"> -->
+          <div class="client-tile"><span>Fe</span><em>Feasti</em></div>
+        </div>
+        <div class="port-body">
+          <h3>Feasti</h3>
+          <p class="port-cat">Home-chef meal delivery</p>
+          <p>A subscription platform for daily home-cooked meals. We built the customer, home-chef and driver apps on one ERP that handles subscriptions, daily menus, order routing and chef settlements — with the website running off the same catalogue.</p>
+          <a href="https://feasti.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="tms" style="--c:#0F7C86">
+        <div class="port-thumb">
+          <span class="port-type">Apps · ERP</span>
+          <!-- swap for: <img src="assets/img/clients/ghumantoo.jpg" alt="Ghumantoo platform"> -->
+          <div class="client-tile"><span>Gh</span><em>Ghumantoo</em></div>
+        </div>
+        <div class="port-body">
+          <h3>Vindhyashri / Ghumantoo</h3>
+          <p class="port-cat">Bus ticket booking</p>
+          <p>An online bus ticketing platform. Passenger, operator, driver, vendor and agent each get a solution built for their job, over one ERP holding routes, seat inventory, fares and settlement — so a seat sold in any channel disappears everywhere at once.</p>
+          <a href="https://vindhyashrisolutions.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="erp" style="--c:#2B5D8C">
+        <div class="port-thumb">
+          <span class="port-type">ERP</span>
+          <!-- swap for: <img src="assets/img/clients/rsrobotics.jpg" alt="RS Robotics ERP"> -->
+          <div class="client-tile"><span>RS</span><em>RS Robotics</em></div>
+        </div>
+        <div class="port-body">
+          <h3>RS Robotics &amp; Automation</h3>
+          <p class="port-cat">Industrial automation · Manesar</p>
+          <p>A manufacturer of line automation systems, special purpose machines and robotic cells. Every SPM is a one-off build, so the ERP carries each order from enquiry to dispatch — BOM, purchase, stores issue, job cards and production progress.</p>
+          <a href="https://www.rsrobotic.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="erp" style="--c:#1F8A4C">
+        <div class="port-thumb">
+          <span class="port-type">ERP · HR</span>
+          <!-- swap for: <img src="assets/img/clients/sugslloyd.jpg" alt="Sugs Lloyd ERP"> -->
+          <div class="client-tile"><span>SL</span><em>Sugs Lloyd</em></div>
+        </div>
+        <div class="port-body">
+          <h3>Sugs Lloyd Limited</h3>
+          <p class="port-cat">Renewable energy &amp; power EPC</p>
+          <p>Solar EPC, battery storage and power distribution work spread across many sites at once. The ERP tracks each installation site's material and progress, while the HR side runs field attendance, deployment records and payroll.</p>
+          <a href="https://slldm.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="erp" style="--c:#B4731F">
+        <div class="port-thumb">
+          <span class="port-type">ERP</span>
+          <!-- swap for: <img src="assets/img/clients/spconstructs.jpg" alt="SP Constructs ERP"> -->
+          <div class="client-tile"><span>SP</span><em>SP Constructs</em></div>
+        </div>
+        <div class="port-body">
+          <h3>SP Constructs</h3>
+          <p class="port-cat">Construction &amp; interiors · Navi Mumbai</p>
+          <p>Dozens of small jobs run at the same time, each with its own materials, labour and billing schedule. The ERP keeps costing per job rather than per month — what was issued, who was deployed, what is billed and what is still to recover.</p>
+          <a href="https://spconstructs.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="erp" style="--c:#2E8B57">
+        <div class="port-thumb">
+          <span class="port-type">ERP</span>
+          <!-- swap for: <img src="assets/img/clients/trustmerecycle.jpg" alt="Trust Me Recycle ERP"> -->
+          <div class="client-tile"><span>TM</span><em>Trust Me Recycle</em></div>
+        </div>
+        <div class="port-body">
+          <h3>Trust Me Recycle</h3>
+          <p class="port-cat">Scrap &amp; e-waste management · Gurugram</p>
+          <p>Scrap is bought by weight, sorted into grades and sold on, so the quantity changes shape at every step. The ERP follows a lot from pickup and weighment through sorting to sale, keeping stock accurate after each split with the paperwork attached.</p>
+          <a href="https://trustmerecycle.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="tms" style="--c:#3A5A7A">
+        <div class="port-thumb">
+          <span class="port-type">TMS</span>
+          <!-- swap for: <img src="assets/img/clients/tiktrucs.jpg" alt="TikTrucks ERP"> -->
+          <div class="client-tile"><span>TT</span><em>TikTrucks</em></div>
+        </div>
+        <div class="port-body">
+          <h3>TikTrucks</h3>
+          <p class="port-cat">Logistics management</p>
+          <p>In road freight the money leaks between the trip sheet and the invoice. The ERP holds trips and consignments as one record, tracks vehicle and driver document expiry, captures fuel and trip expenses, and bills freight from the same trip it costed.</p>
+          <a href="https://tiktrucs.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="erp" style="--c:#E07B23">
+        <div class="port-thumb">
+          <span class="port-type">ERP</span>
+          <!-- swap for: <img src="assets/img/clients/bmp.jpg" alt="Bharatiya Merit Party ERP"> -->
+          <div class="client-tile"><span>BM</span><em>Bharatiya Merit Party</em></div>
+        </div>
+        <div class="port-body">
+          <h3>Bharatiya Merit Party</h3>
+          <p class="port-cat">National membership organisation</p>
+          <p>Membership that has to be verified, and units nesting from national down to district. The ERP holds that hierarchy properly — members registered and verified against a unit, roles assigned within it, and reporting that rolls up the same way.</p>
+          <a href="https://bharatiyameritparty.org" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="erp" style="--c:#C9541B">
+        <div class="port-thumb">
+          <span class="port-type">ERP</span>
+          <!-- swap for: <img src="assets/img/clients/smart4bharat.jpg" alt="SMaRT4Bharat ERP"> -->
+          <div class="client-tile"><span>S4</span><em>SMaRT4Bharat</em></div>
+        </div>
+        <div class="port-body">
+          <h3>SMaRT4Bharat</h3>
+          <p class="port-cat">Media creators' coalition · Chennai</p>
+          <p>A membership body that also runs grants, legal support and events — three workflows sharing one list of people. The ERP keeps that list authoritative and hangs applications, support requests and event participation off it.</p>
+          <a href="https://smart4bharat.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="lms" style="--c:#2E4EA8">
+        <div class="port-thumb">
+          <span class="port-type">LMS</span>
+          <!-- swap for: <img src="assets/img/clients/skillbridge.jpg" alt="Skill Bridge LMS"> -->
+          <div class="client-tile"><span>SB</span><em>Skill Bridge India</em></div>
+        </div>
+        <div class="port-body">
+          <h3>Skill Bridge India</h3>
+          <p class="port-cat">Technical training institute</p>
+          <p>Programmes run in parallel across Noida, Lucknow and Bhopal, each with its own batches and certification dates. The LMS holds enrolments, schedules, course material, assessments and progress, and issues certificates from the same record.</p>
+          <a href="https://skillbridgeindiatechnologies.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="lms" style="--c:#6A4AA8">
+        <div class="port-thumb">
+          <span class="port-type">LMS</span>
+          <!-- swap for: <img src="assets/img/clients/writeeasy.jpg" alt="WriteEasy LMS"> -->
+          <div class="client-tile"><span>WE</span><em>WriteEasy</em></div>
+        </div>
+        <div class="port-body">
+          <h3>WriteEasy</h3>
+          <p class="port-cat">Academic support · Kota</p>
+          <p>Work arrives continuously, each piece with its own subject, deadline and assigned writer, and the deadline is the whole product. The system takes each request in against a subject, allocates it, tracks drafting and review, and logs delivery.</p>
+          <a href="https://writeeasyhub.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="pos" style="--c:#4A7C3F">
+        <div class="port-thumb">
+          <span class="port-type">POS</span>
+          <!-- swap for: <img src="assets/img/clients/snubfoods.jpg" alt="Snub Foods POS"> -->
+          <div class="client-tile"><span>Sn</span><em>Snüb Foods</em></div>
+        </div>
+        <div class="port-body">
+          <h3>Snüb Foods</h3>
+          <p class="port-cat">Plant-based snack brand · Texas</p>
+          <p>Frozen and refrigerated lines sell through different channels but draw on the same stock. The POS bills fast at the counter while keeping catalogue, variants and stock movement in step, so the day-close report matches what actually left the freezer.</p>
+          <a href="https://snubfoods.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+      <article class="portfolio-card reveal" data-type="hr" style="--c:#1E5FA8">
+        <div class="port-thumb">
+          <span class="port-type">HR</span>
+          <!-- swap for: <img src="assets/img/clients/inversio365.jpg" alt="Inversio365 HRMS"> -->
+          <div class="client-tile"><span>In</span><em>Inversio365</em></div>
+        </div>
+        <div class="port-body">
+          <h3>Inversio365</h3>
+          <p class="port-cat">Dedicated HR platform</p>
+          <p>HR modules bolted onto a general ERP tend to fit no one, so here the HR system is the product. Employee records, attendance, leave, payroll and role-based access, with managers, staff and administrators each seeing only their own slice.</p>
+          <a href="https://inversio365.com" class="port-demo-link" target="_blank" rel="noopener">Visit site &rarr;</a>
+          <span class="port-access">Private system</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════════════
+     PASTE UP TO HERE
+     ══════════════════════════════════════════════════════════════════════ -->
+
+<script>
+/* Preview only — your assets/js/app.js already does exactly this. */
+document.querySelectorAll('.filter-btn').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    document.querySelectorAll('.filter-btn').forEach(function (b) {
+      var isActive = b === btn;
+      b.classList.toggle('active', isActive);
+      b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+    var filter = btn.dataset.filter;
+    document.querySelectorAll('.portfolio-card').forEach(function (card) {
+      card.style.display = (filter === 'all' || card.dataset.type === filter) ? '' : 'none';
+    });
+  });
+});
+</script>

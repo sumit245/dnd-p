@@ -18,7 +18,7 @@
         <li><a href="<?= BASE_PATH ?>/#services" <?= ($page['active_nav'] ?? '') === 'services' ? ' class="active"' : '' ?>>Services</a></li>
         <li><a href="<?= BASE_PATH ?>/#industries">Industries</a></li>
         <li><a href="<?= BASE_PATH ?>/#solutions">Solutions</a></li>
-        <li><a href="<?= BASE_PATH ?>/#portfolio" <?= ($page['active_nav'] ?? '') === 'portfolio' ? ' class="active"' : '' ?>>Portfolio</a></li>
+        <li><a href="<?= BASE_PATH ?>/portfolio" <?= ($page['active_nav'] ?? '') === 'portfolio' ? ' class="active"' : '' ?>>Portfolio</a></li>
         <li><a href="<?= BASE_PATH ?>/blog/" <?= ($page['active_nav'] ?? '') === 'blog' ? ' class="active"' : '' ?>>Blog</a>
         </li>
       </ul>
@@ -26,7 +26,7 @@
         <?php if (defined('SITE_WHATSAPP_URL') && SITE_WHATSAPP_URL !== ''): ?>
           <a href="<?= htmlspecialchars(SITE_WHATSAPP_URL, ENT_QUOTES, 'UTF-8') ?>" class="btn btn-outline" target="_blank" rel="noopener noreferrer" data-track="whatsapp" data-cta-location="nav" aria-label="Talk to us on WhatsApp (opens in a new tab)">Talk to us</a>
         <?php else: ?>
-          <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline" data-track="cta" data-cta-location="nav">See Work</a>
+          <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="nav">See Work</a>
         <?php endif; ?>
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="nav">Get Instant Estimate</a>
       </div>
@@ -40,7 +40,7 @@
     <a href="<?= BASE_PATH ?>/#services" class="mobile-link">Services</a>
     <a href="<?= BASE_PATH ?>/#solutions" class="mobile-link">Solutions</a>
     <a href="<?= BASE_PATH ?>/#industries" class="mobile-link">Industries</a>
-    <a href="<?= BASE_PATH ?>/#portfolio" class="mobile-link">Portfolio</a>
+    <a href="<?= BASE_PATH ?>/portfolio" class="mobile-link">Portfolio</a>
     <a href="<?= BASE_PATH ?>/blog/" class="mobile-link">Blog</a>
     <a href="<?= BASE_PATH ?>/#about" class="mobile-link">About</a>
     <a href="<?= BASE_PATH ?>/#faq" class="mobile-link">FAQ</a>

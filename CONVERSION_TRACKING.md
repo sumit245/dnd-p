@@ -48,8 +48,7 @@ Create data layer variables for:
 - `page_path`
 - `service`
 - `project_type`
-- `budget_min`
-- `budget_max`
+- `source` (`ai` or `template`)
 - `timeline`
 - `complexity`
 - `demo_slug`

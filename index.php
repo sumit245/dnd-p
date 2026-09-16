@@ -2,6 +2,7 @@
 require __DIR__ . '/includes/config.php';
 require __DIR__ . '/includes/db.php';
 require_once __DIR__ . '/includes/portfolio-media.php';
+require_once __DIR__ . '/includes/portfolio-taxonomy.php';
 
 // Fetch settings
 $settings = [];
@@ -11,7 +12,7 @@ while ($row = $stmt->fetch()) {
 }
 
 // Fetch portfolios
-$portfoliosStmt = $pdo->query('SELECT * FROM portfolios ORDER BY created_at ASC');
+$portfoliosStmt = $pdo->query('SELECT * FROM portfolios ORDER BY sort_order ASC, created_at ASC');
 $portfolios = $portfoliosStmt->fetchAll();
 
 // Homepage-specific SEO: override title and description for maximum keyword coverage
@@ -830,26 +831,30 @@ if ($heroDescription === '') {
             <p class="section-sub">A glimpse into the types of platforms we build. Reach out for a detailed walkthrough.
             </p>
           </div>
-          <div class="portfolio-filters" role="group" aria-label="Filter portfolio">
+          <div class="portfolio-filters" role="group" aria-label="Filter portfolio by industry">
             <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
-            <button type="button" class="filter-btn" data-filter="erp" aria-pressed="false">ERP/CRM</button>
-            <button type="button" class="filter-btn" data-filter="tms" aria-pressed="false">TMS</button>
-            <button type="button" class="filter-btn" data-filter="hms" aria-pressed="false">HMS</button>
-            <button type="button" class="filter-btn" data-filter="web" aria-pressed="false">Web &amp; Mobile</button>
+            <?php foreach (PORTFOLIO_HOME_INDUSTRIES as $homeIndustry): ?>
+              <button type="button" class="filter-btn" data-filter="<?php echo htmlspecialchars($homeIndustry); ?>" aria-pressed="false"><?php echo htmlspecialchars(portfolio_industry_label($homeIndustry)); ?></button>
+            <?php endforeach; ?>
+            <a class="filter-btn filter-btn--link" href="<?php echo htmlspecialchars(portfolio_url()); ?>">More filters &rarr;</a>
           </div>
         </div>
         <div class="portfolio-grid">
           <?php if (!empty($portfolios)): ?>
             <?php foreach ($portfolios as $index => $portfolio): ?>
               <?php
-              $delayClass = $index > 0 ? 'reveal-delay-' . min($index, 3) : '';
-              $slugUpper = strtoupper($portfolio['slug']);
+              $delayClass = $index > 0 ? 'reveal-delay-' . min($index % 3, 3) : '';
+              $badge = trim((string)($portfolio['badge'] ?? '')) !== '' ? $portfolio['badge'] : strtoupper($portfolio['slug']);
+              $category = $portfolio['category'] ?? $portfolio['slug'];
+              $cardLink = portfolio_card_link($portfolio);
               ?>
               <article class="portfolio-card reveal <?php echo $delayClass; ?>"
-                data-type="<?php echo htmlspecialchars($portfolio['slug']); ?>">
+                data-type="<?php echo htmlspecialchars($category); ?>"
+                data-industry="<?php echo htmlspecialchars($portfolio['industry'] ?? ''); ?>"
+                style="--c:<?php echo htmlspecialchars(portfolio_tile_color($portfolio)); ?>"<?php echo $index >= PORTFOLIO_HOME_MAX ? ' hidden' : ''; ?>>
                 <div class="port-thumb" style="background:none; padding: 0;">
-                  <span class="port-type" style="z-index:2;"><?php echo htmlspecialchars($slugUpper); ?></span>
-                  <?php if (!empty($portfolio['image_path'])): ?>
+                  <span class="port-type" style="z-index:2;"><?php echo htmlspecialchars($badge); ?></span>
+                  <?php if (!empty($portfolio['image_path']) && portfolio_image_meta($portfolio['image_path'])): ?>
                     <?php
                     echo portfolio_picture_html(
                       $portfolio['image_path'],
@@ -861,20 +866,30 @@ if ($heroDescription === '') {
                     );
                     ?>
                   <?php else: ?>
-                    <div
-                      style="width: 100%; height: 100%; background: var(--surface-2); display: flex; align-items: center; justify-content: center; color: var(--text-2);">
-                      No Image</div>
+                    <div class="port-initials" aria-hidden="true">
+                      <span><?php echo htmlspecialchars(portfolio_initials($portfolio)); ?></span>
+                      <em><?php echo htmlspecialchars($portfolio['client_name'] ?: $portfolio['title']); ?></em>
+                    </div>
                   <?php endif; ?>
                 </div>
                 <div class="port-body">
                   <h3><?php echo htmlspecialchars($portfolio['title']); ?></h3>
-                  <p class="port-cat"><?php echo htmlspecialchars($slugUpper); ?></p>
+                  <p class="port-cat"><?php echo htmlspecialchars($badge); ?></p>
                   <p><?php echo htmlspecialchars($portfolio['short_description']); ?></p>
-                  <a href="<?= BASE_PATH ?>/demo/view.php?slug=<?php echo urlencode($portfolio['slug']); ?>"
-                    class="port-demo-link" target="_blank" rel="noopener" data-track="demo"
-                    data-demo-slug="<?php echo htmlspecialchars($portfolio['slug']); ?>">
-                    View Demo &rarr;
-                  </a>
+                  <?php if ($cardLink && !$cardLink['external']): ?>
+                    <a href="<?php echo htmlspecialchars($cardLink['href']); ?>"
+                      class="port-demo-link" data-track="demo"
+                      data-demo-slug="<?php echo htmlspecialchars($portfolio['slug']); ?>">
+                      <?php echo htmlspecialchars($cardLink['label']); ?> &rarr;
+                    </a>
+                  <?php elseif ($cardLink): ?>
+                    <a href="<?php echo htmlspecialchars($cardLink['href']); ?>"
+                      class="port-demo-link" target="_blank" rel="noopener noreferrer"
+                      data-track="cta" data-cta-location="portfolio-home">
+                      <?php echo htmlspecialchars($cardLink['label']); ?> &rarr;
+                    </a>
+                    <span class="port-access">Private system</span>
+                  <?php endif; ?>
                 </div>
               </article>
             <?php endforeach; ?>
@@ -882,6 +897,10 @@ if ($heroDescription === '') {
             <p style="text-align:center; grid-column: 1 / -1; padding: 40px; color: var(--text-2);">New portfolio updates
               coming soon.</p>
           <?php endif; ?>
+        </div>
+        <div class="portfolio-more reveal">
+          <a id="portfolioViewAll" class="btn btn-outline" href="<?php echo htmlspecialchars(portfolio_url()); ?>" data-track="cta" data-cta-location="portfolio-home">View all work &rarr;</a>
+          <p class="portfolio-more-note"><?php echo count($portfolios); ?> systems across <?php echo count(array_unique(array_filter(array_column($portfolios, 'industry')))); ?> industries</p>
         </div>
         <div class="mid-cta reveal">
           <div>
@@ -1256,10 +1275,10 @@ if ($heroDescription === '') {
       <div class="container">
         <div class="reveal" style="text-align:center">
           <p class="section-label">AI‑Assisted Scoping</p>
-          <h2 id="wizard-heading" class="section-title">Get an instant project brief &amp; cost estimate.</h2>
-          <p class="section-sub" style="margin:0 auto">Not sure where to start? Answer 5 quick questions and we'll
-            generate a structured project brief with a realistic budget and timeline range — and pre‑fill your enquiry
-            form instantly.</p>
+          <h2 id="wizard-heading" class="section-title">Get an instant AI-generated project brief.</h2>
+          <p class="section-sub" style="margin:0 auto">Not sure where to start? Answer 5 quick questions and our AI
+            scoping assistant will draft a structured requirement brief with scope, tech stack and an indicative
+            timeline — then pre‑fill your enquiry form so we can send you a tailored proposal.</p>
         </div>
 
         <div class="wizard-wrap reveal">
@@ -1412,7 +1431,7 @@ if ($heroDescription === '') {
           <!-- STEP 2: Scale -->
           <div class="wizard-pane" id="wizPane2">
             <h3 class="wizard-pane-title">What is the scale of this project?</h3>
-            <p class="wizard-pane-sub">This helps us estimate team size, architecture complexity, and timelines.</p>
+            <p class="wizard-pane-sub">This helps us gauge team size, architecture complexity, and timelines.</p>
             <div class="wiz-scale-options" id="scaleGrid">
               <label class="wiz-radio-card" data-scale="Small" onclick="selectScale(this)">
                 <input type="radio" name="scale" value="Small">
@@ -1448,7 +1467,7 @@ if ($heroDescription === '') {
           <!-- STEP 3: Features -->
           <div class="wizard-pane" id="wizPane3">
             <h3 class="wizard-pane-title">Which features are most important?</h3>
-            <p class="wizard-pane-sub">Select all that apply — each feature influences the estimate.</p>
+            <p class="wizard-pane-sub">Select all that apply — each feature shapes the scope and timeline.</p>
             <div class="wiz-check-grid" id="featuresGrid">
               <label class="wiz-check-card" onclick="toggleCheck(this)"><input type="checkbox"
                   value="User roles &amp; permissions"><span class="wcc-label">User roles &amp;
@@ -1563,10 +1582,6 @@ if ($heroDescription === '') {
                 </div>
                 <div class="wiz-badges">
                   <div class="wiz-badge">
-                    <div class="wb-label">Estimated Budget</div>
-                    <div class="wb-val" id="resBudget">—</div>
-                  </div>
-                  <div class="wiz-badge">
                     <div class="wb-label">Timeline</div>
                     <div class="wb-val" id="resTimeline">—</div>
                   </div>
@@ -1592,10 +1607,24 @@ if ($heroDescription === '') {
                 <h4>Key Assumptions &amp; Notes</h4>
                 <div class="wiz-brief-text" id="resNotes"></div>
               </div>
+              <div class="wiz-enquiry-card">
+                <div class="wiz-enquiry-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C8293E" stroke-width="1.7"
+                    stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="M3 8 L12 13 L21 8" />
+                    <path d="M16 3 L18 5 L16 7" />
+                  </svg></div>
+                <div>
+                  <h4>Pricing is tailored to your scope</h4>
+                  <p>Send this brief as an enquiry and we'll reply with a detailed proposal — phases, timeline and
+                    pricing — <strong>within 48 hours</strong>.</p>
+                </div>
+              </div>
               <div class="wiz-result-actions">
                 <button class="wiz-btn wiz-btn-primary" onclick="prefillContactForm()">→ Pre-fill Enquiry Form &amp;
                   Send</button>
                 <button class="wiz-btn wiz-btn-secondary" onclick="resetWizard()">↺ Start Over</button>
+                <p class="wiz-assurance">No obligation · Proposal within 48 hours · Your brief is already pre-filled</p>
               </div>
             </div>
           </div>

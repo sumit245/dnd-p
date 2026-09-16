@@ -21,7 +21,7 @@ require __DIR__ . '/../../includes/header.php';
       <p class="lead">We build purpose-specific management platforms for hospitals, hotels, logistics operators, and financial services — systems that understand your industry's regulations, workflows, and reporting needs from the ground up.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="industry-hero">Get My Free Project Estimate</a>
-        <a href="<?= BASE_PATH ?>/#portfolio" class="btn btn-outline" data-track="cta" data-cta-location="industry-hero">View Live Demos</a>
+        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="industry-hero">View Live Demos</a>
       </div>
     </div>
 

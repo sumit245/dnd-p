@@ -1113,14 +1113,97 @@
       justify-content: space-between;
       align-items: flex-end;
       margin-bottom: 48px;
-      flex-wrap: wrap;
-      gap: 20px
+      gap: 32px
+    }
+
+    /* Heading block shrinks (title wraps) before the filter row drops below it */
+    .portfolio-header > div:first-child {
+      flex: 1 1 auto;
+      min-width: 0
     }
 
     .portfolio-filters {
       display: flex;
       gap: 8px;
-      flex-wrap: wrap
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      flex: 0 1 auto;
+      max-width: 52%
+    }
+
+    .filter-btn--link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      background: transparent;
+      border-style: dashed
+    }
+
+    .portfolio-more {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 36px
+    }
+
+    .portfolio-more-note {
+      font-size: 12px;
+      color: var(--text-3);
+      margin: 0
+    }
+
+    .port-initials {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--c, var(--accent)) 13%, var(--surface)) 0%, var(--surface) 100%)
+    }
+
+    .port-initials span {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--c, var(--accent));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -.02em
+    }
+
+    .port-initials em {
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-3)
+    }
+
+    .port-access {
+      display: inline-block;
+      margin: 14px 0 0 10px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      border: .5px solid var(--border-2);
+      padding: 3px 8px;
+      border-radius: 100px;
+      vertical-align: middle
+    }
+
+    .portfolio-card[hidden] {
+      display: none
     }
 
     .filter-btn {
@@ -1162,13 +1245,25 @@
     }
 
     .port-thumb {
-      height: 180px;
+      height: auto;
+      aspect-ratio: 16 / 10;
       background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       border-bottom: .5px solid var(--border);
-      position: relative
+      position: relative;
+      overflow: hidden
+    }
+
+    /* <picture> is inline by default — without this the <img> ignores the thumb height and overflows onto .port-body */
+    .port-thumb picture,
+    .port-thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center
     }
 
     .port-thumb-label {
@@ -2227,6 +2322,8 @@
 
       .portfolio-filters {
         width: 100%;
+        max-width: none;
+        justify-content: flex-start;
         flex-wrap: nowrap;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -2825,11 +2922,6 @@
       color: var(--text-1)
     }
 
-    .wiz-badge .wb-val em {
-      color: var(--accent);
-      font-style: normal
-    }
-
     .wiz-brief-section {
       margin-bottom: 20px
     }
@@ -2850,6 +2942,43 @@
       white-space: pre-wrap
     }
 
+    .wiz-enquiry-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--surface-2);
+      border: .5px solid var(--border-2);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--r-md);
+      padding: 18px 20px;
+      margin-top: 8px
+    }
+
+    .wiz-enquiry-icon {
+      flex: 0 0 28px;
+      width: 28px;
+      height: 28px
+    }
+
+    .wiz-enquiry-icon svg {
+      width: 100%;
+      height: 100%
+    }
+
+    .wiz-enquiry-card h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin: 0 0 4px
+    }
+
+    .wiz-enquiry-card p {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin: 0
+    }
+
     .wiz-result-actions {
       display: flex;
       gap: 12px;
@@ -2857,6 +2986,13 @@
       margin-top: 28px;
       padding-top: 24px;
       border-top: .5px solid var(--border)
+    }
+
+    .wiz-assurance {
+      width: 100%;
+      font-size: 12px;
+      color: var(--text-3);
+      margin: 4px 0 0
     }
 
     @keyframes formHighlight {
@@ -2977,6 +3113,10 @@
       .wiz-result-actions button {
         width: 100%;
         justify-content: center
+      }
+
+      .wiz-enquiry-card {
+        padding: 14px 16px
       }
     }
 

@@ -68,3 +68,9 @@
 <?php $stylesheetHref = asset_css_href(); ?>
   <link rel="preload" href="<?= htmlspecialchars($stylesheetHref, ENT_QUOTES, 'UTF-8') ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="<?= htmlspecialchars($stylesheetHref, ENT_QUOTES, 'UTF-8') ?>"></noscript>
+<?php foreach (($page['preload_fonts'] ?? []) as $preloadFont): ?>
+  <link rel="preload" href="<?= htmlspecialchars(asset_url($preloadFont), ENT_QUOTES, 'UTF-8') ?>" as="font" type="font/woff2" crossorigin>
+<?php endforeach; ?>
+<?php foreach (($page['extra_css'] ?? []) as $extraCss): ?>
+  <link rel="stylesheet" href="<?= htmlspecialchars(asset_prefer_min($extraCss), ENT_QUOTES, 'UTF-8') ?>">
+<?php endforeach; ?>

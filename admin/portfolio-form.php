@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/layout/header.php';
+require_once __DIR__ . '/../includes/portfolio-taxonomy.php';
 
 $message = '';
 $isEdit = isset($_GET['id']) && is_numeric($_GET['id']);
@@ -9,7 +10,14 @@ $id = $isEdit ? $_GET['id'] : null;
 $portfolio = [
     'title' => '',
     'slug' => '',
+    'category' => 'web',
+    'industry' => '',
+    'badge' => '',
+    'sort_order' => 100,
     'short_description' => '',
+    'client_name' => '',
+    'client_url' => '',
+    'tile_color' => '',
     'detailed_description' => '',
     'demo_url' => '',
     'username' => '',
@@ -37,6 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $portfolio = [
         'title' => $_POST['title'] ?? '',
         'slug' => $_POST['slug'] ?? '',
+        'category' => in_array($_POST['category'] ?? '', ['erp', 'tms', 'hms', 'web', 'mobile'], true) ? $_POST['category'] : 'web',
+        'industry' => portfolio_industry_is_valid($_POST['industry'] ?? null) ? $_POST['industry'] : null,
+        'badge' => trim($_POST['badge'] ?? ''),
+        'sort_order' => (int)($_POST['sort_order'] ?? 100),
+        'client_name' => trim($_POST['client_name'] ?? ''),
+        'client_url' => filter_var(trim($_POST['client_url'] ?? ''), FILTER_VALIDATE_URL) ?: null,
+        'tile_color' => preg_match('/^#[0-9A-Fa-f]{6}$/', trim($_POST['tile_color'] ?? '')) ? strtoupper(trim($_POST['tile_color'])) : null,
         'short_description' => $_POST['short_description'] ?? '',
         'detailed_description' => $_POST['detailed_description'] ?? '',
         'demo_url' => $_POST['demo_url'] ?? '',
@@ -48,17 +63,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         if ($isEdit) {
-            $stmt = $pdo->prepare('UPDATE portfolios SET title=?, slug=?, short_description=?, detailed_description=?, demo_url=?, username=?, password=?, image_path=?, gallery_images=? WHERE id=?');
+            $stmt = $pdo->prepare('UPDATE portfolios SET title=?, slug=?, category=?, industry=?, badge=?, sort_order=?, client_name=?, client_url=?, tile_color=?, short_description=?, detailed_description=?, demo_url=?, username=?, password=?, image_path=?, gallery_images=? WHERE id=?');
             $stmt->execute([
-                $portfolio['title'], $portfolio['slug'], $portfolio['short_description'],
+                $portfolio['title'], $portfolio['slug'], $portfolio['category'], $portfolio['industry'], $portfolio['badge'], $portfolio['sort_order'],
+                $portfolio['client_name'], $portfolio['client_url'], $portfolio['tile_color'], $portfolio['short_description'],
                 $portfolio['detailed_description'], $portfolio['demo_url'], $portfolio['username'],
                 $portfolio['password'], $portfolio['image_path'], $portfolio['gallery_images'], $id
             ]);
             $message = '<div class="alert alert-success">Portfolio updated successfully.</div>';
         } else {
-            $stmt = $pdo->prepare('INSERT INTO portfolios (title, slug, short_description, detailed_description, demo_url, username, password, image_path, gallery_images) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+            $stmt = $pdo->prepare('INSERT INTO portfolios (title, slug, category, industry, badge, sort_order, client_name, client_url, tile_color, short_description, detailed_description, demo_url, username, password, image_path, gallery_images) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
             $stmt->execute([
-                $portfolio['title'], $portfolio['slug'], $portfolio['short_description'],
+                $portfolio['title'], $portfolio['slug'], $portfolio['category'], $portfolio['industry'], $portfolio['badge'], $portfolio['sort_order'],
+                $portfolio['client_name'], $portfolio['client_url'], $portfolio['tile_color'], $portfolio['short_description'],
                 $portfolio['detailed_description'], $portfolio['demo_url'], $portfolio['username'],
                 $portfolio['password'], $portfolio['image_path'], $portfolio['gallery_images']
             ]);
@@ -92,6 +109,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="slug">Slug (URL identifier) *</label>
                 <input type="text" id="slug" name="slug" class="form-control" value="<?php echo htmlspecialchars($portfolio['slug']); ?>" required>
                 <small style="color: var(--text-2);">e.g., erp, tms, hms</small>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+                <label for="category">Category (portfolio filter) *</label>
+                <select id="category" name="category" class="form-control">
+                    <?php foreach (['erp' => 'ERP / CRM', 'tms' => 'Transport & Logistics', 'hms' => 'Healthcare (HMS)', 'web' => 'Web & SaaS', 'mobile' => 'Mobile Apps'] as $catVal => $catLabel): ?>
+                        <option value="<?php echo $catVal; ?>" <?php echo ($portfolio['category'] ?? 'web') === $catVal ? 'selected' : ''; ?>><?php echo $catLabel; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="badge">Card badge</label>
+                <input type="text" id="badge" name="badge" class="form-control" value="<?php echo htmlspecialchars($portfolio['badge'] ?? ''); ?>" placeholder="e.g. CRM, HRMS, ANDROID">
+                <small style="color: var(--text-2);">Short label on the thumbnail. Blank = slug in caps.</small>
+            </div>
+            <div class="form-group">
+                <label for="sort_order">Sort order</label>
+                <input type="number" id="sort_order" name="sort_order" class="form-control" value="<?php echo (int)($portfolio['sort_order'] ?? 100); ?>">
+                <small style="color: var(--text-2);">Lower shows first. Top 6 appear on the home page.</small>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+                <label for="industry">Industry (portfolio page filter)</label>
+                <select id="industry" name="industry" class="form-control">
+                    <option value="">— none —</option>
+                    <?php foreach (portfolio_industries() as $indVal => $indLabel): ?>
+                        <option value="<?php echo $indVal; ?>" <?php echo ($portfolio['industry'] ?? '') === $indVal ? 'selected' : ''; ?>><?php echo htmlspecialchars($indLabel); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="client_name">Client name</label>
+                <input type="text" id="client_name" name="client_name" class="form-control" value="<?php echo htmlspecialchars($portfolio['client_name'] ?? ''); ?>" placeholder="e.g. Sugs Lloyd Limited">
+            </div>
+            <div class="form-group">
+                <label for="client_url">Client website</label>
+                <input type="url" id="client_url" name="client_url" class="form-control" value="<?php echo htmlspecialchars($portfolio['client_url'] ?? ''); ?>" placeholder="https://">
+                <small style="color: var(--text-2);">Card links here when there is no demo page.</small>
+            </div>
+            <div class="form-group">
+                <label for="tile_color">Tile colour</label>
+                <input type="color" id="tile_color" name="tile_color" class="form-control" value="<?php echo htmlspecialchars($portfolio['tile_color'] ?: '#C8293E'); ?>">
+                <small style="color: var(--text-2);">Used when no screenshot is set.</small>
             </div>
         </div>
 

@@ -94,6 +94,12 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ blog/post.php?slug=$1 [L,QSA]
 
+# Portfolio demo pages: /demo/{slug} → demo/view.php?slug={slug} (unless demo/{slug}.php exists)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php !-f
+RewriteRule ^demo/([a-zA-Z0-9_-]+)/?$ demo/view.php?slug=$1 [L,QSA]
+
 # Internally rewrite extensionless → .php (if file exists)
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -127,6 +133,7 @@ ErrorDocument 404 /dashandots/404.php
 
 # Asset MIME types
 AddType image/webp .webp
+AddType font/woff2 .woff2
 
 # Compression
 <IfModule mod_deflate.c>

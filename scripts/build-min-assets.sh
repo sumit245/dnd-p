@@ -9,12 +9,22 @@ JS_APP="$ROOT/assets/js/app.js"
 JS_APP_MIN="$ROOT/assets/js/app.min.js"
 JS_CONSENT="$ROOT/assets/js/consent.js"
 JS_CONSENT_MIN="$ROOT/assets/js/consent.min.js"
+CSS_PF="$ROOT/assets/css/portfolio.css"
+CSS_PF_MIN="$ROOT/assets/css/portfolio.min.css"
+JS_PF="$ROOT/assets/js/portfolio.js"
+JS_PF_MIN="$ROOT/assets/js/portfolio.min.js"
 
 if command -v npx >/dev/null 2>&1; then
   npx --yes clean-css-cli -o "$CSS_MIN" "$CSS_SRC"
   npx --yes terser "$JS_APP" -o "$JS_APP_MIN" -c -m
   if [[ -f "$JS_CONSENT" ]]; then
     npx --yes terser "$JS_CONSENT" -o "$JS_CONSENT_MIN" -c -m
+  fi
+  if [[ -f "$CSS_PF" ]]; then
+    npx --yes clean-css-cli -o "$CSS_PF_MIN" "$CSS_PF"
+  fi
+  if [[ -f "$JS_PF" ]]; then
+    npx --yes terser "$JS_PF" -o "$JS_PF_MIN" -c -m
   fi
   echo "Minified with clean-css-cli and terser."
   exit 0

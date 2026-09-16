@@ -149,7 +149,7 @@ function make_confirm_html(string $name): string {
 </head><body>
 <h2>Thank you, " . htmlspecialchars($name) . "!</h2>
 <p>We've received your enquiry and will get back to you <strong>within 1 business day</strong>.</p>
-<p>In the meantime, browse our <a href='https://dashandots.com/#portfolio'>portfolio</a> or read our <a href='https://dashandots.com/#faq'>FAQ</a>.</p>
+<p>In the meantime, browse our <a href='https://dashandots.com/portfolio'>portfolio</a> or read our <a href='https://dashandots.com/#faq'>FAQ</a>.</p>
 <hr style='border:none;border-top:1px solid #e8e6e0;margin:24px 0'>
 <small>Dashandots Technology &mdash; <a href='https://dashandots.com'>dashandots.com</a></small>
 </body></html>";

@@ -63,7 +63,7 @@ Weights: SEO 25%, Security 30%, Performance 20%, Accessibility 15%, UX 10%.
 | `/contact-handler.php` honeypot POST | **200** | Fake success (no SMTP) |
 | `/contact-handler.php` + `Origin: https://dashandots.com` | **200** | CORS allows site origin only |
 | `/contact-handler.php` + evil `Origin` | **200** | No `Access-Control-Allow-Origin` for evil origin |
-| `/estimate.php` POST | **200** | Returns `budgetMin`, `budgetMax`, `budgetStr` (no `budgetStrHtml`) |
+| `/estimate.php` POST | **200** | Returns `summary`, `briefText`, `timelineStr`, `source` (`ai`/`template`) — no budget fields |
 | `/logo.png` | **404** | Unused if schema uses `/assets/logo.png` |
 | `/assets/logo.png` | **200** | Correct logo |
 | `/assets/img/og-image.jpg` | **200** | Default OG image |
