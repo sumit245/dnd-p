@@ -311,8 +311,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateProgress(step) {
       document.querySelectorAll('.wp-step').forEach((el, i) => {
         el.classList.remove('active', 'done');
+        el.removeAttribute('aria-current');
         if (i + 1 < step) el.classList.add('done');
-        else if (i + 1 === step) el.classList.add('active');
+        else if (i + 1 === step) { el.classList.add('active'); el.setAttribute('aria-current', 'step'); }
       });
     }
 

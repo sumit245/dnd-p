@@ -1283,24 +1283,24 @@ if ($heroDescription === '') {
 
         <div class="wizard-wrap reveal">
           <!-- Progress bar -->
-          <div class="wizard-progress" id="wizProgress" role="tablist" aria-label="Wizard steps">
-            <div class="wp-step active" data-step="1">
+          <div class="wizard-progress" id="wizProgress" role="list" aria-label="Wizard steps">
+            <div class="wp-step active" role="listitem" data-step="1" aria-current="step">
               <div class="wp-dot">1</div>
               <div class="wp-label">Project Type</div>
             </div>
-            <div class="wp-step" data-step="2">
+            <div class="wp-step" role="listitem" data-step="2">
               <div class="wp-dot">2</div>
               <div class="wp-label">Scale</div>
             </div>
-            <div class="wp-step" data-step="3">
+            <div class="wp-step" role="listitem" data-step="3">
               <div class="wp-dot">3</div>
               <div class="wp-label">Features</div>
             </div>
-            <div class="wp-step" data-step="4">
+            <div class="wp-step" role="listitem" data-step="4">
               <div class="wp-dot">4</div>
               <div class="wp-label">Integrations</div>
             </div>
-            <div class="wp-step" data-step="5">
+            <div class="wp-step" role="listitem" data-step="5">
               <div class="wp-dot">5</div>
               <div class="wp-label">Your Details</div>
             </div>
