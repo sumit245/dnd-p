@@ -2942,6 +2942,22 @@
       white-space: pre-wrap
     }
 
+    .wiz-error {
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      border: 1px solid rgba(200, 41, 62, .35);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--r-sm);
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-size: 14px;
+      line-height: 1.5
+    }
+
+    .wiz-error[hidden] {
+      display: none
+    }
+
     .wiz-enquiry-card {
       display: flex;
       gap: 14px;

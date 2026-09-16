@@ -14,9 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Push to dataLayer (GTM) and, when gtag.js is loaded directly (GA4_MEASUREMENT_ID),
+  // also send the same event to GA4 so tracking works before GTM has any tags.
   const pushEvent = (event, payload = {}) => {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event, ...payload });
+    if (window.DND_GA4_ID && typeof window.gtag === 'function') {
+      try { window.gtag('event', event, { ...payload, send_to: window.DND_GA4_ID }); } catch (e) { /* ignore */ }
+    }
   };
 
   document.querySelectorAll('[data-track]').forEach(el => {
@@ -251,8 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(payload)
         });
-        const data = await res.json();
-        if (data.success) {
+        let data = null;
+        try { data = await res.json(); } catch (e) { data = null; }
+        if (data && data.success) {
           status.className = 'form-status success';
           status.textContent = '✓ Thank you! Your enquiry has been received. We\'ll respond within 1 business day with next steps.';
           pushEvent('contact_form_submit_success', {
@@ -261,11 +267,17 @@ document.addEventListener('DOMContentLoaded', () => {
           });
           form.reset();
         } else {
-          throw new Error(data.message || 'Server error');
+          // Server gave a reason (rate limit, validation, SMTP) — show it instead of a generic line.
+          const serverMsg = data && data.message ? String(data.message) : '';
+          const e = new Error(serverMsg || ('HTTP ' + res.status));
+          e.serverMessage = serverMsg;
+          throw e;
         }
       } catch (err) {
         status.className = 'form-status error';
-        status.textContent = 'Something went wrong. Please try again, or use the direct contact options on this page.';
+        status.textContent = (err && err.serverMessage)
+          ? err.serverMessage
+          : 'Something went wrong. Please try again, or use the direct contact options on this page.';
         pushEvent('contact_form_submit_error', {
           error_type: 'server_or_network',
           error_message: err && err.message ? err.message : '',
@@ -361,7 +373,21 @@ document.addEventListener('DOMContentLoaded', () => {
     window.generateBrief = function() {
       const name = document.getElementById('wizName').value.trim();
       const email = document.getElementById('wizEmail').value.trim();
-      if (!name || !email) { alert('Please enter your name and email to generate the brief.'); return; }
+      const showWizError = (msg) => {
+        let box = document.getElementById('wizError');
+        if (!box) {
+          box = document.createElement('p');
+          box.id = 'wizError';
+          box.className = 'wiz-error';
+          box.setAttribute('role', 'alert');
+          const nav = document.querySelector('#wizPane5 .wizard-nav');
+          if (nav) nav.parentNode.insertBefore(box, nav);
+        }
+        box.textContent = msg || '';
+        box.hidden = !msg;
+      };
+      showWizError('');
+      if (!name || !email) { showWizError('Please enter your name and email to generate the brief.'); return; }
 
       wizardData.features = getChecked('featuresGrid');
       wizardData.integrations = getChecked('integrationsGrid');
@@ -380,10 +406,15 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(wizardData)
       })
-      .then(res => res.json())
+      .then(async res => {
+        let data = null;
+        try { data = await res.json(); } catch (e) { data = null; }
+        if (!data) throw new Error('HTTP ' + res.status);
+        return data;
+      })
       .then(data => {
         if (btn) { btn.classList.remove('loading'); btn.disabled = false; btn.textContent = btnLabel; }
-        if (data.error) { alert('Error: ' + data.error); return; }
+        if (data.error) { showWizError(data.error); return; }
 
         document.getElementById('resProjectType').textContent = data.type;
         document.getElementById('resClientName').textContent = data.clientName;
@@ -410,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(err => {
         if (btn) { btn.classList.remove('loading'); btn.disabled = false; btn.textContent = btnLabel; }
         console.error(err);
-        alert('Something went wrong generating your brief. Please try again.');
+        showWizError('Something went wrong generating your brief. Please try again in a moment, or use the contact form below.');
       });
     };
 

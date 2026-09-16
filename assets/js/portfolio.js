@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const push = (event, payload) => {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event, ...payload });
+    if (window.DND_GA4_ID && typeof window.gtag === 'function') {
+      try { window.gtag('event', event, { ...payload, send_to: window.DND_GA4_ID }); } catch (e) { /* ignore */ }
+    }
   };
 
   const apply = (filter, updateUrl) => {

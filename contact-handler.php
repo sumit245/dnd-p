@@ -75,7 +75,7 @@ if (!empty($data['website'] ?? '')) {
     exit;
 }
 
-if (!rate_limit_allow('contact_form', 5, 3600)) {
+if (!rate_limit_allow('contact_form', 10, 3600)) {
     http_response_code(429);
     echo json_encode(['success' => false, 'message' => 'Too many requests. Please try again later or email us directly.']);
     exit;

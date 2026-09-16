@@ -5,7 +5,7 @@
 if (!defined('CONSENT_BANNER_ENABLED') || !CONSENT_BANNER_ENABLED) {
     return;
 }
-if (!defined('GTM_CONTAINER_ID') || GTM_CONTAINER_ID === '') {
+if (!defined('ANALYTICS_ENABLED') || !ANALYTICS_ENABLED) {
     return;
 }
 ?>

@@ -40,7 +40,7 @@ if (!empty($input['website'] ?? '')) {
 }
 
 // Tighter than before: each request may hit a paid AI API.
-if (!rate_limit_allow('estimate_wizard', 10, 3600)) {
+if (!rate_limit_allow('estimate_wizard', 20, 3600)) {
     http_response_code(429);
     echo json_encode(['error' => 'Too many requests. Please try again in a few minutes.']);
     exit;

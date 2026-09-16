@@ -7,13 +7,22 @@
 
 define('SITE_NAME', 'Dashandots Technology');
 define('SITE_URL', 'https://dashandots.com');
-define('GTM_CONTAINER_ID', 'GTM-TJ3ZLPNJ');
+// Analytics — both overridable in .env. GTM_CONTAINER_ID must be a GTM-XXXX container id
+// (NOT a G- measurement id); GA4_MEASUREMENT_ID (G-XXXX) loads gtag.js directly so events
+// reach GA4 even when the GTM container has no tags yet.
+require_once __DIR__ . '/env.php';
+$gtmEnv = strtoupper(trim(site_env('GTM_CONTAINER_ID', 'GTM-TJ3ZLPNJ')));
+define('GTM_CONTAINER_ID', preg_match('/^GTM-[A-Z0-9]{4,12}$/', $gtmEnv) ? $gtmEnv : '');
+$ga4Env = strtoupper(trim(site_env('GA4_MEASUREMENT_ID', '')));
+define('GA4_MEASUREMENT_ID', preg_match('/^G-[A-Z0-9]{4,14}$/', $ga4Env) ? $ga4Env : '');
+define('ANALYTICS_ENABLED', GTM_CONTAINER_ID !== '' || GA4_MEASUREMENT_ID !== '');
+// Consent Mode default for analytics_storage: 'denied' (EU-style opt-in) or 'granted' (opt-out).
+define('CONSENT_ANALYTICS_DEFAULT', site_env('CONSENT_ANALYTICS_DEFAULT', 'denied') === 'granted' ? 'granted' : 'denied');
 
 // Optional: paste Google Search Console HTML tag content, or set GOOGLE_SITE_VERIFICATION in .env
 define('GOOGLE_SITE_VERIFICATION', '');
 
 // Cookie banner + Consent Mode (disable with CONSENT_BANNER_ENABLED=0 in .env)
-require_once __DIR__ . '/env.php';
 define('CONSENT_BANNER_ENABLED', site_env_bool('CONSENT_BANNER_ENABLED', true));
 define('ASSET_CDN_URL', rtrim(site_env('ASSET_CDN_URL', ''), '/'));
 define('SITE_LOGO_URL', (ASSET_CDN_URL !== '' ? ASSET_CDN_URL : SITE_URL) . '/assets/logo.webp');
