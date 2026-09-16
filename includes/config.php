@@ -11,9 +11,14 @@ define('SITE_URL', 'https://dashandots.com');
 // (NOT a G- measurement id); GA4_MEASUREMENT_ID (G-XXXX) loads gtag.js directly so events
 // reach GA4 even when the GTM container has no tags yet.
 require_once __DIR__ . '/env.php';
-$gtmEnv = strtoupper(trim(site_env('GTM_CONTAINER_ID', 'GTM-TJ3ZLPNJ')));
-define('GTM_CONTAINER_ID', preg_match('/^GTM-[A-Z0-9]{4,12}$/', $gtmEnv) ? $gtmEnv : '');
+$gtmEnv = strtoupper(trim(site_env('GTM_CONTAINER_ID', '')));
 $ga4Env = strtoupper(trim(site_env('GA4_MEASUREMENT_ID', '')));
+// Forgive a G- measurement id pasted into the GTM slot: use it as the GA4 id instead.
+if ($ga4Env === '' && preg_match('/^G-[A-Z0-9]{4,14}$/', $gtmEnv)) {
+    $ga4Env = $gtmEnv;
+}
+// Empty/invalid GTM value → the site's known container, never "analytics off".
+define('GTM_CONTAINER_ID', preg_match('/^GTM-[A-Z0-9]{4,12}$/', $gtmEnv) ? $gtmEnv : 'GTM-TJ3ZLPNJ');
 define('GA4_MEASUREMENT_ID', preg_match('/^G-[A-Z0-9]{4,14}$/', $ga4Env) ? $ga4Env : '');
 define('ANALYTICS_ENABLED', GTM_CONTAINER_ID !== '' || GA4_MEASUREMENT_ID !== '');
 // Consent Mode default for analytics_storage: 'denied' (EU-style opt-in) or 'granted' (opt-out).

@@ -75,12 +75,6 @@ if (!empty($data['website'] ?? '')) {
     exit;
 }
 
-if (!rate_limit_allow('contact_form', 10, 3600)) {
-    http_response_code(429);
-    echo json_encode(['success' => false, 'message' => 'Too many requests. Please try again later or email us directly.']);
-    exit;
-}
-
 function s(string $v): string {
     return htmlspecialchars(strip_tags(trim($v)), ENT_QUOTES, 'UTF-8');
 }

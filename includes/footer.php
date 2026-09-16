@@ -75,7 +75,8 @@
     <div class="footer-bottom">
       <p class="footer-copy">&copy; <?= date('Y') ?> <?= SITE_NAME ?>. All rights reserved.
         &nbsp;·&nbsp; <a href="<?= BASE_PATH ?>/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a
-          href="<?= BASE_PATH ?>/terms">Terms</a></p>
+          href="<?= BASE_PATH ?>/terms">Terms</a><?php if (defined('ANALYTICS_ENABLED') && ANALYTICS_ENABLED && CONSENT_BANNER_ENABLED): ?> &nbsp;·&nbsp; <a
+          href="#" data-consent-open>Cookie settings</a><?php endif; ?></p>
       <p class="footer-tagline">Fast · Mobile‑first · Privacy‑respecting</p>
     </div>
   </div>

@@ -107,16 +107,7 @@
     var banner = document.getElementById('consentBanner');
     var existing = readChoice();
 
-    if (existing) {
-      pushConsentUpdate(existing.analytics);
-      hideBanner(banner);
-      if (existing.analytics) loadWebVitals();
-      return;
-    }
-
     if (!banner) return;
-
-    showBanner(banner);
 
     document.getElementById('consentAccept')?.addEventListener('click', function () {
       applyChoice(true, banner);
@@ -124,6 +115,22 @@
     document.getElementById('consentReject')?.addEventListener('click', function () {
       applyChoice(false, banner);
     });
+    // "Cookie settings" links (footer) reopen the banner so a stored choice can be changed.
+    document.querySelectorAll('[data-consent-open]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        showBanner(banner);
+      });
+    });
+
+    if (existing) {
+      pushConsentUpdate(existing.analytics);
+      hideBanner(banner);
+      if (existing.analytics) loadWebVitals();
+      return;
+    }
+
+    showBanner(banner);
   }
 
   if (document.readyState === 'loading') {

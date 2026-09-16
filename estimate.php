@@ -39,13 +39,6 @@ if (!empty($input['website'] ?? '')) {
     exit;
 }
 
-// Tighter than before: each request may hit a paid AI API.
-if (!rate_limit_allow('estimate_wizard', 20, 3600)) {
-    http_response_code(429);
-    echo json_encode(['error' => 'Too many requests. Please try again in a few minutes.']);
-    exit;
-}
-
 $n = ai_brief_normalize_input($input);
 
 if ($n['name'] === '' || $n['email'] === '' || !filter_var($n['email'], FILTER_VALIDATE_EMAIL)) {
