@@ -14,8 +14,8 @@ foreach ($rows as $r) {
   }
 }
 
-$page['title'] = 'Portfolio — ERP, CRM, TMS & Mobile Systems Built for Indian Businesses | ' . SITE_NAME;
-$page['description'] = 'Client systems and live product demos by Dashandots: ERP, CRM, HRMS, transport, bus booking, LMS, POS and mobile apps across manufacturing, logistics, travel, energy, education and more.';
+$page['title'] = 'ERP, CRM & Mobile Systems — Live Demos | ' . SITE_NAME;
+$page['description'] = '30+ systems running in production — ERP, CRM, transport, mobile apps. Browse projects by industry, try live demos, or start yours.';
 $page['canonical'] = SITE_URL . '/portfolio';
 $page['og_title'] = $page['title'];
 $page['og_desc'] = $page['description'];
@@ -69,8 +69,7 @@ $h = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8')
           <div class="pf-sechead">
             <p class="pf-micro pf-meta"><span>[ 01 ]</span> Portfolio</p>
             <h1 class="pf-display">Systems in<br>daily use<span class="pf-accent">.</span></h1>
-            <p class="pf-lead">ERP, CRM, transport, HR, booking and mobile systems we built and still run for businesses
-              globally.</p>
+            <p class="pf-lead">Custom ERP, CRM, logistics, and mobile systems we built for Indian businesses — and still support. Browse by industry or try a live demo.</p>
             <!-- <p class="pf-micro" id="pf-count" aria-live="polite"><?= (int) $visibleCount ?> <?= $visibleCount === 1 ? 'project' : 'projects' ?></p> -->
           </div>
           <div class="pf-filters" role="group" aria-label="Filter portfolio by industry">
@@ -155,10 +154,10 @@ $h = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8')
           <!-- CTA plate: always visible, drops into the last gap of the grid -->
           <article class="pf-tile pf-tile--c reveal" data-cta>
             <div class="pf-cta">
-              <h2>Your system<br>next<span>.</span></h2>
+              <h2>Need something<br>like this<span>?</span></h2>
               <div>
-                <a href="<?= BASE_PATH ?>/#contact" data-track="cta" data-cta-location="portfolio-page">Build something similar</a>
-                <a href="<?= BASE_PATH ?>/#ai-brief" data-track="cta" data-cta-location="portfolio-page">Get a project brief</a>
+                <a href="<?= BASE_PATH ?>/#contact" data-track="cta" data-cta-location="portfolio-page">Start your project</a>
+                <a href="<?= BASE_PATH ?>/#ai-brief" data-track="cta" data-cta-location="portfolio-page">Get a free brief</a>
               </div>
             </div>
           </article>

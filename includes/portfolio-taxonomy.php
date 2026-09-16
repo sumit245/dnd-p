@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 const PORTFOLIO_INDUSTRIES = [
     'manufacturing' => 'Manufacturing',
-    'service'       => 'Service',
+    'service'       => 'Professional Services',
     'travel'        => 'Tour & Travel',
     'logistics'     => 'Logistics',
     'healthcare'    => 'Healthcare',
@@ -16,7 +16,7 @@ const PORTFOLIO_INDUSTRIES = [
     'food-retail'   => 'Food & Retail',
     'energy'        => 'Energy & Infrastructure',
     'construction'  => 'Construction',
-    'organisations' => 'Membership Orgs',
+    'organisations' => 'Associations',
 ];
 
 // Chips shown on the home page (the rest live behind "More filters →").
