@@ -8,65 +8,28 @@ $page['canonical']   = SITE_URL . '/services/data-analytics/';
 $page['og_title']    = 'Data Analytics Services & BI Dashboard Development | Dashandots Technology';
 $page['og_desc']     = $page['description'];
 
-$serviceSchemaProvider = [
-  '@type' => 'Organization',
-  '@id' => SITE_URL . '/#organization',
-  'name' => SITE_NAME,
-  'url' => SITE_URL . '/',
-  'logo' => SITE_LOGO_URL,
-];
-if (defined('SITE_ADDRESS') && SITE_ADDRESS !== '') {
-  $serviceSchemaProvider['address'] = [
-    '@type' => 'PostalAddress',
-    'streetAddress' => SITE_ADDRESS,
-    'addressCountry' => 'IN'
-  ];
-}
+$page['active_nav']  = 'services';
 
-$serviceSchema = [
-  '@context' => 'https://schema.org',
-  '@type' => 'Service',
-  '@id' => SITE_URL . '/services/data-analytics/#service',
-  'name' => 'Data Analytics Services and BI Dashboard Development',
+require_once __DIR__ . '/../../includes/service-schema.php';
+$serviceSchema = service_schema([
+  'slug'        => 'data-analytics',
+  'name'        => 'Data Analytics Services and BI Dashboard Development',
   'serviceType' => [
     'Data analytics services',
     'Business intelligence dashboard development',
     'Data visualization',
     'AI analytics solutions',
-    'Automated reporting'
+    'Automated reporting',
   ],
   'description' => $page['description'],
-  'url' => $page['canonical'],
-  'provider' => $serviceSchemaProvider,
-  'areaServed' => [
-    ['@type' => 'Country', 'name' => 'India'],
-    ['@type' => 'AdministrativeArea', 'name' => 'Delhi NCR']
+  'catalogName' => 'Data analytics and BI services',
+  'offers'      => [
+    'Executive KPI dashboard development',
+    'Business intelligence reporting automation',
+    'Data warehouse and ETL pipeline setup',
+    'AI analytics and predictive forecasting',
   ],
-  'audience' => [
-    '@type' => 'BusinessAudience',
-    'audienceType' => 'SMEs and growing businesses'
-  ],
-  'offers' => [
-    '@type' => 'Offer',
-    'availability' => 'https://schema.org/InStock',
-    'priceSpecification' => [
-      '@type' => 'PriceSpecification',
-      'priceCurrency' => 'INR',
-      'description' => 'Custom scope, timeline, and budget are estimated after discovery.'
-    ],
-    'url' => SITE_URL . '/#ai-brief'
-  ],
-  'hasOfferCatalog' => [
-    '@type' => 'OfferCatalog',
-    'name' => 'Data analytics and BI services',
-    'itemListElement' => [
-      ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Executive KPI dashboard development']],
-      ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Business intelligence reporting automation']],
-      ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'Data warehouse and ETL pipeline setup']],
-      ['@type' => 'Offer', 'itemOffered' => ['@type' => 'Service', 'name' => 'AI analytics and predictive forecasting']]
-    ]
-  ]
-];
+]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,12 +44,12 @@ $serviceSchema = [
 
     <!-- HERO -->
     <div class="svc-hero">
-      <p class="page-label">Data Analytics Services &amp; BI Dashboards</p>
+      <p class="page-label">Services &rsaquo; Data Analytics &amp; BI Dashboards</p>
       <h1>Data analytics services and BI dashboard development for clearer business decisions</h1>
       <p class="lead">We build real-time BI dashboards, business intelligence reporting systems, automated data pipelines, and AI analytics tools that give leadership reliable visibility across operations, finance, sales, and customer activity.</p>
       <div class="hero-actions">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="analytics-hero">Get Dashboard Scope</a>
-        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="analytics-hero">Get Instant Estimate</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="analytics-hero">Scope Your Dashboard</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="analytics-hero">Talk to Our Team</a>
       </div>
     </div>
 
@@ -186,18 +149,15 @@ $serviceSchema = [
       <h2>What could you do with clearer visibility into your operations?</h2>
       <p>Tell us what questions you can't answer today. We'll design a data solution that puts those answers in front of your team every morning.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="analytics-final">Get My Free Project Estimate</a>
-        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="analytics-final">Get Instant Estimate</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="analytics-final">Talk to Our Team</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="analytics-final">Scope Your Project</a>
       </div>
     </div>
 
   </div>
 </main>
 
-<script type="application/ld+json">
-<?= json_encode($serviceSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
-</script>
-<?php require __DIR__ . '/../../includes/footer.php'; ?>
+<?= service_schema_jsonld($serviceSchema) ?><?php require __DIR__ . '/../../includes/footer.php'; ?>
 <?php require __DIR__ . '/../../includes/scripts.php'; ?>
 </body>
 </html>

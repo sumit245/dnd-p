@@ -1,21 +1,21 @@
 <?php
 require __DIR__ . '/includes/config.php';
-$page['title']       = 'Terms of Service — ' . SITE_NAME;
+$page['title'] = 'Terms of Service | ' . SITE_NAME;
 $page['description'] = 'Read the terms of service for Dashandots Technology. Understand your rights and obligations when using our custom software development services.';
-$page['canonical']   = SITE_URL . '/terms';
-$page['og_title']    = $page['title'];
-$page['active_nav']  = '';
+$page['canonical'] = SITE_URL . '/terms';
+$page['og_title'] = $page['title'];
+$page['active_nav'] = '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<?php include __DIR__ . '/includes/head.php'; ?>
+  <?php include __DIR__ . '/includes/head.php'; ?>
 </head>
 
 <body>
 
-<?php include __DIR__ . '/includes/header.php'; ?>
+  <?php include __DIR__ . '/includes/header.php'; ?>
 
   <main id="main-content">
     <div class="page-wrap">
@@ -27,7 +27,8 @@ $page['active_nav']  = '';
       <div class="highlight-box">
         <p>These Terms of Service ("Terms") govern your access to and use of the website
           <a href="https://dashandots.com">dashandots.com</a> and any services provided by Dashandots Technology.
-          By using our website or engaging our services, you agree to be bound by these Terms.</p>
+          By using our website or engaging our services, you agree to be bound by these Terms.
+        </p>
       </div>
 
       <h2>1. About Dashandots Technology</h2>
@@ -42,7 +43,7 @@ $page['active_nav']  = '';
 
       <h2>3. Intellectual Property</h2>
       <h3>Our website content</h3>
-      <p>All content on this website — including text, graphics, logos, images, and code — is owned by
+      <p>All content on this website - including text, graphics, logos, images, and code - is owned by
         Dashandots Technology and is protected by applicable intellectual property laws. You may not copy, reproduce,
         or redistribute any part of this website without our written consent.</p>
       <h3>Client project deliverables</h3>
@@ -92,19 +93,23 @@ $page['active_nav']  = '';
 
       <h2>10. Changes to These Terms</h2>
       <p>We may update these Terms from time to time. The "Last updated" date at the top of this page reflects the
-        most recent revision. Continued use of our website after changes constitutes acceptance of the updated Terms.</p>
+        most recent revision. Continued use of our website after changes constitutes acceptance of the updated Terms.
+      </p>
 
       <h2>11. Contact</h2>
       <p>If you have any questions about these Terms, please contact:</p>
       <p><strong>Dashandots Technology</strong><br>
-        <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>Email: <a href="mailto:<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars(SITE_EMAIL) ?></a><br><?php endif; ?>
-        <?php if (defined('SITE_ADDRESS') && SITE_ADDRESS !== ''): ?>Address: <?= htmlspecialchars(SITE_ADDRESS) ?><br><?php endif; ?>
-        Website: <a href="https://dashandots.com">dashandots.com</a></p>
+        <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>Email: <a
+            href="mailto:<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars(SITE_EMAIL) ?></a><br><?php endif; ?>
+        <?php if (defined('SITE_ADDRESS') && SITE_ADDRESS !== ''): ?>Address:
+          <?= htmlspecialchars(SITE_ADDRESS) ?><br><?php endif; ?>
+        Website: <a href="https://dashandots.com">dashandots.com</a>
+      </p>
     </div>
   </main>
 
-<?php include __DIR__ . '/includes/footer.php'; ?>
-<?php include __DIR__ . '/includes/scripts.php'; ?>
+  <?php include __DIR__ . '/includes/footer.php'; ?>
+  <?php include __DIR__ . '/includes/scripts.php'; ?>
 
 </body>
 

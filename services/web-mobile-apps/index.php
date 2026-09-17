@@ -6,27 +6,55 @@ $page['description'] = 'Expert custom web and mobile app development — React, 
 $page['canonical']   = SITE_URL . '/services/web-mobile-apps/';
 $page['og_title']    = 'Custom Web & Mobile App Development | Dashandots Technology';
 $page['og_desc']     = $page['description'];
+$page['keywords']    = 'web application development company India, mobile app development India, Flutter app development, React Native app development, Laravel development services India, custom portal development';
+$page['active_nav']  = 'services';
 
-require __DIR__ . '/../../includes/head.php';
-require __DIR__ . '/../../includes/header.php';
+
+require_once __DIR__ . '/../../includes/service-schema.php';
+$serviceSchema = service_schema([
+  'slug'        => 'web-mobile-apps',
+  'name'        => 'Custom Web and Mobile App Development',
+  'serviceType' => [
+    'Web application development',
+    'Mobile app development',
+    'Cross-platform app development (Flutter, React Native)',
+    'API and backend development',
+  ],
+  'description' => $page['description'],
+  'catalogName' => 'Web and mobile app services',
+  'offers'      => [
+    'Customer and vendor self-service portals',
+    'iOS and Android apps with Flutter or React Native',
+    'Internal dashboards and admin panels',
+    'REST and GraphQL API development',
+    'Legacy system modernisation',
+  ],
+]);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php require __DIR__ . '/../../includes/head.php'; ?>
+</head>
+<body>
+<?php require __DIR__ . '/../../includes/header.php'; ?>
 
 <main id="main-content">
   <div class="svc-page">
 
     <!-- HERO -->
     <div class="svc-hero">
-      <p class="page-label">Web &amp; Mobile App Development</p>
-      <h1>Custom Web &amp; Mobile Applications Built for Scale</h1>
+      <p class="page-label">Services &rsaquo; Web &amp; Mobile Apps</p>
+      <h1>Custom web &amp; mobile applications built for scale</h1>
       <p class="lead">From responsive web portals to native-quality cross-platform mobile apps, we design and engineer digital products that are fast, secure, and built to grow with your business.</p>
       <div class="hero-actions">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Start Your Project</a>
-        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline">See Our Work</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="webapps-hero">Scope Your App</a>
+        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="webapps-hero">See our work</a>
       </div>
     </div>
 
     <!-- WHY CUSTOM -->
-    <h2>Why Choose Custom Over Off-the-Shelf?</h2>
+    <h2>Why choose custom over off-the-shelf?</h2>
     <p class="svc-body-text">Generic SaaS tools are built for the average business. Your workflows, your data, your customers — they're not average. A custom-built application gives you complete control over features, performance, and cost while eliminating recurring licence fees that drain margins over time.</p>
 
     <div class="svc-feature-grid">
@@ -57,7 +85,7 @@ require __DIR__ . '/../../includes/header.php';
     </div>
 
     <!-- WHAT WE BUILD -->
-    <h2>What We Build</h2>
+    <h2>What we build</h2>
     <ul class="svc-includes">
       <li>B2B &amp; B2C web portals</li>
       <li>SaaS product development</li>
@@ -73,8 +101,18 @@ require __DIR__ . '/../../includes/header.php';
       <li>Payment gateway integrations (Razorpay, Stripe, PayU)</li>
     </ul>
 
+    <div class="svc-cta-strip">
+      <p class="page-label">Start with the workflow that hurts</p>
+      <h2>Most app projects begin as one portal or one field app.</h2>
+      <p>Tell us which process runs on WhatsApp and spreadsheets today. We will scope the first release your team can actually use in weeks, not quarters.</p>
+      <div class="hero-actions" style="justify-content:center; margin-top:24px">
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="webapps-mid">Brief Us on Your App</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="webapps-mid">Talk to Our Team</a>
+      </div>
+    </div>
+
     <!-- TECH STACK -->
-    <h2>Our Technology Stack</h2>
+    <h2>Our technology stack</h2>
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
         <h3>Frontend</h3>
@@ -95,7 +133,7 @@ require __DIR__ . '/../../includes/header.php';
     </div>
 
     <!-- PROCESS -->
-    <h2>How We Deliver</h2>
+    <h2>How we deliver</h2>
     <ul class="svc-includes">
       <li>Discovery &amp; requirement mapping — we document every user story before writing a line of code</li>
       <li>UI/UX design in Figma — interactive prototypes reviewed with your team</li>
@@ -107,7 +145,7 @@ require __DIR__ . '/../../includes/header.php';
     </ul>
 
     <!-- WHO WE BUILD FOR -->
-    <h2>Industries We've Built For</h2>
+    <h2>Industries we've built for</h2>
     <ul class="svc-includes">
       <li>Logistics &amp; fleet management</li>
       <li>Healthcare &amp; hospital systems</li>
@@ -121,17 +159,20 @@ require __DIR__ . '/../../includes/header.php';
 
     <!-- CTA -->
     <div class="svc-cta-strip">
-      <p class="page-label">Let's Build Together</p>
-      <h2>Have an App Idea?</h2>
+      <p class="page-label">Let's build together</p>
+      <h2>Have an app idea?</h2>
       <p>Share your concept with us. We'll map out the technical approach, give you an honest timeline, and send a detailed proposal — no obligation.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Get a Free Estimate</a>
-        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline">View Case Studies</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="webapps-final">Talk to Our Team</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="webapps-final">Scope Your Project</a>
       </div>
     </div>
 
   </div>
 </main>
 
+<?= service_schema_jsonld($serviceSchema) ?>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>
 <?php require __DIR__ . '/../../includes/scripts.php'; ?>
+</body>
+</html>

@@ -21,10 +21,10 @@ $page['preload_images'] = ['/assets/img/hero-corporate-bg.webp'];
 $heroTitle = trim($settings['hero_title'] ?? '');
 $heroDescription = trim($settings['hero_description'] ?? '');
 if ($heroTitle === '') {
-  $heroTitle = 'Custom ERP & CRM for Growing SMEs';
+  $heroTitle = 'Your operations, centralised. Your data, visible. Your team, faster.';
 }
 if ($heroDescription === '') {
-  $heroDescription = 'Dashandots builds ERP, CRM, dashboard, portal, and mobile platforms for growing businesses — for clearer operations and dependable long-term support.';
+  $heroDescription = 'Dashandots builds custom ERP, CRM, dashboards, portals, and mobile apps for growing Indian businesses — scoped around how you actually work, owned by you, supported after launch.';
 }
 ?>
 <!DOCTYPE html>
@@ -105,18 +105,31 @@ if ($heroDescription === '') {
           <div class="hero-content reveal visible">
             <div class="hero-tag"><span aria-hidden="true"></span>Dashboards · Mobile Apps · Custom Software
             </div>
-            <h1 id="hero-heading" class="hero-h1"><?php echo htmlspecialchars($heroTitle); ?></h1>
+            <?php
+              // One sentence per line. If every sentence starts with the same word (e.g. "Your"), that word is
+              // rendered once, in the accent colour, beside the stacked lines. Trailing full stop is accent too
+              // (same treatment as the /portfolio display heading).
+              $heroLines = preg_split('/(?<=[.!?])\s+/u', $heroTitle) ?: [$heroTitle];
+              $heroLead = '';
+              if (count($heroLines) > 1) {
+                $firstWords = array_map(static fn(string $l): string => preg_split('/\s+/u', trim($l), 2)[0] ?? '', $heroLines);
+                if (count(array_unique(array_map('mb_strtolower', $firstWords))) === 1 && $firstWords[0] !== '') {
+                  $heroLead = $firstWords[0];
+                  $heroLines = array_map(static fn(string $l): string => trim(preg_replace('/^\S+\s*/u', '', trim($l))), $heroLines);
+                }
+              }
+              $heroLast = count($heroLines) - 1;
+            ?>
+            <h1 id="hero-heading" class="hero-h1<?= $heroLead !== '' ? ' hero-h1--lead' : '' ?>"><?php if ($heroLead !== ''): ?><span class="hero-lead"><?= htmlspecialchars($heroLead) ?></span><?php endif; ?><span class="hero-lines"><?php
+              foreach ($heroLines as $i => $line):
+                $dot = ($i === $heroLast && substr($line, -1) === '.') ? '<em>.</em>' : '';
+                $text = $dot !== '' ? substr($line, 0, -1) : $line;
+              ?><span class="hero-line" data-lead="<?= htmlspecialchars($heroLead) ?>"><?php echo htmlspecialchars($text) . $dot; ?></span><?php endforeach; ?></span></h1>
             <p class="hero-desc"><?php echo htmlspecialchars($heroDescription); ?></p>
             <div class="hero-ctas">
-              <a href="#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="hero">Get Instant
-                Estimate</a>
+              <a href="#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="hero">Get Your Project Brief</a>
               <a href="#portfolio" class="btn btn-outline" data-track="cta" data-cta-location="hero">See Our Work</a>
             </div>
-            <ul class="hero-meta">
-              <li class="hero-meta-item">150+ Clients Served</li>
-              <li class="hero-meta-item">450+ Projects Delivered</li>
-              <li class="hero-meta-item">5+ Years Experience</li>
-            </ul>
           </div>
           <!-- Pure CSS/SVG animated diagram — replaces broken THREE.js -->
           <div class="hero-diagram reveal reveal-delay-2 visible" aria-hidden="true">
@@ -285,17 +298,28 @@ if ($heroDescription === '') {
     </section>
 
     <!-- ═══════════════════════════════ TRUST BAR ═══════════════════════════════ -->
-    <!-- TODO: Replace contents same repetitive contents look forced -->
+    <?php
+      $trustItems = [
+        'ERP · CRM · TMS · HMS · Dashboards',
+        'You own the code and data',
+        'Founder-led scoping',
+        'India-based, serving globally',
+        'Support after launch',
+      ];
+    ?>
     <div class="trust-bar" role="region" aria-label="Company highlights">
       <div class="container">
         <div class="trust-inner">
-          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>150+ Clients Served</span>
-          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>450+ Projects Delivered</span>
-          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>ERP · CRM · TMS · HMS ·
-            Dashboards</span>
-          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>Serving
-            Globally</span>
-          <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span>Open to Long-Term Support</span>
+          <!-- Second copy is for the CSS marquee loop on mobile only (hidden from AT and on desktop). -->
+          <div class="trust-track">
+            <?php foreach ([false, true] as $dup): ?>
+              <div class="trust-set"<?= $dup ? ' aria-hidden="true"' : '' ?>>
+                <?php foreach ($trustItems as $item): ?>
+                  <span class="trust-item"><span class="trust-dot" aria-hidden="true"></span><?= htmlspecialchars($item) ?></span>
+                <?php endforeach; ?>
+              </div>
+            <?php endforeach; ?>
+          </div>
         </div>
       </div>
     </div>
@@ -305,13 +329,11 @@ if ($heroDescription === '') {
         <div class="estimate-jump-inner reveal">
           <div>
             <p class="section-label">Not ready to call?</p>
-            <h2 id="estimate-jump-heading">Find what your project needs.</h2>
-            <p>Budget uncertainty is one of the most common reasons software projects stall before they even start.
-              Answer five questions and get a realistic budget range, delivery timeline, and a shareable project
-              brief — all in under two minutes, no commitments needed.</p>
+            <h2 id="estimate-jump-heading">See what your project actually needs.</h2>
+            <p>Not sure about the scope? Pick your project type, scale, features, and integrations — our AI scoping
+              tool drafts a structured project brief with timeline in under two minutes. No calls, no commitments.</p>
           </div>
-          <a href="#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="estimate-jump">Get Instant
-            Estimate</a>
+          <a href="#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="estimate-jump">Start the 2-minute brief</a>
         </div>
       </div>
     </section>
@@ -326,18 +348,6 @@ if ($heroDescription === '') {
             <p class="section-sub">
               <?php echo nl2br(htmlspecialchars($settings['about_us_text'] ?? 'Dashandots Technology is an end-to-end software development and technology consulting company based in India.')); ?>
             </p>
-            <div class="about-cards">
-              <div class="about-card">
-                <h3>Our Mission</h3>
-                <p>To simplify complex business processes using technology and make well-engineered software
-                  accessible to SMEs.</p>
-              </div>
-              <div class="about-card">
-                <h3>Our Vision</h3>
-                <p>To be the most trusted technology partner for businesses who want long‑term digital platforms
-                  that keep paying back after launch.</p>
-              </div>
-            </div>
             <div class="about-stat-row">
               <div class="about-stat">
                 <div class="num">450+</div>
@@ -412,8 +422,9 @@ if ($heroDescription === '') {
                   <path d="M3 9 H1 M17 9 H19" />
                 </svg></div>
               <div>
-                <h3>AI‑assisted presales</h3>
-                <p>AI‑assisted tools for requirement capture and realistic, fast project scoping.</p>
+                <h3>AI‑powered scoping</h3>
+                <p>Answer five questions and get a structured project brief with scope, tech stack, and timeline — in
+                  under two minutes.</p>
               </div>
             </div>
           </div>
@@ -441,8 +452,8 @@ if ($heroDescription === '') {
               </svg></div>
             <h3>Custom Web &amp; Mobile Apps</h3>
             <p class="service-tag">React · Laravel · Node.js · Flutter · React Native</p>
-            <p>High‑performance, mobile‑first applications that digitise your operations, customer journeys, and
-              internal workflows.</p>
+            <p>Custom web and mobile apps built around your operations — from internal dashboards and approval flows
+              to customer-facing portals and field apps.</p>
             <ul class="service-list" aria-label="Includes">
               <li>Responsive web apps &amp; portals</li>
               <li>Native‑like mobile apps (Flutter, React Native)</li>
@@ -497,7 +508,7 @@ if ($heroDescription === '') {
                 <rect x="7" y="14" width="4" height="7" rx="1" />
                 <rect x="12" y="14" width="3.5" height="5" rx="1" />
               </svg></div>
-            <h3>Hotel, Hospital &amp; Industry Management Systems</h3>
+            <h3>Industry-Specific Management Systems</h3>
             <p class="service-tag">HMS · Hotel PMS · TMS · Finance &amp; Accounting</p>
             <p>Configurable platforms for healthcare, hospitality, logistics, finance, and more — built around how your
               industry actually works.</p>
@@ -570,14 +581,6 @@ if ($heroDescription === '') {
             </div>
           </div>
         </div>
-        <div class="mid-cta reveal">
-          <div>
-            <h3>Want to know what this would cost for your workflow?</h3>
-            <p>Generate a rough budget and timeline before booking a call.</p>
-          </div>
-          <a href="#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="after-services">Get Instant
-            Estimate</a>
-        </div>
       </div>
     </section>
 
@@ -608,6 +611,8 @@ if ($heroDescription === '') {
             <div class="challenge-box">
               <div class="label">Challenge</div>
               <p>Disconnected systems, manual inventory tracking, no real‑time production visibility.</p>
+              <div class="label label-outcome">Outcome</div>
+              <p>Live stock, production and quality numbers in one place — no end-of-day Excel.</p>
             </div>
             <div class="ind-tags"><span class="ind-tag">Production planning</span><span class="ind-tag">Quality
                 control</span><span class="ind-tag">Asset management</span></div>
@@ -627,6 +632,8 @@ if ($heroDescription === '') {
             <div class="challenge-box">
               <div class="label">Challenge</div>
               <p>Multi‑channel inventory sync, POS complexity, and inconsistent customer experiences.</p>
+              <div class="label label-outcome">Outcome</div>
+              <p>Orders, inventory and payments reconciled automatically across channels.</p>
             </div>
             <div class="ind-tags"><span class="ind-tag">Omnichannel POS</span><span class="ind-tag">Inventory
                 sync</span><span class="ind-tag">Analytics</span></div>
@@ -647,6 +654,8 @@ if ($heroDescription === '') {
             <div class="challenge-box">
               <div class="label">Challenge</div>
               <p>Manual trip planning, route inefficiency, and slow billing cycles waste time and revenue.</p>
+              <div class="label label-outcome">Outcome</div>
+              <p>Dispatch, vehicle and driver status visible without WhatsApp chasing.</p>
             </div>
             <div class="ind-tags"><span class="ind-tag">Fleet tracking</span><span class="ind-tag">Route
                 optimisation</span><span class="ind-tag">Automated billing</span></div>
@@ -666,6 +675,8 @@ if ($heroDescription === '') {
             <div class="challenge-box">
               <div class="label">Challenge</div>
               <p>Fragmented patient records, OPD/IPD delays, and disconnected pharmacy/lab systems.</p>
+              <div class="label label-outcome">Outcome</div>
+              <p>OPD, billing, pharmacy and reports flow from one patient record.</p>
             </div>
             <div class="ind-tags"><span class="ind-tag">OPD/IPD management</span><span
                 class="ind-tag">Pharmacy</span><span class="ind-tag">LIS</span></div>
@@ -688,6 +699,8 @@ if ($heroDescription === '') {
             <div class="challenge-box">
               <div class="label">Challenge</div>
               <p>Overbooking, disconnected front‑office and housekeeping, and multi‑channel booking chaos.</p>
+              <div class="label label-outcome">Outcome</div>
+              <p>Bookings, housekeeping and billing in sync — fewer double entries, faster checkout.</p>
             </div>
             <div class="ind-tags"><span class="ind-tag">Reservations</span><span class="ind-tag">Housekeeping
                 sync</span><span class="ind-tag">Multi‑channel</span></div>
@@ -707,6 +720,8 @@ if ($heroDescription === '') {
             <div class="challenge-box">
               <div class="label">Challenge</div>
               <p>Manual data entry, GST compliance burden, and poor integration with existing accounting tools.</p>
+              <div class="label label-outcome">Outcome</div>
+              <p>GST-ready books and approvals with Tally staying in step.</p>
             </div>
             <div class="ind-tags"><span class="ind-tag">GST automation</span><span class="ind-tag">Tally
                 integration</span><span class="ind-tag">Dashboards</span></div>
@@ -724,6 +739,8 @@ if ($heroDescription === '') {
             <div class="challenge-box">
               <div class="label">Challenge</div>
               <p>Managing student data, delivering blended learning, and automating assessments at scale.</p>
+              <div class="label label-outcome">Outcome</div>
+              <p>Admissions, fees, attendance and results tracked from one portal.</p>
             </div>
             <div class="ind-tags"><span class="ind-tag">Learning management</span><span class="ind-tag">Student
                 portals</span><span class="ind-tag">Assessments</span></div>
@@ -731,92 +748,23 @@ if ($heroDescription === '') {
           <article class="industry-card reveal reveal-delay-3">
             <div class="ind-icon" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"
                 fill="none" stroke="#C8293E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M24 4 C24 4 36 8 36 24 L24 38 L12 24 C12 8 24 4 24 4 Z" />
-                <circle cx="24" cy="20" r="4" />
-                <path d="M12 24 L6 32 L14 30 Z" />
-                <path d="M36 24 L42 32 L34 30 Z" />
-                <path d="M20 38 L18 44 L24 40 L30 44 L28 38" />
+                <rect x="6" y="22" width="16" height="22" rx="1" />
+                <rect x="22" y="30" width="20" height="14" rx="1" />
+                <path d="M10 27 H18 M10 32 H18 M10 37 H18 M27 35 H37 M27 40 H37" />
+                <path d="M14 22 V8 H40 M40 8 V14 M34 8 V20 M14 8 L8 14" />
+                <path d="M4 44 H44" />
               </svg></div>
-            <h3>Startups &amp; Products</h3>
-            <p class="sub">MVPs to scale‑ups</p>
+            <h3>Construction &amp; Real Estate</h3>
+            <p class="sub">Projects, procurement, sites</p>
             <div class="challenge-box">
               <div class="label">Challenge</div>
-              <p>Moving fast, validating quickly, and building scalable architecture without technical debt.</p>
+              <p>Tracking project costs, material procurement, and site progress across scattered spreadsheets and calls.</p>
+              <div class="label label-outcome">Outcome</div>
+              <p>One dashboard for BOQs, vendor payments, site updates, and project margins.</p>
             </div>
-            <div class="ind-tags"><span class="ind-tag">Rapid MVP</span><span class="ind-tag">Scalable
-                architecture</span><span class="ind-tag">Product engineering</span></div>
+            <div class="ind-tags"><span class="ind-tag">BOQ tracking</span><span class="ind-tag">Vendor
+                management</span><span class="ind-tag">Site progress</span></div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════ SOLUTIONS ═══════════════════════════════ -->
-    <section id="solutions" aria-labelledby="solutions-heading">
-      <div class="container">
-        <div class="reveal">
-          <p class="section-label">Solutions</p>
-          <h2 id="solutions-heading" class="section-title">Modular management systems tailored to your business.</h2>
-          <p class="section-sub">Choose from our solution accelerators for ERP, CRM, TMS, HMS, Hotel PMS, and Finance —
-            each configurable to your processes and scale.</p>
-        </div>
-        <div class="solutions-grid">
-          <article class="solution-card reveal"><span class="sol-badge">ERP</span>
-            <h3>ERP Platform</h3>
-            <p class="sub-text">Finance, inventory, procurement, HR</p>
-            <p>A configurable ERP foundation to unify your core business functions, data, and reporting across
-              departments and locations.</p>
-            <div class="sol-tags"><span class="sol-tag">Finance</span><span class="sol-tag">Inventory</span><span
-                class="sol-tag">Procurement</span><span class="sol-tag">HR</span></div>
-          </article>
-          <article class="solution-card reveal reveal-delay-1"><span class="sol-badge">CRM</span>
-            <h3>CRM Platform</h3>
-            <p class="sub-text">Leads, pipelines, support</p>
-            <p>Manage the full customer lifecycle from first touch to long‑term retention with pipeline, ticketing, and
-              communication tools.</p>
-            <div class="sol-tags"><span class="sol-tag">Leads &amp; deals</span><span
-                class="sol-tag">Ticketing</span><span class="sol-tag">Automation</span></div>
-          </article>
-          <article class="solution-card reveal reveal-delay-2"><span class="sol-badge">TMS</span>
-            <h3>Transport Management</h3>
-            <p class="sub-text">Fleet, trips, routes, billing</p>
-            <p>Digitise dispatch, routing, tracking, and billing for logistics and transport businesses of all sizes.
-            </p>
-            <div class="sol-tags"><span class="sol-tag">Fleet</span><span class="sol-tag">Dispatch</span><span
-                class="sol-tag">GPS tracking</span></div>
-          </article>
-          <article class="solution-card reveal"><span class="sol-badge">HMS</span>
-            <h3>Hospital Management Software (HMS)</h3>
-            <p class="sub-text">OPD, IPD, billing, pharmacy, LIS</p>
-            <p>End‑to‑end hospital and clinic management with patient‑centric UX, from registration to discharge and
-              billing.</p>
-            <div class="sol-tags"><span class="sol-tag">OPD/IPD</span><span class="sol-tag">Pharmacy</span><span
-                class="sol-tag">LIS</span></div>
-          </article>
-          <article class="solution-card reveal reveal-delay-1"><span class="sol-badge">PMS</span>
-            <h3>Hotel Management System &amp; PMS</h3>
-            <p class="sub-text">Reservations, front-office, POS</p>
-            <p>Reservation, front‑office, housekeeping, and POS in one cohesive platform. Reduce overbooking and improve
-              guest experience.</p>
-            <div class="sol-tags"><span class="sol-tag">Reservations</span><span
-                class="sol-tag">Front‑office</span><span class="sol-tag">POS</span></div>
-          </article>
-          <article class="solution-card reveal reveal-delay-2"><span class="sol-badge">Finance</span>
-            <h3>Financial &amp; Accounting Software</h3>
-            <p class="sub-text">Invoicing, ledgers, GST</p>
-            <p>Accounting workflows that reflect how your finance team actually works — with GST automation and Tally
-              integration.</p>
-            <div class="sol-tags"><span class="sol-tag">GST</span><span class="sol-tag">Invoicing</span><span
-                class="sol-tag">Tally</span></div>
-          </article>
-        </div>
-        <div class="mid-cta reveal">
-          <div>
-            <h3>Not sure which system to build first?</h3>
-            <p>We usually start with the workflow causing the most leakage: sales, stock, billing, dispatch, reporting,
-              or follow-ups.</p>
-          </div>
-          <a href="#contact" class="btn btn-primary" data-track="cta" data-cta-location="after-solutions">Book Free
-            Consultation</a>
         </div>
       </div>
     </section>
@@ -827,9 +775,8 @@ if ($heroDescription === '') {
         <div class="portfolio-header reveal">
           <div>
             <p class="section-label">Portfolio</p>
-            <h2 id="portfolio-heading" class="section-title">Selected work &amp; solution demos.</h2>
-            <p class="section-sub">A glimpse into the types of platforms we build. Reach out for a detailed walkthrough.
-            </p>
+            <h2 id="portfolio-heading" class="section-title">Systems we've built and shipped.</h2>
+            <p class="section-sub">Real projects. Real operations. Browse by industry or try a live demo.</p>
           </div>
           <div class="portfolio-filters" role="group" aria-label="Filter portfolio by industry">
             <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
@@ -907,8 +854,7 @@ if ($heroDescription === '') {
             <h3>Need an ERP, CRM, HMS, TMS, or portal like these?</h3>
             <p>Share your workflow and we will suggest the quickest useful first phase.</p>
           </div>
-          <a href="#contact" class="btn btn-primary" data-track="cta" data-cta-location="after-portfolio">Build
-            Something Similar</a>
+          <a href="#contact" class="btn btn-primary" data-track="cta" data-cta-location="after-portfolio">Talk to Our Team</a>
         </div>
       </div>
     </section>
@@ -983,11 +929,9 @@ if ($heroDescription === '') {
         <div class="mid-cta reveal">
           <div>
             <h3>Have a similar workflow problem?</h3>
-            <p>Send a short requirement and we will respond with the likely first phase, timeline, and rough budget
-              range.</p>
+            <p>Send a short requirement and we will respond with the likely first phase and timeline.</p>
           </div>
-          <a href="#contact" class="btn btn-primary" data-track="cta" data-cta-location="after-proof">Build Something
-            Similar</a>
+          <a href="#contact" class="btn btn-primary" data-track="cta" data-cta-location="after-proof">Talk to Our Team</a>
         </div>
       </div>
     </section>
@@ -1067,7 +1011,7 @@ if ($heroDescription === '') {
       <div class="container">
         <div class="reveal">
           <p class="section-label">Why choose us</p>
-          <h2 id="why-heading" class="section-title">A partner focused on outcomes, not just deliverables.</h2>
+          <h2 id="why-heading" class="section-title">We stay after launch.</h2>
         </div>
         <div class="why-grid">
           <div class="why-card reveal">
@@ -1133,7 +1077,7 @@ if ($heroDescription === '') {
                 </tr>
                 <tr>
                   <td><strong>Speed to Market</strong></td>
-                  <td>Fast. We use pre-built industry patterns and dedicated squads.</td>
+                  <td>Fast — but not instant. SaaS runs in a day for basic cases. We take weeks, but what ships is yours and fits.</td>
                   <td>Instant (if you accept out-of-the-box limitations).</td>
                   <td>Slowest. Months spent hiring and establishing infrastructure.</td>
                 </tr>
@@ -1181,7 +1125,7 @@ if ($heroDescription === '') {
             <div class="faq-a">
               <div class="faq-a-inner">We start with a structured discovery of your requirements, then provide a
                 detailed estimate before any commitment. Use the contact form below for an initial scope discussion — we
-                typically respond within 24 hours.</div>
+                typically respond within 48 hours.</div>
             </div>
           </div>
           <div class="faq-item">
@@ -1536,9 +1480,8 @@ if ($heroDescription === '') {
 
           <!-- STEP 5: Contact details -->
           <div class="wizard-pane" id="wizPane5">
-            <h3 class="wizard-pane-title">Almost there — tell us a bit about yourself.</h3>
-            <p class="wizard-pane-sub">Your details help us personalise the project brief and pre-fill the enquiry form.
-            </p>
+            <h3 class="wizard-pane-title">Last step — where should we send your brief?</h3>
+            <p class="wizard-pane-sub">Your details help us personalise the brief and pre-fill the enquiry form.</p>
             <div class="wizard-contact-grid">
               <div class="wiz-input-group">
                 <label for="wizName">Your name <span style="color:var(--accent)">*</span></label>
@@ -1564,7 +1507,7 @@ if ($heroDescription === '') {
             </div>
             <div class="wizard-nav">
               <button class="wiz-btn wiz-btn-secondary" onclick="wizBack(5)">← Back</button>
-              <button class="wiz-btn wiz-btn-primary" id="step5Generate" onclick="generateBrief()">✦ Generate My Project
+              <button class="wiz-btn wiz-btn-primary" id="step5Generate" onclick="generateBrief()">Generate My Project
                 Brief</button>
             </div>
           </div>
@@ -1639,11 +1582,9 @@ if ($heroDescription === '') {
         <div class="strip-inner">
           <div>
             <h2>Ready to centralise your business operations?</h2>
-            <p>Tell us about your workflow and we'll respond within 1 business day with the likely approach, timeline,
-              and rough budget range.</p>
+            <p>Tell us about your workflow and we'll respond within 48 hours with the likely approach and timeline.</p>
           </div>
-          <a href="#contact" class="btn btn-white" data-track="cta" data-cta-location="contact-strip">Get My Free
-            Project Estimate</a>
+          <a href="#contact" class="btn btn-white" data-track="cta" data-cta-location="contact-strip">Talk to Our Team</a>
         </div>
       </div>
     </div>
@@ -1654,8 +1595,8 @@ if ($heroDescription === '') {
         <div class="reveal" style="text-align:center;margin-bottom:16px">
           <p class="section-label">Contact</p>
           <h2 id="contact-heading" class="section-title">Get a free project estimate.</h2>
-          <p class="section-sub" style="margin:0 auto">We respond within 1 business day with suggested approach,
-            estimated timeline, and rough budget range. No spam. No obligation.</p>
+          <p class="section-sub" style="margin:0 auto">We respond within 48 hours with suggested approach and
+            estimated timeline. No spam. No obligation.</p>
         </div>
         <div class="contact-grid">
           <!-- FORM -->
@@ -1669,7 +1610,7 @@ if ($heroDescription === '') {
               <div class="form-row">
                 <div class="form-group">
                   <label for="name">Your name <span aria-hidden="true" style="color:var(--accent)">*</span></label>
-                  <input type="text" id="name" name="name" placeholder="Sumit Kumar" required autocomplete="name">
+                  <input type="text" id="name" name="name" placeholder="Your full name" required autocomplete="name">
                 </div>
                 <div class="form-group">
                   <label for="company">Company</label>
@@ -1711,10 +1652,10 @@ if ($heroDescription === '') {
                   required></textarea>
               </div>
               <button type="submit" class="form-submit" id="submitBtn">
-                <span class="btn-text">Get My Free Project Estimate →</span>
+                <span class="btn-text">Talk to Our Team →</span>
                 <span class="spinner" aria-hidden="true"></span>
               </button>
-              <p class="form-reassurance">We respond within 1 business day. No spam. No obligation.</p>
+              <p class="form-reassurance">We respond within 48 hours. No spam. No obligation.</p>
               <div class="form-status" id="formStatus" role="alert" aria-live="polite"></div>
             </form>
           </div>
@@ -1808,7 +1749,7 @@ if ($heroDescription === '') {
                   </svg></div>
                 <div>
                   <div class="cd-label">Response time</div>
-                  <div class="cd-value">Within 24 hours, Monday–Friday</div>
+                  <div class="cd-value">Within 48 hours</div>
                 </div>
               </div>
             </div>
@@ -1839,19 +1780,6 @@ if ($heroDescription === '') {
                       d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
                   </svg>
                 </a>
-              </div>
-            </div>
-            <div
-              style="margin-top:32px;background:var(--surface-2);border-radius:var(--r-md);padding:22px;border:.5px solid var(--border)">
-              <h3 style="font-size:15px;font-weight:700;margin-bottom:10px">Engagement models</h3>
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <div style="font-size:13px;color:var(--text-2);display:flex;gap:10px"><span
-                    style="color:var(--accent);font-weight:700">→</span>Fixed‑price projects with clear scope</div>
-                <div style="font-size:13px;color:var(--text-2);display:flex;gap:10px"><span
-                    style="color:var(--accent);font-weight:700">→</span>Time &amp; material for evolving products</div>
-                <div style="font-size:13px;color:var(--text-2);display:flex;gap:10px"><span
-                    style="color:var(--accent);font-weight:700">→</span>Dedicated squads as an extension of your team
-                </div>
               </div>
             </div>
           </div>

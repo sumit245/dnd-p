@@ -6,27 +6,55 @@ $page['description'] = 'Custom IoT platform development, firmware engineering an
 $page['canonical']   = SITE_URL . '/services/iot-embedded/';
 $page['og_title']    = 'IoT & Embedded Software Development | Dashandots Technology';
 $page['og_desc']     = $page['description'];
+$page['keywords']    = 'IoT development company India, embedded software development India, IoT platform development, firmware development services, industrial IoT solutions India';
+$page['active_nav']  = 'services';
 
-require __DIR__ . '/../../includes/head.php';
-require __DIR__ . '/../../includes/header.php';
+
+require_once __DIR__ . '/../../includes/service-schema.php';
+$serviceSchema = service_schema([
+  'slug'        => 'iot-embedded',
+  'name'        => 'IoT and Embedded Software Development',
+  'serviceType' => [
+    'IoT platform development',
+    'Embedded firmware development',
+    'Device-to-cloud connectivity',
+    'Industrial IoT monitoring solutions',
+  ],
+  'description' => $page['description'],
+  'catalogName' => 'IoT and embedded services',
+  'offers'      => [
+    'Embedded firmware for ESP32, STM32 and custom PCBs',
+    'IoT cloud platform with telemetry, rules and OTA updates',
+    'Industrial equipment and energy monitoring dashboards',
+    'Cold chain and fleet telemetry systems',
+    'BLE companion mobile apps',
+  ],
+]);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php require __DIR__ . '/../../includes/head.php'; ?>
+</head>
+<body>
+<?php require __DIR__ . '/../../includes/header.php'; ?>
 
 <main id="main-content">
   <div class="svc-page">
 
     <!-- HERO -->
     <div class="svc-hero">
-      <p class="page-label">IoT &amp; Embedded Software</p>
-      <h1>Connect Your Physical World to the Digital — Reliably and at Scale</h1>
+      <p class="page-label">Services &rsaquo; IoT &amp; Embedded</p>
+      <h1>Connect your physical world to the digital — reliably and at scale</h1>
       <p class="lead">From firmware on the chip to the cloud platform and the mobile app your customer uses to monitor it — we engineer the full IoT stack, so your connected product works the way you imagined it.</p>
       <div class="hero-actions">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Discuss Your IoT Project</a>
-        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline">See Our Work</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="iot-hero">Scope Your IoT Product</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="iot-hero">Talk to Our Team</a>
       </div>
     </div>
 
     <!-- WHY US -->
-    <h2>End-to-End IoT Development — One Team, Every Layer</h2>
+    <h2>End-to-end IoT development — one team, every layer</h2>
     <p class="svc-body-text">Most IoT projects fail because firmware engineers, cloud architects, and app developers don't talk to each other. We're a single team that works across all three layers simultaneously — which means protocols are chosen correctly up front, edge constraints are respected in the cloud design, and the app is built for real device data, not mock data.</p>
 
     <div class="svc-feature-grid">
@@ -57,7 +85,7 @@ require __DIR__ . '/../../includes/header.php';
     </div>
 
     <!-- SOLUTIONS -->
-    <h2>IoT Solutions We Build</h2>
+    <h2>IoT solutions we build</h2>
     <ul class="svc-includes">
       <li>Industrial equipment monitoring &amp; predictive maintenance</li>
       <li>Cold chain &amp; temperature monitoring systems</li>
@@ -73,8 +101,18 @@ require __DIR__ . '/../../includes/header.php';
       <li>Device provisioning &amp; zero-touch onboarding systems</li>
     </ul>
 
+    <div class="svc-cta-strip">
+      <p class="page-label">From prototype to fleet</p>
+      <h2>Most IoT enquiries start with one device and one dashboard.</h2>
+      <p>Tell us what your hardware measures and who needs to see it. We will scope the firmware, connectivity, and cloud layer as one first phase — no vendor lock-in.</p>
+      <div class="hero-actions" style="justify-content:center; margin-top:24px">
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="iot-mid">Brief Us on Your Device</a>
+        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="iot-mid">See our work</a>
+      </div>
+    </div>
+
     <!-- EMBEDDED -->
-    <h2>Embedded Software &amp; Hardware-Adjacent Work</h2>
+    <h2>Embedded software &amp; hardware-adjacent work</h2>
     <p class="svc-body-text">Beyond IoT platforms, we take on embedded software projects where the software has to live close to hardware — real-time constraints, low power budgets, and hardware-specific peripherals.</p>
     <ul class="svc-includes">
       <li>RTOS-based firmware (FreeRTOS, Zephyr)</li>
@@ -86,7 +124,7 @@ require __DIR__ . '/../../includes/header.php';
     </ul>
 
     <!-- INDUSTRIES -->
-    <h2>Industries We Serve</h2>
+    <h2>Industries we serve</h2>
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
         <h3>Manufacturing</h3>
@@ -107,7 +145,7 @@ require __DIR__ . '/../../includes/header.php';
     </div>
 
     <!-- HOW WE WORK -->
-    <h2>How We Approach IoT Projects</h2>
+    <h2>How we approach IoT projects</h2>
     <ul class="svc-includes">
       <li>Hardware selection guidance — we help you choose the right modules and connectivity for your deployment environment</li>
       <li>Architecture review — we validate protocol choices, cloud costs, and edge vs cloud compute split before you commit</li>
@@ -120,17 +158,20 @@ require __DIR__ . '/../../includes/header.php';
 
     <!-- CTA -->
     <div class="svc-cta-strip">
-      <p class="page-label">Ready to Connect Your Hardware?</p>
-      <h2>Let's Engineer Your IoT Product Together</h2>
+      <p class="page-label">Ready to connect your hardware?</p>
+      <h2>Let's engineer your IoT product together</h2>
       <p>Whether you have hardware already chosen or are starting from a concept, we can take your connected product from prototype to production-scale deployment.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary">Start the Conversation</a>
-        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline">View Portfolio</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="iot-final">Talk to Our Team</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="iot-final">Scope Your Project</a>
       </div>
     </div>
 
   </div>
 </main>
 
+<?= service_schema_jsonld($serviceSchema) ?>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>
 <?php require __DIR__ . '/../../includes/scripts.php'; ?>
+</body>
+</html>

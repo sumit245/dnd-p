@@ -156,15 +156,15 @@ $h = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8')
             <div class="pf-cta">
               <h2>Need something<br>like this<span>?</span></h2>
               <div>
-                <a href="<?= BASE_PATH ?>/#contact" data-track="cta" data-cta-location="portfolio-page">Start your project</a>
-                <a href="<?= BASE_PATH ?>/#ai-brief" data-track="cta" data-cta-location="portfolio-page">Get a free brief</a>
+                <a href="<?= BASE_PATH ?>/#contact" data-track="cta" data-cta-location="portfolio-page">Talk to Our Team</a>
+                <a href="<?= BASE_PATH ?>/#ai-brief" data-track="cta" data-cta-location="portfolio-page">Brief Us on Yours</a>
               </div>
             </div>
           </article>
         </div>
 
         <p class="pf-empty pf-micro" id="pf-empty" <?= $visibleCount > 0 ? ' hidden' : '' ?>>No projects in this industry
-          yet — ask us, we have probably built something close.</p>
+          yet. We've built systems in adjacent industries — ask us.</p>
 
       </div>
     </div>

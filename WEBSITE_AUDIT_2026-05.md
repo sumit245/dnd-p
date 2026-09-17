@@ -1,6 +1,7 @@
 # Website Audit Report — Dashandots Technology
 
-**Last updated:** 18 May 2026 (live re-audit)
+**Last updated:** 17 Sep 2026 (live re-audit #2 — post copywriting audit)
+**Previous:** 18 May 2026
 **Production URL:** https://dashandots.com
 **Codebase:** `/Applications/XAMPP/xamppfiles/htdocs/dashandots`
 **Method:** Live HTTP/HTML verification on production + codebase review
@@ -10,24 +11,26 @@
 
 ## Executive summary
 
-Dashandots is a multi-page PHP marketing site (service landings, dynamic blog, CMS admin, AI estimator) with **Phases 0–3 remediations deployed to production**. HTTPS, HSTS, GTM with Consent Mode, hardened form APIs, WebP portfolio images, and minified assets are live on the homepage.
+Dashandots is a multi-page PHP marketing site (service landings, `/portfolio`, dynamic blog, CMS admin, AI project-brief tool) with **Phases 0–3 remediations live on production**. All P1 items from the May audit are now **verified fixed on live**: static blog clean URLs return 200, legacy `.html` redirects resolve on the apex host, `X-Powered-By` is gone, `.env` was never committed.
 
-Remaining gaps are **narrow**: static blog clean URLs redirect to the blog index (rewrite / legacy redirect rules), legacy `.html` redirects still prefix `/dashandots/` on production, and `X-Powered-By` is still exposed. The site is in good shape for marketing traffic after fixing blog URL routing.
+Since May the site also gained: `/portfolio` page (30+ tiles, industry filters, `ItemList` schema), AI scoping brief replacing the ₹ estimator (no pricing shown), GTM tags + GA4 custom dimensions/key events, and a full **copywriting audit** (nav simplification, unified CTAs, 48-hour response promise, service-page SEO parity).
+
+**What remains is a deploy, not a fix**: the copywriting-audit build (20 files) is in the local repo, uncommitted and not on production. Until deployed, live still shows old CTAs, "24 hours / 1 business day", four service pages without `<!DOCTYPE>`/JSON-LD, and the old hero headline.
 
 | Category | Score (0–100) | Status |
 |----------|---------------|--------|
-| SEO & discoverability | 80 | Strong base; fix static blog clean URLs |
-| Security | 82 | Critical items fixed on live; minor disclosure remains |
-| Performance | 88 | WebP + min bundles; blog LCP preload + responsive thumbs |
-| Accessibility | 88 | Prior Lighthouse 92–94; a11y fixes in repo |
-| UX & compliance | 90 | Consent banner, privacy policy, safe estimator |
-| **Overall (weighted)** | **84** | **Ready for traffic; fix blog URLs before SEO push** |
+| SEO & discoverability | 86 | Blog URLs fixed; service-page schema/keywords waiting on deploy |
+| Security | 88 | All P1/P2 verified on live; `.env` clean in git |
+| Performance | 88 | Unchanged since May; Lighthouse not re-run this pass |
+| Accessibility | 88 | Unchanged; wizard ARIA roles added in repo |
+| UX & compliance | 90 | Consent + privacy live; copy consistency pending deploy |
+| **Overall (weighted)** | **88** | **Deploy the copywriting build, run DB script, re-run Lighthouse** |
 
 Weights: SEO 25%, Security 30%, Performance 20%, Accessibility 15%, UX 10%.
 
 ---
 
-## Live verification (18 May 2026)
+## Live verification (17 Sep 2026)
 
 ### Redirects and TLS
 
@@ -46,13 +49,14 @@ Weights: SEO 25%, Security 30%, Performance 20%, Accessibility 15%, UX 10%.
 | `X-Frame-Options` | `SAMEORIGIN` |
 | `Referrer-Policy` | `strict-origin-when-cross-origin` |
 | `Content-Security-Policy` | Full policy (GTM, Fonts, GA `connect-src`, `frame-src` for GTM) |
-| `X-Powered-By` | **PHP/8.2.30** (still exposed) |
+| `X-Powered-By` | **absent** ✅ (was `PHP/8.2.30`) |
+| `Server` | `hcdn` (Hostinger CDN) |
 
 ### Key endpoints
 
 | URL | Status | Notes |
 |-----|--------|-------|
-| `/` | **200** | GTM, consent banner, WebP `<picture>`, `style.min.css` / `app.min.js` |
+| `/` | **200** | GTM, consent banner, WebP `<picture>`, `style.min.css` / `app.min.js` — **old copy** (pre-audit CTAs, "24 hours", Solutions section) |
 | `/robots.txt` | **200** | Blocks `/admin/`, APIs, test paths; `Sitemap: …/sitemap.php` |
 | `/sitemap.xml` | **301** → `sitemap.php` | Correct |
 | `/sitemap.php` | **200** | Home, services, legal, CMS + static blog URLs |
@@ -69,14 +73,21 @@ Weights: SEO 25%, Security 30%, Performance 20%, Accessibility 15%, UX 10%.
 | `/assets/img/og-image.jpg` | **200** | Default OG image |
 | `/blog/` | **200** | GTM present |
 | `/blog/agentic-ai-software-development` | **200** | Clean canonical URL |
-| `/blog/future-of-custom-erp` | **302** → `/blog/` | **Open issue** — sitemap lists this URL |
+| `/blog/future-of-custom-erp` | **200** ✅ | Fixed (was 302 → `/blog/`) |
+| `/blog/mobile-first-design-b2b` | **200** ✅ | Fixed |
 | `/blog/future-of-custom-erp.php` | **200** | Article + GTM + `BlogPosting`; canonical points to clean slug |
-| `/blog/future-of-custom-erp.html` | **301** → `/dashandots/blog/…` | **Open issue** — wrong path on apex host |
+| `/blog/future-of-custom-erp.html` | **301** → `https://dashandots.com/blog/future-of-custom-erp` ✅ | Fixed (was `/dashandots/…`) |
 | `/services/erp-development` | **301** → `…/erp-development/` | Trailing-slash redirect |
-| `/services/erp-development/` | **200** | GTM + consent banner |
-| `/demo/erp` | **200** | `noindex`; passwords not in HTML |
+| `/services/erp-development/` | **200** | GTM + consent banner; `<!DOCTYPE>` present |
+| `/services/{ecommerce,web-mobile-apps,industry-systems,iot-embedded}/` | **200** | **No `<!DOCTYPE>`/`<html>`/`<body>`, no JSON-LD** on live — fixed in repo, pending deploy |
+| `/services/data-analytics/` | **200** | Only service page with `Service` JSON-LD on live |
+| `/portfolio` | **200** | 33 tiles, 2× JSON-LD (`ItemList` + `CollectionPage`) |
+| `/demo/erp`, `/demo/crm` | **200** | Now `index, follow` (have content) and listed in sitemap — consistent; passwords not in HTML |
 | `/privacy-policy` | **200** | GTM, cookies §7 with `#cookies` anchor |
-| `/test_smtp.php`, `/test_form.php` | **404** | Not deployed |
+| `/test_smtp.php` | **403** | Blocked by `.htaccess` |
+| `/.env` | **403** | Blocked |
+| `/llms.txt` | **200** | Markdown links (rewritten Sep 2026) |
+| `/assets/css/style.min.css` | **200** | `Cache-Control: public, max-age=31536000, immutable` ✅ |
 
 ### Analytics and consent (homepage)
 
@@ -86,6 +97,12 @@ Weights: SEO 25%, Security 30%, Performance 20%, Accessibility 15%, UX 10%.
 | Consent Mode default | `gtag('consent', 'default', …)` |
 | Cookie banner | `#consentBanner` |
 | JSON-LD Organization logo | `https://dashandots.com/assets/logo.png` |
+| GTM workspace | Version 2 published: Google Tag (G-WK4BH19XRG) + GA4 event tag + 7 DL variables |
+| GA4 custom dimensions | `cta_location`, `cta_text`, `destination`, `service`, `project_type`, `demo_slug` |
+| GA4 key events | `contact_form_submit_success`, `estimate_completed` |
+| `google-site-verification` meta | **absent** (env var empty) — verify via DNS/GSC or set `GOOGLE_SITE_VERIFICATION` |
+| `twitter:site` | absent (optional, `TWITTER_SITE` unset) |
+| Microsoft Clarity | not enabled |
 
 ### Lighthouse reference (initial pass, 18 May 2026)
 
@@ -95,7 +112,7 @@ Weights: SEO 25%, Security 30%, Performance 20%, Accessibility 15%, UX 10%.
 | `/services/erp-development/` | 99 | 94 | 100 | 1.8 s |
 | `/blog/agentic-ai-software-development` | 82 | 94 | 100 | 4.8 s |
 
-Re-run Lighthouse after blog URL fix and any new content publishes.
+**Not re-run in the Sep 2026 pass** — run again after the copywriting build deploys (hero markup, nav scroll-spy JS and trust-bar marquee changed).
 
 ### Form API smoke tests
 
@@ -110,12 +127,16 @@ php scripts/smoke-test-forms.php https://dashandots.com
 
 | ID | Sev | Category | Finding | Evidence | Recommendation |
 |----|-----|----------|---------|----------|----------------|
-| SEO-01 | **P1** | SEO | Static blog clean URLs redirect to blog index | Was **302** → `/blog/` when rewrite `-f` check failed | **Fixed in repo** — deploy `.htaccess` and retest `/blog/future-of-custom-erp` |
-| SEO-02 | **P1** | SEO | Legacy `.html` 301s used `/dashandots/` on production | Old rules always prefixed `/dashandots/` | **Fixed in repo** — host-based rules; deploy and retest `.html` URLs |
-| SEO-03 | **P2** | SEO | Service URLs require trailing slash | `/services/erp-development` → 301 → `…/` | Optional: internal rewrite without extra redirect |
-| SEO-04 | **P2** | SEO | No `twitter:site` | Was missing on blog templates | Optional — set `TWITTER_SITE` only after confirming the active handle |
-| SEC-01 | **P2** | Security | `X-Powered-By: PHP/8.2.30` | May still appear if host re-adds header | **Fixed in repo** (`Header unset`); verify after deploy |
-| SEC-02 | **P2** | Security | `.env` may have been in git history | Rotate SMTP/DB/TinyMCE if repo was ever public | Confirm `git log` / Hostinger secrets |
+| DEP-01 | **P1** | Deploy | Copywriting-audit build not on production | 20 modified files + 2 new (`includes/service-schema.php`, `scripts/update-copywriting-audit.php`) uncommitted locally; live `/` still has "Get Instant Estimate" ×2, "24 hours" ×2, "1 business day" ×3, `#solutions` section | Commit, push, deploy; then `php scripts/update-copywriting-audit.php` on prod (updates `hero_title`/`hero_description`) |
+| SEO-05 | **P1** | SEO | 4 of 6 service pages ship without `<!DOCTYPE html>`, `<html>`, `<head>`, `<body>` and without `Service` JSON-LD | Live `ecommerce`, `web-mobile-apps`, `industry-systems`, `iot-embedded` start at `<meta charset>`; `ld+json` = 0 | **Fixed in repo** (wrappers + shared `service_schema()`); ships with DEP-01 |
+| SEO-06 | **P2** | SEO | `erp-development` canonical lacked trailing slash; title used `—` not `|` | Live canonical `…/erp-development` vs 301 to `…/` | **Fixed in repo**; ships with DEP-01 |
+| SEO-03 | P3 | SEO | Service URLs require trailing slash (extra 301 hop) | `/services/erp-development` → 301 | Optional: internal rewrite; all internal links already use `/` |
+| SEO-04 | P3 | SEO | No `twitter:site` | Unset | Optional — set `TWITTER_SITE` only if handle is active |
+| TRK-01 | **P2** | Tracking | `google-site-verification` not emitted | `GOOGLE_SITE_VERIFICATION` empty in `.env` | Confirm GSC ownership (DNS is fine) or set the meta value |
+| TRK-02 | P3 | Tracking | Microsoft Clarity not enabled | `MICROSOFT_CLARITY_ID` unset | Optional; set if session recordings wanted |
+| UX-02 | **P2** | Trust | `450+ / 150+ / 5+` stats still unsubstantiated | Removed from hero + trust bar in repo; remain in About `.about-stat-row` | Keep only numbers you can defend; add anonymised testimonials (offered, deferred as separate task) |
+| UX-03 | P3 | Copy | Contact section h2 still says "Get a free project estimate." | `index.php` `#contact-heading`; button now "Talk to Our Team" | Rename to match (e.g. "Tell us what's slowing you down.") |
+| CFG-01 | P3 | Config | `SITE_FOUNDER_NAME` commented out | Founder card not rendered | Enable if founder-led scoping is a selling point (trust bar now says "Founder-led scoping") |
 
 ---
 
@@ -123,6 +144,10 @@ php scripts/smoke-test-forms.php https://dashandots.com
 
 | ID | Was | Resolution |
 |----|-----|------------|
+| SEO-01 (May) | Static blog clean URLs 302 → `/blog/` | **200** on live for both static posts (17 Sep 2026) |
+| SEO-02 (May) | `.html` 301s to `/dashandots/…` | 301 → `https://dashandots.com/blog/{slug}` (17 Sep 2026) |
+| SEC-01 (May) | `X-Powered-By: PHP/8.2.30` | Header absent on live (17 Sep 2026) |
+| SEC-02 (May) | `.env` possibly in git history | `git log --all -- .env` empty — never committed (17 Sep 2026) |
 | SEC-02 | Open migration scripts | **403** on live |
 | SEC-03 | No CSRF | Tokens + POST-only deletes in codebase (deployed) |
 | SEC-04 | CORS `*` | Origin restricted to `https://dashandots.com` |
@@ -138,6 +163,11 @@ php scripts/smoke-test-forms.php https://dashandots.com
 | A11Y-01–04 | Skip link, ARIA, robots dupes | Skip focus, `aria-pressed` filters, reduced motion, `:focus-visible` |
 | UX-01 | `budgetStrHtml` / innerHTML | Safe JSON + DOM on live `estimate.php` |
 | Phase 3 | No consent | Banner + privacy policy live |
+| ANL-01 | GTM container empty / GA4 id in GTM slot | GTM v2 published with Google Tag + GA4 event tag; env-driven ids; CSP allows GA collect (Sep 2026) |
+| ANL-02 | Rate limiter returned 429 as "Something went wrong" | Rate limiters removed from `contact-handler.php` / `estimate.php`; honeypot kept; JS surfaces server messages (Sep 2026) |
+| ANL-03 | Consent banner buttons dead after reopen | Listeners bound before stored-choice return; footer "Cookie settings" link (Sep 2026) |
+| EST-01 | ₹-lakh estimator scared prospects | Replaced by AI project brief (`includes/ai-brief.php`, DeepSeek/OpenAI, template fallback, pricing regex guard); no budget fields in response |
+| PF-01 | Portfolio limited to 13 CMS rows on home | `/portfolio` page, 29 seeded entries incl. live products + Play Store apps + graphics; industry filters; `ItemList` schema |
 
 ---
 
@@ -149,10 +179,12 @@ php scripts/smoke-test-forms.php https://dashandots.com
 - Dynamic `sitemap.php` with services, legal, CMS, and static blog entries.
 - Shared SEO head: canonical, OG, Twitter; CMS posts use clean `/blog/{slug}` URLs.
 - GTM `GTM-TJ3ZLPNJ` with Google Consent Mode v2 and cookie banner.
-- Contact and estimator APIs: honeypot, rate limits, restricted CORS, safe estimate JSON.
+- Contact and brief APIs: honeypot, restricted CORS (evil origin gets no ACAO — re-verified), safe JSON; no pricing anywhere in the brief.
 - Portfolio WebP + responsive images on homepage; minified assets served.
 - Admin migration endpoints blocked; test scripts not on production.
-- `llms.txt` and structured data on homepage (FAQ, Organization with valid logo).
+- `llms.txt` and structured data on homepage (FAQ, Organization with valid logo); `/portfolio` ships `ItemList` + `CollectionPage`.
+- Analytics pipeline verified end-to-end: site → dataLayer → GTM → GA4 (`page_view`, `cta_click` with custom params, key events).
+- Static assets served with `immutable` year-long cache on Hostinger CDN.
 
 ---
 
@@ -191,6 +223,16 @@ php scripts/smoke-test-forms.php https://dashandots.com
 - Global `:focus-visible` rings; FAQ chevron contrast (`--text-2`)
 - Stronger CSP; WebP `ExpiresByType` in `.htaccess`
 
+### Phase 4 — Copywriting audit (implemented 17 Sep 2026, **not yet deployed**)
+
+- Nav: Industries/Solutions/FAQ removed; "Chat on WhatsApp" + "Scope Your Project"; sticky mobile bar WhatsApp · Call · Brief
+- Homepage: new hero (`hero_title` split per sentence, tall accent "Your" on desktop, plain sentence on mobile); stats removed from hero + trust bar; trust bar CSS marquee on mobile; Mission/Vision, Solutions section, after-services CTA, engagement-models box removed; Industries get Challenge + Outcome, Startups → Construction & Real Estate; comparison table "Speed to Market" honest cell; wizard step-5 copy; all response promises → **48 hours**
+- CTA vocabulary: one "Scope Your Project" per page (nav); context labels elsewhere ("Get Your Project Brief", "Start the 2-minute brief", "Scope Your ERP", "Brief Us on Yours"…); `data-cta-location` unchanged so GA4 `cta_text` differentiates wording
+- Nav scroll-spy (`.nav-links a.active`) on homepage sections
+- Service pages: HTML wrappers on 4 pages, `keywords`, `active_nav`, "Services ›" breadcrumbs, sentence-case headings, tracking attrs, mid-page CTA strips (web-apps, IoT), shared `includes/service-schema.php` → `Service` JSON-LD on all 6, ERP canonical/title fixes
+- `contact-handler.php`, `privacy-policy.php` typo, `portfolio.php` CTA plate + empty state
+- `scripts/update-copywriting-audit.php` (idempotent) + `database.sql` seed for new hero copy
+
 ### Phase 3 — UX and growth
 
 - Consent Mode + banner (`consent-mode.php`, `consent-banner.php`, `consent.js`)
@@ -204,11 +246,13 @@ php scripts/smoke-test-forms.php https://dashandots.com
 
 ## Recommended next steps
 
-1. **Deploy `.htaccess` + `robots.txt`** — blog clean URLs, legacy `.html` redirects, `X-Powered-By` strip (see SEO-01, SEO-02, SEC-01).
-2. **Search Console** — Submit `https://dashandots.com/sitemap.php`; add `GOOGLE_SITE_VERIFICATION` to production `.env` if not set.
-3. **GTM** — Configure events from `CONVERSION_TRACKING.md`; mark form success, estimate completion, WhatsApp, phone, and demo clicks as conversions.
-4. **SMTP check** — Submit one real contact form on production to verify delivery.
-5. **Optional** — Strip `X-Powered-By`; re-run Lighthouse on `/` and top blog post after URL fix.
+1. **Commit + deploy the copywriting build** (DEP-01) — then on prod: `php scripts/update-copywriting-audit.php`; re-run `php scripts/smoke-test-forms.php https://dashandots.com`.
+2. **Post-deploy live checks** — every `/services/*/` starts with `<!DOCTYPE html>` and has one `ld+json`; `/` has zero "Get Instant Estimate", "24 hours", "1 business day", `id="solutions"`; hero shows the new headline.
+3. **Re-run Lighthouse** on `/`, `/portfolio`, `/services/erp-development/`, top blog post (hero/nav/marquee changed).
+4. **Search Console** — confirm property is verified (DNS or set `GOOGLE_SITE_VERIFICATION`); sitemap already correct.
+5. **Fund an AI key** (DeepSeek or OpenAI) — briefs currently fall back to template (`source: template`) on 402/429.
+6. **Trust content** — decide on About stats (UX-02); draft anonymised testimonials (separate task, offered).
+7. **Optional** — `SITE_FOUNDER_NAME`, Clarity, `twitter:site`, trailing-slash internal rewrite.
 
 ---
 
@@ -216,20 +260,20 @@ php scripts/smoke-test-forms.php https://dashandots.com
 
 Before scaling SEO or ads, confirm:
 
-- `SITE_PUBLIC_EMAIL` is a real domain email such as `hello@dashandots.com` or `sales@dashandots.com`.
-- `SITE_PHONE`, `SITE_WHATSAPP_URL`, `SITE_ADDRESS`, founder name, and founder LinkedIn are configured in production `.env`.
-- Public pages no longer display `dashandots@gmail.com` or fake phone numbers.
-- `php scripts/smoke-test-forms.php https://dashandots.com` passes after deploy.
-- One real contact submission reaches the inbox, avoids spam, and sends the confirmation email.
-- `/blog/future-of-custom-erp` and `/blog/mobile-first-design-b2b` return 200 on live.
-- Legacy `.html` redirects do not contain `/dashandots/` on production.
-- `ASSET_CDN_URL` is set in production when using a pull CDN such as Cloudflare, Bunny.net, Fastly, or CloudFront.
-- Static asset responses include long-lived cache headers: `public, max-age=31536000, immutable`.
-- GTM Preview shows `cta_click`, `estimate_completed`, `contact_form_submit_success`, `whatsapp_click`, `phone_click`, `demo_click`, and `proof_card_click`.
-- GA4 conversions are enabled for lead, estimate, WhatsApp, phone, and demo events.
-- Microsoft Clarity is enabled with `MICROSOFT_CLARITY_ID` if session recordings are desired.
-- Search Console has `https://dashandots.com/sitemap.php` submitted and no sitemap URL redirects to `/blog/`.
-- Proof claims (`150+ clients served`, `450+ products shipped`) are substantiated with permitted screenshots, demos, client categories, logos, testimonials, or external reviews.
+- ✅ `SITE_PUBLIC_EMAIL` is a real domain email — live shows `hello@dashandots.com`.
+- ✅ `SITE_PHONE`, `SITE_WHATSAPP_URL`, `SITE_ADDRESS` configured (live shows `+91 9649240944`). ⬜ `SITE_FOUNDER_NAME` still commented out.
+- ✅ Public pages no longer display `dashandots@gmail.com`; `+91 98765 43210` appears only as an input `placeholder`.
+- ⬜ `php scripts/smoke-test-forms.php https://dashandots.com` passes after the DEP-01 deploy (local `--cli`: 14/14).
+- ⬜ One real contact submission reaches the inbox, avoids spam, and sends the confirmation email.
+- ✅ `/blog/future-of-custom-erp` and `/blog/mobile-first-design-b2b` return 200 on live.
+- ✅ Legacy `.html` redirects do not contain `/dashandots/` on production.
+- ✅ Static asset responses include `public, max-age=31536000, immutable` (Hostinger CDN, `Server: hcdn`); `ASSET_CDN_URL` not needed.
+- ✅ GA4 receives `page_view`, `user_engagement`, `cta_click` with `cta_text/cta_location/destination` (verified via `collect` hits).
+- ✅ GA4 key events: `contact_form_submit_success`, `estimate_completed`. ⬜ Consider also marking `whatsapp_click`, `phone_click`, `demo_click`.
+- ⬜ Microsoft Clarity (`MICROSOFT_CLARITY_ID`) — optional, unset.
+- ⬜ Search Console: confirm ownership; no sitemap URL redirects any more (✅ verified).
+- ⬜ Proof claims: `450+ / 150+ / 5+` still in About section only; substantiate or trim. Hero + trust bar no longer show them.
+- ⬜ AI provider funded so briefs return `source: "ai"` not `"template"`.
 
 ---
 
@@ -242,4 +286,4 @@ Before scaling SEO or ads, confirm:
 
 ---
 
-*Report maintained as the single source of truth for dashandots.com audit status. Update this file after each live re-audit or major deploy.*
+*Report maintained as the single source of truth for dashandots.com audit status. Update this file after each live re-audit or major deploy. Next update due: after DEP-01 deploy + Lighthouse re-run.*

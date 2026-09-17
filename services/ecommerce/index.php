@@ -6,22 +6,50 @@ $page['description'] = 'Custom B2B & B2C e-commerce development — multi-vendor
 $page['canonical']   = SITE_URL . '/services/ecommerce/';
 $page['og_title']    = 'E-commerce & Portal Development | Dashandots Technology';
 $page['og_desc']     = $page['description'];
+$page['keywords']    = 'ecommerce development company India, B2B ordering portal development, dealer portal software India, multi-vendor marketplace development, custom online store development India';
+$page['active_nav']  = 'services';
 
-require __DIR__ . '/../../includes/head.php';
-require __DIR__ . '/../../includes/header.php';
+
+require_once __DIR__ . '/../../includes/service-schema.php';
+$serviceSchema = service_schema([
+  'slug'        => 'ecommerce',
+  'name'        => 'E-commerce and Customer Portal Development',
+  'serviceType' => [
+    'E-commerce development',
+    'B2B ordering portal development',
+    'Multi-vendor marketplace development',
+    'Customer and dealer portal development',
+  ],
+  'description' => $page['description'],
+  'catalogName' => 'E-commerce and portal services',
+  'offers'      => [
+    'Custom B2C online store development',
+    'B2B dealer and distributor ordering portal',
+    'Multi-vendor marketplace platform',
+    'Customer self-service portal with ERP integration',
+    'Payment gateway and GST invoicing integration',
+  ],
+]);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php require __DIR__ . '/../../includes/head.php'; ?>
+</head>
+<body>
+<?php require __DIR__ . '/../../includes/header.php'; ?>
 
 <main id="main-content">
   <div class="svc-page">
 
     <!-- HERO -->
     <div class="svc-hero">
-      <p class="page-label">E-commerce &amp; Portal Development</p>
+      <p class="page-label">Services &rsaquo; E-commerce &amp; Portals</p>
       <h1>E-commerce &amp; customer portals that convert and retain</h1>
       <p class="lead">We build high-performance online stores, B2B ordering portals, and multi-vendor marketplaces designed to maximise revenue, reduce operational overhead, and keep customers coming back.</p>
       <div class="hero-actions">
-        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="ecommerce-hero">Get Instant Estimate</a>
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="ecommerce-hero">Discuss Your Store</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="ecommerce-hero">Scope Your Store or Portal</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="ecommerce-hero">Talk to Our Team</a>
       </div>
     </div>
 
@@ -78,8 +106,8 @@ require __DIR__ . '/../../includes/header.php';
       <h2>Most portal enquiries start with pricing, ordering, inventory, and invoice pain.</h2>
       <p>If repeat ordering and customer support depend on manual coordination, we can scope a self-service portal that connects products, stock, customer pricing, order status, and billing.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
-        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="ecommerce-mid">Get Instant Estimate</a>
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="ecommerce-mid">Build a Dealer Portal</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="ecommerce-mid">Brief Us on Your Portal</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="ecommerce-mid">Talk to Our Team</a>
       </div>
     </div>
 
@@ -122,13 +150,16 @@ require __DIR__ . '/../../includes/header.php';
       <h2>Let's build your store or portal</h2>
       <p>Tell us about your products, your customers, and your current bottlenecks. We'll design a commerce solution that fits your business model precisely.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="ecommerce-final">Get My Free Project Estimate</a>
-        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="ecommerce-final">Get Instant Estimate</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="ecommerce-final">Talk to Our Team</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="ecommerce-final">Scope Your Project</a>
       </div>
     </div>
 
   </div>
 </main>
 
+<?= service_schema_jsonld($serviceSchema) ?>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>
 <?php require __DIR__ . '/../../includes/scripts.php'; ?>
+</body>
+</html>

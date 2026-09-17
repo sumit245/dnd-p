@@ -58,6 +58,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
+  // ── Nav scroll-spy (homepage only: sections #home/#about/#services/#portfolio) ──
+  const spyLinks = Array.from(document.querySelectorAll('.nav-links a[href]')).map(a => {
+    const href = a.getAttribute('href') || '';
+    const hash = href.includes('#') ? href.slice(href.indexOf('#') + 1) : (href.replace(/\/$/, '').split('/').pop() || '');
+    const section = hash ? document.getElementById(hash) : null;
+    return section ? { a, section } : null;
+  }).filter(Boolean).sort((a, b) => a.section.offsetTop - b.section.offsetTop);
+  if (spyLinks.length > 1) {
+    // Probe line sits ~a third down the viewport so a section counts once it clearly occupies the screen.
+    const navH = () => Math.max((navbar ? navbar.offsetHeight : 70) + 24, Math.round(window.innerHeight * 0.35));
+    let spyTick = false;
+    const runSpy = () => {
+      spyTick = false;
+      const y = window.scrollY + navH();
+      let current = spyLinks[0];
+      spyLinks.forEach(l => { if (l.section.offsetTop <= y) current = l; });
+      // Past the last section (e.g. contact/footer) → keep the last one lit.
+      spyLinks.forEach(l => l.a.classList.toggle('active', l === current));
+    };
+    window.addEventListener('scroll', () => {
+      if (!spyTick) { spyTick = true; setTimeout(runSpy, 60); }
+    }, { passive: true });
+    window.addEventListener('resize', runSpy, { passive: true });
+    runSpy();
+  }
+
   const mobileStickyCta = document.querySelector('.mobile-sticky-cta');
   const mobileStickyBlockers = Array.from(document.querySelectorAll('#home, .trust-bar, .estimate-jump'));
   const hasVisibleStickyBlocker = () => mobileStickyBlockers.some(el => {

@@ -1,12 +1,33 @@
 <?php
 require __DIR__ . '/../../includes/config.php';
-$page['title']       = 'Custom ERP Development Services in India — ' . SITE_NAME;
+$page['title']       = 'Custom ERP Development Services in India | ' . SITE_NAME;
 $page['description'] = 'Custom ERP & CRM development for Indian SMEs — finance, inventory, HR, sales and procurement. Own your software and scale without recurring licensing fees.';
 $page['keywords']    = 'custom ERP development India, ERP software development company, enterprise resource planning India, ERP for SME India, CRM development India';
-$page['canonical']   = SITE_URL . '/services/erp-development';
-$page['og_title']    = 'Custom ERP & CRM Development — ' . SITE_NAME;
+$page['canonical']   = SITE_URL . '/services/erp-development/';
+$page['og_title']    = 'Custom ERP & CRM Development | ' . SITE_NAME;
 $page['og_desc']     = 'Custom ERP & CRM to automate workflows, centralise data, and gain complete visibility across finance, inventory, HR, sales, and support.';
 $page['active_nav']  = 'services';
+
+require_once __DIR__ . '/../../includes/service-schema.php';
+$serviceSchema = service_schema([
+  'slug'        => 'erp-development',
+  'name'        => 'Custom ERP and CRM Development Services',
+  'serviceType' => [
+    'Custom ERP development',
+    'CRM development',
+    'Business process automation',
+    'ERP migration and integration',
+  ],
+  'description' => $page['description'],
+  'catalogName' => 'ERP and CRM development services',
+  'offers'      => [
+    'Finance and accounting ERP module',
+    'Inventory and procurement ERP module',
+    'HR and payroll ERP module',
+    'Sales pipeline and CRM development',
+    'Tally, GST and legacy system integration',
+  ],
+]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +45,7 @@ $page['active_nav']  = 'services';
       <h1>Custom ERP &amp; CRM development services</h1>
       <p class="lead">Digitise core operations with ERP &amp; CRM systems designed around your sales, inventory, finance, HR, procurement, and approval workflows.</p>
       <div class="hero-actions">
-        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="erp-hero">Get Instant Estimate</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="erp-hero">Scope Your ERP</a>
         <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp" class="btn btn-outline" target="_blank" rel="noopener" data-track="demo" data-demo-slug="erp">See ERP Demo</a>
       </div>
     </div>
@@ -84,7 +105,7 @@ $page['active_nav']  = 'services';
       <p>Review an ERP-style demo, then send us your modules and branches. We will respond with a practical first-phase plan instead of a generic quote.</p>
       <div class="cta-actions">
         <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp" class="btn btn-primary" target="_blank" rel="noopener" data-track="demo" data-demo-slug="erp">View ERP Proof</a>
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="erp-proof">Build Something Similar</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="erp-proof">Talk to Our Team</a>
       </div>
     </div>
 
@@ -147,16 +168,17 @@ $page['active_nav']  = 'services';
 
     <div class="svc-cta-strip">
       <h2>Ready to centralise your ERP and CRM operations?</h2>
-      <p>Tell us about your operations and we'll scope a solution — including timeline and budget — at no cost.</p>
+      <p>Tell us about your operations and we'll reply within 48 hours with a practical first phase and timeline.</p>
       <div class="cta-actions">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="erp-final">Get My Free Project Estimate</a>
-        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="erp-final">Get Instant Estimate</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="erp-final">Talk to Our Team</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="erp-final">Scope Your Project</a>
       </div>
     </div>
 
   </div>
 </main>
 
+<?= service_schema_jsonld($serviceSchema) ?>
 <?php include __DIR__ . '/../../includes/footer.php'; ?>
 <?php include __DIR__ . '/../../includes/scripts.php'; ?>
 </body>

@@ -6,27 +6,54 @@ $page['description'] = 'Custom Hospital Management (HMS), Hotel PMS, Transport (
 $page['canonical']   = SITE_URL . '/services/industry-systems/';
 $page['og_title']    = 'Industry Management Systems | Dashandots Technology';
 $page['og_desc']     = $page['description'];
+$page['keywords']    = 'hospital management system development India, hotel PMS software development, transport management system India, custom finance accounting software, industry-specific ERP development';
+$page['active_nav']  = 'services';
 
-require __DIR__ . '/../../includes/head.php';
-require __DIR__ . '/../../includes/header.php';
+
+require_once __DIR__ . '/../../includes/service-schema.php';
+$serviceSchema = service_schema([
+  'slug'        => 'industry-systems',
+  'name'        => 'Industry-Specific Management Systems Development',
+  'serviceType' => [
+    'Hospital management system development',
+    'Hotel property management system development',
+    'Transport management system development',
+    'Finance and accounting software development',
+  ],
+  'description' => $page['description'],
+  'catalogName' => 'Industry management systems',
+  'offers'      => [
+    'Hospital management system (HMS) with OPD, IPD, pharmacy and billing',
+    'Hotel property management system (PMS) with reservations and housekeeping',
+    'Transport management system (TMS) with dispatch and fleet tracking',
+    'GST-ready finance and accounting software with Tally integration',
+  ],
+]);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php require __DIR__ . '/../../includes/head.php'; ?>
+</head>
+<body>
+<?php require __DIR__ . '/../../includes/header.php'; ?>
 
 <main id="main-content">
   <div class="svc-page">
 
     <!-- HERO -->
     <div class="svc-hero">
-      <p class="page-label">Industry Management Systems</p>
-      <h1>Vertical Software Built for Your Industry — Not Adapted from a Generic Template</h1>
+      <p class="page-label">Services &rsaquo; Industry Systems</p>
+      <h1>Vertical software built for your industry — not adapted from a generic template</h1>
       <p class="lead">We build purpose-specific management platforms for hospitals, hotels, logistics operators, and financial services — systems that understand your industry's regulations, workflows, and reporting needs from the ground up.</p>
       <div class="hero-actions">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="industry-hero">Get My Free Project Estimate</a>
-        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="industry-hero">View Live Demos</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="industry-hero">Scope Your System</a>
+        <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="industry-hero">View live demos</a>
       </div>
     </div>
 
     <!-- INTRO -->
-    <h2>Why Off-the-Shelf Industry Software Falls Short</h2>
+    <h2>Why off-the-shelf industry software falls short</h2>
     <p class="svc-body-text">Packaged HMS, PMS, or TMS solutions come with years of technical debt, licence fees that scale with your headcount, and customisation locked behind expensive consulting contracts. We build systems that are yours — designed around how your staff actually works, integrated with your existing tools, and owned by you with no ongoing licence.</p>
 
     <div class="svc-feature-grid">
@@ -127,17 +154,20 @@ require __DIR__ . '/../../includes/header.php';
 
     <!-- CTA -->
     <div class="svc-cta-strip">
-      <p class="page-label">Purpose-Built for Your Industry</p>
-      <h2>Ready for a System That Actually Fits?</h2>
+      <p class="page-label">Purpose-built for your industry</p>
+      <h2>Ready for a system that actually fits?</h2>
       <p>Share your current workflows and pain points. We'll show you how a purpose-built system compares against the generic software you're fighting with today.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
-        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="industry-final">Get My Free Project Estimate</a>
-        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="industry-final">Get Rough Cost &amp; Timeline</a>
+        <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="industry-final">Talk to Our Team</a>
+        <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="industry-final">Scope Your Project</a>
       </div>
     </div>
 
   </div>
 </main>
 
+<?= service_schema_jsonld($serviceSchema) ?>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>
 <?php require __DIR__ . '/../../includes/scripts.php'; ?>
+</body>
+</html>
