@@ -14,6 +14,12 @@
  */
 declare(strict_types=1);
 
+// Never web-callable: these scripts write content and read .env.
+if (PHP_SAPI !== 'cli') {
+    http_response_code(403);
+    exit("Forbidden: CLI only.\n");
+}
+
 $root = dirname(__DIR__);
 $mode = 'http';
 $base = 'http://127.0.0.1/dashandots';

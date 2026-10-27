@@ -59,7 +59,7 @@ CREATE TABLE `portfolios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
-  `category` varchar(32) NOT NULL DEFAULT 'web' COMMENT 'Portfolio filter: erp | tms | hms | web | mobile',
+  `category` varchar(32) NOT NULL DEFAULT 'web' COMMENT 'Portfolio filter: erp | tms | hms | web | mobile | graphics',
   `industry` varchar(32) DEFAULT NULL COMMENT 'Industry slug - see includes/portfolio-taxonomy.php',
   `badge` varchar(32) DEFAULT NULL COMMENT 'Short label shown on the card thumbnail (defaults to upper-cased slug)',
   `sort_order` int(11) NOT NULL DEFAULT 100,

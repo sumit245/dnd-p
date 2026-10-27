@@ -114,6 +114,9 @@ RewriteRule ^(.+)$ $1.php [L]
 RewriteRule ^admin/run-(blog-)?migration\.php$ - [F,L]
 RewriteRule ^test_.*\.php$ - [F,L]
 
+# CLI maintenance scripts (seed, migrations, smoke tests) are never web-callable
+RewriteRule ^scripts/ - [F,L]
+
 # Block dot-files (.env, .git, etc.)
 <FilesMatch "^\.">
     Order allow,deny

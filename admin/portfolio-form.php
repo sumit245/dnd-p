@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $portfolio = [
         'title' => $_POST['title'] ?? '',
         'slug' => $_POST['slug'] ?? '',
-        'category' => in_array($_POST['category'] ?? '', ['erp', 'tms', 'hms', 'web', 'mobile'], true) ? $_POST['category'] : 'web',
+        'category' => in_array($_POST['category'] ?? '', ['erp', 'tms', 'hms', 'web', 'mobile', 'graphics'], true) ? $_POST['category'] : 'web',
         'industry' => portfolio_industry_is_valid($_POST['industry'] ?? null) ? $_POST['industry'] : null,
         'badge' => trim($_POST['badge'] ?? ''),
         'sort_order' => (int)($_POST['sort_order'] ?? 100),
@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group">
                 <label for="category">Category (portfolio filter) *</label>
                 <select id="category" name="category" class="form-control">
-                    <?php foreach (['erp' => 'ERP / CRM', 'tms' => 'Transport & Logistics', 'hms' => 'Healthcare (HMS)', 'web' => 'Web & SaaS', 'mobile' => 'Mobile Apps'] as $catVal => $catLabel): ?>
+                    <?php foreach (['erp' => 'ERP / CRM', 'tms' => 'Transport & Logistics', 'hms' => 'Healthcare (HMS)', 'web' => 'Web & SaaS', 'mobile' => 'Mobile Apps', 'graphics' => 'Graphics & Branding'] as $catVal => $catLabel): ?>
                         <option value="<?php echo $catVal; ?>" <?php echo ($portfolio['category'] ?? 'web') === $catVal ? 'selected' : ''; ?>><?php echo $catLabel; ?></option>
                     <?php endforeach; ?>
                 </select>
