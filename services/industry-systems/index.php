@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../../includes/config.php';
 
-$page['title']       = 'Industry Management Systems: HMS, Hotel PMS, TMS & Finance Software | Dashandots';
+$page['title']       = 'HMS, Hotel PMS & TMS Software Development | Dashandots';
 $page['description'] = 'Custom Hospital Management (HMS), Hotel PMS, Transport (TMS) and Finance software for Indian enterprises. Industry-grade systems built for your sector.';
 $page['canonical']   = SITE_URL . '/services/industry-systems/';
 $page['og_title']    = 'Industry Management Systems | Dashandots Technology';

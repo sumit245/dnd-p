@@ -64,6 +64,8 @@ CREATE TABLE `portfolios` (
   `badge` varchar(32) DEFAULT NULL COMMENT 'Short label shown on the card thumbnail (defaults to upper-cased slug)',
   `sort_order` int(11) NOT NULL DEFAULT 100,
   `short_description` text NOT NULL,
+  `meta_title` varchar(70) DEFAULT NULL COMMENT 'SEO <title> override, max 60 chars; brand is NOT appended',
+  `meta_description` varchar(170) DEFAULT NULL COMMENT 'SEO meta description override, 120-155 chars',
   `client_name` varchar(120) DEFAULT NULL,
   `client_url` varchar(255) DEFAULT NULL,
   `detailed_description` longtext DEFAULT NULL,

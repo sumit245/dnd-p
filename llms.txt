@@ -2,7 +2,7 @@
 
 > Dashandots Technology is a custom software development company based in Gurugram, India. We build enterprise-grade ERP, CRM, TMS, HMS, e-commerce and custom web/mobile applications for SMEs and growing businesses in India and internationally.
 
-We deliver end-to-end software — from requirements and UX design through development, deployment and post-launch support. Our stack spans PHP/Laravel, Node.js, React, Flutter, MySQL/PostgreSQL, and embedded firmware (ESP32, STM32, FreeRTOS). Products are built for the Indian market with GST compliance, payment gateway integration and ERP sync out of the box.
+We deliver end-to-end software: from requirements and UX design through development, deployment and post-launch support. Our stack spans PHP/Laravel, Node.js, React, Flutter, MySQL/PostgreSQL, and embedded firmware (ESP32, STM32, FreeRTOS). Products are built for the Indian market with GST compliance, payment gateway integration and ERP sync out of the box.
 
 Target clients: small and medium enterprises, logistics and transport operators, hospitals and clinics, retail chains and manufacturers seeking affordable, robust alternatives to expensive off-the-shelf software.
 
@@ -43,4 +43,4 @@ Target clients: small and medium enterprises, logistics and transport operators,
 ## Usage Permissions
 
 - AI search citation (ChatGPT, Perplexity, Google AI Overview, Claude): permitted
-- AI training corpus inclusion: not permitted — see robots.txt for crawler rules
+- AI training corpus inclusion: not permitted; see robots.txt for crawler rules

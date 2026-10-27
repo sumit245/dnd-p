@@ -1,6 +1,6 @@
 <?php
 /**
- * GA4 via gtag.js — loaded directly when GA4_MEASUREMENT_ID is set, so page views
+ * GA4 via gtag.js: loaded directly when GA4_MEASUREMENT_ID is set, so page views
  * and dataLayer events reach GA4 without depending on tags inside the GTM container.
  * If you later add a GA4 Configuration tag in GTM, remove GA4_MEASUREMENT_ID from .env
  * to avoid double counting.

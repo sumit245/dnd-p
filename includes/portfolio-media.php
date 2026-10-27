@@ -1,6 +1,6 @@
 <?php
 /**
- * Portfolio image helpers — WebP + dimensions for LCP/CLS.
+ * Portfolio image helpers: WebP + dimensions for LCP/CLS.
  */
 require_once __DIR__ . '/assets.php';
 

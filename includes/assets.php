@@ -1,6 +1,6 @@
 <?php
 /**
- * Public asset URLs — prefers minified bundles when present.
+ * Public asset URLs: prefers minified bundles when present.
  */
 function asset_cdn_base(): string
 {

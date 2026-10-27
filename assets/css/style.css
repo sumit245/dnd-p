@@ -486,7 +486,7 @@
         display: block
       }
 
-      /* Mobile: no room for the tall "Your" — show the full sentences as a plain h1 instead. */
+      /* Mobile: no room for the tall "Your": show the full sentences as a plain h1 instead. */
       .hero-h1--lead {
         display: block;
         font-size: clamp(28px, 7.4vw, 40px);
@@ -1342,7 +1342,7 @@
       overflow: hidden
     }
 
-    /* <picture> is inline by default — without this the <img> ignores the thumb height and overflows onto .port-body */
+    /* <picture> is inline by default: without this the <img> ignores the thumb height and overflows onto .port-body */
     .port-thumb picture,
     .port-thumb img {
       display: block;
@@ -2603,7 +2603,7 @@
         bottom: 10px
       }
 
-      /* Footer bottom — stack copy and tagline */
+      /* Footer bottom: stack copy and tagline */
       .footer-bottom {
         flex-direction: column;
         align-items: flex-start;
@@ -3409,7 +3409,7 @@
       margin: 0 4px
     }
 
-    /* ═══════════════════════════════ DEMO PAGES (legacy standalone — kept for reference) ═══════════════════════════════ */
+    /* ═══════════════════════════════ DEMO PAGES (legacy standalone: kept for reference) ═══════════════════════════════ */
     .demo-hero--legacy {
       background: linear-gradient(135deg, #1a1a1a 0%, #2d0a10 100%);
       color: #fff;
@@ -3751,7 +3751,7 @@
       gap: 8px
     }
 
-    /* Outer wrapper — replaces inline padding/max-width */
+    /* Outer wrapper: replaces inline padding/max-width */
     .svc-page {
       max-width: 960px;
       margin: 0 auto;
@@ -4284,7 +4284,7 @@
       margin: 32px 0 12px;
     }
 
-    /* Per-product FAQ accordion on demo pages — reuses .faq-list / .faq-item */
+    /* Per-product FAQ accordion on demo pages: reuses .faq-list / .faq-item */
     .demo-faq-block {
       max-width: 840px;
       margin: 56px auto 0;

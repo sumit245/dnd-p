@@ -1,8 +1,8 @@
 <?php
 require __DIR__ . '/../../includes/config.php';
 
-$page['title']       = 'Data Analytics Services & BI Dashboard Development India | Dashandots';
-$page['description'] = 'Data analytics services, BI dashboard development, business intelligence reporting, data visualization and AI analytics solutions for Indian SMEs and growing businesses.';
+$page['title']       = 'BI Dashboards & Data Analytics Services | Dashandots';
+$page['description'] = 'Data analytics, BI dashboard development, business intelligence reporting and data visualization for Indian SMEs and growing businesses.';
 $page['keywords']    = 'data analytics services India, BI dashboard development India, business intelligence reporting, data visualization dashboards, AI analytics solutions';
 $page['canonical']   = SITE_URL . '/services/data-analytics/';
 $page['og_title']    = 'Data Analytics Services & BI Dashboard Development | Dashandots Technology';

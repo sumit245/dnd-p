@@ -15,7 +15,7 @@ csrf_ensure_token();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashandots CMS</title>
-    <!-- TinyMCE CDN — key from .env TINY_MCE_API -->
+    <!-- TinyMCE CDN: key from .env TINY_MCE_API -->
     <script src="https://cdn.tiny.cloud/1/<?= htmlspecialchars($_ENV['TINY_MCE_API'] ?? 'no-api-key') ?>/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <style>
         :root {

@@ -72,7 +72,7 @@ $isCustomCat = !empty($blog['category']) && !in_array($blog['category'], $catego
 ?>
 
 <!-- ═══════════════════════════════════════════
-     BLOG FORM — Extra Styles
+     BLOG FORM: Extra Styles
 ═══════════════════════════════════════════ -->
 <style>
 /* ── Layout ─────────────────────────────────── */

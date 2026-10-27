@@ -1,6 +1,6 @@
 <?php
 /**
- * Shared security helpers — CSRF, rate limiting, session hardening, CORS.
+ * Shared security helpers: CSRF, rate limiting, session hardening, CORS.
  */
 
 declare(strict_types=1);

@@ -293,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
           form.reset();
         } else {
-          // Server gave a reason (rate limit, validation, SMTP) — show it instead of a generic line.
+          // Server gave a reason (rate limit, validation, SMTP): show it instead of a generic line.
           const serverMsg = data && data.message ? String(data.message) : '';
           const e = new Error(serverMsg || ('HTTP ' + res.status));
           e.serverMessage = serverMsg;
@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     window.wizBack = function(from) { showPane(from - 1); };
 
-    // Step 1 — type selection
+    // Step 1: type selection
     document.querySelectorAll('.wiz-type-card').forEach(card => {
       card.addEventListener('click', () => {
         document.querySelectorAll('.wiz-type-card').forEach(c => c.classList.remove('selected'));

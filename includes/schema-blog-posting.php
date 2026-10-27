@@ -1,6 +1,6 @@
 <?php
 /**
- * BlogPosting JSON-LD — set $schemaBlog before including:
+ * BlogPosting JSON-LD: set $schemaBlog before including:
  *   headline, description, url, datePublished (Y-m-d or ISO), dateModified (optional), image (optional)
  */
 if (empty($schemaBlog['headline']) || empty($schemaBlog['url'])) {

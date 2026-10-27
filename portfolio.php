@@ -14,8 +14,9 @@ foreach ($rows as $r) {
   }
 }
 
-$page['title'] = 'ERP, CRM & Mobile Systems: Live Demos | ' . SITE_NAME;
+$page['title'] = 'ERP, CRM & Mobile System Demos | Dashandots';
 $page['description'] = '30+ systems running in production: ERP, CRM, transport, mobile apps. Browse projects by industry, try live demos, or start yours.';
+$page['keywords'] = 'ERP software portfolio India, custom CRM case studies, transport management system demo, business software demos India';
 $page['canonical'] = SITE_URL . '/portfolio';
 $page['og_title'] = $page['title'];
 $page['og_desc'] = $page['description'];

@@ -15,8 +15,11 @@ while ($row = $stmt->fetch()) {
 $portfoliosStmt = $pdo->query('SELECT * FROM portfolios ORDER BY sort_order ASC, created_at ASC');
 $portfolios = $portfoliosStmt->fetchAll();
 
-// Homepage-specific SEO: override title and description for maximum keyword coverage
+// Homepage-specific SEO: override title and description for maximum keyword coverage.
+// The description is set here rather than inherited from config.php, whose
+// default runs to 176 chars and truncates in search results.
 $page['title'] = 'Custom ERP & CRM Software Developer in India | Dashandots';
+$page['description'] = 'Dashandots builds custom ERP, CRM, dashboards and mobile apps for Indian SMEs in Gurugram and Delhi NCR. You own the software.';
 $page['preload_images'] = ['/assets/img/hero-corporate-bg.webp'];
 $heroTitle = trim($settings['hero_title'] ?? '');
 $heroDescription = trim($settings['hero_description'] ?? '');
@@ -24,7 +27,7 @@ if ($heroTitle === '') {
   $heroTitle = 'Your operations, centralised. Your data, visible. Your team, faster.';
 }
 if ($heroDescription === '') {
-  $heroDescription = 'Dashandots builds custom ERP, CRM, dashboards, portals, and mobile apps for growing Indian businesses — scoped around how you actually work, owned by you, supported after launch.';
+  $heroDescription = 'Dashandots builds custom ERP, CRM, dashboards, portals, and mobile apps for growing Indian businesses: scoped around how you actually work, owned by you, supported after launch.';
 }
 ?>
 <!DOCTYPE html>
@@ -66,8 +69,8 @@ if ($heroDescription === '') {
         {"@type":"Question","name":"What happens after the project goes live?","acceptedAnswer":{"@type":"Answer","text":"We offer structured support and AMC options covering monitoring, bug fixes, enhancements and ongoing feature development."}},
         {"@type":"Question","name":"What engagement models do you offer?","acceptedAnswer":{"@type":"Answer","text":"We offer three models: fixed-price projects with a clear scope and deliverables; time & material for evolving products where requirements change; and dedicated squads as an extension of your own team."}},
         {"@type":"Question","name":"Are you a software development company in Delhi, India?","acceptedAnswer":{"@type":"Answer","text":"Yes. Dashandots Technology is based in Gurugram, Delhi NCR. We are a full-cycle custom software development company serving clients across Delhi, the rest of India, and globally. Our core services include ERP development, CRM systems, mobile app development, hotel management software (PMS), hospital management software (HMS), and transport management systems (TMS)."}},
-        {"@type":"Question","name":"Do you build hotel management software and property management systems (PMS)?","acceptedAnswer":{"@type":"Answer","text":"Yes. Our Hotel PMS is a complete hotel management system covering reservations, front-office, housekeeping, POS, and guest management. We build custom hotel management software tailored to boutique hotels, hotel chains, and resorts across India — fully integrated with billing, GST, and channel management."}},
-        {"@type":"Question","name":"Can you develop custom project management software?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. We build custom project management software and task-tracking platforms as standalone tools or integrated modules within your ERP or CRM. Whether you need agile sprint boards, milestone tracking, resource planning, or client-facing project portals — we design and develop the solution from scratch to match your exact workflow."}}
+        {"@type":"Question","name":"Do you build hotel management software and property management systems (PMS)?","acceptedAnswer":{"@type":"Answer","text":"Yes. Our Hotel PMS is a complete hotel management system covering reservations, front-office, housekeeping, POS, and guest management. We build custom hotel management software tailored to boutique hotels, hotel chains, and resorts across India: fully integrated with billing, GST, and channel management."}},
+        {"@type":"Question","name":"Can you develop custom project management software?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. We build custom project management software and task-tracking platforms as standalone tools or integrated modules within your ERP or CRM. Whether you need agile sprint boards, milestone tracking, resource planning, or client-facing project portals; we design and develop the solution from scratch to match your exact workflow."}}
       ]
     },
     {
@@ -131,7 +134,7 @@ if ($heroDescription === '') {
               <a href="#portfolio" class="btn btn-outline" data-track="cta" data-cta-location="hero">See Our Work</a>
             </div>
           </div>
-          <!-- Pure CSS/SVG animated diagram — replaces broken THREE.js -->
+          <!-- Pure CSS/SVG animated diagram: replaces broken THREE.js -->
           <div class="hero-diagram reveal reveal-delay-2 visible" aria-hidden="true">
             <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
               <defs>
@@ -330,7 +333,7 @@ if ($heroDescription === '') {
           <div>
             <p class="section-label">Not ready to call?</p>
             <h2 id="estimate-jump-heading">See what your project actually needs.</h2>
-            <p>Not sure about the scope? Pick your project type, scale, features, and integrations — our AI scoping
+            <p>Not sure about the scope? Pick your project type, scale, features, and integrations; our AI scoping
               tool drafts a structured project brief with timeline in under two minutes. No calls, no commitments.</p>
           </div>
           <a href="#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="estimate-jump">Start the 2-minute brief</a>
@@ -348,18 +351,24 @@ if ($heroDescription === '') {
             <p class="section-sub">
               <?php echo nl2br(htmlspecialchars($settings['about_us_text'] ?? 'Dashandots Technology is an end-to-end software development and technology consulting company based in India.')); ?>
             </p>
-            <div class="about-stat-row">
-              <div class="about-stat">
-                <div class="num">450+</div>
-                <div class="label">Projects Delivered</div>
+            <?php // Project/client counts used to sit here. They were not substantiated anywhere,
+                  // so they are gone. These four are terms we can show in writing. ?>
+            <div class="about-cards">
+              <div class="about-card">
+                <h3>Confidentiality</h3>
+                <p>An NDA is signed before the engagement begins, not after.</p>
               </div>
-              <div class="about-stat">
-                <div class="num">150+</div>
-                <div class="label">Clients Served</div>
+              <div class="about-card">
+                <h3>Ownership</h3>
+                <p>You own the IP and the source. The system stays yours if we part ways.</p>
               </div>
-              <div class="about-stat">
-                <div class="num">5+</div>
-                <div class="label">Years Experience</div>
+              <div class="about-card">
+                <h3>After launch</h3>
+                <p>Annual maintenance covers bug fixes and security updates, with 24/7 support.</p>
+              </div>
+              <div class="about-card">
+                <h3>Response time</h3>
+                <p>India-based team. Enquiries get a reply within 48 hours.</p>
               </div>
             </div>
             <?php if (defined('SITE_FOUNDER_NAME') && SITE_FOUNDER_NAME !== ''): ?>
@@ -423,7 +432,7 @@ if ($heroDescription === '') {
                 </svg></div>
               <div>
                 <h3>AI‑powered scoping</h3>
-                <p>Answer five questions and get a structured project brief with scope, tech stack, and timeline — in
+                <p>Answer five questions and get a structured project brief with scope, tech stack, and timeline: in
                   under two minutes.</p>
               </div>
             </div>
@@ -452,7 +461,7 @@ if ($heroDescription === '') {
               </svg></div>
             <h3>Custom Web &amp; Mobile Apps</h3>
             <p class="service-tag">React · Laravel · Node.js · Flutter · React Native</p>
-            <p>Custom web and mobile apps built around your operations — from internal dashboards and approval flows
+            <p>Custom web and mobile apps built around your operations: from internal dashboards and approval flows
               to customer-facing portals and field apps.</p>
             <ul class="service-list" aria-label="Includes">
               <li>Responsive web apps &amp; portals</li>
@@ -510,7 +519,7 @@ if ($heroDescription === '') {
               </svg></div>
             <h3>Industry-Specific Management Systems</h3>
             <p class="service-tag">HMS · Hotel PMS · TMS · Finance &amp; Accounting</p>
-            <p>Configurable platforms for healthcare, hospitality, logistics, finance, and more — built around how your
+            <p>Configurable platforms for healthcare, hospitality, logistics, finance, and more: built around how your
               industry actually works.</p>
             <ul class="service-list" aria-label="Includes">
               <li>Hospital &amp; clinic management (HMS)</li>
@@ -612,7 +621,7 @@ if ($heroDescription === '') {
               <div class="label">Challenge</div>
               <p>Disconnected systems, manual inventory tracking, no real‑time production visibility.</p>
               <div class="label label-outcome">Outcome</div>
-              <p>Live stock, production and quality numbers in one place — no end-of-day Excel.</p>
+              <p>Live stock, production and quality numbers in one place: no end-of-day Excel.</p>
             </div>
             <div class="ind-tags"><span class="ind-tag">Production planning</span><span class="ind-tag">Quality
                 control</span><span class="ind-tag">Asset management</span></div>
@@ -700,7 +709,7 @@ if ($heroDescription === '') {
               <div class="label">Challenge</div>
               <p>Overbooking, disconnected front‑office and housekeeping, and multi‑channel booking chaos.</p>
               <div class="label label-outcome">Outcome</div>
-              <p>Bookings, housekeeping and billing in sync — fewer double entries, faster checkout.</p>
+              <p>Bookings, housekeeping and billing in sync: fewer double entries, faster checkout.</p>
             </div>
             <div class="ind-tags"><span class="ind-tag">Reservations</span><span class="ind-tag">Housekeeping
                 sync</span><span class="ind-tag">Multi‑channel</span></div>
@@ -955,13 +964,13 @@ if ($heroDescription === '') {
           <article class="resource-card reveal reveal-delay-1">
             <p class="res-cat">UX · Portals</p>
             <h3>Designing mobile‑first B2B portals</h3>
-            <p>Principles for building portals that field teams and business partners actually enjoy using — on any
+            <p>Principles for building portals that field teams and business partners actually enjoy using: on any
               device, any time.</p>
           </article>
           <article class="resource-card reveal reveal-delay-2">
             <p class="res-cat">Strategy · Build vs Buy</p>
             <h3>When to use custom software vs off‑the‑shelf</h3>
-            <p>How to decide between customising a product and building a tailored platform — with a decision framework
+            <p>How to decide between customising a product and building a tailored platform; with a decision framework
               for each scenario.</p>
           </article>
         </div>
@@ -974,7 +983,7 @@ if ($heroDescription === '') {
         <div class="reveal">
           <p class="section-label">Technology</p>
           <h2 id="tech-heading" class="section-title">Modern, battle‑tested technology stack.</h2>
-          <p class="section-sub">Technologies that balance innovation with stability — so your systems stay performant,
+          <p class="section-sub">Technologies that balance innovation with stability; so your systems stay performant,
             maintainable, and secure.</p>
         </div>
         <div class="tech-grid">
@@ -1018,7 +1027,7 @@ if ($heroDescription === '') {
             <div class="why-num" aria-hidden="true">01</div>
             <div>
               <h3>Enterprise‑grade quality</h3>
-              <p>Architecture, security, and performance standards comparable to large IT firms — delivered at
+              <p>Architecture, security, and performance standards comparable to large IT firms: delivered at
                 SME‑compatible speed and cost.</p>
             </div>
           </div>
@@ -1034,7 +1043,7 @@ if ($heroDescription === '') {
             <div class="why-num" aria-hidden="true">03</div>
             <div>
               <h3>Domain‑aware delivery</h3>
-              <p>Pre‑built patterns for logistics, healthcare, hospitality, finance, and more — so you don't pay for us
+              <p>Pre‑built patterns for logistics, healthcare, hospitality, finance, and more; so you don't pay for us
                 to learn your industry.</p>
             </div>
           </div>
@@ -1077,7 +1086,7 @@ if ($heroDescription === '') {
                 </tr>
                 <tr>
                   <td><strong>Speed to Market</strong></td>
-                  <td>Fast — but not instant. SaaS runs in a day for basic cases. We take weeks, but what ships is yours and fits.</td>
+                  <td>Fast; but not instant. SaaS runs in a day for basic cases. We take weeks, but what ships is yours and fits.</td>
                   <td>Instant (if you accept out-of-the-box limitations).</td>
                   <td>Slowest. Months spent hiring and establishing infrastructure.</td>
                 </tr>
@@ -1124,7 +1133,7 @@ if ($heroDescription === '') {
               </svg></button>
             <div class="faq-a">
               <div class="faq-a-inner">We start with a structured discovery of your requirements, then provide a
-                detailed estimate before any commitment. Use the contact form below for an initial scope discussion — we
+                detailed estimate before any commitment. Use the contact form below for an initial scope discussion; we
                 typically respond within 48 hours.</div>
             </div>
           </div>
@@ -1191,7 +1200,7 @@ if ($heroDescription === '') {
             <div class="faq-a">
               <div class="faq-a-inner">Yes. Our Hotel PMS is a complete hotel management system covering reservations,
                 front-office, housekeeping, POS, and guest management. We build custom hotel management software
-                tailored to boutique hotels, hotel chains, and resorts across India — fully integrated with billing,
+                tailored to boutique hotels, hotel chains, and resorts across India: fully integrated with billing,
                 GST, and channel management.</div>
             </div>
           </div>
@@ -1205,7 +1214,7 @@ if ($heroDescription === '') {
             <div class="faq-a">
               <div class="faq-a-inner">Absolutely. We build custom project management software and task-tracking
                 platforms as standalone tools or integrated modules within your ERP or CRM. Whether you need agile
-                sprint boards, milestone tracking, resource planning, or client-facing project portals — we design and
+                sprint boards, milestone tracking, resource planning, or client-facing project portals; we design and
                 develop the solution from scratch to match your exact workflow.</div>
             </div>
           </div>
@@ -1222,7 +1231,7 @@ if ($heroDescription === '') {
           <h2 id="wizard-heading" class="section-title">Get an instant AI-generated project brief.</h2>
           <p class="section-sub" style="margin:0 auto">Not sure where to start? Answer 5 quick questions and our AI
             scoping assistant will draft a structured requirement brief with scope, tech stack and an indicative
-            timeline — then pre‑fill your enquiry form so we can send you a tailored proposal.</p>
+            timeline; then pre‑fill your enquiry form so we can send you a tailored proposal.</p>
         </div>
 
         <div class="wizard-wrap reveal">
@@ -1380,7 +1389,7 @@ if ($heroDescription === '') {
               <label class="wiz-radio-card" data-scale="Small" onclick="selectScale(this)">
                 <input type="radio" name="scale" value="Small">
                 <div>
-                  <div class="wrc-title">Small — Startup / MVP</div>
+                  <div class="wrc-title">Small | Startup / MVP</div>
                   <div class="wrc-desc">Solo founder, startup, or a quick MVP to validate an idea. Simple workflows,
                     limited users.</div>
                 </div>
@@ -1388,14 +1397,14 @@ if ($heroDescription === '') {
               <label class="wiz-radio-card" data-scale="Medium" onclick="selectScale(this)">
                 <input type="radio" name="scale" value="Medium">
                 <div>
-                  <div class="wrc-title">Medium — Growing Business</div>
+                  <div class="wrc-title">Medium | Growing Business</div>
                   <div class="wrc-desc">10–200 users, multiple departments, moderate integrations, some reporting.</div>
                 </div>
               </label>
               <label class="wiz-radio-card" data-scale="Large" onclick="selectScale(this)">
                 <input type="radio" name="scale" value="Large">
                 <div>
-                  <div class="wrc-title">Large — Enterprise / Multi-location</div>
+                  <div class="wrc-title">Large | Enterprise / Multi-location</div>
                   <div class="wrc-desc">200+ users, multi-branch or multi-company, complex permissions, advanced
                     analytics.</div>
                 </div>
@@ -1411,7 +1420,7 @@ if ($heroDescription === '') {
           <!-- STEP 3: Features -->
           <div class="wizard-pane" id="wizPane3">
             <h3 class="wizard-pane-title">Which features are most important?</h3>
-            <p class="wizard-pane-sub">Select all that apply — each feature shapes the scope and timeline.</p>
+            <p class="wizard-pane-sub">Select all that apply: each feature shapes the scope and timeline.</p>
             <div class="wiz-check-grid" id="featuresGrid">
               <label class="wiz-check-card" onclick="toggleCheck(this)"><input type="checkbox"
                   value="User roles &amp; permissions"><span class="wcc-label">User roles &amp;
@@ -1480,7 +1489,7 @@ if ($heroDescription === '') {
 
           <!-- STEP 5: Contact details -->
           <div class="wizard-pane" id="wizPane5">
-            <h3 class="wizard-pane-title">Last step — where should we send your brief?</h3>
+            <h3 class="wizard-pane-title">Last step: where should we send your brief?</h3>
             <p class="wizard-pane-sub">Your details help us personalise the brief and pre-fill the enquiry form.</p>
             <div class="wizard-contact-grid">
               <div class="wiz-input-group">
@@ -1559,8 +1568,8 @@ if ($heroDescription === '') {
                   </svg></div>
                 <div>
                   <h4>Pricing is tailored to your scope</h4>
-                  <p>Send this brief as an enquiry and we'll reply with a detailed proposal — phases, timeline and
-                    pricing — <strong>within 48 hours</strong>.</p>
+                  <p>Send this brief as an enquiry and we'll reply with a detailed proposal (phases, timeline and
+                    pricing) <strong>within 48 hours</strong>.</p>
                 </div>
               </div>
               <div class="wiz-result-actions">
@@ -1594,7 +1603,7 @@ if ($heroDescription === '') {
       <div class="container">
         <div class="reveal" style="text-align:center;margin-bottom:16px">
           <p class="section-label">Contact</p>
-          <h2 id="contact-heading" class="section-title">Get a free project estimate.</h2>
+          <h2 id="contact-heading" class="section-title">Tell us what's slowing you down.</h2>
           <p class="section-sub" style="margin:0 auto">We respond within 48 hours with suggested approach and
             estimated timeline. No spam. No obligation.</p>
         </div>

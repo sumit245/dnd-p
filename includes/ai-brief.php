@@ -1,6 +1,6 @@
 <?php
 /**
- * AI project brief — generates a requirement brief for the estimate wizard.
+ * AI project brief: generates a requirement brief for the estimate wizard.
  *
  * Provider is OpenAI-compatible (DeepSeek by default, OpenAI switchable via
  * AI_PROVIDER in .env). No pricing is ever produced: the model is instructed
@@ -288,7 +288,7 @@ if (!function_exists('ai_brief_template')) {
 
         $tech = ai_brief_tech_map()[$n['type']] ?? 'React.js · Node.js / Laravel · MySQL · AWS';
 
-        $notes = "• Pricing is tailored to the final scope — send this brief as an enquiry and we will reply with a detailed proposal within 48 hours.\n"
+        $notes = "• Pricing is tailored to the final scope; send this brief as an enquiry and we will reply with a detailed proposal within 48 hours.\n"
             . "• Timeline assumes a dedicated team and regular client availability for reviews.\n"
             . "• Dashandots typically starts with a 1–2 week discovery phase before committing to a fixed scope.";
 
@@ -410,7 +410,7 @@ if (!function_exists('ai_brief_generate')) {
             return null;
         }
 
-        // Pricing guard — the model was told not to, but never trust output.
+        // Pricing guard: the model was told not to, but never trust output.
         $tpl = ai_brief_template($n);
         if (ai_brief_contains_pricing($summary)) {
             error_log('[Dashandots AI Brief] stripped pricing from summary');
@@ -432,7 +432,7 @@ if (!function_exists('ai_brief_generate')) {
             error_log('[Dashandots AI Brief] stripped pricing from notes');
         }
         // Always append the enquiry/48-hour line so every brief carries it.
-        $notesKept[] = 'Pricing is tailored to the final scope — send this brief as an enquiry and Dashandots will reply with a detailed proposal within 48 hours.';
+        $notesKept[] = 'Pricing is tailored to the final scope; send this brief as an enquiry and Dashandots will reply with a detailed proposal within 48 hours.';
         $notesText = implode("\n", array_map(static fn($s) => '• ' . $s, $notesKept));
 
         return [

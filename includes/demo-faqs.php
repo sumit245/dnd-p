@@ -7,7 +7,7 @@
  * structured data can never drift apart.
  *
  * Answers are plain text (no HTML) because they are emitted into JSON-LD.
- * Keep every claim verifiable — this content is eligible for rich results.
+ * Keep every claim verifiable; this content is eligible for rich results.
  */
 
 return [

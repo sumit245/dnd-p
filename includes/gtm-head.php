@@ -1,6 +1,6 @@
 <?php
 /**
- * Google Tag Manager — head snippet (include once per page, early in <head>).
+ * Google Tag Manager: head snippet (include once per page, early in <head>).
  * Requires GTM_CONTAINER_ID in config.php.
  */
 if (!defined('GTM_CONTAINER_ID') || GTM_CONTAINER_ID === '') {

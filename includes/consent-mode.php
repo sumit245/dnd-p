@@ -1,6 +1,6 @@
 <?php
 /**
- * Google Consent Mode v2 defaults — must run before GTM container snippet.
+ * Google Consent Mode v2 defaults: must run before GTM container snippet.
  */
 if (!defined('ANALYTICS_ENABLED') || !ANALYTICS_ENABLED) {
     return;

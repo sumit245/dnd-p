@@ -59,7 +59,7 @@ $brief ??= ai_brief_template($n);
 
 $clientLine = $n['name'] . ($n['company'] !== '' ? ' · ' . $n['company'] : '');
 
-$briefText = "PROJECT BRIEF — {$n['type']} ({$n['scale']} scale)\n"
+$briefText = "PROJECT BRIEF: {$n['type']} ({$n['scale']} scale)\n"
     . "Client: {$clientLine}\n\n"
     . "{$brief['summary']}\n\n"
     . "--- SCOPE ---\n{$brief['scope']}\n\n"

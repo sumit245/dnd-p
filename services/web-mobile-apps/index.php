@@ -1,8 +1,8 @@
 <?php
 require __DIR__ . '/../../includes/config.php';
 
-$page['title']       = 'Custom Web & Mobile App Development Services in India | Dashandots';
-$page['description'] = 'Expert custom web and mobile app development: React, Laravel, Node.js, Flutter & React Native. Scalable, fast, SEO-friendly apps built for Indian businesses.';
+$page['title']       = 'Web & Mobile App Development India | Dashandots';
+$page['description'] = 'Custom web and mobile app development: React, Laravel, Node.js, Flutter and React Native. Scalable, fast apps built for Indian businesses.';
 $page['canonical']   = SITE_URL . '/services/web-mobile-apps/';
 $page['og_title']    = 'Custom Web & Mobile App Development | Dashandots Technology';
 $page['og_desc']     = $page['description'];

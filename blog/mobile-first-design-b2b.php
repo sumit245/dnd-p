@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/../includes/config.php';
-$page['title']       = 'Why Mobile-First Design Matters for B2B | ' . SITE_NAME . ' Blog';
+$page['title']       = 'Why Mobile-First Design Matters for B2B | Dashandots';
 $page['description'] = 'Enterprise software used to mean clunky desktop dashboards. Today, field workers and executives demand mobile-first experiences.';
 $page['canonical']   = SITE_URL . '/blog/mobile-first-design-b2b';
 $page['og_title']    = $page['title'];

@@ -21,7 +21,7 @@ $isMobileApp = ($portfolio['category'] ?? '') === 'mobile';
 <main id="main-content">
 
   <!-- ══════════════════════════════════════════
-       HERO — dark, full-width
+       HERO: dark, full-width
   ══════════════════════════════════════════ -->
   <section class="demo-hero">
 
@@ -82,7 +82,7 @@ $isMobileApp = ($portfolio['category'] ?? '') === 'mobile';
 
       <?php if ($hasOpenCreds): ?>
         <p class="demo-creds-note">
-          Open access &mdash; nothing to request. Log in with the details above and click through the whole system.
+          Open access: nothing to request. Log in with the details above and click through the whole system.
           This demo runs on sample data only. Need a walkthrough on your own structure? Email
           <a href="mailto:<?= htmlspecialchars(SITE_EMAIL) ?>"><?= htmlspecialchars(SITE_EMAIL) ?></a>
           or use the <a href="<?= BASE_PATH ?>/#contact">contact form</a>.
@@ -114,7 +114,7 @@ $isMobileApp = ($portfolio['category'] ?? '') === 'mobile';
 
 
   <!-- ══════════════════════════════════════════
-       IMAGE GALLERY — 1 main + 4-6 thumbnails
+       IMAGE GALLERY: 1 main + 4-6 thumbnails
   ══════════════════════════════════════════ -->
   <?php
     $galleryRaw  = $portfolio['gallery_images'] ?? '';
@@ -142,7 +142,7 @@ $isMobileApp = ($portfolio['category'] ?? '') === 'mobile';
           <img
             id="demoMainImg"
             src="<?= htmlspecialchars($mainImageSrc) ?>"
-            alt="<?= htmlspecialchars($portfolio['title']) ?> — dashboard overview"
+            alt="<?= htmlspecialchars($portfolio['title']) ?>: dashboard overview"
             class="demo-main-img"
             width="<?= (int) ($mainImageMeta['width'] ?? 1200) ?>"
             height="<?= (int) ($mainImageMeta['height'] ?? 800) ?>"

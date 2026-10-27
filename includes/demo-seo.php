@@ -3,9 +3,9 @@
  * Per-product SEO overrides for demo pages, keyed by portfolio slug.
  *
  * Why this exists: demo/view.php builds the <title> as
- * `portfolios.title . ' — ' . SITE_NAME`, and uses short_description as the
- * meta description. Both are written for the page itself — the H1 and the
- * intro paragraph — so they run well past what a SERP will show
+ * `portfolios.title . ' | ' . SITE_NAME`, and uses short_description as the
+ * meta description. Both are written for the page itself (the H1 and the
+ * intro paragraph) so they run well past what a SERP will show
  * (the HRMX title lands at 73 characters that way, the description past 200).
  *
  * An entry here overrides the <title> and meta/OG description for that slug
@@ -13,7 +13,7 @@
  * title tag targets the query, the H1 speaks to the reader.
  *
  * Keep `title` under 60 characters and `description` under 155. The override
- * is used verbatim — SITE_NAME is NOT appended — so include the brand if you
+ * is used verbatim (SITE_NAME is NOT appended) so include the brand if you
  * want it. Slugs with no entry keep the existing behaviour untouched.
  */
 

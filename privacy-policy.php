@@ -68,14 +68,14 @@ $page['active_nav'] = '';
       <p>Enquiry data submitted through our contact form is transmitted via encrypted SMTP (TLS) to our business email
         inbox (hosted by Google Workspace / Gmail). We do not store form submissions in a
         database. Your data is subject to Google's data protection practices.</p>
-      <p>We take reasonable technical precautions — including HTTPS, input sanitization, and access controls — to
+      <p>We take reasonable technical precautions (including HTTPS, input sanitization, and access controls) to
         protect
         data in transit.</p>
 
       <h2>5. Data Retention</h2>
       <p>We retain email correspondence (including enquiry data) for as long as reasonably necessary to fulfil the
         purpose
-        for which it was collected — typically for the duration of a business relationship and up to 3 years thereafter
+        for which it was collected: typically for the duration of a business relationship and up to 3 years thereafter
         for record-keeping purposes.</p>
 
       <h2>6. Your Rights</h2>

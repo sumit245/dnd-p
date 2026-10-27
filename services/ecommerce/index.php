@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../../includes/config.php';
 
-$page['title']       = 'E-commerce & Portal Development Services in India | Dashandots';
+$page['title']       = 'E-commerce & Portal Development India | Dashandots';
 $page['description'] = 'Custom B2B & B2C e-commerce development: multi-vendor marketplaces, dealer portals and self-service platforms. Built on Laravel, React & WooCommerce.';
 $page['canonical']   = SITE_URL . '/services/ecommerce/';
 $page['og_title']    = 'E-commerce & Portal Development | Dashandots Technology';

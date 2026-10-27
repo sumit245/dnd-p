@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../../includes/config.php';
-$page['title']       = 'Custom ERP Development Services in India | ' . SITE_NAME;
-$page['description'] = 'Custom ERP & CRM development for Indian SMEs: finance, inventory, HR, sales and procurement. Own your software and scale without recurring licensing fees.';
+$page['title']       = 'Custom ERP & CRM Development India | Dashandots';
+$page['description'] = 'Custom ERP & CRM development for Indian SMEs: finance, inventory, HR, sales and procurement. Own your software, with no licensing fees.';
 $page['keywords']    = 'custom ERP development India, ERP software development company, enterprise resource planning India, ERP for SME India, CRM development India';
 $page['canonical']   = SITE_URL . '/services/erp-development/';
 $page['og_title']    = 'Custom ERP & CRM Development | ' . SITE_NAME;

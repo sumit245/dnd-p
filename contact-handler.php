@@ -1,15 +1,15 @@
 <?php
 /**
- * Dashandots Technology — Contact Form Handler
+ * Dashandots Technology: Contact Form Handler
  * ─────────────────────────────────────────────
- * Self-contained SMTP mailer — NO Composer / PHPMailer needed.
+ * Self-contained SMTP mailer: NO Composer / PHPMailer needed.
  * Uses Gmail SSL (port 465) via PHP's native stream_socket_client().
  *
  * SETUP:
  *   1. Open .env (same folder as this file)
  *   2. Replace SMTP_PASS with your Gmail App Password (16 chars, no spaces)
  *      Get one at: https://myaccount.google.com/apppasswords
- *   3. Save — done.
+ *   3. Save: done.
  */
 
 declare(strict_types=1);
@@ -69,7 +69,7 @@ if (!$data) {
     exit;
 }
 
-// Honeypot — bots often fill hidden fields
+// Honeypot: bots often fill hidden fields
 if (!empty($data['website'] ?? '')) {
     echo json_encode(['success' => true, 'message' => 'Thanks! We\'ll reply within 48 hours.']);
     exit;
@@ -133,7 +133,7 @@ function make_enquiry_html(string $name, string $email, string $company, string 
  <div class='f'><div class='l'>Email</div><div class='v'><a href='mailto:{$email}'>" . htmlspecialchars($email) . "</a></div></div>
  {$co}{$ph}{$sv}
  <div class='f'><div class='l'>Message</div><div class='v msg'>" . nl2br(htmlspecialchars($message)) . "</div></div>
- <div class='ft'>Sent via dashandots.com — reply to this email to respond to {$name}.</div>
+ <div class='ft'>Sent via dashandots.com; reply to this email to respond to {$name}.</div>
 </div></body></html>";
 }
 
@@ -145,7 +145,7 @@ function make_confirm_html(string $name): string {
 <p>We've received your enquiry and will get back to you <strong>within 48 hours</strong>.</p>
 <p>In the meantime, browse our <a href='https://dashandots.com/portfolio'>portfolio</a> or read our <a href='https://dashandots.com/#faq'>FAQ</a>.</p>
 <hr style='border:none;border-top:1px solid #e8e6e0;margin:24px 0'>
-<small>Dashandots Technology &mdash; <a href='https://dashandots.com'>dashandots.com</a></small>
+<small>Dashandots Technology: <a href='https://dashandots.com'>dashandots.com</a></small>
 </body></html>";
 }
 
@@ -227,9 +227,9 @@ function smtp_send(
 }
 
 /* ── Send ──────────────────────────────────────────────────────────────── */
-$subject  = "New enquiry from {$name}" . ($company ? " ({$company})" : '') . " — Dashandots";
+$subject  = "New enquiry from {$name}" . ($company ? " ({$company})" : '') . " | Dashandots";
 $htmlBody = make_enquiry_html($name, $email, $company, $phone, $service, $message);
-$textBody = "New enquiry — Dashandots\n\nName: {$name}\nEmail: {$email}"
+$textBody = "New enquiry | Dashandots\n\nName: {$name}\nEmail: {$email}"
           . ($company ? "\nCompany: {$company}" : '')
           . ($phone   ? "\nPhone: {$phone}"     : '')
           . ($service ? "\nService: {$service}" : '')
@@ -254,9 +254,9 @@ try {
         $SMTP_USER, $SMTP_PASS,
         $SMTP_USER, $TO_NAME,
         $email, $name,
-        "We've received your enquiry — Dashandots Technology",
+        "We've received your enquiry | Dashandots Technology",
         make_confirm_html($name),
-        "Thank you {$name}! We'll reply within 48 hours. — Dashandots Technology"
+        "Thank you {$name}! We'll reply within 48 hours.: Dashandots Technology"
     );
     $sent = true;
 } catch (RuntimeException $e) {
@@ -270,7 +270,7 @@ if ($sent) {
 } else {
     http_response_code(500);
     $hint = str_contains($errMsg, 'connect') || str_contains($errMsg, 'ssl')
-        ? 'SMTP connection failed — check SMTP_PASS in .env is your Gmail App Password (no spaces).'
+        ? 'SMTP connection failed; check SMTP_PASS in .env is your Gmail App Password (no spaces).'
         : $errMsg;
     echo json_encode(['success' => false, 'message' => "Could not send email. {$hint}"]);
 }

@@ -60,7 +60,7 @@ $entries = [
         'client_name' => null,
         'client_url' => null,
         'tile_color' => '#C8293E',
-        'title'      => 'DnD CRM — Sales, Projects & Team Operations in One Place',
+        'title'      => 'DnD CRM | Sales, Projects & Team Operations in One Place',
         'short_description' => 'A custom CRM built for Indian SMEs that ties leads, clients, projects, invoicing, tasks, attendance and support tickets into a single daily dashboard.',
         'demo_url'   => 'https://crm.dashandots.com',
         'detailed_description' => <<<'HTML'
@@ -71,27 +71,27 @@ $entries = [
 <h2>What you see the moment you log in</h2>
 <p>The dashboard in this demo is a real working environment. The first row tells you whether you are clocked in, how many tasks are open against your name, what events are on today and what money is due. Below that:</p>
 <ul>
-<li><strong>Projects overview</strong> — open, completed and on-hold counts with an overall progression bar, so a stuck project is visible before the client calls.</li>
-<li><strong>Invoice overview</strong> — overdue, not paid, partially paid, fully paid and draft invoices with amounts against each. Cash-flow problems announce themselves here first.</li>
-<li><strong>Income vs expenses</strong> — this year against last year, with a monthly trend, straight from the finance module.</li>
-<li><strong>All tasks overview</strong> — to-do, in progress and done across the whole team, with overdue and priority markers.</li>
-<li><strong>Team members</strong> — headcount, who is on leave today, who has clocked in and who has clocked out. The <em>geofencing attendance</em> module means a field executive can only clock in from where they are supposed to be.</li>
-<li><strong>Ticket status</strong> — new, open and closed tickets grouped by type (general enquiry, bug report, feature request, billing, technical support), plus a 30-day trend.</li>
-<li><strong>Announcements and reminders</strong> — the small things that keep a team in sync without another WhatsApp group.</li>
+<li><strong>Projects overview</strong>: open, completed and on-hold counts with an overall progression bar, so a stuck project is visible before the client calls.</li>
+<li><strong>Invoice overview</strong>: overdue, not paid, partially paid, fully paid and draft invoices with amounts against each. Cash-flow problems announce themselves here first.</li>
+<li><strong>Income vs expenses</strong>: this year against last year, with a monthly trend, straight from the finance module.</li>
+<li><strong>All tasks overview</strong>: to-do, in progress and done across the whole team, with overdue and priority markers.</li>
+<li><strong>Team members</strong>: headcount, who is on leave today, who has clocked in and who has clocked out. The <em>geofencing attendance</em> module means a field executive can only clock in from where they are supposed to be.</li>
+<li><strong>Ticket status</strong>: new, open and closed tickets grouped by type (general enquiry, bug report, feature request, billing, technical support), plus a 30-day trend.</li>
+<li><strong>Announcements and reminders</strong>: the small things that keep a team in sync without another WhatsApp group.</li>
 </ul>
 
 <h2>Modules included in DnD CRM</h2>
 <ul>
-<li><strong>Leads, prospects and sales</strong> — capture from web forms or manual entry, assign, follow up, convert. Every touchpoint stays on the record.</li>
-<li><strong>Clients and projects</strong> — one client, many projects, each with its own tasks, notes, files and billing history.</li>
-<li><strong>Invoicing, purchase and expenses</strong> — GST-ready invoices, purchase orders, vendor bills and expense claims that roll into the income-vs-expense view automatically.</li>
-<li><strong>Inventory</strong> — for businesses that sell products alongside services, stock levels live next to sales orders.</li>
-<li><strong>HR records and payroll</strong> — employee master, documents, leave, payroll runs and salary slips, integrated with attendance.</li>
-<li><strong>Tasks, events, polls, mailbox and messages</strong> — the internal collaboration layer that keeps work inside the system instead of scattered across chat apps and email.</li>
-<li><strong>Fleet</strong> — for companies with vehicles, basic fleet records and running costs sit next to the projects they serve.</li>
-<li><strong>Tickets and help &amp; support</strong> — a proper helpdesk for customers, with SLA-friendly status tracking.</li>
-<li><strong>API management</strong> — connect the CRM to your website, WhatsApp, payment gateway or accounting software.</li>
-<li><strong>Reports</strong> — sales, collections, productivity and attendance reports that management actually reads.</li>
+<li><strong>Leads, prospects and sales</strong>: capture from web forms or manual entry, assign, follow up, convert. Every touchpoint stays on the record.</li>
+<li><strong>Clients and projects</strong>: one client, many projects, each with its own tasks, notes, files and billing history.</li>
+<li><strong>Invoicing, purchase and expenses</strong>: GST-ready invoices, purchase orders, vendor bills and expense claims that roll into the income-vs-expense view automatically.</li>
+<li><strong>Inventory</strong>: for businesses that sell products alongside services, stock levels live next to sales orders.</li>
+<li><strong>HR records and payroll</strong>: employee master, documents, leave, payroll runs and salary slips, integrated with attendance.</li>
+<li><strong>Tasks, events, polls, mailbox and messages</strong>: the internal collaboration layer that keeps work inside the system instead of scattered across chat apps and email.</li>
+<li><strong>Fleet</strong>: for companies with vehicles, basic fleet records and running costs sit next to the projects they serve.</li>
+<li><strong>Tickets and help &amp; support</strong>: a proper helpdesk for customers, with SLA-friendly status tracking.</li>
+<li><strong>API management</strong>: connect the CRM to your website, WhatsApp, payment gateway or accounting software.</li>
+<li><strong>Reports</strong>: sales, collections, productivity and attendance reports that management actually reads.</li>
 </ul>
 
 <h2>Who this CRM is for</h2>
@@ -115,7 +115,7 @@ HTML,
         'client_name' => 'TikTrucks',
         'client_url' => 'https://tiktrucs.com',
         'tile_color' => '#3A5A7A',
-        'title'      => 'Truckie — Fleet & Transport Management ERP for Logistics Companies',
+        'title'      => 'Truckie | Fleet & Transport Management ERP for Logistics Companies',
         'short_description' => 'A control-tower ERP for transporters and fleet owners: vehicles, drivers, vendors, trips, live GPS tracking, route planning, maintenance, tyres, fuel and driver payroll across branches.',
         'demo_url'   => 'https://truckie.dashandots.com',
         'detailed_description' => <<<'HTML'
@@ -125,24 +125,24 @@ HTML,
 
 <h2>What the control tower shows you</h2>
 <ul>
-<li><strong>Fleet statistics and utilisation</strong> — moving, parked, offline, no-data, in-trip, available and inactive vehicle counts, refreshed from live tracking.</li>
-<li><strong>Needs attention</strong> — a prioritised list: delayed trips requiring dispatcher action, vehicles in GPS-offline state, service reminders due in 24 hours, overdue vendor settlements, customs or compliance holds. The dispatcher starts the day here.</li>
-<li><strong>Fuel consumption (last 7 days)</strong> — per-day fuel spend, with anomalies visible immediately.</li>
+<li><strong>Fleet statistics and utilisation</strong>: moving, parked, offline, no-data, in-trip, available and inactive vehicle counts, refreshed from live tracking.</li>
+<li><strong>Needs attention</strong>: a prioritised list: delayed trips requiring dispatcher action, vehicles in GPS-offline state, service reminders due in 24 hours, overdue vendor settlements, customs or compliance holds. The dispatcher starts the day here.</li>
+<li><strong>Fuel consumption (last 7 days)</strong>: per-day fuel spend, with anomalies visible immediately.</li>
 <li><strong>Income vs expense trend</strong> and a <strong>today snapshot</strong> of available vehicles, revenue, expense and net position.</li>
-<li><strong>Operational tables</strong> — live trips, pending POD, upcoming maintenance, expiring documents.</li>
+<li><strong>Operational tables</strong>: live trips, pending POD, upcoming maintenance, expiring documents.</li>
 </ul>
 
 <h2>Modules in Truckie</h2>
 <ul>
-<li><strong>Vehicle management</strong> — registration, permits, insurance, fitness, PUC and tax expiry with reminders; ownership (own vs vendor-attached); running cost per km.</li>
-<li><strong>Driver management</strong> — licences, medical, assignments, advances, trip earnings, behaviour scores, and a <strong>driver chat</strong> channel so instructions are on record.</li>
-<li><strong>Vendor management</strong> — attached-vehicle owners, workshops, tyre and fuel vendors, with settlements tracked against trips.</li>
-<li><strong>Trip management</strong> — booking to delivery: consignor/consignee, LR/consignment note, e-way bill details, loading and unloading, PODs, detention and additional charges.</li>
-<li><strong>Customer management and coupons</strong> — customer master, contract rates, credit terms and promotional coupons for spot bookings.</li>
-<li><strong>Live tracking, route planner and geofence</strong> — GPS positions on a map, planned vs actual routes, and geofence alerts for depots, customer sites and restricted zones.</li>
-<li><strong>Warehouse and maintenance</strong> — parts stock, maintenance job cards, and a full <strong>tyre lifecycle</strong> module (fitment, rotation, retreading, scrapping) because tyres are usually the second-largest cost after fuel.</li>
-<li><strong>Attendance and payroll</strong> — driver and staff attendance, trip-based pay, overtime and deductions, ready for salary processing.</li>
-<li><strong>Multi-branch and multi-country</strong> — branch-wise P&amp;L with consolidated reporting for operators who run across regions or borders.</li>
+<li><strong>Vehicle management</strong>: registration, permits, insurance, fitness, PUC and tax expiry with reminders; ownership (own vs vendor-attached); running cost per km.</li>
+<li><strong>Driver management</strong>: licences, medical, assignments, advances, trip earnings, behaviour scores, and a <strong>driver chat</strong> channel so instructions are on record.</li>
+<li><strong>Vendor management</strong>: attached-vehicle owners, workshops, tyre and fuel vendors, with settlements tracked against trips.</li>
+<li><strong>Trip management</strong>: booking to delivery: consignor/consignee, LR/consignment note, e-way bill details, loading and unloading, PODs, detention and additional charges.</li>
+<li><strong>Customer management and coupons</strong>: customer master, contract rates, credit terms and promotional coupons for spot bookings.</li>
+<li><strong>Live tracking, route planner and geofence</strong>: GPS positions on a map, planned vs actual routes, and geofence alerts for depots, customer sites and restricted zones.</li>
+<li><strong>Warehouse and maintenance</strong>: parts stock, maintenance job cards, and a full <strong>tyre lifecycle</strong> module (fitment, rotation, retreading, scrapping) because tyres are usually the second-largest cost after fuel.</li>
+<li><strong>Attendance and payroll</strong>: driver and staff attendance, trip-based pay, overtime and deductions, ready for salary processing.</li>
+<li><strong>Multi-branch and multi-country</strong>: branch-wise P&amp;L with consolidated reporting for operators who run across regions or borders.</li>
 </ul>
 
 <h2>Who Truckie is for</h2>
@@ -166,7 +166,7 @@ HTML,
         'client_name' => 'Vindhyashri Solutions',
         'client_url' => 'https://vindhyashrisolutions.com',
         'tile_color' => '#0F7C86',
-        'title'      => 'Ghumantoo — Bus Ticket Booking & Operator Management Platform',
+        'title'      => 'Ghumantoo | Bus Ticket Booking & Operator Management Platform',
         'short_description' => 'A complete online bus reservation system for travel operators: routes, buses, schedules, dynamic pricing, seat bookings, crew assignment, attendance, occupancy alerts and revenue, with an operator onboarding flow.',
         'demo_url'   => 'https://bus-booking.dashandots.com',
         'detailed_description' => <<<'HTML'
@@ -176,17 +176,17 @@ HTML,
 
 <h2>What an operator can do from the panel</h2>
 <ul>
-<li><strong>Routes</strong> — define origin, destination, boarding and dropping points, distance and duration.</li>
-<li><strong>Buses</strong> — register vehicles with seat layouts (seater, sleeper, mixed), amenities, documents and photos.</li>
-<li><strong>Schedules</strong> — assign buses to routes by day and time, with recurring departures and blackout dates.</li>
-<li><strong>Pricing rules</strong> — base fares plus rules for weekends, festivals, last-minute demand, seat position and early-bird discounts. Change once, apply everywhere.</li>
-<li><strong>Bookings</strong> — see recent bookings with booking ID, route, passenger, amount and travel date; handle cancellations, refunds and reschedules from one place.</li>
-<li><strong>Occupancy alerts</strong> — get told when a departure is under-booked (time to promote it) or nearly full (time to add a bus).</li>
-<li><strong>Checklists</strong> — pre-departure safety and cleanliness checks that crew complete on their phone.</li>
-<li><strong>Staff management, crew assignment and attendance</strong> — drivers, conductors and helpers rostered per trip, with attendance captured at departure.</li>
-<li><strong>Feedback</strong> — passenger ratings and comments tied to the exact bus, crew and trip.</li>
-<li><strong>Revenue</strong> — daily, route-wise and bus-wise revenue with settlement reports.</li>
-<li><strong>Profile and onboarding</strong> — basic details, company details, documents and bank details, with a status tracker, so new operators can be verified and go live quickly.</li>
+<li><strong>Routes</strong>: define origin, destination, boarding and dropping points, distance and duration.</li>
+<li><strong>Buses</strong>: register vehicles with seat layouts (seater, sleeper, mixed), amenities, documents and photos.</li>
+<li><strong>Schedules</strong>: assign buses to routes by day and time, with recurring departures and blackout dates.</li>
+<li><strong>Pricing rules</strong>: base fares plus rules for weekends, festivals, last-minute demand, seat position and early-bird discounts. Change once, apply everywhere.</li>
+<li><strong>Bookings</strong>: see recent bookings with booking ID, route, passenger, amount and travel date; handle cancellations, refunds and reschedules from one place.</li>
+<li><strong>Occupancy alerts</strong>: get told when a departure is under-booked (time to promote it) or nearly full (time to add a bus).</li>
+<li><strong>Checklists</strong>: pre-departure safety and cleanliness checks that crew complete on their phone.</li>
+<li><strong>Staff management, crew assignment and attendance</strong>: drivers, conductors and helpers rostered per trip, with attendance captured at departure.</li>
+<li><strong>Feedback</strong>: passenger ratings and comments tied to the exact bus, crew and trip.</li>
+<li><strong>Revenue</strong>: daily, route-wise and bus-wise revenue with settlement reports.</li>
+<li><strong>Profile and onboarding</strong>: basic details, company details, documents and bank details, with a status tracker, so new operators can be verified and go live quickly.</li>
 </ul>
 
 <h2>For the passenger</h2>
@@ -218,7 +218,7 @@ HTML,
         'client_name' => null,
         'client_url' => null,
         'tile_color' => '#C8293E',
-        'title'      => 'HRMX — HR, Attendance & Payroll Management System',
+        'title'      => 'HRMX | HR, Attendance & Payroll Management System',
         'short_description' => 'An HRMS built for growing Indian companies: employee records, organisation structure, timesheets, leave, payroll, training, performance, recruitment and an HR helpdesk on one dashboard.',
         'demo_url'   => 'https://hrmx.dashandots.com',
         'detailed_description' => <<<'HTML'
@@ -232,44 +232,44 @@ HTML,
 
 <h3>Core HR and organisation</h3>
 <ul>
-<li><strong>Staff and core HR</strong> &mdash; employee master with personal, employment, statutory (PAN, Aadhaar, PF, ESI, UAN) and bank details; documents with expiry reminders; onboarding and exit checklists.</li>
-<li><strong>Organisation</strong> &mdash; companies, branches, departments, designations and reporting lines, with org-chart views.</li>
-<li><strong>HR calendar, tickets and files manager</strong> &mdash; holidays and events, an internal HR helpdesk for employee queries, and a document library for policies and forms.</li>
+<li><strong>Staff and core HR</strong>: employee master with personal, employment, statutory (PAN, Aadhaar, PF, ESI, UAN) and bank details; documents with expiry reminders; onboarding and exit checklists.</li>
+<li><strong>Organisation</strong>: companies, branches, departments, designations and reporting lines, with org-chart views.</li>
+<li><strong>HR calendar, tickets and files manager</strong>: holidays and events, an internal HR helpdesk for employee queries, and a document library for policies and forms.</li>
 </ul>
 
 <h3>Time, leave and payroll</h3>
 <ul>
-<li><strong>Timesheet and attendance</strong> &mdash; daily and weekly timesheets, project-wise hours, biometric or mobile punch integration, shifts and overtime.</li>
-<li><strong>Leave management</strong> &mdash; leave types, accrual rules, holiday calendars, approval workflow and balances visible to the employee.</li>
-<li><strong>Payroll</strong> &mdash; salary structures, earnings and deductions, PF/ESI/PT/TDS computations, arrears, loans and advances, payslips and bank transfer files. Runs in minutes, not days.</li>
-<li><strong>Project management</strong> &mdash; lightweight project and task tracking so utilisation reports come from real work data.</li>
+<li><strong>Timesheet and attendance</strong>: daily and weekly timesheets, project-wise hours, biometric or mobile punch integration, shifts and overtime.</li>
+<li><strong>Leave management</strong>: leave types, accrual rules, holiday calendars, approval workflow and balances visible to the employee.</li>
+<li><strong>Payroll</strong>: salary structures, earnings and deductions, PF/ESI/PT/TDS computations, arrears, loans and advances, payslips and bank transfer files. Runs in minutes, not days.</li>
+<li><strong>Project management</strong>: lightweight project and task tracking so utilisation reports come from real work data.</li>
 </ul>
 
 <h3>Talent: recruitment, training and performance</h3>
 <ul>
-<li><strong>Recruitment</strong> &mdash; job openings, candidate pipeline, interviews and offer letters, converting a hired candidate into an employee in one click.</li>
-<li><strong>Training</strong> &mdash; programmes, sessions, attendance and feedback, tied to the employee record.</li>
-<li><strong>Performance</strong> &mdash; goals, KRAs, self and manager reviews, rating cycles and history.</li>
+<li><strong>Recruitment</strong>: job openings, candidate pipeline, interviews and offer letters, converting a hired candidate into an employee in one click.</li>
+<li><strong>Training</strong>: programmes, sessions, attendance and feedback, tied to the employee record.</li>
+<li><strong>Performance</strong>: goals, KRAs, self and manager reviews, rating cycles and history.</li>
 </ul>
 
 <h3>Employee self-service</h3>
-<p>Employees see their own payslips, apply for leave, update their details and raise tickets without emailing HR. In practice this is the module that decides whether an HRMS gets used or quietly abandoned &mdash; if the team still has to ask HR for everything, nothing has changed.</p>
+<p>Employees see their own payslips, apply for leave, update their details and raise tickets without emailing HR. In practice this is the module that decides whether an HRMS gets used or quietly abandoned: if the team still has to ask HR for everything, nothing has changed.</p>
 
 <h2>Who HRMX is for</h2>
 <p>Companies with 20 to 1,000 employees across IT services, manufacturing, retail chains, healthcare, education, logistics and professional services. It works for single-office teams and for multi-branch companies with different shifts, leave policies and payroll rules per location.</p>
 
 <h2>Built for Indian compliance, customised for your policies</h2>
-<p>Statutory calculations for PF, ESI, professional tax and TDS are built in and kept current. Everything else, from leave policy to appraisal format to payslip layout, is configured to match how your company already works &mdash; and because policies differ by branch and often by department inside the same branch, HRMX lets each one run its own rules while payroll stays a single process. No forced upgrade will break a report you depend on, because you own the deployment.</p>
+<p>Statutory calculations for PF, ESI, professional tax and TDS are built in and kept current. Everything else, from leave policy to appraisal format to payslip layout, is configured to match how your company already works; and because policies differ by branch and often by department inside the same branch, HRMX lets each one run its own rules while payroll stays a single process. No forced upgrade will break a report you depend on, because you own the deployment.</p>
 
 <h2>Attendance problems most HR software cannot solve</h2>
 
 <h3>Roving security guards: punch with a photo, inside 90 metres</h3>
-<p>A security agency's guards do not sit at a desk. They move between posts through a shift, and the question that matters &mdash; <em>was the guard actually at that site?</em> &mdash; cannot be answered by a biometric machine bolted to one wall.</p>
+<p>A security agency's guards do not sit at a desk. They move between posts through a shift, and the question that matters (<em>was the guard actually at that site?</em>) cannot be answered by a biometric machine bolted to one wall.</p>
 <p>So we built attendance that travels with the person: <strong>photo-based punch from a mobile phone, geofenced to a 90-metre radius of the location they are assigned to</strong>, with rotating shift patterns that follow a guard from one site to the next. The attendance record carries the place and the picture, not just a timestamp.</p>
-<p>The same mechanics apply to anyone whose work is not at a fixed address &mdash; field sales and service engineers, multi-site housekeeping and facility staff, delivery and logistics crews, and consultants working from client premises.</p>
+<p>The same mechanics apply to anyone whose work is not at a fixed address: field sales and service engineers, multi-site housekeeping and facility staff, delivery and logistics crews, and consultants working from client premises.</p>
 
 <h3>One payroll, many rulebooks</h3>
-<p>Most HR products let you configure a policy per company, and the better ones per location. The requirement we actually keep meeting goes one level finer than that: <strong>two departments inside the same branch running different rules</strong> &mdash; different leave entitlements, different approval chains, different working patterns &mdash; while payroll still runs as a single process at month end.</p>
+<p>Most HR products let you configure a policy per company, and the better ones per location. The requirement we actually keep meeting goes one level finer than that: <strong>two departments inside the same branch running different rules</strong>: different leave entitlements, different approval chains, different working patterns; while payroll still runs as a single process at month end.</p>
 <p>That same flexibility is what lets one deployment hold a mixed workforce: <strong>daily-wage and unstructured labour alongside salaried corporate staff</strong>, each under the rules that apply to them, in one system with one set of reports.</p>
 
 <h3>What HRMX looks like at scale</h3>
@@ -278,15 +278,15 @@ HTML,
 <h2>How a rollout actually runs: NDA to first live payroll</h2>
 <p>Roughly a week per stage, <strong>eight to ten weeks in total</strong>:</p>
 <ol>
-<li><strong>NDA</strong> &mdash; signed before anything else starts, including discovery.</li>
-<li><strong>Discovery and policy mapping</strong> &mdash; your leave, shift, attendance and payroll rules written down properly. For many companies this is the first time that has happened.</li>
-<li><strong>Data migration</strong> &mdash; guided by us, performed by your team: employee master, salary structures, past leave balances.</li>
-<li><strong>Configuration</strong> &mdash; leave types and accruals, shifts, salary structures, approval chains, and the per-branch and per-department variations your policies need.</li>
-<li><strong>UAT with HR</strong> &mdash; your HR team tests against their own real cases, not a sample dataset.</li>
-<li><strong>Parallel payroll</strong> &mdash; the new system runs alongside your existing process for <strong>two to three pay cycles</strong>. Nobody cuts over on faith.</li>
+<li><strong>NDA</strong>: signed before anything else starts, including discovery.</li>
+<li><strong>Discovery and policy mapping</strong>: your leave, shift, attendance and payroll rules written down properly. For many companies this is the first time that has happened.</li>
+<li><strong>Data migration</strong>: guided by us, performed by your team: employee master, salary structures, past leave balances.</li>
+<li><strong>Configuration</strong>: leave types and accruals, shifts, salary structures, approval chains, and the per-branch and per-department variations your policies need.</li>
+<li><strong>UAT with HR</strong>: your HR team tests against their own real cases, not a sample dataset.</li>
+<li><strong>Parallel payroll</strong>: the new system runs alongside your existing process for <strong>two to three pay cycles</strong>. Nobody cuts over on faith.</li>
 <li><strong>Go-live.</strong></li>
-<li><strong>Training</strong> &mdash; four on-premise sessions and six online sessions, <strong>all recorded</strong>, so people who join later can catch up without booking anyone's time.</li>
-<li><strong>Continuous support</strong> &mdash; 24/7, on whichever channel suits you, under the AMC.</li>
+<li><strong>Training</strong>: four on-premise sessions and six online sessions, <strong>all recorded</strong>, so people who join later can catch up without booking anyone's time.</li>
+<li><strong>Continuous support</strong>: 24/7, on whichever channel suits you, under the AMC.</li>
 </ol>
 
 <h3>What we need from you, and where projects actually slip</h3>
@@ -297,34 +297,34 @@ HTML,
 <p>HRMX is not a subscription. It is a <strong>one-time build fee plus a yearly AMC</strong>, and you own the intellectual property at the end of it. There is no per-employee licence, so what you pay for the software does not move every time you hire.</p>
 <p>What changes from one project to the next is scope. These are the seven things that move an HRMX quote, in the order they actually matter:</p>
 <ol>
-<li><strong>Data migration from your existing system</strong> &mdash; the single biggest driver, on almost every project.</li>
-<li><strong>Where you want it hosted</strong> &mdash; your own on-premise server, your cloud account, or ours.</li>
-<li><strong>Biometric and device integration</strong> &mdash; how many devices, which makes, and whether they already talk to anything.</li>
-<li><strong>Custom modules</strong> &mdash; anything outside the standard module list above.</li>
-<li><strong>Payroll component complexity</strong> &mdash; the number and nature of the earnings, deductions and rules you run.</li>
-<li><strong>Number of branches and locations</strong> &mdash; each one that needs its own calendar, shift pattern or policy set.</li>
-<li><strong>Headcount</strong> &mdash; last on the list, and deliberately so.</li>
+<li><strong>Data migration from your existing system</strong>: the single biggest driver, on almost every project.</li>
+<li><strong>Where you want it hosted</strong>: your own on-premise server, your cloud account, or ours.</li>
+<li><strong>Biometric and device integration</strong>: how many devices, which makes, and whether they already talk to anything.</li>
+<li><strong>Custom modules</strong>: anything outside the standard module list above.</li>
+<li><strong>Payroll component complexity</strong>: the number and nature of the earnings, deductions and rules you run.</li>
+<li><strong>Number of branches and locations</strong>: each one that needs its own calendar, shift pattern or policy set.</li>
+<li><strong>Headcount</strong>: last on the list, and deliberately so.</li>
 </ol>
 <p>That last point is worth sitting with: <em>headcount is the cheapest variable in a custom build and the most expensive variable in a subscription.</em> That one difference is the whole financial argument for owning your HRMS instead of renting it.</p>
 
 <h3>Why migration costs more than the software</h3>
 <p>Companies come to us from Tally, from MARG, from Odoo, and often from a legacy system nobody in the building can name any more. Every one of them stores employees, salary structures and leave balances differently, and very few of them export cleanly. That mapping work, not the build, is where the hours go.</p>
-<p>Here is the part most buyers have backwards: <strong>if you run everything on Excel today, you are in a better position than someone on an old HRMS.</strong> A spreadsheet maps cleanly; a closed system with no usable export does not. We guide the migration &mdash; mapping, templates, validation &mdash; and your team performs it, which means your people finish the project knowing their own data.</p>
+<p>Here is the part most buyers have backwards: <strong>if you run everything on Excel today, you are in a better position than someone on an old HRMS.</strong> A spreadsheet maps cleanly; a closed system with no usable export does not. We guide the migration (mapping, templates, validation) and your team performs it, which means your people finish the project knowing their own data.</p>
 
 <h3>What the yearly AMC covers, and what it does not</h3>
 <ul>
-<li><strong>Covered</strong> &mdash; bug fixes and security updates, with support available 24/7 on whichever channel suits you.</li>
-<li><strong>Not covered</strong> &mdash; cosmetic changes and new features. Those are scoped and quoted separately.</li>
+<li><strong>Covered</strong>: bug fixes and security updates, with support available 24/7 on whichever channel suits you.</li>
+<li><strong>Not covered</strong>: cosmetic changes and new features. Those are scoped and quoted separately.</li>
 </ul>
 <p>We print that exclusion rather than bury it, because discovering it in month four is how clients lose faith in a vendor.</p>
 
 <h2>Where your data sits, and who can touch it</h2>
 <ul>
-<li><strong>Hosting</strong> &mdash; by default, secured AWS infrastructure in the Mumbai region. Where it lives is your decision though: on-premise, your own cloud account, or ours. Because HRMX is a custom build and not a SaaS tenancy, hosting is a choice you make rather than one you inherit.</li>
-<li><strong>Backups</strong> &mdash; taken daily.</li>
-<li><strong>Access</strong> &mdash; nobody at Dashandots touches client data except the support team, and only in order to support you.</li>
-<li><strong>Confidentiality</strong> &mdash; an NDA is signed before the engagement begins.</li>
-<li><strong>Ownership</strong> &mdash; the client owns the IP. The system stays yours, including on the day you stop working with us.</li>
+<li><strong>Hosting</strong>: by default, secured AWS infrastructure in the Mumbai region. Where it lives is your decision though: on-premise, your own cloud account, or ours. Because HRMX is a custom build and not a SaaS tenancy, hosting is a choice you make rather than one you inherit.</li>
+<li><strong>Backups</strong>: taken daily.</li>
+<li><strong>Access</strong>: nobody at Dashandots touches client data except the support team, and only in order to support you.</li>
+<li><strong>Confidentiality</strong>: an NDA is signed before the engagement begins.</li>
+<li><strong>Ownership</strong>: the client owns the IP. The system stays yours, including on the day you stop working with us.</li>
 </ul>
 <p><strong>Track record.</strong> Dashandots has been building software for six years. HRMX runs today at six companies: the largest on <strong>1,200+ employees</strong>, and the longest-running deployment live for <strong>more than three years</strong>.</p>
 <p>We hold no security certifications at present, and we would rather say so than display a badge we have not earned. Everything above is verifiable on a call.</p>
@@ -333,7 +333,7 @@ HTML,
 <p>Plainly: <strong>below about 20 employees, do not commission a custom HRMS.</strong> Subscribe to a SaaS product instead. A build does not pay back at that size, and we would rather tell you that on the call than after the invoice.</p>
 <p>The signals that a custom build <em>is</em> the right call usually look like this:</p>
 <ul>
-<li>A subscription tool's policy model cannot express how you actually operate &mdash; per-department rules, a mixed workforce, geofenced roving staff.</li>
+<li>A subscription tool's policy model cannot express how you actually operate: per-department rules, a mixed workforce, geofenced roving staff.</li>
 <li>Per-employee pricing has quietly become one of your fastest-growing software costs.</li>
 <li>You need employee data on infrastructure you control.</li>
 <li>You would rather own the system than rent it.</li>
@@ -343,13 +343,13 @@ HTML,
 <p>Three mistakes, in the order we see them:</p>
 <ol>
 <li><strong>Tangled policies.</strong> They try to automate leave and attendance rules that contradict each other and were never written down. Software cannot resolve a policy conflict; it only makes it visible faster, and usually in front of the whole team.</li>
-<li><strong>No clear org chart.</strong> Until reporting lines are settled, approval workflows cannot be configured &mdash; and approvals are most of what an HRMS does on an ordinary day.</li>
+<li><strong>No clear org chart.</strong> Until reporting lines are settled, approval workflows cannot be configured; and approvals are most of what an HRMS does on an ordinary day.</li>
 <li><strong>Demos that mislead them.</strong> Buyers are shown features in the order that demonstrates well, not the order that will matter in month three. They end up unable to judge which capabilities they actually need, and choose on impressions.</li>
 </ol>
 <p>So before you talk to any vendor, ours included: write your policies down and settle your org chart. That work is yours, it costs nothing, and it shortens every implementation that follows.</p>
 
 <h2>See your HR process in it</h2>
-<p>A full working demo runs at hrmx.dashandots.com &mdash; ask us for access and click through the whole system, including a sample payroll run.</p>
+<p>A full working demo runs at hrmx.dashandots.com; ask us for access and click through the whole system, including a sample payroll run.</p>
 <p>Then tell us three things: how you record attendance today, what your payroll components are, and your headcount. We will configure a sample with your own structure and walk you through a payroll run start to finish. If it turns out you are better served by a subscription product, we will say so on that call.</p>
 HTML,
     ],
@@ -364,7 +364,7 @@ HTML,
         'client_name' => 'NewGen Windows',
         'client_url' => null,
         'tile_color' => '#2B5D8C',
-        'title'      => 'NewGen ERP — Manufacturing ERP for uPVC & Aluminium Window and Door Fabricators',
+        'title'      => 'NewGen ERP | Manufacturing ERP for uPVC & Aluminium Window and Door Fabricators',
         'short_description' => 'A made-to-order manufacturing ERP: product configurator, BOQ, design drawings with customer approval links, measurements, orders, production planning, inventory, procurement, quality and executive MIS.',
         'demo_url'   => 'https://newgen-erp.dashandots.com',
         'detailed_description' => <<<'HTML'
@@ -377,17 +377,17 @@ HTML,
 
 <h2>Modules in NewGen ERP</h2>
 <ul>
-<li><strong>Configurator</strong> — build a product from series, type, dimensions, panel layout, profile colour, glass and hardware. Rules stop impossible combinations before they reach the factory.</li>
-<li><strong>BOQ</strong> — bill of quantities generated from the configuration: profiles by length, glass by area, hardware by count, with wastage factors per series.</li>
-<li><strong>Designs</strong> — drawings, revisions, annotations, history and component lists, with the approval workflow above.</li>
-<li><strong>Measurements</strong> — site measurement records with opening dimensions, tolerances and photos, feeding the configurator directly.</li>
-<li><strong>Catalogue</strong> — series, profiles, hardware, glass and accessories with supplier links and costs.</li>
-<li><strong>Orders</strong> — customer orders bundling multiple designs, with stage-wise status from confirmation to installation.</li>
-<li><strong>PPC (production planning and control)</strong> — cutting lists, job cards, machine loading and shop-floor status per order line.</li>
-<li><strong>Inventory and stores</strong> — profile bars, glass, hardware and consumables across stores, with reservations against orders.</li>
-<li><strong>Procurement</strong> — purchase requisitions driven by BOQ shortfalls, POs, GRN and supplier bills.</li>
-<li><strong>Quality</strong> — inspection checkpoints at cutting, assembly, glazing and dispatch, with defect logging.</li>
-<li><strong>Executive MIS</strong> — order book, WIP, on-time delivery, material cost variance and margin per order, for the people who need the numbers without opening a module.</li>
+<li><strong>Configurator</strong>: build a product from series, type, dimensions, panel layout, profile colour, glass and hardware. Rules stop impossible combinations before they reach the factory.</li>
+<li><strong>BOQ</strong>: bill of quantities generated from the configuration: profiles by length, glass by area, hardware by count, with wastage factors per series.</li>
+<li><strong>Designs</strong>: drawings, revisions, annotations, history and component lists, with the approval workflow above.</li>
+<li><strong>Measurements</strong>: site measurement records with opening dimensions, tolerances and photos, feeding the configurator directly.</li>
+<li><strong>Catalogue</strong>: series, profiles, hardware, glass and accessories with supplier links and costs.</li>
+<li><strong>Orders</strong>: customer orders bundling multiple designs, with stage-wise status from confirmation to installation.</li>
+<li><strong>PPC (production planning and control)</strong>: cutting lists, job cards, machine loading and shop-floor status per order line.</li>
+<li><strong>Inventory and stores</strong>: profile bars, glass, hardware and consumables across stores, with reservations against orders.</li>
+<li><strong>Procurement</strong>: purchase requisitions driven by BOQ shortfalls, POs, GRN and supplier bills.</li>
+<li><strong>Quality</strong>: inspection checkpoints at cutting, assembly, glazing and dispatch, with defect logging.</li>
+<li><strong>Executive MIS</strong>: order book, WIP, on-time delivery, material cost variance and margin per order, for the people who need the numbers without opening a module.</li>
 </ul>
 
 <h2>Who this ERP is for</h2>
@@ -411,7 +411,7 @@ HTML,
         'client_name' => null,
         'client_url' => null,
         'tile_color' => '#C8293E',
-        'title'      => 'DnD Connect — WhatsApp Business API Platform for Teams',
+        'title'      => 'DnD Connect | WhatsApp Business API Platform for Teams',
         'short_description' => 'A WhatsApp Business API platform: shared team inbox, chatbot flows, broadcast campaigns, message templates, contacts, catalogue, webhooks, click-to-chat links and API access, running on official Meta Cloud API.',
         'demo_url'   => 'https://waba.dashandots.com',
         'detailed_description' => <<<'HTML'
@@ -423,17 +423,17 @@ HTML,
 
 <h2>Modules in DnD Connect</h2>
 <ul>
-<li><strong>Chat (shared team inbox)</strong> — every conversation in one place, assignable to agents, with notes, labels, quick replies and media. Nobody replies twice; nobody is forgotten.</li>
-<li><strong>Chatbot flows</strong> — visual, no-code flows for greetings, menus, FAQ, lead capture, order status and hand-off to a human when needed.</li>
-<li><strong>Agents and teams</strong> — roles, routing rules, working hours and per-agent performance.</li>
-<li><strong>Templates</strong> — create and submit message templates for Meta approval, with variables, buttons and media headers.</li>
-<li><strong>Blast / bulk campaigns</strong> — segment contacts, schedule broadcasts, track delivery and replies. Built for opted-in marketing and transactional messaging, within WhatsApp's policies.</li>
-<li><strong>Contacts and labels</strong> — import, tag and segment; sync with your CRM.</li>
-<li><strong>Catalogue</strong> — product catalogue for WhatsApp commerce, with cart and order messages.</li>
-<li><strong>Ads manager</strong> — click-to-WhatsApp ad tracking so you know which campaign a conversation came from.</li>
-<li><strong>Reports</strong> — volume, response time, resolution, campaign performance and agent productivity.</li>
-<li><strong>API, webhooks, integrations and API health</strong> — REST API with documentation, outbound webhooks for inbound messages and status updates, ready-made integrations, and a health page that tells you at a glance whether everything is connected.</li>
-<li><strong>File manager and link generator</strong> — media library and click-to-chat links with pre-filled messages for websites, QR codes and print.</li>
+<li><strong>Chat (shared team inbox)</strong>: every conversation in one place, assignable to agents, with notes, labels, quick replies and media. Nobody replies twice; nobody is forgotten.</li>
+<li><strong>Chatbot flows</strong>: visual, no-code flows for greetings, menus, FAQ, lead capture, order status and hand-off to a human when needed.</li>
+<li><strong>Agents and teams</strong>: roles, routing rules, working hours and per-agent performance.</li>
+<li><strong>Templates</strong>: create and submit message templates for Meta approval, with variables, buttons and media headers.</li>
+<li><strong>Blast / bulk campaigns</strong>: segment contacts, schedule broadcasts, track delivery and replies. Built for opted-in marketing and transactional messaging, within WhatsApp's policies.</li>
+<li><strong>Contacts and labels</strong>: import, tag and segment; sync with your CRM.</li>
+<li><strong>Catalogue</strong>: product catalogue for WhatsApp commerce, with cart and order messages.</li>
+<li><strong>Ads manager</strong>: click-to-WhatsApp ad tracking so you know which campaign a conversation came from.</li>
+<li><strong>Reports</strong>: volume, response time, resolution, campaign performance and agent productivity.</li>
+<li><strong>API, webhooks, integrations and API health</strong>: REST API with documentation, outbound webhooks for inbound messages and status updates, ready-made integrations, and a health page that tells you at a glance whether everything is connected.</li>
+<li><strong>File manager and link generator</strong>: media library and click-to-chat links with pre-filled messages for websites, QR codes and print.</li>
 </ul>
 
 <h2>Who uses DnD Connect</h2>
@@ -457,9 +457,9 @@ HTML,
         'client_name' => 'Vindhyashri Solutions',
         'client_url' => 'https://vindhyashrisolutions.com',
         'tile_color' => '#0F7C86',
-        'title'      => 'Ghumantoo — Bus Ticket Booking App for Passengers (Android)',
+        'title'      => 'Ghumantoo | Bus Ticket Booking App for Passengers (Android)',
         'short_description' => 'The passenger side of the Ghumantoo bus platform: search routes, pick seats on a visual layout, choose boarding points, pay online and travel with a QR e-ticket, with live trip status and booking history.',
-        // Play listing for com.dashandots.ghumantoo currently returns 404 — set once the app is public.
+        // Play listing for com.dashandots.ghumantoo currently returns 404: set once the app is public.
         'demo_url'   => '',
         'detailed_description' => <<<'HTML'
 <h2>Booking a bus should take less time than waiting for one</h2>
@@ -471,10 +471,10 @@ HTML,
 <li><strong>Pick seats</strong> on a visual seat map (seater, sleeper or mixed layouts), with ladies' seats and already-booked seats marked.</li>
 <li><strong>Choose boarding and dropping points</strong> with times and map pins, so nobody waits at the wrong stand.</li>
 <li><strong>Pay online</strong> by UPI, cards, net banking or wallets, and receive an <strong>e-ticket with QR code</strong> that the conductor scans at boarding.</li>
-<li><strong>Track the trip</strong> — live bus location and expected arrival at your boarding point on the day of travel.</li>
-<li><strong>Manage bookings</strong> — history, cancellations and refunds per the operator's policy, reschedules, and downloadable invoices.</li>
-<li><strong>Rate the journey</strong> — feedback goes straight to the operator's panel, tied to the bus and crew.</li>
-<li><strong>Get notified</strong> — booking confirmation, departure reminders and delay alerts via push notification and WhatsApp.</li>
+<li><strong>Track the trip</strong>: live bus location and expected arrival at your boarding point on the day of travel.</li>
+<li><strong>Manage bookings</strong>: history, cancellations and refunds per the operator's policy, reschedules, and downloadable invoices.</li>
+<li><strong>Rate the journey</strong>: feedback goes straight to the operator's panel, tied to the bus and crew.</li>
+<li><strong>Get notified</strong>: booking confirmation, departure reminders and delay alerts via push notification and WhatsApp.</li>
 </ul>
 
 <h2>How it connects to the operator panel</h2>
@@ -501,7 +501,7 @@ HTML,
         'client_name' => 'Sugs Lloyd Limited',
         'client_url' => 'https://slldm.com',
         'tile_color' => '#1F8A4C',
-        'title'      => 'LloydWFM — Workforce & Vendor Task Management App for Sugs Lloyd',
+        'title'      => 'LloydWFM | Workforce & Vendor Task Management App for Sugs Lloyd',
         'short_description' => 'A field workforce management app built for Sugs Lloyd, a solar and streetlight EPC company: assign site jobs to vendors, approve submitted work, track engineer and project progress, and keep coordination on record instead of on calls.',
         'demo_url'   => 'https://play.google.com/store/apps/details?id=com.dashandots.lloydwfm',
         'detailed_description' => <<<'HTML'
@@ -510,12 +510,12 @@ HTML,
 
 <h2>What staff can do in the app</h2>
 <ul>
-<li><strong>Assign tasks to vendors</strong> — pick the site, the scope, the deadline and the vendor; the vendor receives it instantly in their companion app.</li>
-<li><strong>Review vendor submissions</strong> — completed work comes back with photos, quantities, notes and location stamps.</li>
-<li><strong>Approve or send back</strong> — one tap to approve, or return with comments; every decision is time-stamped against the person who made it.</li>
-<li><strong>Track status</strong> — open, in progress, submitted, approved and rejected counts per site and per vendor, so a delayed job is visible before it becomes a delayed project.</li>
-<li><strong>See team performance</strong> — per-engineer totals, completed and pending, and a project overview with total sites against completed sites per work order (for example a 54-site rooftop order at 47 done, 7 pending).</li>
-<li><strong>Coordinate</strong> — task-level comments and attachments, so the context stays with the job rather than in a chat thread.</li>
+<li><strong>Assign tasks to vendors</strong>: pick the site, the scope, the deadline and the vendor; the vendor receives it instantly in their companion app.</li>
+<li><strong>Review vendor submissions</strong>: completed work comes back with photos, quantities, notes and location stamps.</li>
+<li><strong>Approve or send back</strong>: one tap to approve, or return with comments; every decision is time-stamped against the person who made it.</li>
+<li><strong>Track status</strong>: open, in progress, submitted, approved and rejected counts per site and per vendor, so a delayed job is visible before it becomes a delayed project.</li>
+<li><strong>See team performance</strong>: per-engineer totals, completed and pending, and a project overview with total sites against completed sites per work order (for example a 54-site rooftop order at 47 done, 7 pending).</li>
+<li><strong>Coordinate</strong>: task-level comments and attachments, so the context stays with the job rather than in a chat thread.</li>
 </ul>
 
 <h2>The vendor side</h2>
@@ -542,9 +542,9 @@ HTML,
         'client_name' => 'Sugs Lloyd Limited',
         'client_url' => 'https://slldm.com',
         'tile_color' => '#1F8A4C',
-        'title'      => 'Lloyd BA — Business Associate & Vendor Field App for Sugs Lloyd',
+        'title'      => 'Lloyd BA | Business Associate & Vendor Field App for Sugs Lloyd',
         'short_description' => 'The vendor-side companion to LloydWFM: business associates receive assigned jobs, update progress from site, upload photo proof and submit work for approval, with status and history in one place.',
-        // Play listing for com.dashandots.lloydba currently returns 404 — set once the app is public.
+        // Play listing for com.dashandots.lloydba currently returns 404: set once the app is public.
         'demo_url'   => '',
         'detailed_description' => <<<'HTML'
 <h2>Give partners a clear job list instead of a ringing phone</h2>
@@ -552,13 +552,13 @@ HTML,
 
 <h2>What associates can do</h2>
 <ul>
-<li><strong>See assigned jobs</strong> — site, scope, quantities, deadline and contact person, sorted by urgency.</li>
-<li><strong>Accept and start</strong> — acknowledge a job so staff know it is in hand.</li>
-<li><strong>Update progress from site</strong> — percentage or quantity complete, with photos captured in-app (with GPS and time stamp) and notes.</li>
-<li><strong>Submit for approval</strong> — once done, submit; the staff app receives it for review immediately.</li>
-<li><strong>Handle returns</strong> — if work is sent back, the comment is right there with the job, and resubmission is one step.</li>
-<li><strong>Track history</strong> — approved and rejected work by month, useful for reconciling bills and settling disputes with data instead of memory.</li>
-<li><strong>Get notified</strong> — new assignments, approvals and messages arrive as push notifications.</li>
+<li><strong>See assigned jobs</strong>: site, scope, quantities, deadline and contact person, sorted by urgency.</li>
+<li><strong>Accept and start</strong>: acknowledge a job so staff know it is in hand.</li>
+<li><strong>Update progress from site</strong>: percentage or quantity complete, with photos captured in-app (with GPS and time stamp) and notes.</li>
+<li><strong>Submit for approval</strong>: once done, submit; the staff app receives it for review immediately.</li>
+<li><strong>Handle returns</strong>: if work is sent back, the comment is right there with the job, and resubmission is one step.</li>
+<li><strong>Track history</strong>: approved and rejected work by month, useful for reconciling bills and settling disputes with data instead of memory.</li>
+<li><strong>Get notified</strong>: new assignments, approvals and messages arrive as push notifications.</li>
 </ul>
 
 <h2>Why the two-app design</h2>
@@ -582,7 +582,7 @@ HTML,
         'client_name' => 'Trust Me Recycle',
         'client_url' => 'https://trustmerecycle.com',
         'tile_color' => '#2E8B57',
-        'title'      => 'TrustMeRecycle — Scrap & E-Waste Pickup App for an ISO-Certified Recycler',
+        'title'      => 'TrustMeRecycle | Scrap & E-Waste Pickup App for an ISO-Certified Recycler',
         'short_description' => 'A two-sided app for Trust Me Recycle, a 25-year-old ISO-certified scrap and e-waste company: businesses request pickups for metal, electronic, battery, IT, plastic and paper scrap; collection vendors run their assigned pickups from a dashboard.',
         'demo_url'   => 'https://play.google.com/store/apps/details?id=com.dashandots.trustmerecycle',
         'detailed_description' => <<<'HTML'
@@ -594,13 +594,13 @@ HTML,
 
 <h2>What customers can do</h2>
 <ul>
-<li><strong>Request a pickup</strong> — choose scrap categories, estimate quantity, add photos, set the address and a preferred slot.</li>
-<li><strong>Track the request</strong> — scheduled, assigned, picked up, weighed, settled, with notifications at each step.</li>
-<li><strong>See the weighbridge result</strong> — actual weights per category after pickup, so the settlement is transparent.</li>
-<li><strong>Get documentation</strong> — pickup receipts, and for e-waste, the certificates and forms that corporate customers need for EPR and environmental compliance, downloadable from the app.</li>
-<li><strong>Manage multiple sites</strong> — one company account, many pickup locations, with history per location.</li>
-<li><strong>Repeat easily</strong> — re-book a previous pickup in two taps; schedule recurring collections for regular generators.</li>
-<li><strong>Reach support</strong> — in-app chat and call for questions about categories, pricing structure or scheduling.</li>
+<li><strong>Request a pickup</strong>: choose scrap categories, estimate quantity, add photos, set the address and a preferred slot.</li>
+<li><strong>Track the request</strong>: scheduled, assigned, picked up, weighed, settled, with notifications at each step.</li>
+<li><strong>See the weighbridge result</strong>: actual weights per category after pickup, so the settlement is transparent.</li>
+<li><strong>Get documentation</strong>: pickup receipts, and for e-waste, the certificates and forms that corporate customers need for EPR and environmental compliance, downloadable from the app.</li>
+<li><strong>Manage multiple sites</strong>: one company account, many pickup locations, with history per location.</li>
+<li><strong>Repeat easily</strong>: re-book a previous pickup in two taps; schedule recurring collections for regular generators.</li>
+<li><strong>Reach support</strong>: in-app chat and call for questions about categories, pricing structure or scheduling.</li>
 </ul>
 
 <h2>Why this matters for a recycler</h2>
@@ -633,7 +633,7 @@ HTML,
         'client_name' => 'Feasti',
         'client_url' => 'https://feasti.com',
         'tile_color' => '#E8552E',
-        'short_description' => 'A subscription platform for daily home-cooked meals. We built the customer, home-chef and driver apps on one ERP that handles subscriptions, daily menus, order routing and chef settlements — with the website running off the same catalogue.',
+        'short_description' => 'A subscription platform for daily home-cooked meals. We built the customer, home-chef and driver apps on one ERP that handles subscriptions, daily menus, order routing and chef settlements; with the website running off the same catalogue.',
         'demo_url'   => null,
         'detailed_description' => null,
     ],
@@ -647,7 +647,7 @@ HTML,
         'client_name' => 'RS Robotics & Automation',
         'client_url' => 'https://www.rsrobotic.com',
         'tile_color' => '#2B5D8C',
-        'short_description' => 'A manufacturer of line automation systems, special purpose machines and robotic cells. Every SPM is a one-off build, so the ERP carries each order from enquiry to dispatch — BOM, purchase, stores issue, job cards and production progress.',
+        'short_description' => 'A manufacturer of line automation systems, special purpose machines and robotic cells. Every SPM is a one-off build, so the ERP carries each order from enquiry to dispatch: BOM, purchase, stores issue, job cards and production progress.',
         'demo_url'   => null,
         'detailed_description' => null,
     ],
@@ -661,7 +661,7 @@ HTML,
         'client_name' => 'SP Constructs',
         'client_url' => 'https://spconstructs.com',
         'tile_color' => '#B4731F',
-        'short_description' => 'Dozens of small jobs run at the same time, each with its own materials, labour and billing schedule. The ERP keeps costing per job rather than per month — what was issued, who was deployed, what is billed and what is still to recover.',
+        'short_description' => 'Dozens of small jobs run at the same time, each with its own materials, labour and billing schedule. The ERP keeps costing per job rather than per month: what was issued, who was deployed, what is billed and what is still to recover.',
         'demo_url'   => null,
         'detailed_description' => null,
     ],
@@ -675,7 +675,7 @@ HTML,
         'client_name' => 'Bharatiya Merit Party',
         'client_url' => 'https://bharatiyameritparty.org',
         'tile_color' => '#E07B23',
-        'short_description' => 'Membership that has to be verified, and units nesting from national down to district. The ERP holds that hierarchy properly — members registered and verified against a unit, roles assigned within it, and reporting that rolls up the same way.',
+        'short_description' => 'Membership that has to be verified, and units nesting from national down to district. The ERP holds that hierarchy properly: members registered and verified against a unit, roles assigned within it, and reporting that rolls up the same way.',
         'demo_url'   => null,
         'detailed_description' => null,
     ],
@@ -689,7 +689,7 @@ HTML,
         'client_name' => 'SMaRT4Bharat',
         'client_url' => 'https://smart4bharat.com',
         'tile_color' => '#C9541B',
-        'short_description' => 'A membership body that also runs grants, legal support and events — three workflows sharing one list of people. The ERP keeps that list authoritative and hangs applications, support requests and event participation off it.',
+        'short_description' => 'A membership body that also runs grants, legal support and events: three workflows sharing one list of people. The ERP keeps that list authoritative and hangs applications, support requests and event participation off it.',
         'demo_url'   => null,
         'detailed_description' => null,
     ],
@@ -750,74 +750,74 @@ HTML,
         'detailed_description' => null,
     ],
     // ───────────────────────────── GRAPHICS (from /design work) ─────────────────────────────
-    // Social, print and motion pieces. No demo/detail page — the tile is the work.
+    // Social, print and motion pieces. No demo/detail page: the tile is the work.
     [
         'slug' => 'tapzo-cashback', 'category' => 'graphics', 'badge' => 'SOCIAL', 'sort_order' => 240,
         'industry' => 'food-retail', 'client_name' => 'Tapzo', 'client_url' => null, 'tile_color' => '#E8552E',
-        'title' => 'Tapzo — First Order Cashback Banner',
-        'short_description' => 'A 25% cashback banner that has to carry five partner logos and still read in one glance. Burger, offer, code — nothing else gets in the way.',
+        'title' => 'Tapzo | First Order Cashback Banner',
+        'short_description' => 'A 25% cashback banner that has to carry five partner logos and still read in one glance. Burger, offer, code: nothing else gets in the way.',
         'demo_url' => '', 'detailed_description' => '',
     ],
     [
         'slug' => 'fast-food-banner', 'category' => 'graphics', 'badge' => 'PRINT', 'sort_order' => 250,
         'industry' => 'food-retail', 'client_name' => 'Self-initiated', 'client_url' => null, 'tile_color' => '#E07B23',
-        'title' => 'Fast Food — Triangular Menu Banner',
+        'title' => 'Fast Food | Triangular Menu Banner',
         'short_description' => 'Seven dishes cut into one triangular run for a hoarding-width banner. Built so the same artwork works at counter size and at 20 feet.',
         'demo_url' => '', 'detailed_description' => '',
     ],
     [
         'slug' => 'detox-story', 'category' => 'graphics', 'badge' => 'SOCIAL', 'sort_order' => 130,
         'industry' => 'food-retail', 'client_name' => 'Self-initiated', 'client_url' => null, 'tile_color' => '#4A7C3F',
-        'title' => 'Detox — Instagram Story Frame',
+        'title' => 'Detox | Instagram Story Frame',
         'short_description' => 'Story frame for a juice bar: one rule, one promise, no clutter. Designed as a template the client fills every morning.',
         'demo_url' => '', 'detailed_description' => '',
     ],
     [
         'slug' => 'petoo-bhau-burger', 'category' => 'graphics', 'badge' => 'SOCIAL', 'sort_order' => 160,
         'industry' => 'food-retail', 'client_name' => 'Petoo Bhau', 'client_url' => null, 'tile_color' => '#C9541B',
-        'title' => 'Petoo Bhau — Burger Drop Post',
+        'title' => 'Petoo Bhau | Burger Drop Post',
         'short_description' => 'Menu hero at ₹49. The burger was cut out, relit and stacked so the price tag and the product fight for attention and both win.',
         'demo_url' => '', 'detailed_description' => '',
     ],
     [
         'slug' => 'rashmika-coffee', 'category' => 'graphics', 'badge' => 'SOCIAL', 'sort_order' => 210,
         'industry' => 'food-retail', 'client_name' => "Rashmika's Coffee Shop", 'client_url' => null, 'tile_color' => '#B4731F',
-        'title' => "Rashmika's Coffee Shop — Launch Square",
+        'title' => "Rashmika's Coffee Shop: Launch Square",
         'short_description' => 'Pour, splash and price in one square. A single post that had to work as the shop sign, the menu board and the first Instagram tile.',
         'demo_url' => '', 'detailed_description' => '',
     ],
     [
         'slug' => 'snubfoods-chips', 'category' => 'graphics', 'badge' => 'SOCIAL', 'sort_order' => 290,
         'industry' => 'food-retail', 'client_name' => 'Snüb Foods', 'client_url' => 'https://snubfoods.com', 'tile_color' => '#4A7C3F',
-        'title' => 'Snüb Foods — Good Food, Great Mood',
+        'title' => 'Snüb Foods | Good Food, Great Mood',
         'short_description' => 'Banana chips on a banana leaf, with the type cut out of the fry itself. Part of the same brand system as the Snüb Foods POS build.',
         'demo_url' => '', 'detailed_description' => '',
     ],
     [
         'slug' => 'merienda-snacks', 'category' => 'graphics', 'badge' => 'MOTION', 'sort_order' => 150,
         'industry' => 'food-retail', 'client_name' => 'Merienda Me Snacks', 'client_url' => null, 'tile_color' => '#E8552E',
-        'title' => 'Merienda Me Snacks — Five-Second Reel',
-        'short_description' => 'Five seconds of snack type for a Varanasi kitchen. Kinetic text, product pop, phone number, done — built for Reels and WhatsApp status.',
+        'title' => 'Merienda Me Snacks | Five-Second Reel',
+        'short_description' => 'Five seconds of snack type for a Varanasi kitchen. Kinetic text, product pop, phone number, done: built for Reels and WhatsApp status.',
         'demo_url' => '', 'detailed_description' => '',
     ],
     [
         'slug' => 'flax-protein-bar', 'category' => 'graphics', 'badge' => 'MOTION', 'sort_order' => 220,
         'industry' => 'food-retail', 'client_name' => 'Self-initiated', 'client_url' => null, 'tile_color' => '#6A4AA8',
-        'title' => 'Flax Seed Protein Bar — Product Reveal',
+        'title' => 'Flax Seed Protein Bar | Product Reveal',
         'short_description' => 'Starburst build, product reveal, five seconds flat. A vertical motion piece showing how a packaged product launches on social.',
         'demo_url' => '', 'detailed_description' => '',
     ],
     [
         'slug' => 'todays-menu', 'category' => 'graphics', 'badge' => 'SOCIAL', 'sort_order' => 310,
         'industry' => 'food-retail', 'client_name' => 'Self-initiated', 'client_url' => null, 'tile_color' => '#2E8B57',
-        'title' => "Today's Menu — Sunday Service Story",
+        'title' => "Today's Menu: Sunday Service Story",
         'short_description' => 'Sunday service, three plates, one polaroid stack. A daily-menu story template a restaurant can update without a designer.',
         'demo_url' => '', 'detailed_description' => '',
     ],
     [
         'slug' => 'italian-pizza', 'category' => 'graphics', 'badge' => 'SOCIAL', 'sort_order' => 320,
         'industry' => 'food-retail', 'client_name' => 'Self-initiated', 'client_url' => null, 'tile_color' => '#C9541B',
-        'title' => 'Italian Pizza — Menu Hero',
+        'title' => 'Italian Pizza | Menu Hero',
         'short_description' => 'Cast iron, chilli, and one thin gold rule. A menu hero built for a dark-mode Instagram feed and the same card printed on the table tent.',
         'demo_url' => '', 'detailed_description' => '',
     ],

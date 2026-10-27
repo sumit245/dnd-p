@@ -1,6 +1,6 @@
 <?php
 /**
- * Dynamic XML Sitemap — Dashandots Technology
+ * Dynamic XML Sitemap: Dashandots Technology
  * Queries DB for live blog posts so phantom URLs never appear.
  * Replace sitemap.xml reference with this file in robots.txt.
  */
@@ -81,7 +81,7 @@ $staticPages = [
 ];
 
 // ── Static blog articles (blog/{slug}.php) ────────────────────────
-// lastmod comes from the file itself, not a literal — the 2024 dates these
+// lastmod comes from the file itself, not a literal: the 2024 dates these
 // carried were years out of step with every other date on the site.
 $staticBlogPages = [
     ['slug' => 'future-of-custom-erp'],
@@ -104,7 +104,7 @@ try {
         ];
     }
 } catch (PDOException $e) {
-    // Silently skip DB errors — static pages still output
+    // Silently skip DB errors: static pages still output
 }
 
 // ── Portfolio / product pages from DB (only those with a live URL) ──

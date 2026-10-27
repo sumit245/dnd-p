@@ -13,16 +13,16 @@ function getReadTime($blog) {
     return max(1, (int)ceil($words / 200));
 }
 
-$page['title'] = 'Blog & Insights — ' . SITE_NAME;
+$page['title'] = 'Blog & Insights | ' . SITE_NAME;
 $page['description'] = 'Read our latest insights, case studies, and guides on custom software development, ERP, CRM, and digital transformation for SMEs.';
 $page['canonical'] = SITE_URL . '/blog/';
-$page['og_title'] = 'Blog & Insights — ' . SITE_NAME;
+$page['og_title'] = 'Blog & Insights | ' . SITE_NAME;
 $page['og_desc'] = 'Insights, guides and case studies on ERP, CRM, TMS and custom software development. Expert perspectives from Dashandots Technology, India.';
 $page['og_image'] = SITE_URL . '/assets/img/og-image.jpg';
 $page['active_nav'] = 'blog';
 
 $schemaCollection = [
-    'name' => 'Blog & Insights — ' . SITE_NAME,
+    'name' => 'Blog & Insights | ' . SITE_NAME,
     'description' => 'Insights, case studies, and guides on ERP, CRM, TMS, and custom software for growing businesses.',
     'url' => SITE_URL . '/blog/',
 ];
@@ -43,7 +43,7 @@ if (!empty($blogs[0]['feature_image'])) {
 <?php endif; ?>
     <style>
         /* ═══════════════════════════════════════════
-           BLOG LISTING — STYLES
+           BLOG LISTING: STYLES
         ═══════════════════════════════════════════ */
 
         .blog-header {
@@ -146,8 +146,12 @@ if (!empty($blogs[0]['feature_image'])) {
         }
         .blog-rt svg { color: var(--accent); flex-shrink: 0; }
 
-        /* ── Title ────────────────────────────────── */
-        .blog-h3 {
+        /* ── Title ──────────────────────────────────
+           Card titles are h2 (they sit under the page h1, and h3 skipped a
+           level). The compound selector is deliberate: style.css carries a
+           legacy `.blog-card h2` rule that would otherwise win on specificity
+           and change the spacing. */
+        .blog-card .blog-h3 {
             font-size: 20px;
             font-weight: 700;
             margin: 0 0 12px 0;
@@ -305,9 +309,9 @@ if (!empty($blogs[0]['feature_image'])) {
                                     </span>
                                 </div>
 
-                                <h3 class="blog-h3">
+                                <h2 class="blog-h3">
                                     <a href="<?php echo public_href('/blog/' . urlencode($blog['slug'])); ?>"><?php echo $postTitle; ?></a>
-                                </h3>
+                                </h2>
 
                                 <p class="blog-excerpt">
                                     <?php

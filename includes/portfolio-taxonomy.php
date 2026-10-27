@@ -105,8 +105,11 @@ if (!function_exists('portfolio_initials')) {
     /** Two-character mark for entries without a screenshot. */
     function portfolio_initials(array $row): string
     {
-        // Product name first (Ghumantoo → "Gh"), client name only as a fallback.
-        $name = trim(explode(' — ', (string)($row['title'] ?? ''))[0]);
+        // Product name first (Ghumantoo -> "Gh"), client name only as a fallback.
+        // Titles separate product from descriptor with ' | '; older rows used an
+        // em-dash, so accept either rather than returning the whole title.
+        $title = (string)($row['title'] ?? '');
+        $name  = trim(preg_split('/\s+(\||\x{2014})\s+/u', $title)[0] ?? $title);
         if ($name === '') {
             $name = trim((string)($row['client_name'] ?? ''));
         }

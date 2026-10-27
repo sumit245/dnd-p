@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../../includes/config.php';
 
-$page['title']       = 'IoT & Embedded Software Development Services in India | Dashandots';
+$page['title']       = 'IoT & Embedded Development India | Dashandots';
 $page['description'] = 'Custom IoT platform development, firmware engineering and device-cloud connectivity for industrial, agricultural and consumer IoT products in India.';
 $page['canonical']   = SITE_URL . '/services/iot-embedded/';
 $page['og_title']    = 'IoT & Embedded Software Development | Dashandots Technology';

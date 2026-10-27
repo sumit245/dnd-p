@@ -13,7 +13,7 @@ if (!$portfolio) {
     exit;
 }
 
-$page['title']       = $portfolio['title'] . ' Demo — ' . SITE_NAME;
+$page['title']       = $portfolio['title'] . ' Demo | ' . SITE_NAME;
 $page['description'] = $portfolio['short_description'];
 $page['canonical']   = SITE_URL . '/demo/' . $slug;
 $page['og_title']    = $page['title'];

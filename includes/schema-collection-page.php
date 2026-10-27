@@ -1,6 +1,6 @@
 <?php
 /**
- * CollectionPage JSON-LD — set $schemaCollection before including:
+ * CollectionPage JSON-LD: set $schemaCollection before including:
  *   name, description, url
  */
 if (empty($schemaCollection['name']) || empty($schemaCollection['url'])) {

@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════════════════
-   PORTFOLIO PAGE — /portfolio
+   PORTFOLIO PAGE: /portfolio
    Ported from the /design system (graph-paper substrate, Archivo Black display,
    JetBrains Mono micro, square chips, hard-offset tile shadows). Everything is
    scoped under .pf so the site's main stylesheet is untouched. Accent is the
@@ -85,7 +85,7 @@
   padding: calc(var(--nav-h, 68px) + var(--s8)) 0 var(--s12);
 }
 
-/* Paper grain — noticeable by its absence, not its presence. */
+/* Paper grain: noticeable by its absence, not its presence. */
 .pf::after {
   content: '';
   position: absolute;
@@ -275,7 +275,7 @@
 }
 
 /* -------------------------------------------------------------------- GRID */
-/* Unit grid — square units, 10 per row on desktop.
+/* Unit grid: square units, 10 per row on desktop.
      desktop   4×3  (16:9 screenshot + caption strip)
      portrait  2×4  (9:16 phone / story + caption strip)
      square    2×2  (1:1 graphic)
@@ -599,7 +599,7 @@
   font-size: .6875rem;
 }
 
-/* CTA plate — sits in the last gap of the grid */
+/* CTA plate: sits in the last gap of the grid */
 .pf-tile--c {
   background: var(--ink);
   border-color: var(--ink);
@@ -662,7 +662,7 @@
 }
 
 /* -------------------------------------------------------------- RESPONSIVE */
-/* ≤1024: 8 units — two desktops per row */
+/* ≤1024: 8 units: two desktops per row */
 @media (max-width: 1024px) {
   .pf-grid {
     --pf-cols: 8;
@@ -702,7 +702,7 @@
   }
 }
 
-/* ≤700: 4 units — desktop full width, everything else half */
+/* ≤700: 4 units: desktop full width, everything else half */
 @media (max-width: 700px) {
   .pf-grid {
     --pf-cols: 4;

@@ -1,4 +1,4 @@
-/* Portfolio page — client-side industry filter + stagger bookkeeping.
+/* Portfolio page: client-side industry filter + stagger bookkeeping.
    Placement is pure CSS (dense grid in sort order); hiding tiles re-packs the rest.
    Reveal animation is handled by the site-wide .reveal observer in app.js. */
 document.addEventListener('DOMContentLoaded', () => {

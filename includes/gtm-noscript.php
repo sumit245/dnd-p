@@ -1,6 +1,6 @@
 <?php
 /**
- * Google Tag Manager — noscript fallback (place immediately after opening <body>).
+ * Google Tag Manager: noscript fallback (place immediately after opening <body>).
  */
 if (!defined('GTM_CONTAINER_ID') || GTM_CONTAINER_ID === '') {
     return;

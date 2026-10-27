@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/../includes/config.php';
-$page['title']       = 'Future of Custom ERP Development in India | ' . SITE_NAME;
+$page['title']       = 'The Future of Custom ERP Development in India | Dashandots';
 $page['description'] = "Discover why custom ERP development is replacing off-the-shelf software for India's mid-sized and growing enterprises in 2025 and beyond.";
 $page['canonical']   = SITE_URL . '/blog/future-of-custom-erp';
 $page['og_title']    = $page['title'];
