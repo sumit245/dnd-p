@@ -241,7 +241,43 @@ HTML,
 <p>Companies with 20 to 1,000 employees across IT services, manufacturing, retail chains, healthcare, education, logistics and professional services. It works for single-office teams and for multi-branch companies with different shifts, leave policies and payroll rules per location.</p>
 
 <h2>Built for Indian compliance, customised for your policies</h2>
-<p>Statutory calculations for PF, ESI, professional tax and TDS are built in and kept current. Everything else, from leave policy to appraisal format to payslip layout, is configured to match how your company already works. Because you own the deployment, there is no per-employee subscription and no forced upgrade that breaks a report you depend on.</p>
+<p>Statutory calculations for PF, ESI, professional tax and TDS are built in and kept current. Everything else, from leave policy to appraisal format to payslip layout, is configured to match how your company already works &mdash; and because policies differ by branch and often by department inside the same branch, HRMX lets each one run its own rules while payroll stays a single process. No forced upgrade will break a report you depend on, because you own the deployment.</p>
+
+<h2>What HRMX costs, and what actually drives the number</h2>
+<p>HRMX is not a subscription. It is a <strong>one-time build fee plus a yearly AMC</strong>, and you own the intellectual property at the end of it. There is no per-employee licence, so what you pay for the software does not move every time you hire.</p>
+<p>What changes from one project to the next is scope. These are the seven things that move an HRMX quote, in the order they actually matter:</p>
+<ol>
+<li><strong>Data migration from your existing system</strong> &mdash; the single biggest driver, on almost every project.</li>
+<li><strong>Where you want it hosted</strong> &mdash; your own on-premise server, your cloud account, or ours.</li>
+<li><strong>Biometric and device integration</strong> &mdash; how many devices, which makes, and whether they already talk to anything.</li>
+<li><strong>Custom modules</strong> &mdash; anything outside the standard module list above.</li>
+<li><strong>Payroll component complexity</strong> &mdash; the number and nature of the earnings, deductions and rules you run.</li>
+<li><strong>Number of branches and locations</strong> &mdash; each one that needs its own calendar, shift pattern or policy set.</li>
+<li><strong>Headcount</strong> &mdash; last on the list, and deliberately so.</li>
+</ol>
+<p>That last point is worth sitting with: <em>headcount is the cheapest variable in a custom build and the most expensive variable in a subscription.</em> That one difference is the whole financial argument for owning your HRMS instead of renting it.</p>
+
+<h3>Why migration costs more than the software</h3>
+<p>Companies come to us from Tally, from MARG, from Odoo, and often from a legacy system nobody in the building can name any more. Every one of them stores employees, salary structures and leave balances differently, and very few of them export cleanly. That mapping work, not the build, is where the hours go.</p>
+<p>Here is the part most buyers have backwards: <strong>if you run everything on Excel today, you are in a better position than someone on an old HRMS.</strong> A spreadsheet maps cleanly; a closed system with no usable export does not. We guide the migration &mdash; mapping, templates, validation &mdash; and your team performs it, which means your people finish the project knowing their own data.</p>
+
+<h3>What the yearly AMC covers, and what it does not</h3>
+<ul>
+<li><strong>Covered</strong> &mdash; bug fixes and security updates, with support available 24/7 on whichever channel suits you.</li>
+<li><strong>Not covered</strong> &mdash; cosmetic changes and new features. Those are scoped and quoted separately.</li>
+</ul>
+<p>We print that exclusion rather than bury it, because discovering it in month four is how clients lose faith in a vendor.</p>
+
+<h2>Where your data sits, and who can touch it</h2>
+<ul>
+<li><strong>Hosting</strong> &mdash; by default, secured AWS infrastructure in the Mumbai region. Where it lives is your decision though: on-premise, your own cloud account, or ours. Because HRMX is a custom build and not a SaaS tenancy, hosting is a choice you make rather than one you inherit.</li>
+<li><strong>Backups</strong> &mdash; taken daily.</li>
+<li><strong>Access</strong> &mdash; nobody at Dashandots touches client data except the support team, and only in order to support you.</li>
+<li><strong>Confidentiality</strong> &mdash; an NDA is signed before the engagement begins.</li>
+<li><strong>Ownership</strong> &mdash; the client owns the IP. The system stays yours, including on the day you stop working with us.</li>
+</ul>
+<p><strong>Track record.</strong> Dashandots has been building software for six years. HRMX runs today at six companies: the largest on <strong>1,200+ employees</strong>, and the longest-running deployment live for <strong>more than three years</strong>.</p>
+<p>We hold no security certifications at present, and we would rather say so than display a badge we have not earned. Everything above is verifiable on a call.</p>
 
 <h2>See your HR process in it</h2>
 <p>Try the demo, then share your current attendance method, payroll components and headcount. We will configure a sample with your structure and show you a payroll run start to finish.</p>
@@ -720,7 +756,7 @@ HTML,
 
 
 $sql = 'INSERT INTO portfolios (slug, category, industry, badge, sort_order, title, client_name, client_url, tile_color, short_description, detailed_description, demo_url, username, password, image_path, gallery_images)
-        VALUES (:slug, :category, :industry, :badge, :sort_order, :title, :client_name, :client_url, :tile_color, :short_description, :detailed_description, :demo_url, NULL, NULL, :image_path, NULL)
+        VALUES (:slug, :category, :industry, :badge, :sort_order, :title, :client_name, :client_url, :tile_color, :short_description, :detailed_description, :demo_url, :username, :password, :image_path, NULL)
         ON DUPLICATE KEY UPDATE
             category = VALUES(category),
             industry = VALUES(industry),
@@ -733,6 +769,8 @@ $sql = 'INSERT INTO portfolios (slug, category, industry, badge, sort_order, tit
             short_description = VALUES(short_description),
             detailed_description = VALUES(detailed_description),
             demo_url = VALUES(demo_url),
+            username = VALUES(username),
+            password = VALUES(password),
             image_path = VALUES(image_path)';
 
 $stmt = $pdo->prepare($sql);
@@ -750,6 +788,8 @@ foreach ($entries as $e) {
         ':short_description'    => $e['short_description'],
         ':detailed_description' => $e['detailed_description'],
         ':demo_url'             => ($e['demo_url'] ?? '') !== '' ? $e['demo_url'] : null,
+        ':username'             => ($e['username'] ?? '') !== '' ? $e['username'] : null,
+        ':password'             => ($e['password'] ?? '') !== '' ? $e['password'] : null,
         ':image_path'           => $img($e['slug']),
     ]);
     $exists = $img($e['slug']) !== null;
