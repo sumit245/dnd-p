@@ -56,7 +56,8 @@ $page = [
     'description' => 'Dashandots builds custom ERP, CRM, Hotel PMS, project management software and mobile apps for Indian SMEs in Gurugram and Delhi NCR, with secure delivery and long-term support.',
     'keywords' => 'custom ERP development India, CRM development company India, business software for Indian SMEs',
     'canonical' => SITE_URL . '/',
-    'og_title' => 'Software Developer in India | ERP, CRM, Hotel PMS & Management Systems — ' . SITE_NAME,
+    // Kept under ~70 chars so social previews do not truncate it.
+    'og_title' => 'ERP, CRM & Management Systems | ' . SITE_NAME,
     'og_desc' => 'Custom ERP, CRM, Hotel PMS, hospital management & project management software developer in Delhi NCR, India. Mobile apps and enterprise systems for SMEs.',
     'og_image' => SITE_URL . '/assets/img/og-image.jpg',
     'body_class' => '',

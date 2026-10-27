@@ -19,13 +19,55 @@ if (!$portfolio || !portfolio_has_detail($portfolio)) {
     exit;
 }
 
-// Per-slug SEO overrides keep the <title> and meta description inside SERP
-// limits without touching the H1, which still comes from portfolios.title.
+// SEO overrides keep the <title> and meta description inside SERP limits
+// without touching the H1, which still comes from portfolios.title.
+//
+// Resolution order, most specific first:
+//   1. portfolios.meta_title / meta_description — editable in admin, no deploy
+//   2. includes/demo-seo.php — code-reviewed defaults for specific slugs
+//   3. generated — brand appended to the title, short_description trimmed to
+//      155 chars on a word boundary (it is page copy, and ran to 249 chars on
+//      some rows, so it truncated mid-sentence in results)
 $seoOverrides = include __DIR__ . '/../includes/demo-seo.php';
 $seo          = $seoOverrides[$slug] ?? [];
 
-$page['title']       = $seo['title'] ?? ($portfolio['title'] . ' | ' . SITE_NAME);
-$page['description'] = $seo['description'] ?? $portfolio['short_description'];
+/** Trim to $limit chars on a word boundary, without a trailing ellipsis. */
+$demoMetaTrim = static function (string $text, int $limit = 155): string {
+    $text = trim(preg_replace('/\s+/', ' ', strip_tags($text)));
+    if (mb_strlen($text) <= $limit) {
+        return $text;
+    }
+    $cut = mb_substr($text, 0, $limit);
+    $lastSpace = mb_strrpos($cut, ' ');
+
+    return rtrim($lastSpace !== false ? mb_substr($cut, 0, $lastSpace) : $cut, " ,;:—-");
+};
+
+/**
+ * Generated title: brand suffix only when it still fits in ~60 chars.
+ * Several portfolio titles are themselves descriptive sentences
+ * ("TrustMeRecycle | Scrap & E-Waste Pickup App for an ISO-Certified
+ * Recycler"), so appending the brand unconditionally pushed them past 100.
+ */
+$demoMetaTitle = static function (string $rowTitle) use ($demoMetaTrim): string {
+    $withBrand = $rowTitle . ' | ' . SITE_NAME;
+    if (mb_strlen($withBrand) <= 60) {
+        return $withBrand;
+    }
+    $short = $rowTitle . ' | Dashandots';
+    if (mb_strlen($short) <= 60) {
+        return $short;
+    }
+
+    return mb_strlen($rowTitle) <= 60 ? $rowTitle : $demoMetaTrim($rowTitle, 60);
+};
+
+$page['title']       = !empty($portfolio['meta_title'])
+    ? $portfolio['meta_title']
+    : ($seo['title'] ?? $demoMetaTitle((string)$portfolio['title']));
+$page['description'] = !empty($portfolio['meta_description'])
+    ? $portfolio['meta_description']
+    : ($seo['description'] ?? $demoMetaTrim((string)$portfolio['short_description']));
 $page['canonical']   = SITE_URL . '/demo/' . $slug;
 $page['og_title']    = $page['title'];
 $page['og_desc']     = $page['description'];

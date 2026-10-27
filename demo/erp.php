@@ -1,24 +1,10 @@
 <?php
-require __DIR__ . '/../includes/config.php';
-require __DIR__ . '/../includes/db.php';
-
-$slug = 'erp';
-
-$stmt = $pdo->prepare('SELECT * FROM portfolios WHERE slug = ?');
-$stmt->execute([$slug]);
-$portfolio = $stmt->fetch();
-
-if (!$portfolio) {
-    header('Location: ' . BASE_PATH . '/portfolio');
-    exit;
-}
-
-$page['title']       = $portfolio['title'] . ' Demo | ' . SITE_NAME;
-$page['description'] = $portfolio['short_description'];
-$page['canonical']   = SITE_URL . '/demo/' . $slug;
-$page['og_title']    = $page['title'];
-$page['og_desc']     = $page['description'];
-$page['active_nav']  = 'portfolio';
-$page['robots']      = 'index, follow';
-
-include __DIR__ . '/_template.php';
+/**
+ * /demo/erp — thin wrapper around demo/view.php.
+ *
+ * These three pages predate view.php and carried their own copy of the SEO
+ * setup, so they missed the per-row meta overrides, the breadcrumb and the
+ * SoftwareApplication schema. Delegating keeps one code path.
+ */
+$_GET['slug'] = 'erp';
+require __DIR__ . '/view.php';

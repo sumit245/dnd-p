@@ -15,6 +15,8 @@ $portfolio = [
     'badge' => '',
     'sort_order' => 100,
     'short_description' => '',
+    'meta_title' => '',
+    'meta_description' => '',
     'client_name' => '',
     'client_url' => '',
     'tile_color' => '',
@@ -53,6 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'client_url' => filter_var(trim($_POST['client_url'] ?? ''), FILTER_VALIDATE_URL) ?: null,
         'tile_color' => preg_match('/^#[0-9A-Fa-f]{6}$/', trim($_POST['tile_color'] ?? '')) ? strtoupper(trim($_POST['tile_color'])) : null,
         'short_description' => $_POST['short_description'] ?? '',
+        'meta_title' => trim($_POST['meta_title'] ?? ''),
+        'meta_description' => trim($_POST['meta_description'] ?? ''),
         'detailed_description' => $_POST['detailed_description'] ?? '',
         'demo_url' => $_POST['demo_url'] ?? '',
         'username' => $_POST['username'] ?? '',
@@ -63,19 +67,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         if ($isEdit) {
-            $stmt = $pdo->prepare('UPDATE portfolios SET title=?, slug=?, category=?, industry=?, badge=?, sort_order=?, client_name=?, client_url=?, tile_color=?, short_description=?, detailed_description=?, demo_url=?, username=?, password=?, image_path=?, gallery_images=? WHERE id=?');
+            $stmt = $pdo->prepare('UPDATE portfolios SET title=?, slug=?, category=?, industry=?, badge=?, sort_order=?, client_name=?, client_url=?, tile_color=?, short_description=?, meta_title=?, meta_description=?, detailed_description=?, demo_url=?, username=?, password=?, image_path=?, gallery_images=? WHERE id=?');
             $stmt->execute([
                 $portfolio['title'], $portfolio['slug'], $portfolio['category'], $portfolio['industry'], $portfolio['badge'], $portfolio['sort_order'],
                 $portfolio['client_name'], $portfolio['client_url'], $portfolio['tile_color'], $portfolio['short_description'],
+                $portfolio['meta_title'] !== '' ? $portfolio['meta_title'] : null,
+                $portfolio['meta_description'] !== '' ? $portfolio['meta_description'] : null,
                 $portfolio['detailed_description'], $portfolio['demo_url'], $portfolio['username'],
                 $portfolio['password'], $portfolio['image_path'], $portfolio['gallery_images'], $id
             ]);
             $message = '<div class="alert alert-success">Portfolio updated successfully.</div>';
         } else {
-            $stmt = $pdo->prepare('INSERT INTO portfolios (title, slug, category, industry, badge, sort_order, client_name, client_url, tile_color, short_description, detailed_description, demo_url, username, password, image_path, gallery_images) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+            $stmt = $pdo->prepare('INSERT INTO portfolios (title, slug, category, industry, badge, sort_order, client_name, client_url, tile_color, short_description, meta_title, meta_description, detailed_description, demo_url, username, password, image_path, gallery_images) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
             $stmt->execute([
                 $portfolio['title'], $portfolio['slug'], $portfolio['category'], $portfolio['industry'], $portfolio['badge'], $portfolio['sort_order'],
                 $portfolio['client_name'], $portfolio['client_url'], $portfolio['tile_color'], $portfolio['short_description'],
+                $portfolio['meta_title'] !== '' ? $portfolio['meta_title'] : null,
+                $portfolio['meta_description'] !== '' ? $portfolio['meta_description'] : null,
                 $portfolio['detailed_description'], $portfolio['demo_url'], $portfolio['username'],
                 $portfolio['password'], $portfolio['image_path'], $portfolio['gallery_images']
             ]);
@@ -162,6 +170,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="form-group">
             <label for="short_description">Short Description (For Homepage Grid) *</label>
             <textarea id="short_description" name="short_description" class="form-control" rows="3" required><?php echo htmlspecialchars($portfolio['short_description']); ?></textarea>
+
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+                <label for="meta_title">SEO title override (max 60 chars)</label>
+                <input type="text" id="meta_title" name="meta_title" class="form-control" maxlength="70"
+                    value="<?php echo htmlspecialchars($portfolio['meta_title'] ?? ''); ?>"
+                    placeholder="Leave blank to use the title above plus the brand">
+            </div>
+            <div class="form-group">
+                <label for="meta_description">SEO meta description (120-155 chars)</label>
+                <input type="text" id="meta_description" name="meta_description" class="form-control" maxlength="170"
+                    value="<?php echo htmlspecialchars($portfolio['meta_description'] ?? ''); ?>"
+                    placeholder="Leave blank to trim the short description to 155 chars">
+            </div>
         </div>
         
         <div class="form-group">
