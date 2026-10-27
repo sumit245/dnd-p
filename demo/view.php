@@ -19,8 +19,13 @@ if (!$portfolio || !portfolio_has_detail($portfolio)) {
     exit;
 }
 
-$page['title']       = $portfolio['title'] . ' — ' . SITE_NAME;
-$page['description'] = $portfolio['short_description'];
+// Per-slug SEO overrides keep the <title> and meta description inside SERP
+// limits without touching the H1, which still comes from portfolios.title.
+$seoOverrides = include __DIR__ . '/../includes/demo-seo.php';
+$seo          = $seoOverrides[$slug] ?? [];
+
+$page['title']       = $seo['title'] ?? ($portfolio['title'] . ' — ' . SITE_NAME);
+$page['description'] = $seo['description'] ?? $portfolio['short_description'];
 $page['canonical']   = SITE_URL . '/demo/' . $slug;
 $page['og_title']    = $page['title'];
 $page['og_desc']     = $page['description'];

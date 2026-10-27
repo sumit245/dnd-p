@@ -223,25 +223,69 @@ HTML,
 <p>Log in to the demo and you will see the day laid out: total employees with active and inactive counts, quick links to roles and permissions, leave applications waiting for action, and HR settings. Below that, today's absent and present counts, project and task status, department and designation charts, an expenses summary (salaries paid, account balance, travel and other expenses), and the helpdesk ticket counters. It is the morning briefing an HR head normally has to assemble by hand.</p>
 
 <h2>Modules in HRMX</h2>
+
+<h3>Core HR and organisation</h3>
 <ul>
-<li><strong>Staff and core HR</strong> — employee master with personal, employment, statutory (PAN, Aadhaar, PF, ESI, UAN) and bank details; documents with expiry reminders; onboarding and exit checklists.</li>
-<li><strong>Organisation</strong> — companies, branches, departments, designations and reporting lines, with org-chart views.</li>
-<li><strong>Timesheet and attendance</strong> — daily and weekly timesheets, project-wise hours, biometric or mobile punch integration, shifts and overtime.</li>
-<li><strong>Leave management</strong> — leave types, accrual rules, holiday calendars, approval workflow and balances visible to the employee.</li>
-<li><strong>Payroll</strong> — salary structures, earnings and deductions, PF/ESI/PT/TDS computations, arrears, loans and advances, payslips and bank transfer files. Runs in minutes, not days.</li>
-<li><strong>Training</strong> — programmes, sessions, attendance and feedback, tied to the employee record.</li>
-<li><strong>Performance</strong> — goals, KRAs, self and manager reviews, rating cycles and history.</li>
-<li><strong>Recruitment</strong> — job openings, candidate pipeline, interviews and offer letters, converting a hired candidate into an employee in one click.</li>
-<li><strong>HR calendar, tickets and files manager</strong> — holidays and events, an internal HR helpdesk for employee queries, and a document library for policies and forms.</li>
-<li><strong>Project management</strong> — lightweight project and task tracking so utilisation reports come from real work data.</li>
-<li><strong>Employee self-service</strong> — employees see payslips, apply for leave, update details and raise tickets without emailing HR.</li>
+<li><strong>Staff and core HR</strong> &mdash; employee master with personal, employment, statutory (PAN, Aadhaar, PF, ESI, UAN) and bank details; documents with expiry reminders; onboarding and exit checklists.</li>
+<li><strong>Organisation</strong> &mdash; companies, branches, departments, designations and reporting lines, with org-chart views.</li>
+<li><strong>HR calendar, tickets and files manager</strong> &mdash; holidays and events, an internal HR helpdesk for employee queries, and a document library for policies and forms.</li>
 </ul>
+
+<h3>Time, leave and payroll</h3>
+<ul>
+<li><strong>Timesheet and attendance</strong> &mdash; daily and weekly timesheets, project-wise hours, biometric or mobile punch integration, shifts and overtime.</li>
+<li><strong>Leave management</strong> &mdash; leave types, accrual rules, holiday calendars, approval workflow and balances visible to the employee.</li>
+<li><strong>Payroll</strong> &mdash; salary structures, earnings and deductions, PF/ESI/PT/TDS computations, arrears, loans and advances, payslips and bank transfer files. Runs in minutes, not days.</li>
+<li><strong>Project management</strong> &mdash; lightweight project and task tracking so utilisation reports come from real work data.</li>
+</ul>
+
+<h3>Talent: recruitment, training and performance</h3>
+<ul>
+<li><strong>Recruitment</strong> &mdash; job openings, candidate pipeline, interviews and offer letters, converting a hired candidate into an employee in one click.</li>
+<li><strong>Training</strong> &mdash; programmes, sessions, attendance and feedback, tied to the employee record.</li>
+<li><strong>Performance</strong> &mdash; goals, KRAs, self and manager reviews, rating cycles and history.</li>
+</ul>
+
+<h3>Employee self-service</h3>
+<p>Employees see their own payslips, apply for leave, update their details and raise tickets without emailing HR. In practice this is the module that decides whether an HRMS gets used or quietly abandoned &mdash; if the team still has to ask HR for everything, nothing has changed.</p>
 
 <h2>Who HRMX is for</h2>
 <p>Companies with 20 to 1,000 employees across IT services, manufacturing, retail chains, healthcare, education, logistics and professional services. It works for single-office teams and for multi-branch companies with different shifts, leave policies and payroll rules per location.</p>
 
 <h2>Built for Indian compliance, customised for your policies</h2>
 <p>Statutory calculations for PF, ESI, professional tax and TDS are built in and kept current. Everything else, from leave policy to appraisal format to payslip layout, is configured to match how your company already works &mdash; and because policies differ by branch and often by department inside the same branch, HRMX lets each one run its own rules while payroll stays a single process. No forced upgrade will break a report you depend on, because you own the deployment.</p>
+
+<h2>Attendance problems most HR software cannot solve</h2>
+
+<h3>Roving security guards: punch with a photo, inside 90 metres</h3>
+<p>A security agency's guards do not sit at a desk. They move between posts through a shift, and the question that matters &mdash; <em>was the guard actually at that site?</em> &mdash; cannot be answered by a biometric machine bolted to one wall.</p>
+<p>So we built attendance that travels with the person: <strong>photo-based punch from a mobile phone, geofenced to a 90-metre radius of the location they are assigned to</strong>, with rotating shift patterns that follow a guard from one site to the next. The attendance record carries the place and the picture, not just a timestamp.</p>
+<p>The same mechanics apply to anyone whose work is not at a fixed address &mdash; field sales and service engineers, multi-site housekeeping and facility staff, delivery and logistics crews, and consultants working from client premises.</p>
+
+<h3>One payroll, many rulebooks</h3>
+<p>Most HR products let you configure a policy per company, and the better ones per location. The requirement we actually keep meeting goes one level finer than that: <strong>two departments inside the same branch running different rules</strong> &mdash; different leave entitlements, different approval chains, different working patterns &mdash; while payroll still runs as a single process at month end.</p>
+<p>That same flexibility is what lets one deployment hold a mixed workforce: <strong>daily-wage and unstructured labour alongside salaried corporate staff</strong>, each under the rules that apply to them, in one system with one set of reports.</p>
+
+<h3>What HRMX looks like at scale</h3>
+<p>HRMX runs today at six companies. The largest is on <strong>1,200+ employees</strong>, and the longest-running deployment has been live for <strong>more than three years</strong>.</p>
+
+<h2>How a rollout actually runs: NDA to first live payroll</h2>
+<p>Roughly a week per stage, <strong>eight to ten weeks in total</strong>:</p>
+<ol>
+<li><strong>NDA</strong> &mdash; signed before anything else starts, including discovery.</li>
+<li><strong>Discovery and policy mapping</strong> &mdash; your leave, shift, attendance and payroll rules written down properly. For many companies this is the first time that has happened.</li>
+<li><strong>Data migration</strong> &mdash; guided by us, performed by your team: employee master, salary structures, past leave balances.</li>
+<li><strong>Configuration</strong> &mdash; leave types and accruals, shifts, salary structures, approval chains, and the per-branch and per-department variations your policies need.</li>
+<li><strong>UAT with HR</strong> &mdash; your HR team tests against their own real cases, not a sample dataset.</li>
+<li><strong>Parallel payroll</strong> &mdash; the new system runs alongside your existing process for <strong>two to three pay cycles</strong>. Nobody cuts over on faith.</li>
+<li><strong>Go-live.</strong></li>
+<li><strong>Training</strong> &mdash; four on-premise sessions and six online sessions, <strong>all recorded</strong>, so people who join later can catch up without booking anyone's time.</li>
+<li><strong>Continuous support</strong> &mdash; 24/7, on whichever channel suits you, under the AMC.</li>
+</ol>
+
+<h3>What we need from you, and where projects actually slip</h3>
+<p>You provide four things: your policies, your employee master, your salary structures and your past leave balances.</p>
+<p>And here is the honest answer about delays, after six deployments: it is almost never the software, and almost never the data. It is <strong>HR and management agreeing on payout decisions</strong>. The build waits while somebody settles what a component should actually be. If you want a rollout to land in eight weeks rather than ten, that is the conversation to start before we do.</p>
 
 <h2>What HRMX costs, and what actually drives the number</h2>
 <p>HRMX is not a subscription. It is a <strong>one-time build fee plus a yearly AMC</strong>, and you own the intellectual property at the end of it. There is no per-employee licence, so what you pay for the software does not move every time you hire.</p>
@@ -279,8 +323,28 @@ HTML,
 <p><strong>Track record.</strong> Dashandots has been building software for six years. HRMX runs today at six companies: the largest on <strong>1,200+ employees</strong>, and the longest-running deployment live for <strong>more than three years</strong>.</p>
 <p>We hold no security certifications at present, and we would rather say so than display a badge we have not earned. Everything above is verifiable on a call.</p>
 
+<h2>When you should not buy HRMX</h2>
+<p>Plainly: <strong>below about 20 employees, do not commission a custom HRMS.</strong> Subscribe to a SaaS product instead. A build does not pay back at that size, and we would rather tell you that on the call than after the invoice.</p>
+<p>The signals that a custom build <em>is</em> the right call usually look like this:</p>
+<ul>
+<li>A subscription tool's policy model cannot express how you actually operate &mdash; per-department rules, a mixed workforce, geofenced roving staff.</li>
+<li>Per-employee pricing has quietly become one of your fastest-growing software costs.</li>
+<li>You need employee data on infrastructure you control.</li>
+<li>You would rather own the system than rent it.</li>
+</ul>
+
+<h3>What companies at 20 to 50 employees get wrong when buying HR software</h3>
+<p>Three mistakes, in the order we see them:</p>
+<ol>
+<li><strong>Tangled policies.</strong> They try to automate leave and attendance rules that contradict each other and were never written down. Software cannot resolve a policy conflict; it only makes it visible faster, and usually in front of the whole team.</li>
+<li><strong>No clear org chart.</strong> Until reporting lines are settled, approval workflows cannot be configured &mdash; and approvals are most of what an HRMS does on an ordinary day.</li>
+<li><strong>Demos that mislead them.</strong> Buyers are shown features in the order that demonstrates well, not the order that will matter in month three. They end up unable to judge which capabilities they actually need, and choose on impressions.</li>
+</ol>
+<p>So before you talk to any vendor, ours included: write your policies down and settle your org chart. That work is yours, it costs nothing, and it shortens every implementation that follows.</p>
+
 <h2>See your HR process in it</h2>
-<p>Try the demo, then share your current attendance method, payroll components and headcount. We will configure a sample with your structure and show you a payroll run start to finish.</p>
+<p>A full working demo runs at hrmx.dashandots.com &mdash; ask us for access and click through the whole system, including a sample payroll run.</p>
+<p>Then tell us three things: how you record attendance today, what your payroll components are, and your headcount. We will configure a sample with your own structure and walk you through a payroll run start to finish. If it turns out you are better served by a subscription product, we will say so on that call.</p>
 HTML,
     ],
 

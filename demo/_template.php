@@ -5,6 +5,8 @@
  * Requires: $portfolio (row from `portfolios` table), $page (set for head.php).
  */
 require_once __DIR__ . '/../includes/portfolio-media.php';
+$demoFaqs = include __DIR__ . '/../includes/demo-faqs.php';
+$faqs     = $demoFaqs[$portfolio['slug'] ?? ''] ?? [];
 $isMobileApp = ($portfolio['category'] ?? '') === 'mobile';
 ?>
 <!DOCTYPE html>
@@ -195,6 +197,44 @@ $isMobileApp = ($portfolio['category'] ?? '') === 'mobile';
         <div class="demo-empty-state">
           <p>Detailed content coming soon. Book a walkthrough to see this product in action.</p>
         </div>
+      <?php endif; ?>
+
+      <?php if (!empty($faqs)): ?>
+        <div class="demo-faq-block">
+          <h2>Common questions</h2>
+
+          <div class="faq-list">
+            <?php foreach ($faqs as $faq): ?>
+              <div class="faq-item">
+                <button class="faq-q" aria-expanded="false" type="button"><?= htmlspecialchars($faq['q'], ENT_QUOTES, 'UTF-8') ?><svg
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" aria-hidden="true">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg></button>
+                <div class="faq-a">
+                  <div class="faq-a-inner"><?= htmlspecialchars($faq['a'], ENT_QUOTES, 'UTF-8') ?></div>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
+
+        <?php
+          // FAQPage structured data, built from the same array as the markup above.
+          $faqSchema = [
+              '@context'   => 'https://schema.org',
+              '@type'      => 'FAQPage',
+              'mainEntity' => array_map(static fn(array $f): array => [
+                  '@type'          => 'Question',
+                  'name'           => $f['q'],
+                  'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f['a']],
+              ], $faqs),
+          ];
+        ?>
+        <script type="application/ld+json">
+<?= json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_HEX_TAG | JSON_HEX_AMP) ?>
+        </script>
       <?php endif; ?>
 
     </div>

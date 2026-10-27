@@ -257,12 +257,12 @@ Mark up with FAQPage schema — competitors on this SERP have it and the page cu
 | P0 | Demo credentials visible near the top | **Code done, waiting on a demo account** — see §8 | Open access is the one thing no competitor on this SERP offers. |
 | P0 | Pricing-drivers section | **Written** — `seed-portfolio-products.php` | The audit's worst gap; nothing on the page addressed the first question a buyer has. |
 | P0 | Trust / data-and-ownership section | **Written** — `seed-portfolio-products.php` | 1,200+ employees, 3+ years, 6 years in business, client owns IP — all true, all absent before. |
-| P1 | FAQ block with FAQPage schema | Not started | Competitors have it; fills the audit's "Missing" row and earns SERP real estate. |
-| P1 | Geofence and per-department workflow sections | Per-department fact added to the compliance section; geofence section not started | Only genuinely unique capability on the page. |
-| P1 | Numbered rollout timeline | Not started | Turns an abstract engagement into an 8–10 week plan. |
-| P2 | "When you should not buy HRMX" | Not started | Highest trust per word; no competitor will copy it. |
-| P2 | Title and meta update | Not started | Do after the body supports the new framing, not before. |
-| P2 | Module list regrouped under three H3s | Not started | Readability, not ranking. |
+| P1 | FAQ block with FAQPage schema | **Done** — 16 questions in `includes/demo-faqs.php`, rendered + schema in `demo/_template.php` | Competitors have it; fills the audit's "Missing" row and earns SERP real estate. |
+| P1 | Geofence and per-department workflow sections | **Done** — “Attendance problems most HR software cannot solve” | Only genuinely unique capability on the page. |
+| P1 | Numbered rollout timeline | **Done** — “How a rollout actually runs: NDA to first live payroll” | Turns an abstract engagement into an 8–10 week plan. |
+| P2 | "When you should not buy HRMX" | **Done** — with the three buyer-mistakes sub-section | Highest trust per word; no competitor will copy it. |
+| P2 | Title and meta update | **Done** — via `includes/demo-seo.php`; title 56 chars, description 137 | Do after the body supports the new framing, not before. |
+| P2 | Module list regrouped under three H3s | **Done** — four groups; self-service split out as prose | Readability, not ranking. |
 
 ---
 
@@ -295,3 +295,43 @@ The code is in place and linted; only the account is missing.
 4. A tenant holding **synthetic employees only**. A public admin login exposes every record in the instance: names, PAN, Aadhaar, PF and UAN numbers, bank details, salary figures. If any real client data has ever touched that instance, clean it before opening access.
 
 Once those exist, it is a two-line change to the `hrmx` entry.
+
+---
+
+## 9. P1 implementation notes
+
+**FAQ** &mdash; the questions live in `includes/demo-faqs.php`, keyed by portfolio slug. `demo/_template.php` renders the visible accordion and the `FAQPage` JSON-LD from that one array, so markup and structured data cannot drift. Answers are plain text by design, because they are emitted into JSON-LD. The accordion reuses the existing `.faq-list` / `.faq-item` markup and the `.faq-q` handler already in `app.js`, so no new JavaScript was added; `.demo-faq-block` was added to `assets/css/style.css` for the wrapper and its heading.
+
+Sixteen questions shipped rather than the fourteen drafted in §3, with two changes forced by the facts:
+
+- **No support response time is claimed.** The AMC answer says 24/7 on any channel and stops there, because the interview answer was cut off before a response time. See §7 item 1.
+- **The demo question matches reality.** It says the demo is live and access is shared on request, not “open access, credentials on this page”, because that is still true until a demo account exists (§8).
+
+**Verification** &mdash; `php -l` passes on every changed file, and the schema was validated in isolation: 16 questions, clean JSON round-trip, no HTML leaking into answers, no empty fields. The page itself was **not** rendered, because Apache was not running locally. Worth loading `/demo/hrmx` once and running the URL through Google's Rich Results Test before counting the FAQ as live.
+
+**Reminder** &mdash; the copy sections live in the seed script, so they appear on the page only after `php scripts/seed-portfolio-products.php` runs against the database. The FAQ block does not depend on that, since it is read from a PHP file at render time.
+
+---
+
+## 10. P2 implementation notes
+
+**"When you should not buy HRMX"** sits immediately before the closing CTA, so the honest disqualifier is the last thing read before the ask. It carries the under-20-employees advice, the four signals that a build *is* right, and the three buyer mistakes as a numbered list.
+
+**Module list** regrouped into four blocks rather than the three planned &mdash; *Core HR and organisation*, *Time, leave and payroll*, *Talent*, and *Employee self-service*. Self-service became prose instead of a bullet because it is the module that decides whether an HRMS gets adopted or abandoned, and it was doing no work buried eleventh in a list.
+
+**Title and meta** needed a new mechanism. `demo/view.php` was building the title as `portfolios.title . ' — ' . SITE_NAME`, which put HRMX at 73 characters, and using `short_description` as the meta description, which ran past 200. Adding `includes/demo-seo.php` (same per-slug pattern as `demo-faqs.php`) lets a slug override the title tag and meta/OG description verbatim, with no `SITE_NAME` appended. The **H1 still comes from `portfolios.title`** on purpose: the title tag targets the query, the H1 speaks to the reader. Slugs without an entry behave exactly as before.
+
+Shipped values, both verified by character count:
+
+- Title (56): `HRMX HRMS: Payroll, Attendance & Leave for 20–1000 Staff`
+- Description (137): `HRMX runs HR, attendance and payroll for 20 to 1,200+ employees. One-time build, no per-employee fee, you own the IP. Live in 8–10 weeks.`
+
+**Closing CTA** was rewritten beyond the P2 list, for accuracy rather than style: it said "Try the demo", which implies open access the page does not yet offer. It now says the demo is live and access is shared on request, and it ends by promising to say so if a subscription product would serve them better &mdash; consistent with the new disqualifier section.
+
+**Not done from §2**, since neither was priority-ranked: halving "The dashboard at a glance", and reworking "Who HRMX is for" to lead with workforce types instead of the industry list. Both are still worth doing.
+
+### Final heading order on the page
+
+H1 (from the DB title) → spreadsheet hook → dashboard → modules (4 × H3) → who it is for → Indian compliance → attendance problems (3 × H3) → rollout timeline (+1 H3) → cost and drivers (+2 H3) → data and ownership → when not to buy (+1 H3) → CTA → FAQ accordion (from the template).
+
+That order answers the buyer's questions roughly in the sequence they ask them: *what is it, does it fit me, can it handle my mess, how long, what does it cost, can I trust you, should I even buy it.*

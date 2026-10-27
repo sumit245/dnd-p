@@ -4284,6 +4284,22 @@
       margin: 32px 0 12px;
     }
 
+    /* Per-product FAQ accordion on demo pages — reuses .faq-list / .faq-item */
+    .demo-faq-block {
+      max-width: 840px;
+      margin: 56px auto 0;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .demo-faq-block h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -.02em;
+      margin: 0 0 24px;
+    }
+
     .demo-rich-text p {
       margin-bottom: 16px;
     }
