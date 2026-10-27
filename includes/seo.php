@@ -1,6 +1,6 @@
 <?php
 /**
- * SEO helpers — absolute URLs for OG/schema (production vs local BASE_PATH).
+ * SEO helpers: absolute URLs for OG/schema (production vs local BASE_PATH).
  */
 declare(strict_types=1);
 
@@ -32,6 +32,26 @@ if (!function_exists('site_redirect')) {
         $path = '/' . ltrim($path, '/');
         header('Location: ' . rtrim(SITE_URL, '/') . $path);
         exit;
+    }
+}
+
+if (!function_exists('schema_jsonld')) {
+    /**
+     * Render any schema array as a JSON-LD block.
+     *
+     * Escapes tags and ampersands because some schema values come from
+     * admin-editable rows (portfolios.title), and a value containing
+     * "</script>" must not be able to break out of the block.
+     */
+    function schema_jsonld(array $schema): string
+    {
+        return '<script type="application/ld+json">' . "\n"
+            . json_encode(
+                $schema,
+                JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
+                    | JSON_HEX_TAG | JSON_HEX_AMP
+            )
+            . "\n</script>\n";
     }
 }
 

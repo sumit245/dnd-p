@@ -1,10 +1,16 @@
 <?php
 require __DIR__ . '/../includes/config.php';
-$page['title']       = 'Future of Custom ERP Development in India — ' . SITE_NAME;
+$page['title']       = 'Future of Custom ERP Development in India | ' . SITE_NAME;
 $page['description'] = "Discover why custom ERP development is replacing off-the-shelf software for India's mid-sized and growing enterprises in 2025 and beyond.";
 $page['canonical']   = SITE_URL . '/blog/future-of-custom-erp';
 $page['og_title']    = $page['title'];
 $page['active_nav']  = 'blog';
+
+require_once __DIR__ . '/../includes/schema-breadcrumb.php';
+$page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
+    ['name' => 'Blog', 'url' => '/blog/'],
+    ['name' => "The Future of Custom ERP: Why Off-the-Shelf is No Longer Enough", 'url' => '/blog/future-of-custom-erp'],
+]));
 ?>
 <!DOCTYPE html>
 <html lang="en">

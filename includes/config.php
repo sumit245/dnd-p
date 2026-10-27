@@ -61,4 +61,6 @@ $page = [
     'og_image' => SITE_URL . '/assets/img/og-image.jpg',
     'body_class' => '',
     'active_nav' => 'home',
+    // Pre-rendered <script type="application/ld+json"> blocks; head.php emits each.
+    'jsonld' => [],
 ];

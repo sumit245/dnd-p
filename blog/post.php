@@ -27,7 +27,7 @@ $featureImageSrc = !empty($blog['feature_image'])
 $publishedIso = date('c', strtotime($blog['created_at']));
 $modifiedIso = date('c', strtotime($blog['updated_at'] ?? $blog['created_at']));
 
-$page['title'] = $blog['title'] . ' — Dashandots Blog';
+$page['title'] = $blog['title'] . ' | Dashandots Blog';
 $page['description'] = $excerpt;
 $page['canonical'] = $canonicalUrl;
 $page['og_title'] = $blog['title'];
@@ -41,6 +41,12 @@ $page['active_nav'] = 'blog';
 if (!empty($blog['keywords'])) {
     $page['keywords'] = $blog['keywords'];
 }
+
+require_once __DIR__ . '/../includes/schema-breadcrumb.php';
+$page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
+    ['name' => 'Blog', 'url' => '/blog/'],
+    ['name' => $blog['title'], 'url' => $canonicalUrl],
+]));
 
 $schemaBlog = [
     'headline' => $blog['title'],

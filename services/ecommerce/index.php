@@ -2,7 +2,7 @@
 require __DIR__ . '/../../includes/config.php';
 
 $page['title']       = 'E-commerce & Portal Development Services in India | Dashandots';
-$page['description'] = 'Custom B2B & B2C e-commerce development — multi-vendor marketplaces, dealer portals and self-service platforms. Built on Laravel, React & WooCommerce.';
+$page['description'] = 'Custom B2B & B2C e-commerce development: multi-vendor marketplaces, dealer portals and self-service platforms. Built on Laravel, React & WooCommerce.';
 $page['canonical']   = SITE_URL . '/services/ecommerce/';
 $page['og_title']    = 'E-commerce & Portal Development | Dashandots Technology';
 $page['og_desc']     = $page['description'];
@@ -30,6 +30,13 @@ $serviceSchema = service_schema([
     'Payment gateway and GST invoicing integration',
   ],
 ]);
+
+require_once __DIR__ . '/../../includes/schema-breadcrumb.php';
+$page['jsonld'][] = service_schema_jsonld($serviceSchema);
+$page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
+  ['name' => 'Services', 'url' => '/#services'],
+  ['name' => 'E-commerce & Portals', 'url' => '/services/ecommerce/'],
+]));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,16 +62,16 @@ $serviceSchema = service_schema([
 
     <!-- WHY CUSTOM E-COM -->
     <h2>Beyond template stores</h2>
-    <p class="svc-body-text">Shopify and WooCommerce templates get you live fast — but they hit a ceiling. Custom payment flows, dealer-specific pricing, bulk ordering logic, GST-compliant invoicing, and ERP integration all require custom development. We build stores that handle your actual business rules, not a generic retailer's.</p>
+    <p class="svc-body-text">Shopify and WooCommerce templates get you live fast; but they hit a ceiling. Custom payment flows, dealer-specific pricing, bulk ordering logic, GST-compliant invoicing, and ERP integration all require custom development. We build stores that handle your actual business rules, not a generic retailer's.</p>
 
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
         <h3>Customer-specific pricing</h3>
-        <p>B2B portals with dealer tiers, customer-group discounts, credit limits, and personalised product catalogues — hidden from competitors and the public.</p>
+        <p>B2B portals with dealer tiers, customer-group discounts, credit limits, and personalised product catalogues: hidden from competitors and the public.</p>
       </div>
       <div class="svc-feature-card">
         <h3>GST-compliant invoicing</h3>
-        <p>Automated CGST/SGST/IGST calculation, HSN code mapping, e-invoice generation, and GSTR-1 export — built for India's tax compliance requirements.</p>
+        <p>Automated CGST/SGST/IGST calculation, HSN code mapping, e-invoice generation, and GSTR-1 export: built for India's tax compliance requirements.</p>
       </div>
       <div class="svc-feature-card">
         <h3>ERP &amp; inventory sync</h3>
@@ -72,15 +79,15 @@ $serviceSchema = service_schema([
       </div>
       <div class="svc-feature-card">
         <h3>Multi-vendor marketplace</h3>
-        <p>Seller onboarding, commission management, payout splits, and dispute resolution — the infrastructure to run a platform business.</p>
+        <p>Seller onboarding, commission management, payout splits, and dispute resolution: the infrastructure to run a platform business.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Conversion-optimised UX</h3>
-        <p>Persistent cart, one-click reorder, smart search with filters, guest checkout, and mobile-first design — reducing drop-offs at every stage.</p>
+        <p>Persistent cart, one-click reorder, smart search with filters, guest checkout, and mobile-first design: reducing drop-offs at every stage.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Payment gateway ready</h3>
-        <p>Razorpay, PayU, CCAvenue, Stripe, UPI, COD, credit terms — all integrated and tested before go-live, not after.</p>
+        <p>Razorpay, PayU, CCAvenue, Stripe, UPI, COD, credit terms: all integrated and tested before go-live, not after.</p>
       </div>
     </div>
 
@@ -124,7 +131,7 @@ $serviceSchema = service_schema([
       </div>
       <div class="svc-feature-card">
         <h3>Analytics dashboard</h3>
-        <p>Real-time sales reporting, funnel visualisation, abandoned cart tracking, and cohort analysis — all in one internal dashboard.</p>
+        <p>Real-time sales reporting, funnel visualisation, abandoned cart tracking, and cohort analysis: all in one internal dashboard.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Logistics integration</h3>
@@ -158,7 +165,6 @@ $serviceSchema = service_schema([
   </div>
 </main>
 
-<?= service_schema_jsonld($serviceSchema) ?>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>
 <?php require __DIR__ . '/../../includes/scripts.php'; ?>
 </body>

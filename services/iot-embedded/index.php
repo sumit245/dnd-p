@@ -30,6 +30,13 @@ $serviceSchema = service_schema([
     'BLE companion mobile apps',
   ],
 ]);
+
+require_once __DIR__ . '/../../includes/schema-breadcrumb.php';
+$page['jsonld'][] = service_schema_jsonld($serviceSchema);
+$page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
+  ['name' => 'Services', 'url' => '/#services'],
+  ['name' => 'IoT & Embedded', 'url' => '/services/iot-embedded/'],
+]));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,8 +52,8 @@ $serviceSchema = service_schema([
     <!-- HERO -->
     <div class="svc-hero">
       <p class="page-label">Services &rsaquo; IoT &amp; Embedded</p>
-      <h1>Connect your physical world to the digital — reliably and at scale</h1>
-      <p class="lead">From firmware on the chip to the cloud platform and the mobile app your customer uses to monitor it — we engineer the full IoT stack, so your connected product works the way you imagined it.</p>
+      <h1>Connect your physical world to the digital: reliably and at scale</h1>
+      <p class="lead">From firmware on the chip to the cloud platform and the mobile app your customer uses to monitor it; we engineer the full IoT stack, so your connected product works the way you imagined it.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="iot-hero">Scope Your IoT Product</a>
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="iot-hero">Talk to Our Team</a>
@@ -54,8 +61,8 @@ $serviceSchema = service_schema([
     </div>
 
     <!-- WHY US -->
-    <h2>End-to-end IoT development — one team, every layer</h2>
-    <p class="svc-body-text">Most IoT projects fail because firmware engineers, cloud architects, and app developers don't talk to each other. We're a single team that works across all three layers simultaneously — which means protocols are chosen correctly up front, edge constraints are respected in the cloud design, and the app is built for real device data, not mock data.</p>
+    <h2>End-to-end IoT development: one team, every layer</h2>
+    <p class="svc-body-text">Most IoT projects fail because firmware engineers, cloud architects, and app developers don't talk to each other. We're a single team that works across all three layers simultaneously: which means protocols are chosen correctly up front, edge constraints are respected in the cloud design, and the app is built for real device data, not mock data.</p>
 
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
@@ -64,15 +71,15 @@ $serviceSchema = service_schema([
       </div>
       <div class="svc-feature-card">
         <h3>Device-Cloud Connectivity</h3>
-        <p>MQTT, CoAP, HTTP/2, and WebSockets over WiFi, LTE, LoRaWAN, and BLE — we choose the right protocol for your power budget, bandwidth, and latency requirements.</p>
+        <p>MQTT, CoAP, HTTP/2, and WebSockets over WiFi, LTE, LoRaWAN, and BLE; we choose the right protocol for your power budget, bandwidth, and latency requirements.</p>
       </div>
       <div class="svc-feature-card">
         <h3>IoT Cloud Platform</h3>
-        <p>Device registry, telemetry ingestion, rule engine, command dispatch, OTA update management, and a REST API for your application layer — all on AWS IoT or Azure IoT, or a custom open-source stack.</p>
+        <p>Device registry, telemetry ingestion, rule engine, command dispatch, OTA update management, and a REST API for your application layer: all on AWS IoT or Azure IoT, or a custom open-source stack.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Real-Time Dashboards</h3>
-        <p>Live device monitoring with time-series charts, threshold alerts, geofencing, fleet maps, and historical data export — accessible from web and mobile.</p>
+        <p>Live device monitoring with time-series charts, threshold alerts, geofencing, fleet maps, and historical data export: accessible from web and mobile.</p>
       </div>
       <div class="svc-feature-card">
         <h3>OTA Firmware Updates</h3>
@@ -104,7 +111,7 @@ $serviceSchema = service_schema([
     <div class="svc-cta-strip">
       <p class="page-label">From prototype to fleet</p>
       <h2>Most IoT enquiries start with one device and one dashboard.</h2>
-      <p>Tell us what your hardware measures and who needs to see it. We will scope the firmware, connectivity, and cloud layer as one first phase — no vendor lock-in.</p>
+      <p>Tell us what your hardware measures and who needs to see it. We will scope the firmware, connectivity, and cloud layer as one first phase: no vendor lock-in.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="iot-mid">Brief Us on Your Device</a>
         <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="iot-mid">See our work</a>
@@ -113,7 +120,7 @@ $serviceSchema = service_schema([
 
     <!-- EMBEDDED -->
     <h2>Embedded software &amp; hardware-adjacent work</h2>
-    <p class="svc-body-text">Beyond IoT platforms, we take on embedded software projects where the software has to live close to hardware — real-time constraints, low power budgets, and hardware-specific peripherals.</p>
+    <p class="svc-body-text">Beyond IoT platforms, we take on embedded software projects where the software has to live close to hardware: real-time constraints, low power budgets, and hardware-specific peripherals.</p>
     <ul class="svc-includes">
       <li>RTOS-based firmware (FreeRTOS, Zephyr)</li>
       <li>Bootloader development &amp; secure boot</li>
@@ -147,13 +154,13 @@ $serviceSchema = service_schema([
     <!-- HOW WE WORK -->
     <h2>How we approach IoT projects</h2>
     <ul class="svc-includes">
-      <li>Hardware selection guidance — we help you choose the right modules and connectivity for your deployment environment</li>
-      <li>Architecture review — we validate protocol choices, cloud costs, and edge vs cloud compute split before you commit</li>
-      <li>Firmware prototype — working device communicating with the cloud in the first sprint</li>
-      <li>Cloud platform build — telemetry pipeline, device management, alerting, and APIs</li>
-      <li>Dashboard &amp; mobile app — the interface your operators or end-customers will use daily</li>
-      <li>Field deployment support — we help with provisioning, testing, and scaling to production</li>
-      <li>Ongoing support — firmware bug fixes, cloud infrastructure scaling, feature additions</li>
+      <li>Hardware selection guidance; we help you choose the right modules and connectivity for your deployment environment</li>
+      <li>Architecture review; we validate protocol choices, cloud costs, and edge vs cloud compute split before you commit</li>
+      <li>Firmware prototype: working device communicating with the cloud in the first sprint</li>
+      <li>Cloud platform build: telemetry pipeline, device management, alerting, and APIs</li>
+      <li>Dashboard &amp; mobile app: the interface your operators or end-customers will use daily</li>
+      <li>Field deployment support; we help with provisioning, testing, and scaling to production</li>
+      <li>Ongoing support: firmware bug fixes, cloud infrastructure scaling, feature additions</li>
     </ul>
 
     <!-- CTA -->
@@ -170,7 +177,6 @@ $serviceSchema = service_schema([
   </div>
 </main>
 
-<?= service_schema_jsonld($serviceSchema) ?>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>
 <?php require __DIR__ . '/../../includes/scripts.php'; ?>
 </body>

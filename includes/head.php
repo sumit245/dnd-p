@@ -20,6 +20,11 @@
 <?php endif; ?>
   <link rel="canonical" href="<?= htmlspecialchars($page['canonical']) ?>">
 
+<?php // Pre-rendered JSON-LD blocks a page pushed onto $page['jsonld'] (breadcrumbs, Service, SoftwareApplication…). ?>
+<?php foreach (($page['jsonld'] ?? []) as $jsonLdBlock): ?>
+<?= $jsonLdBlock ?>
+<?php endforeach; ?>
+
   <!-- Open Graph -->
 <?php $ogType = $page['og_type'] ?? 'website'; ?>
   <meta property="og:type" content="<?= htmlspecialchars($ogType, ENT_QUOTES, 'UTF-8') ?>">

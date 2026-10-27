@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../../includes/config.php';
 
-$page['title']       = 'Industry Management Systems — HMS, Hotel PMS, TMS & Finance Software | Dashandots';
+$page['title']       = 'Industry Management Systems: HMS, Hotel PMS, TMS & Finance Software | Dashandots';
 $page['description'] = 'Custom Hospital Management (HMS), Hotel PMS, Transport (TMS) and Finance software for Indian enterprises. Industry-grade systems built for your sector.';
 $page['canonical']   = SITE_URL . '/services/industry-systems/';
 $page['og_title']    = 'Industry Management Systems | Dashandots Technology';
@@ -29,6 +29,13 @@ $serviceSchema = service_schema([
     'GST-ready finance and accounting software with Tally integration',
   ],
 ]);
+
+require_once __DIR__ . '/../../includes/schema-breadcrumb.php';
+$page['jsonld'][] = service_schema_jsonld($serviceSchema);
+$page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
+  ['name' => 'Services', 'url' => '/#services'],
+  ['name' => 'Industry Systems', 'url' => '/services/industry-systems/'],
+]));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,8 +51,8 @@ $serviceSchema = service_schema([
     <!-- HERO -->
     <div class="svc-hero">
       <p class="page-label">Services &rsaquo; Industry Systems</p>
-      <h1>Vertical software built for your industry — not adapted from a generic template</h1>
-      <p class="lead">We build purpose-specific management platforms for hospitals, hotels, logistics operators, and financial services — systems that understand your industry's regulations, workflows, and reporting needs from the ground up.</p>
+      <h1>Vertical software built for your industry: not adapted from a generic template</h1>
+      <p class="lead">We build purpose-specific management platforms for hospitals, hotels, logistics operators, and financial services: systems that understand your industry's regulations, workflows, and reporting needs from the ground up.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="industry-hero">Scope Your System</a>
         <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="industry-hero">View live demos</a>
@@ -54,7 +61,7 @@ $serviceSchema = service_schema([
 
     <!-- INTRO -->
     <h2>Why off-the-shelf industry software falls short</h2>
-    <p class="svc-body-text">Packaged HMS, PMS, or TMS solutions come with years of technical debt, licence fees that scale with your headcount, and customisation locked behind expensive consulting contracts. We build systems that are yours — designed around how your staff actually works, integrated with your existing tools, and owned by you with no ongoing licence.</p>
+    <p class="svc-body-text">Packaged HMS, PMS, or TMS solutions come with years of technical debt, licence fees that scale with your headcount, and customisation locked behind expensive consulting contracts. We build systems that are yours: designed around how your staff actually works, integrated with your existing tools, and owned by you with no ongoing licence.</p>
 
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
@@ -67,17 +74,17 @@ $serviceSchema = service_schema([
       </div>
       <div class="svc-feature-card">
         <h3>Integrates with What You Have</h3>
-        <p>Lab equipment, biometrics, payment terminals, third-party APIs — we write the connectors so the system speaks every device and service in your ecosystem.</p>
+        <p>Lab equipment, biometrics, payment terminals, third-party APIs; we write the connectors so the system speaks every device and service in your ecosystem.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Role-Based for Every Staff Level</h3>
-        <p>From ground-level operators to department heads and C-suite, every role sees exactly what they need — nothing more, nothing less.</p>
+        <p>From ground-level operators to department heads and C-suite, every role sees exactly what they need: nothing more, nothing less.</p>
       </div>
     </div>
 
     <!-- HMS -->
     <h2>Hospital Management System (HMS)</h2>
-    <p class="svc-body-text">Our HMS covers the complete patient journey — from OPD registration to discharge summary — with modules designed to reduce manual paperwork, speed up billing, and give management real-time visibility across departments.</p>
+    <p class="svc-body-text">Our HMS covers the complete patient journey (from OPD registration to discharge summary) with modules designed to reduce manual paperwork, speed up billing, and give management real-time visibility across departments.</p>
     <ul class="svc-includes">
       <li>Patient registration &amp; OPD/IPD management</li>
       <li>Doctor scheduling &amp; appointment booking (online + in-person)</li>
@@ -123,7 +130,7 @@ $serviceSchema = service_schema([
 
     <!-- TMS -->
     <h2>Transport Management System (TMS)</h2>
-    <p class="svc-body-text">Our TMS gives fleet operators and logistics companies end-to-end visibility — from order creation to final delivery — while automating the paperwork that slows operations down.</p>
+    <p class="svc-body-text">Our TMS gives fleet operators and logistics companies end-to-end visibility (from order creation to final delivery) while automating the paperwork that slows operations down.</p>
     <ul class="svc-includes">
       <li>Trip planning &amp; route optimisation</li>
       <li>GPS-based live vehicle tracking</li>
@@ -166,7 +173,6 @@ $serviceSchema = service_schema([
   </div>
 </main>
 
-<?= service_schema_jsonld($serviceSchema) ?>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>
 <?php require __DIR__ . '/../../includes/scripts.php'; ?>
 </body>

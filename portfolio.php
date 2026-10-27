@@ -14,8 +14,8 @@ foreach ($rows as $r) {
   }
 }
 
-$page['title'] = 'ERP, CRM & Mobile Systems — Live Demos | ' . SITE_NAME;
-$page['description'] = '30+ systems running in production — ERP, CRM, transport, mobile apps. Browse projects by industry, try live demos, or start yours.';
+$page['title'] = 'ERP, CRM & Mobile Systems: Live Demos | ' . SITE_NAME;
+$page['description'] = '30+ systems running in production: ERP, CRM, transport, mobile apps. Browse projects by industry, try live demos, or start yours.';
 $page['canonical'] = SITE_URL . '/portfolio';
 $page['og_title'] = $page['title'];
 $page['og_desc'] = $page['description'];
@@ -23,6 +23,11 @@ $page['active_nav'] = 'portfolio';
 $page['extra_css'] = ['/assets/css/portfolio.css'];
 $page['extra_js'] = ['/assets/js/portfolio.js'];
 $page['preload_fonts'] = ['/assets/fonts/ArchivoBlack-Regular.woff2'];
+
+require_once __DIR__ . '/includes/schema-breadcrumb.php';
+$page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
+  ['name' => 'Portfolio', 'url' => '/portfolio'],
+]));
 
 $schemaCollection = [
   'name' => 'Dashandots Portfolio',
@@ -69,7 +74,7 @@ $h = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8')
           <div class="pf-sechead">
             <p class="pf-micro pf-meta"><span>[ 01 ]</span> Portfolio</p>
             <h1 class="pf-display">Systems in<br>daily use<span class="pf-accent">.</span></h1>
-            <p class="pf-lead">Custom ERP, CRM, logistics, and mobile systems we built for Indian businesses — and still support. Browse by industry or try a live demo.</p>
+            <p class="pf-lead">Custom ERP, CRM, logistics, and mobile systems we built for Indian businesses; and still support. Browse by industry or try a live demo.</p>
             <!-- <p class="pf-micro" id="pf-count" aria-live="polite"><?= (int) $visibleCount ?> <?= $visibleCount === 1 ? 'project' : 'projects' ?></p> -->
           </div>
           <div class="pf-filters" role="group" aria-label="Filter portfolio by industry">
@@ -164,7 +169,7 @@ $h = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8')
         </div>
 
         <p class="pf-empty pf-micro" id="pf-empty" <?= $visibleCount > 0 ? ' hidden' : '' ?>>No projects in this industry
-          yet. We've built systems in adjacent industries — ask us.</p>
+          yet. We've built systems in adjacent industries; ask us.</p>
 
       </div>
     </div>

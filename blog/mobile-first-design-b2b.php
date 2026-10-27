@@ -1,10 +1,16 @@
 <?php
 require __DIR__ . '/../includes/config.php';
-$page['title']       = 'Why Mobile-First Design Matters for B2B — ' . SITE_NAME . ' Blog';
+$page['title']       = 'Why Mobile-First Design Matters for B2B | ' . SITE_NAME . ' Blog';
 $page['description'] = 'Enterprise software used to mean clunky desktop dashboards. Today, field workers and executives demand mobile-first experiences.';
 $page['canonical']   = SITE_URL . '/blog/mobile-first-design-b2b';
 $page['og_title']    = $page['title'];
 $page['active_nav']  = 'blog';
+
+require_once __DIR__ . '/../includes/schema-breadcrumb.php';
+$page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
+    ['name' => 'Blog', 'url' => '/blog/'],
+    ['name' => "Why Mobile-First Design Matters for B2B Software", 'url' => '/blog/mobile-first-design-b2b'],
+]));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +53,7 @@ include __DIR__ . '/../includes/schema-blog-posting.php';
       </ul>
 
       <h2>Conclusion</h2>
-      <p>If your internal tools don't work beautifully on a smartphone, you are throttling your team's productivity. At Dashandots, every custom application we build—from ERPs to <a href="<?= BASE_PATH ?>/services/ecommerce/">client portals</a>—is engineered mobile-first. Use the <a href="<?= BASE_PATH ?>/#ai-brief">estimate wizard</a> to scope the first useful mobile workflow.</p>
+      <p>If your internal tools don't work beautifully on a smartphone, you are throttling your team's productivity. At Dashandots, every custom application we build (from ERPs to <a href="<?= BASE_PATH ?>/services/ecommerce/">client portals</a>) is engineered mobile-first. Use the <a href="<?= BASE_PATH ?>/#ai-brief">estimate wizard</a> to scope the first useful mobile workflow.</p>
 
       <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border);">
         <a href="<?= BASE_PATH ?>/blog/" style="color: var(--accent); font-weight: 600; text-decoration: none;">&larr; Back to Blog</a>

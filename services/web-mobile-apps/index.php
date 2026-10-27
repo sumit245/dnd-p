@@ -2,7 +2,7 @@
 require __DIR__ . '/../../includes/config.php';
 
 $page['title']       = 'Custom Web & Mobile App Development Services in India | Dashandots';
-$page['description'] = 'Expert custom web and mobile app development — React, Laravel, Node.js, Flutter & React Native. Scalable, fast, SEO-friendly apps built for Indian businesses.';
+$page['description'] = 'Expert custom web and mobile app development: React, Laravel, Node.js, Flutter & React Native. Scalable, fast, SEO-friendly apps built for Indian businesses.';
 $page['canonical']   = SITE_URL . '/services/web-mobile-apps/';
 $page['og_title']    = 'Custom Web & Mobile App Development | Dashandots Technology';
 $page['og_desc']     = $page['description'];
@@ -30,6 +30,13 @@ $serviceSchema = service_schema([
     'Legacy system modernisation',
   ],
 ]);
+
+require_once __DIR__ . '/../../includes/schema-breadcrumb.php';
+$page['jsonld'][] = service_schema_jsonld($serviceSchema);
+$page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
+  ['name' => 'Services', 'url' => '/#services'],
+  ['name' => 'Web & Mobile Apps', 'url' => '/services/web-mobile-apps/'],
+]));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,20 +62,20 @@ $serviceSchema = service_schema([
 
     <!-- WHY CUSTOM -->
     <h2>Why choose custom over off-the-shelf?</h2>
-    <p class="svc-body-text">Generic SaaS tools are built for the average business. Your workflows, your data, your customers — they're not average. A custom-built application gives you complete control over features, performance, and cost while eliminating recurring licence fees that drain margins over time.</p>
+    <p class="svc-body-text">Generic SaaS tools are built for the average business. Your workflows, your data, your customers; they're not average. A custom-built application gives you complete control over features, performance, and cost while eliminating recurring licence fees that drain margins over time.</p>
 
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
         <h3>Built Around Your Workflow</h3>
-        <p>No compromises. Every screen, every flow, every report is designed exactly for how your team actually works — not the other way around.</p>
+        <p>No compromises. Every screen, every flow, every report is designed exactly for how your team actually works: not the other way around.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Faster Than Competitors</h3>
-        <p>We obsess over Core Web Vitals. Pages load in under 2 seconds, interactions feel instant — giving you an SEO and conversion advantage.</p>
+        <p>We obsess over Core Web Vitals. Pages load in under 2 seconds, interactions feel instant: giving you an SEO and conversion advantage.</p>
       </div>
       <div class="svc-feature-card">
         <h3>One Codebase, All Platforms</h3>
-        <p>Using React Native and Flutter, we ship iOS and Android apps from a single codebase — cutting development time and long-term maintenance cost.</p>
+        <p>Using React Native and Flutter, we ship iOS and Android apps from a single codebase: cutting development time and long-term maintenance cost.</p>
       </div>
       <div class="svc-feature-card">
         <h3>API-First Architecture</h3>
@@ -116,11 +123,11 @@ $serviceSchema = service_schema([
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
         <h3>Frontend</h3>
-        <p>React.js, Next.js, Vue.js — component-driven UIs that are fast to load and easy to iterate on. Tailwind CSS for design consistency.</p>
+        <p>React.js, Next.js, Vue.js: component-driven UIs that are fast to load and easy to iterate on. Tailwind CSS for design consistency.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Backend</h3>
-        <p>Laravel (PHP), Node.js (Express / NestJS), Python (FastAPI) — chosen based on your project's performance and ecosystem requirements.</p>
+        <p>Laravel (PHP), Node.js (Express / NestJS), Python (FastAPI): chosen based on your project's performance and ecosystem requirements.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Mobile</h3>
@@ -128,20 +135,20 @@ $serviceSchema = service_schema([
       </div>
       <div class="svc-feature-card">
         <h3>Database</h3>
-        <p>MySQL, PostgreSQL, MongoDB, Redis — often combined in one project. We design schemas that stay fast as data volume grows.</p>
+        <p>MySQL, PostgreSQL, MongoDB, Redis: often combined in one project. We design schemas that stay fast as data volume grows.</p>
       </div>
     </div>
 
     <!-- PROCESS -->
     <h2>How we deliver</h2>
     <ul class="svc-includes">
-      <li>Discovery &amp; requirement mapping — we document every user story before writing a line of code</li>
-      <li>UI/UX design in Figma — interactive prototypes reviewed with your team</li>
+      <li>Discovery &amp; requirement mapping; we document every user story before writing a line of code</li>
+      <li>UI/UX design in Figma: interactive prototypes reviewed with your team</li>
       <li>Agile sprints (2-week cycles) with demos at each milestone</li>
-      <li>Automated testing — unit, integration, and end-to-end before every release</li>
-      <li>CI/CD pipeline setup — code merges trigger automated deploys to staging</li>
+      <li>Automated testing: unit, integration, and end-to-end before every release</li>
+      <li>CI/CD pipeline setup: code merges trigger automated deploys to staging</li>
       <li>Production launch with load testing and monitoring setup (Sentry, Datadog)</li>
-      <li>Post-launch support — bug fixes, feature additions, performance tuning</li>
+      <li>Post-launch support: bug fixes, feature additions, performance tuning</li>
     </ul>
 
     <!-- WHO WE BUILD FOR -->
@@ -161,7 +168,7 @@ $serviceSchema = service_schema([
     <div class="svc-cta-strip">
       <p class="page-label">Let's build together</p>
       <h2>Have an app idea?</h2>
-      <p>Share your concept with us. We'll map out the technical approach, give you an honest timeline, and send a detailed proposal — no obligation.</p>
+      <p>Share your concept with us. We'll map out the technical approach, give you an honest timeline, and send a detailed proposal: no obligation.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-primary" data-track="cta" data-cta-location="webapps-final">Talk to Our Team</a>
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-outline" data-track="cta" data-cta-location="webapps-final">Scope Your Project</a>
@@ -171,7 +178,6 @@ $serviceSchema = service_schema([
   </div>
 </main>
 
-<?= service_schema_jsonld($serviceSchema) ?>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>
 <?php require __DIR__ . '/../../includes/scripts.php'; ?>
 </body>

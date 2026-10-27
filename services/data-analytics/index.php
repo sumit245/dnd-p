@@ -30,6 +30,13 @@ $serviceSchema = service_schema([
     'AI analytics and predictive forecasting',
   ],
 ]);
+
+require_once __DIR__ . '/../../includes/schema-breadcrumb.php';
+$page['jsonld'][] = service_schema_jsonld($serviceSchema);
+$page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
+  ['name' => 'Services', 'url' => '/#services'],
+  ['name' => 'Data Analytics & BI Dashboards', 'url' => '/services/data-analytics/'],
+]));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,11 +67,11 @@ $serviceSchema = service_schema([
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
         <h3>Single source of truth</h3>
-        <p>We aggregate data from your ERP, CRM, sales tools, and databases into one clean data warehouse — eliminating the "which report is correct?" problem.</p>
+        <p>We aggregate data from your ERP, CRM, sales tools, and databases into one clean data warehouse: eliminating the "which report is correct?" problem.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Real-time BI dashboards</h3>
-        <p>Live KPI screens refreshed every few seconds. Drill down from company-level to branch, team, or individual — all without waiting for someone to run a query.</p>
+        <p>Live KPI screens refreshed every few seconds. Drill down from company-level to branch, team, or individual: all without waiting for someone to run a query.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Business intelligence reporting automation</h3>
@@ -76,11 +83,11 @@ $serviceSchema = service_schema([
       </div>
       <div class="svc-feature-card">
         <h3>AI analytics and assisted workflows</h3>
-        <p>LLM-powered features inside your internal tools — auto-summarise customer notes, classify tickets, extract data from documents, draft personalised communications.</p>
+        <p>LLM-powered features inside your internal tools: auto-summarise customer notes, classify tickets, extract data from documents, draft personalised communications.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Anomaly detection</h3>
-        <p>Automatic alerts when metrics deviate from expected ranges — unusual spikes in returns, drops in conversion, cost overruns — before they become crises.</p>
+        <p>Automatic alerts when metrics deviate from expected ranges (unusual spikes in returns, drops in conversion, cost overruns) before they become crises.</p>
       </div>
     </div>
 
@@ -116,7 +123,7 @@ $serviceSchema = service_schema([
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
         <h3>Data visualisation</h3>
-        <p>Custom React dashboards with Recharts, D3.js, or Apache ECharts — or Metabase / Grafana for teams that prefer no-code dashboards.</p>
+        <p>Custom React dashboards with Recharts, D3.js, or Apache ECharts; or Metabase / Grafana for teams that prefer no-code dashboards.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Data engineering</h3>
@@ -128,19 +135,19 @@ $serviceSchema = service_schema([
       </div>
       <div class="svc-feature-card">
         <h3>AI &amp; LLM Integration</h3>
-        <p>OpenAI GPT, Anthropic Claude, and open-source LLMs (Mistral, LLaMA) via API — embedded into your workflows, not bolted on as a chatbot nobody uses.</p>
+        <p>OpenAI GPT, Anthropic Claude, and open-source LLMs (Mistral, LLaMA) via API: embedded into your workflows, not bolted on as a chatbot nobody uses.</p>
       </div>
     </div>
 
     <!-- HOW WE WORK -->
     <h2>Our engagement process</h2>
     <ul class="svc-includes">
-      <li>Data audit — we map every data source, its format, quality, and access method</li>
-      <li>KPI workshop — we work with leadership to define what success metrics matter most</li>
-      <li>Pipeline architecture — design the ETL flow from sources to clean, queryable data</li>
-      <li>Dashboard &amp; report prototyping — Figma mockups reviewed before any coding</li>
-      <li>Build &amp; integrate — connect all data sources, build the visualisation layer</li>
-      <li>Training &amp; handover — your team knows how to use and extend everything we build</li>
+      <li>Data audit; we map every data source, its format, quality, and access method</li>
+      <li>KPI workshop; we work with leadership to define what success metrics matter most</li>
+      <li>Pipeline architecture: design the ETL flow from sources to clean, queryable data</li>
+      <li>Dashboard &amp; report prototyping: Figma mockups reviewed before any coding</li>
+      <li>Build &amp; integrate: connect all data sources, build the visualisation layer</li>
+      <li>Training &amp; handover; your team knows how to use and extend everything we build</li>
     </ul>
 
     <!-- CTA -->
@@ -157,7 +164,7 @@ $serviceSchema = service_schema([
   </div>
 </main>
 
-<?= service_schema_jsonld($serviceSchema) ?><?php require __DIR__ . '/../../includes/footer.php'; ?>
+<?php require __DIR__ . '/../../includes/footer.php'; ?>
 <?php require __DIR__ . '/../../includes/scripts.php'; ?>
 </body>
 </html>
