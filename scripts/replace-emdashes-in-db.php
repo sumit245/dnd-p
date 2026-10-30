@@ -33,7 +33,7 @@ $apply = in_array('--apply', $argv ?? [], true);
 const TARGETS = [
     'portfolios'    => ['title', 'short_description', 'detailed_description'],
     'blogs'         => ['title', 'excerpt', 'content'],
-    'site_settings' => ['setting_value'],
+    'site_settings' => ['value'],
 ];
 
 const DASH = "\u{2014}";
@@ -108,8 +108,15 @@ function convert(string $value): array
 
 $changes = [];
 foreach (TARGETS as $table => $columns) {
-    $have = $pdo->query("SHOW COLUMNS FROM `$table`")->fetchAll(PDO::FETCH_COLUMN);
+    $have    = $pdo->query("SHOW COLUMNS FROM `$table`")->fetchAll(PDO::FETCH_COLUMN);
+    $missing = array_values(array_diff($columns, $have));
     $columns = array_values(array_intersect($columns, $have));
+    // Say so rather than skipping in silence: a renamed column would otherwise
+    // leave rows converted everywhere except here, with nothing to show why.
+    if ($missing) {
+        fwrite(STDERR, sprintf("warning: %s has no column(s) %s; not converted\n",
+            $table, implode(', ', $missing)));
+    }
     if (!$columns) {
         continue;
     }

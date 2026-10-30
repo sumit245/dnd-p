@@ -1,13 +1,13 @@
 <?php
 /**
- * Dashandots Technology — Site Configuration
+ * Dashandots Technology: Site Configuration
  * ───────────────────────────────────────────
  * Loaded by every page before any output.
  */
 
 define('SITE_NAME', 'Dashandots Technology');
 define('SITE_URL', 'https://dashandots.com');
-// Analytics — both overridable in .env. GTM_CONTAINER_ID must be a GTM-XXXX container id
+// Analytics: both overridable in .env. GTM_CONTAINER_ID must be a GTM-XXXX container id
 // (NOT a G- measurement id); GA4_MEASUREMENT_ID (G-XXXX) loads gtag.js directly so events
 // reach GA4 even when the GTM container has no tags yet.
 require_once __DIR__ . '/env.php';
@@ -45,14 +45,14 @@ define('MICROSOFT_CLARITY_ID', site_env('MICROSOFT_CLARITY_ID', ''));
 // Optional twitter:site meta. Set only after confirming the active handle.
 define('TWITTER_SITE', site_env('TWITTER_SITE', ''));
 
-// Base path for asset URLs — empty string for production root
+// Base path for asset URLs: empty string for production root
 define('BASE_PATH', '/dashandots');
 
 require_once __DIR__ . '/seo.php';
 
-// Default page context — pages override before including head.php
+// Default page context: pages override before including head.php
 $page = [
-    'title' => SITE_NAME . ' — ' . SITE_TAGLINE,
+    'title' => SITE_NAME . ' | ' . SITE_TAGLINE,
     'description' => 'Dashandots builds custom ERP, CRM, Hotel PMS, project management software and mobile apps for Indian SMEs in Gurugram and Delhi NCR, with secure delivery and long-term support.',
     'keywords' => 'custom ERP development India, CRM development company India, business software for Indian SMEs',
     'canonical' => SITE_URL . '/',

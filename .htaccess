@@ -117,6 +117,9 @@ RewriteRule ^test_.*\.php$ - [F,L]
 # CLI maintenance scripts (seed, migrations, smoke tests) are never web-callable
 RewriteRule ^scripts/ - [F,L]
 
+# Database row backups written by maintenance scripts; never web-readable
+RewriteRule ^backups/ - [F,L]
+
 # Block dot-files (.env, .git, etc.)
 <FilesMatch "^\.">
     Order allow,deny

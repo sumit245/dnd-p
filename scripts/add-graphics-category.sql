@@ -9,5 +9,5 @@ ALTER TABLE `portfolios`
 
 -- Example: Insert a graphics portfolio item
 -- INSERT INTO `portfolios` (`title`, `slug`, `category`, `industry`, `badge`, `sort_order`, `short_description`)
--- VALUES ('Brand Identity — Acme Corp', 'acme-brand', 'graphics', 'service', 'DESIGN', 500,
+-- VALUES ('Brand Identity | Acme Corp', 'acme-brand', 'graphics', 'service', 'DESIGN', 500,
 --         'Complete brand identity package including logo, colors, typography, and marketing collateral.');

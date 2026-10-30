@@ -10,3 +10,6 @@ Thumbs.db
 *.log
 
 .audit-lh-*.json
+
+# Database row backups written by scripts/replace-emdashes-in-db.php
+backups/

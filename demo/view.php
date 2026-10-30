@@ -23,9 +23,9 @@ if (!$portfolio || !portfolio_has_detail($portfolio)) {
 // without touching the H1, which still comes from portfolios.title.
 //
 // Resolution order, most specific first:
-//   1. portfolios.meta_title / meta_description — editable in admin, no deploy
-//   2. includes/demo-seo.php — code-reviewed defaults for specific slugs
-//   3. generated — brand appended to the title, short_description trimmed to
+//   1. portfolios.meta_title / meta_description: editable in admin, no deploy
+//   2. includes/demo-seo.php: code-reviewed defaults for specific slugs
+//   3. generated: brand appended to the title, short_description trimmed to
 //      155 chars on a word boundary (it is page copy, and ran to 249 chars on
 //      some rows, so it truncated mid-sentence in results)
 $seoOverrides = include __DIR__ . '/../includes/demo-seo.php';
