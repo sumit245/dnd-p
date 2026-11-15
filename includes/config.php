@@ -45,8 +45,21 @@ define('MICROSOFT_CLARITY_ID', site_env('MICROSOFT_CLARITY_ID', ''));
 // Optional twitter:site meta. Set only after confirming the active handle.
 define('TWITTER_SITE', site_env('TWITTER_SITE', ''));
 
-// Base path for asset URLs: empty string for production root
-define('BASE_PATH', '/dashandots');
+// Base path for links and asset URLs. The site runs at the document root in
+// production and under /dashandots on local XAMPP, so this cannot be a constant:
+// hardcoding the local path ships /dashandots/assets/... to production, where
+// every stylesheet, script and image 404s.
+// Order: explicit BASE_PATH in .env wins; otherwise local hosts get /dashandots
+// and everything else (including CLI, which has no HTTP_HOST) gets the root.
+$basePathEnv = site_env('BASE_PATH', '__unset__');
+if ($basePathEnv !== '__unset__') {
+    define('BASE_PATH', $basePathEnv === '/' ? '' : rtrim($basePathEnv, '/'));
+} else {
+    $siteHost = strtolower(trim((string) ($_SERVER['HTTP_HOST'] ?? '')));
+    $siteIsLocal = (bool) preg_match('/^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/', $siteHost);
+    define('BASE_PATH', $siteIsLocal ? '/dashandots' : '');
+}
+unset($basePathEnv, $siteHost, $siteIsLocal);
 
 require_once __DIR__ . '/seo.php';
 

@@ -106,6 +106,18 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.+)$ $1.php [L]
 
+# 404 fallback. ErrorDocument takes one absolute path, which cannot be right in
+# both environments at once (/dashandots/404.php locally, /404.php in
+# production) — the old absolute path meant production served Apache's default
+# 404 page. A relative rewrite target resolves against this directory, so it
+# works in both. 404.php calls http_response_code(404) itself, so the status is
+# still correct. Static assets are excluded: a missing image should fail plainly
+# rather than return a full HTML page.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.(?:css|js|map|webp|png|jpe?g|gif|svg|ico|woff2?|ttf|eot|xml|json|pdf)$ [NC]
+RewriteRule ^ 404.php [L]
+
 # ═══════════════════════════════════════════════════════════════════════════
 # SECURITY
 # ═══════════════════════════════════════════════════════════════════════════
@@ -130,8 +142,8 @@ RewriteRule ^backups/ - [F,L]
     Require all denied
 </Files>
 
-# Error pages
-ErrorDocument 404 /dashandots/404.php
+# Error pages: handled by the 404 fallback rewrite above, which works at both
+# the production document root and under /dashandots on local XAMPP.
 
 # ═══════════════════════════════════════════════════════════════════════════
 # PERFORMANCE
