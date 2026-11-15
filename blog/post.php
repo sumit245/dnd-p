@@ -32,6 +32,10 @@ $modifiedIso = date('c', strtotime($blog['updated_at'] ?? $blog['created_at']));
  * the agentic-AI headline is 74 characters, and the brand suffix took the
  * title tag to 92 (Semrush, 15 Nov 2026).
  *
+ * The suffix is the plain brand, as on every other page. An earlier version
+ * appended " | Dashandots Blog", which reads as keyword padding next to a
+ * headline that already says what the page is.
+ *
  * Resolution order, most specific first:
  *   1. includes/blog-seo.php: a code-reviewed override for that slug
  *   2. generated: the brand suffix if it fits in 60 characters, otherwise
@@ -44,7 +48,7 @@ $modifiedIso = date('c', strtotime($blog['updated_at'] ?? $blog['created_at']));
 $blogSeo = include __DIR__ . '/../includes/blog-seo.php';
 
 $blogMetaTitle = static function (string $headline): string {
-    foreach ([' | Dashandots Blog', ' | Dashandots'] as $suffix) {
+    foreach ([' | ' . SITE_NAME, ' | Dashandots'] as $suffix) {
         if (mb_strlen($headline . $suffix) <= 60) {
             return $headline . $suffix;
         }

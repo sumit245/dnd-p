@@ -3,7 +3,7 @@
  * Per-post SEO overrides for blog articles, keyed by slug.
  *
  * Why this exists: blog/post.php builds the <title> as
- * `blogs.title . ' | Dashandots Blog'`, and blogs.title is written for the
+ * `blogs.title` plus the brand suffix, and blogs.title is written for the
  * page itself, where a long descriptive headline reads well. In a SERP it
  * does not: the agentic-AI headline is 74 characters, which reached 92 once
  * the brand suffix was appended (Semrush, 15 Nov 2026).
@@ -23,9 +23,9 @@
 return [
 
     'agentic-ai-software-development' => [
-        // 52 chars. The headline's "A Complete Guide for Engineering Teams"
+        // 47 chars. The headline's "A Complete Guide for Engineering Teams"
         // is what pushed it to 92; the topic itself is the searched part.
-        'title' => 'Agentic AI in Software Development | Dashandots Blog',
+        'title' => 'Agentic AI in Software Development | Dashandots',
     ],
 
 ];
