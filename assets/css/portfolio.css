@@ -728,3 +728,29 @@
     transform: none;
   }
 }
+
+/* ── Explainer notes under the grid ──────────────────────────────────────
+   Added 15 Nov 2026: the grid is deliberately image-led, which left the page
+   at a 0.06 text-to-HTML ratio with almost nothing for a crawler to read. */
+.pf-notes {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 80px 0 20px;
+}
+.pf-notes h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 36px 0 14px;
+}
+.pf-notes h2:first-child { margin-top: 0; }
+.pf-notes p,
+.pf-notes li {
+  line-height: 1.7;
+  opacity: .82;
+  margin-bottom: 12px;
+}
+.pf-notes ul { margin: 0 0 12px 20px; }
+@media (max-width: 640px) {
+  .pf-notes { padding: 56px 16px 12px; }
+  .pf-notes h2 { font-size: 20px; }
+}

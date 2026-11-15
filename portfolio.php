@@ -173,6 +173,27 @@ $h = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8')
           yet. We've built systems in adjacent industries; ask us.</p>
 
       </div>
+
+      <section class="pf-notes">
+        <h2>How to read this portfolio</h2>
+        <p>Every tile above is a system we built and still support. Tiles marked with a demo link open a working build you can click through; the rest are client deployments we cannot open to the public, so they show a screenshot and a short description instead.</p>
+        <p>Treat a demo as a look at the interface and the workflow, not a quote. Module scope, integrations, hardware and reporting all get agreed separately for your project.</p>
+
+        <h2>What these systems have in common</h2>
+        <ul>
+          <li><strong>Built around an existing operation.</strong> Each one replaced a mix of spreadsheets, paper and a packaged tool that had stopped fitting. We map the current process first, then build to it.</li>
+          <li><strong>Used daily by non-technical staff.</strong> Operators, drivers, store keepers and front-desk teams are the main users, so the screens are short and the error states matter more than the dashboards.</li>
+          <li><strong>Run on your own data.</strong> There is no per-user licence on the custom application, and ownership and handover follow the project agreement.</li>
+          <li><strong>Supported after go-live.</strong> Most of these have been running for more than a year, with changes going in as the business changes.</li>
+        </ul>
+
+        <h2>Industries we have built for</h2>
+        <p>The filters above cover manufacturing, logistics and transport, healthcare, recycling, travel and professional services. If your industry is not listed, the underlying work is usually close enough to adapt: stock, jobs, approvals and billing behave much the same across sectors.</p>
+        <p>For the service behind these builds, see <a href="<?= BASE_PATH ?>/services/erp-development/">ERP and CRM development</a>, <a href="<?= BASE_PATH ?>/services/manufacturing-erp/">manufacturing ERP</a>, <a href="<?= BASE_PATH ?>/services/industry-systems/">industry-specific systems</a> or <a href="<?= BASE_PATH ?>/services/web-mobile-apps/">web and mobile apps</a>.</p>
+
+        <h2>Starting your own</h2>
+        <p>Send us the shape of the problem: how many people will use it, what they do now, and which systems it has to talk to. Run it through the <a href="<?= BASE_PATH ?>/#ai-brief">scoping tool</a> for a rough cost and timeline, or <a href="<?= BASE_PATH ?>/#contact">talk to our team</a> directly.</p>
+      </section>
     </div>
   </main>
 

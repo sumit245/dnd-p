@@ -33,6 +33,10 @@ $page['og_title'] = 'Blog & Insights | ' . SITE_NAME;
 $page['og_desc'] = 'Insights, guides and case studies on ERP, CRM, TMS and custom software development. Expert perspectives from Dashandots Technology, India.';
 $page['og_image'] = SITE_URL . '/assets/img/og-image.jpg';
 $page['active_nav'] = 'blog';
+// Listing styles used to sit in a <style> block in this file. Inline, they were
+// 7KB of every response and uncacheable, which is also what pushed this page
+// under Semrush's text-to-HTML ratio threshold (0.04 on 15 Nov 2026).
+$page['extra_css'] = ['/assets/css/blog.css'];
 
 $schemaCollection = [
     'name' => 'Blog & Insights | ' . SITE_NAME,
@@ -54,215 +58,6 @@ if (!empty($blogs[0]['feature_image'])) {
 <?php if ($firstLcpImage !== ''): ?>
     <link rel="preload" as="image" href="<?= htmlspecialchars($firstLcpImage, ENT_QUOTES, 'UTF-8') ?>">
 <?php endif; ?>
-    <style>
-        /* ═══════════════════════════════════════════
-           BLOG LISTING: STYLES
-        ═══════════════════════════════════════════ */
-
-        .blog-header {
-            padding: 100px 0 60px;
-            background: var(--surface-2);
-            text-align: center;
-        }
-        .blog-title {
-            font-size: 42px;
-            font-weight: 800;
-            color: var(--text-1);
-            margin-bottom: 20px;
-        }
-
-        /* ── Grid ─────────────────────────────────── */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 30px;
-            padding: 60px 0;
-        }
-        @media (max-width: 400px) {
-            .blog-grid { grid-template-columns: 1fr; }
-        }
-
-        /* ── Card ─────────────────────────────────── */
-        .blog-card {
-            background: var(--surface-1);
-            border-radius: var(--r-md);
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-        }
-
-        /* ── Thumbnail ────────────────────────────── */
-        .blog-thumb {
-            height: 200px;
-            background: var(--surface-2);
-            position: relative;
-            overflow: hidden;
-        }
-        .blog-thumb a { display: block; height: 100%; }
-        .blog-thumb img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-        .blog-card:hover .blog-thumb img { transform: scale(1.05); }
-
-        /* ── Category pill on image ───────────────── */
-        .blog-cat-pill {
-            position: absolute;
-            top: 12px; left: 12px;
-            background: rgba(0,0,0,.6);
-            backdrop-filter: blur(6px);
-            color: #fff;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: .04em;
-            padding: 4px 10px;
-            border-radius: 20px;
-            z-index: 1;
-        }
-
-        /* ── Body ─────────────────────────────────── */
-        .blog-body {
-            padding: 22px 24px 0;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* ── Meta row (date + read time) ──────────── */
-        .blog-meta {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            font-size: 13px;
-            color: var(--text-2);
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-        .blog-meta-sep {
-            width: 3px; height: 3px;
-            border-radius: 50%;
-            background: var(--text-2);
-            opacity: .5;
-        }
-        .blog-rt {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .blog-rt svg { color: var(--accent); flex-shrink: 0; }
-
-        /* ── Title ──────────────────────────────────
-           Card titles are h2 (they sit under the page h1, and h3 skipped a
-           level). The compound selector is deliberate: style.css carries a
-           legacy `.blog-card h2` rule that would otherwise win on specificity
-           and change the spacing. */
-        .blog-card .blog-h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin: 0 0 12px 0;
-            color: var(--text-1);
-            line-height: 1.4;
-        }
-        .blog-h3 a {
-            color: inherit;
-            text-decoration: none;
-            transition: color .2s;
-        }
-        .blog-card:hover .blog-h3 a { color: var(--accent); }
-
-        /* ── Excerpt ──────────────────────────────── */
-        .blog-excerpt {
-            color: var(--text-2);
-            line-height: 1.6;
-            flex-grow: 1;
-            font-size: 15px;
-            margin-bottom: 0;
-        }
-
-        /* ── Card footer ─────────────────────────── */
-        .blog-card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 24px;
-            margin-top: auto;
-            border-top: 1px solid var(--border);
-        }
-        .blog-readmore {
-            color: var(--accent);
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 14px;
-            transition: gap .2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .blog-readmore:hover { gap: 8px; text-decoration: underline; }
-
-        /* ── Share buttons ────────────────────────── */
-        .blog-share {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-        .share-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px; height: 32px;
-            border: none;
-            background: transparent;
-            border-radius: 6px;
-            cursor: pointer;
-            color: var(--text-2);
-            transition: all .2s;
-            padding: 0;
-            text-decoration: none;
-        }
-        .share-btn:hover { background: var(--surface-2); color: var(--accent); }
-        .share-btn svg { width: 16px; height: 16px; }
-
-        /* X/Twitter hover */
-        .share-btn.x:hover { color: #000; }
-        /* LinkedIn hover */
-        .share-btn.li:hover { color: #0a66c2; }
-        /* WhatsApp hover */
-        .share-btn.wa:hover { color: #25d366; }
-        /* Copy hover */
-        .share-btn.cp:hover { color: var(--accent); }
-
-        /* Copy tooltip */
-        .share-btn.cp { position: relative; }
-        .share-btn.cp .cp-tip {
-            position: absolute;
-            bottom: calc(100% + 6px);
-            left: 50%;
-            transform: translateX(-50%) scale(0.8);
-            background: var(--text-1);
-            color: #fff;
-            font-size: 11px;
-            font-weight: 600;
-            padding: 4px 8px;
-            border-radius: 4px;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity .2s, transform .2s;
-        }
-        .share-btn.cp .cp-tip.show {
-            opacity: 1;
-            transform: translateX(-50%) scale(1);
-        }
-    </style>
 </head>
 <body>
     <?php include __DIR__ . '/../includes/header.php'; ?>
@@ -368,6 +163,24 @@ if (!empty($blogs[0]['feature_image'])) {
                 <?php else: ?>
                     <p style="text-align:center; grid-column: 1 / -1; padding: 60px 0; color: var(--text-2); font-size: 18px;">New articles coming soon.</p>
                 <?php endif; ?>
+            </div>
+
+            <div class="blog-intro">
+                <h2>What we write about</h2>
+                <p>We build custom business software for Indian SMEs. These articles come out of that work, not from a content calendar. Expect practical pieces on scoping, build decisions and the parts of a rollout that usually go wrong.</p>
+                <p>Three themes run through most of what we publish:</p>
+                <ul>
+                    <li><strong>Buying and scoping.</strong> How to tell a packaged product from a custom build, what drives the cost of each, and which questions to settle before anyone writes code. Our <a href="<?= BASE_PATH ?>/services/erp-development/">ERP and CRM development service</a> covers the same ground in more detail.</li>
+                    <li><strong>Delivery practice.</strong> Data migration, user testing with the people who will actually use the system, cutover planning, and what support looks like after go-live.</li>
+                    <li><strong>Tooling and AI.</strong> Where AI-assisted development genuinely saves time on a client project, and where it adds risk that a human review has to catch.</li>
+                </ul>
+
+                <h2>Who these articles are for</h2>
+                <p>Owners, operations heads and IT leads at growing companies: the people who have to approve a system, live with it, and answer for it when it breaks. We write for readers evaluating a build, not for a developer audience.</p>
+                <p>Where a piece touches something we sell, we say so and link to it. Nothing here is a case study unless it is labelled as one.</p>
+
+                <h2>Looking for something specific?</h2>
+                <p>If you want to see working systems rather than read about them, the <a href="<?= BASE_PATH ?>/portfolio">portfolio</a> has live demos of the ERP, CRM, logistics and mobile systems we have built. To talk through a project of your own, <a href="<?= BASE_PATH ?>/#contact">get in touch</a> or run your requirement through the <a href="<?= BASE_PATH ?>/#ai-brief">scoping tool</a> for a rough cost and timeline.</p>
             </div>
         </section>
     </main>

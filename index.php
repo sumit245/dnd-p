@@ -473,7 +473,7 @@ if ($heroDescription === '') {
               <li>Native‑like mobile apps (Flutter, React Native)</li>
               <li>PWAs and admin consoles</li>
             </ul>
-            <a href="<?= BASE_PATH ?>/services/web-mobile-apps/" class="service-learn-more">Learn more &#x2192;</a>
+            <a href="<?= BASE_PATH ?>/services/web-mobile-apps/" class="service-learn-more">Explore web &amp; mobile app development &#x2192;</a>
           </article>
           <article class="service-card reveal reveal-delay-1">
             <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
@@ -493,7 +493,7 @@ if ($heroDescription === '') {
               <li>Integrations with Tally &amp; third‑party tools</li>
               <li><a href="<?= BASE_PATH ?>/services/manufacturing-erp/" style="color:var(--accent);font-weight:600">Manufacturing ERP (BOM &amp; Shop Floor) &rsaquo;</a></li>
             </ul>
-            <a href="<?= BASE_PATH ?>/services/erp-development/" class="service-learn-more">Learn more &#x2192;</a>
+            <a href="<?= BASE_PATH ?>/services/erp-development/" class="service-learn-more">Explore ERP &amp; CRM development &#x2192;</a>
           </article>
           <article class="service-card reveal reveal-delay-2">
             <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
@@ -511,7 +511,7 @@ if ($heroDescription === '') {
               <li>Customer, vendor &amp; employee portals</li>
               <li>Secure payments &amp; order tracking</li>
             </ul>
-            <a href="<?= BASE_PATH ?>/services/ecommerce/" class="service-learn-more">Learn more &#x2192;</a>
+            <a href="<?= BASE_PATH ?>/services/ecommerce/" class="service-learn-more">Explore e&#8209;commerce &amp; portal development &#x2192;</a>
           </article>
           <article class="service-card reveal">
             <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
@@ -532,7 +532,7 @@ if ($heroDescription === '') {
               <li>Hotel &amp; property management (PMS)</li>
               <li>Transport management systems (TMS)</li>
             </ul>
-            <a href="<?= BASE_PATH ?>/services/industry-systems/" class="service-learn-more">Learn more &#x2192;</a>
+            <a href="<?= BASE_PATH ?>/services/industry-systems/" class="service-learn-more">Explore industry-specific systems &#x2192;</a>
           </article>
           <article class="service-card reveal reveal-delay-1">
             <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
@@ -552,7 +552,7 @@ if ($heroDescription === '') {
               <li>Forecasting &amp; anomaly detection</li>
               <li>AI‑powered tools &amp; assistants</li>
             </ul>
-            <a href="<?= BASE_PATH ?>/services/data-analytics/" class="service-learn-more">Learn more &#x2192;</a>
+            <a href="<?= BASE_PATH ?>/services/data-analytics/" class="service-learn-more">Explore data, analytics &amp; AI services &#x2192;</a>
           </article>
           <article class="service-card reveal reveal-delay-2">
             <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"
@@ -573,7 +573,7 @@ if ($heroDescription === '') {
               <li>IoT data platforms &amp; dashboards</li>
               <li>Integrations into ERP &amp; field apps</li>
             </ul>
-            <a href="<?= BASE_PATH ?>/services/iot-embedded/" class="service-learn-more">Learn more &#x2192;</a>
+            <a href="<?= BASE_PATH ?>/services/iot-embedded/" class="service-learn-more">Explore IoT &amp; embedded development &#x2192;</a>
           </article>
         </div>
         <div class="how-we-work reveal">
