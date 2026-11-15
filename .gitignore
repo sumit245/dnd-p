@@ -13,3 +13,6 @@ Thumbs.db
 
 # Database row backups written by scripts/replace-emdashes-in-db.php
 backups/
+
+# Local marketing media (large video exports, not part of the site)
+marketing/

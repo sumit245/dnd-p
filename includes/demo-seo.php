@@ -19,6 +19,11 @@
 
 return [
 
+    'hms' => [
+        'title'       => 'Hospital Management System Demo | Dashandots',
+        'description' => 'Explore the Dashandots hospital management system demo for appointments, patient records, pharmacy and billing. Review workflows before scoping a custom HMS.',
+    ],
+
     'hrmx' => [
         // 56 chars. Leads with the headcount band: the strongest qualifier we
         // have, and it filters out navigational traffic for the other brands

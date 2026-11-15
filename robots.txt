@@ -28,23 +28,34 @@ Disallow: /dashandots/test_form.php
 Disallow: /dashandots/test_session1.php
 Disallow: /dashandots/test_session2.php
 
-# AI search citation crawlers (ALLOWED - improves AI search visibility)
+# Explicit agent access rules. Search, user-fetch, training and grounding
+# agents have different purposes; allowing access does not guarantee citation.
 User-agent: ChatGPT-User
-Allow: /
-
+User-agent: OAI-SearchBot
+User-agent: ClaudeBot
 User-agent: PerplexityBot
-Allow: /
-
 User-agent: Google-Extended
-Allow: /
-
 User-agent: anthropic-ai
-Allow: /
-
 User-agent: YouBot
 Allow: /
+Disallow: /admin/
+Disallow: /contact-handler.php
+Disallow: /estimate.php
+Disallow: /vendor/
+Disallow: /test_smtp.php
+Disallow: /test_form.php
+Disallow: /test_session1.php
+Disallow: /test_session2.php
+Disallow: /dashandots/admin/
+Disallow: /dashandots/contact-handler.php
+Disallow: /dashandots/estimate.php
+Disallow: /dashandots/vendor/
+Disallow: /dashandots/test_smtp.php
+Disallow: /dashandots/test_form.php
+Disallow: /dashandots/test_session1.php
+Disallow: /dashandots/test_session2.php
 
-# AI training-only crawlers (BLOCKED - no training consent granted)
+# Additional agent blocks (existing access policy)
 User-agent: GPTBot
 Disallow: /
 

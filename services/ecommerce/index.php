@@ -52,8 +52,8 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
     <!-- HERO -->
     <div class="svc-hero">
       <p class="page-label">Services &rsaquo; E-commerce &amp; Portals</p>
-      <h1>E-commerce &amp; customer portals that convert and retain</h1>
-      <p class="lead">We build high-performance online stores, B2B ordering portals, and multi-vendor marketplaces designed to maximise revenue, reduce operational overhead, and keep customers coming back.</p>
+      <h1>E-commerce and B2B customer portal development</h1>
+      <p class="lead">Dashandots builds online stores, business-to-business (B2B) ordering portals and multi-vendor marketplaces. We connect product catalogues, customer pricing, orders, payments and inventory around your operating model.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="ecommerce-hero">Scope Your Store or Portal</a>
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="ecommerce-hero">Talk to Our Team</a>
@@ -62,7 +62,7 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
 
     <!-- WHY CUSTOM E-COM -->
     <h2>Beyond template stores</h2>
-    <p class="svc-body-text">Shopify and WooCommerce templates get you live fast; but they hit a ceiling. Custom payment flows, dealer-specific pricing, bulk ordering logic, GST-compliant invoicing, and ERP integration all require custom development. We build stores that handle your actual business rules, not a generic retailer's.</p>
+    <p class="svc-body-text">Start by checking whether a platform's built-in features or extensions cover your catalogue, pricing and fulfilment needs. Custom development becomes useful when important requirements remain, such as dealer approvals, account-specific credit rules or a specialised inventory integration. Compare extension costs and maintenance with a custom build before choosing.</p>
 
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
@@ -75,7 +75,7 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
       </div>
       <div class="svc-feature-card">
         <h3>ERP &amp; inventory sync</h3>
-        <p>Real-time stock sync with your warehouse or ERP. No overselling, no manual updates, no customer disappointment on delivery timelines.</p>
+        <p>Connect stock and order records to your warehouse or ERP. Agree the refresh interval, stock reservation rules, retries and reconciliation process so staff can identify and resolve mismatches.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Multi-vendor marketplace</h3>
@@ -90,6 +90,9 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
         <p>Razorpay, PayU, CCAvenue, Stripe, UPI, COD, credit terms: all integrated and tested before go-live, not after.</p>
       </div>
     </div>
+
+    <h2>What should a B2B ordering portal include?</h2>
+    <p>Begin with the buyer journey: account approval, catalogue access, customer pricing, order placement and status tracking. Then define returns, payment terms and staff permissions. For example, a dealer's order may need credit approval before stock is reserved; document that rule before designing checkout. If inventory and finance already sit in an ERP, scope the <a href="<?= BASE_PATH ?>/services/erp-development/">ERP integration</a> alongside the portal.</p>
 
     <!-- WHAT WE BUILD -->
     <h2>Platforms we build</h2>

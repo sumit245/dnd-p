@@ -19,6 +19,10 @@ $logoUrl = defined('SITE_LOGO_URL') ? SITE_LOGO_URL : (SITE_URL . '/assets/logo.
     "@type": "Organization",
     "name": <?= json_encode(SITE_NAME, JSON_UNESCAPED_UNICODE) ?>,
     "url": <?= json_encode(SITE_URL . '/', JSON_UNESCAPED_SLASHES) ?>,
+    "sameAs": [
+      "https://www.linkedin.com/company/dashandots-technology",
+      "https://twitter.com/dashandots"
+    ],
     "logo": {
       "@type": "ImageObject",
       "url": <?= json_encode($logoUrl, JSON_UNESCAPED_SLASHES) ?>

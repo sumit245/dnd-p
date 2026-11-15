@@ -52,8 +52,8 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
     <!-- HERO -->
     <div class="svc-hero">
       <p class="page-label">Services &rsaquo; Web &amp; Mobile Apps</p>
-      <h1>Custom web &amp; mobile applications built for scale</h1>
-      <p class="lead">From responsive web portals to native-quality cross-platform mobile apps, we design and engineer digital products that are fast, secure, and built to grow with your business.</p>
+      <h1>Custom web and mobile app development</h1>
+      <p class="lead">Dashandots builds browser-based portals and mobile applications for customer, employee and field-team workflows. We scope the screens, permissions, integrations and device requirements before choosing a web, cross-platform or native approach.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="webapps-hero">Scope Your App</a>
         <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="webapps-hero">See our work</a>
@@ -62,7 +62,7 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
 
     <!-- WHY CUSTOM -->
     <h2>Why choose custom over off-the-shelf?</h2>
-    <p class="svc-body-text">Generic SaaS tools are built for the average business. Your workflows, your data, your customers; they're not average. A custom-built application gives you complete control over features, performance, and cost while eliminating recurring licence fees that drain margins over time.</p>
+    <p class="svc-body-text">Custom development is useful when a workflow or integration is central to your business and existing products cannot meet it well. A standard product may be more economical for common requirements. Compare development, hosting, support and third-party costs, as well as your ability to maintain the application after launch.</p>
 
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
@@ -70,8 +70,8 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
         <p>No compromises. Every screen, every flow, every report is designed exactly for how your team actually works: not the other way around.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Faster Than Competitors</h3>
-        <p>We obsess over Core Web Vitals. Pages load in under 2 seconds, interactions feel instant: giving you an SEO and conversion advantage.</p>
+        <h3>Measurable Performance Targets</h3>
+        <p>Agree loading and interaction targets for the devices and network conditions your users have. Measure representative screens and journeys before launch and monitor them as usage grows.</p>
       </div>
       <div class="svc-feature-card">
         <h3>One Codebase, All Platforms</h3>
@@ -82,14 +82,17 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
         <p>Every app we build exposes clean REST or GraphQL APIs, making it easy to integrate with third-party services, payment gateways, or future products.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Secure by Default</h3>
-        <p>Role-based access control, encrypted data at rest and in transit, OWASP-compliant code reviews, and regular dependency audits keep your users safe.</p>
+        <h3>Security Requirements in Scope</h3>
+        <p>Define authentication, access permissions, encryption, dependency review and backup requirements for the application. Document the checks and ongoing maintenance responsibilities before handover.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Scales When You Do</h3>
-        <p>Containerised deployments on AWS, Azure, or DigitalOcean mean you handle traffic spikes without emergency calls at 2 AM.</p>
+        <p>Plan capacity, monitoring and recovery around expected traffic. Hosting architecture and load testing should reflect your busiest workflows and agreed availability needs.</p>
       </div>
     </div>
+
+    <h2>Should you build a web app or a mobile app?</h2>
+    <p>A web app is a useful starting point when users need access through a browser across devices. Evaluate a mobile app when the workflow depends on device capabilities, repeated field use or app distribution. Offline operation needs explicit storage, sync and conflict handling in either approach. Our <a href="<?= BASE_PATH ?>/blog/mobile-first-design-b2b">mobile-first B2B design guide</a> provides a practical evaluation checklist.</p>
 
     <!-- WHAT WE BUILD -->
     <h2>What we build</h2>

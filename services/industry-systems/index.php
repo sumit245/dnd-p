@@ -51,8 +51,8 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
     <!-- HERO -->
     <div class="svc-hero">
       <p class="page-label">Services &rsaquo; Industry Systems</p>
-      <h1>Vertical software built for your industry: not adapted from a generic template</h1>
-      <p class="lead">We build purpose-specific management platforms for hospitals, hotels, logistics operators, and financial services: systems that understand your industry's regulations, workflows, and reporting needs from the ground up.</p>
+      <h1>Hospital, hotel and transport management software development</h1>
+      <p class="lead">Dashandots develops hospital management systems (HMS), hotel property management systems (PMS), and transport management systems (TMS). Each project starts with your staff roles, operational workflows, reporting needs and existing software.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="industry-hero">Scope Your System</a>
         <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="industry-hero">View live demos</a>
@@ -60,17 +60,17 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
     </div>
 
     <!-- INTRO -->
-    <h2>Why off-the-shelf industry software falls short</h2>
-    <p class="svc-body-text">Packaged HMS, PMS, or TMS solutions come with years of technical debt, licence fees that scale with your headcount, and customisation locked behind expensive consulting contracts. We build systems that are yours: designed around how your staff actually works, integrated with your existing tools, and owned by you with no ongoing licence.</p>
+    <h2>When does industry-specific custom software make sense?</h2>
+    <p class="svc-body-text">Custom development is an option when a standard product cannot cover important handovers, permissions or reporting without repeated manual work. Compare available products first, then document the remaining gaps. The proposal should identify which workflows are included, which systems must connect and who validates the requirements.</p>
 
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
         <h3>No Per-User Licence</h3>
-        <p>A one-time development investment that you own permanently. Add 50 more staff without a cost increase. That's what ownership looks like.</p>
+        <p>No per-user licence for the custom application. Hosting, support, third-party products and new features may add costs; ownership and handover follow the project agreement.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Compliance Built In</h3>
-        <p>NABH/JCI for hospitals. GST &amp; TDS for finance. MoRTH for logistics. Regulatory requirements are part of the spec, not an afterthought.</p>
+        <h3>Documented Requirements</h3>
+        <p>Identify required records, approvals, access controls and reports with your operational and compliance teams. Software features alone do not establish accreditation or regulatory compliance.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Integrates with What You Have</h3>
@@ -83,8 +83,8 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
     </div>
 
     <!-- HMS -->
-    <h2>Hospital Management System (HMS)</h2>
-    <p class="svc-body-text">Our HMS covers the complete patient journey (from OPD registration to discharge summary) with modules designed to reduce manual paperwork, speed up billing, and give management real-time visibility across departments.</p>
+    <h2 id="hospital-management-system">Hospital Management System (HMS)</h2>
+    <p class="svc-body-text">A hospital management system connects registration, appointments, patient records, pharmacy and billing. Outpatient department (OPD) workflows cover visits without admission; inpatient department (IPD) workflows cover admitted patients. Review the <a href="<?= BASE_PATH ?>/demo/hms">hospital management system demo</a> and its evaluation checklist, then confirm the modules needed for your facility.</p>
     <ul class="svc-includes">
       <li>Patient registration &amp; OPD/IPD management</li>
       <li>Doctor scheduling &amp; appointment booking (online + in-person)</li>
@@ -105,7 +105,7 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
       <h2>Review HMS, TMS, and ERP-style demos before you enquire.</h2>
       <p>Use the demos to compare modules, dashboard style, and workflow depth. Then send us your current process and we will suggest the first implementation phase.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
-        <a href="<?= BASE_PATH ?>/demo/view.php?slug=hms" class="btn btn-primary" target="_blank" rel="noopener" data-track="demo" data-demo-slug="hms">HMS Demo</a>
+        <a href="<?= BASE_PATH ?>/demo/hms" class="btn btn-primary" target="_blank" rel="noopener" data-track="demo" data-demo-slug="hms">Hospital Management System Demo</a>
         <a href="<?= BASE_PATH ?>/demo/view.php?slug=tms" class="btn btn-outline" target="_blank" rel="noopener" data-track="demo" data-demo-slug="tms">TMS Demo</a>
         <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp" class="btn btn-outline" target="_blank" rel="noopener" data-track="demo" data-demo-slug="erp">ERP Demo</a>
       </div>

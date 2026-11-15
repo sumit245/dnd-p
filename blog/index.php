@@ -6,6 +6,19 @@ require_once __DIR__ . '/../includes/portfolio-media.php';
 $stmt = $pdo->query('SELECT * FROM blogs WHERE status = \'published\' ORDER BY created_at DESC');
 $blogs = $stmt->fetchAll();
 
+// The two static routes serve file content even when a DB row shares the slug.
+// Keep their listing current and include them when they have no DB row.
+$staticBlogPosts = require __DIR__ . '/../includes/static-blog-posts.php';
+$blogsBySlug = [];
+foreach ($blogs as $blog) {
+    $blogsBySlug[$blog['slug']] = $blog;
+}
+foreach ($staticBlogPosts as $slug => $staticBlog) {
+    $blogsBySlug[$slug] = array_replace($blogsBySlug[$slug] ?? [], $staticBlog);
+}
+$blogs = array_values($blogsBySlug);
+usort($blogs, static fn(array $a, array $b): int => strcmp($b['created_at'], $a['created_at']));
+
 // Helper: compute read time
 function getReadTime($blog) {
     if (!empty($blog['read_time'])) return (int)$blog['read_time'];
@@ -301,7 +314,7 @@ if (!empty($blogs[0]['feature_image'])) {
                             <!-- Body -->
                             <div class="blog-body">
                                 <div class="blog-meta">
-                                    <span><?php echo date('M j, Y', strtotime($blog['created_at'])); ?></span>
+                                    <span><?php if (isset($staticBlogPosts[$blog['slug']])): ?>Updated <?php echo date('M j, Y', strtotime($blog['updated_at'])); ?><?php else: ?><?php echo date('M j, Y', strtotime($blog['created_at'])); ?><?php endif; ?></span>
                                     <span class="blog-meta-sep"></span>
                                     <span class="blog-rt">
                                         <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>

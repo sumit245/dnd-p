@@ -52,8 +52,8 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
     <!-- HERO -->
     <div class="svc-hero">
       <p class="page-label">Services &rsaquo; IoT &amp; Embedded</p>
-      <h1>Connect your physical world to the digital: reliably and at scale</h1>
-      <p class="lead">From firmware on the chip to the cloud platform and the mobile app your customer uses to monitor it; we engineer the full IoT stack, so your connected product works the way you imagined it.</p>
+      <h1>IoT and embedded software development</h1>
+      <p class="lead">Internet of Things (IoT) systems connect physical devices to software for monitoring and control. Dashandots scopes device firmware, connectivity, cloud services and dashboards together, based on the hardware, power budget and operating environment.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="iot-hero">Scope Your IoT Product</a>
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="iot-hero">Talk to Our Team</a>
@@ -62,12 +62,12 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
 
     <!-- WHY US -->
     <h2>End-to-end IoT development: one team, every layer</h2>
-    <p class="svc-body-text">Most IoT projects fail because firmware engineers, cloud architects, and app developers don't talk to each other. We're a single team that works across all three layers simultaneously: which means protocols are chosen correctly up front, edge constraints are respected in the cloud design, and the app is built for real device data, not mock data.</p>
+    <p class="svc-body-text">A connected product needs agreement between the device, cloud and application layers. We define message formats, connection behaviour, permissions and error handling across those layers. Prototype with actual hardware to check assumptions about power, signal quality and sensor data before expanding the deployment.</p>
 
     <div class="svc-feature-grid">
       <div class="svc-feature-card">
         <h3>Firmware &amp; Embedded C/C++</h3>
-        <p>Lean, reliable firmware for ESP32, STM32, Arduino, Raspberry Pi, and custom PCBs. We write code that runs on constrained hardware without leaking memory or hanging.</p>
+        <p>Firmware for ESP32, STM32, Arduino, Raspberry Pi and custom boards. Define memory, timing and power constraints, then test normal operation, recovery and long-running behaviour on the target hardware.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Device-Cloud Connectivity</h3>
@@ -82,7 +82,7 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
         <p>Live device monitoring with time-series charts, threshold alerts, geofencing, fleet maps, and historical data export: accessible from web and mobile.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>OTA Firmware Updates</h3>
+        <h3>Over-the-Air (OTA) Firmware Updates</h3>
         <p>Rollout updates to thousands of devices in the field without a service visit. Staged rollouts, rollback capability, and update success tracking included.</p>
       </div>
       <div class="svc-feature-card">
@@ -90,6 +90,9 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
         <p>TLS/mTLS for all device communications, unique device certificates, encrypted storage on-chip, and cloud-side anomaly detection for compromised devices.</p>
       </div>
     </div>
+
+    <h2>What information is needed to scope an IoT project?</h2>
+    <p>Share the device model, sensor readings, communication interfaces, power source, deployment conditions and expected fleet size. Decide what should happen when connectivity fails: which readings are stored, when they are sent again and how operators see a fault. A <a href="<?= BASE_PATH ?>/services/data-analytics/">monitoring dashboard</a> should distinguish live readings from delayed or missing data.</p>
 
     <!-- SOLUTIONS -->
     <h2>IoT solutions we build</h2>

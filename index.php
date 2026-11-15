@@ -48,6 +48,7 @@ if ($heroDescription === '') {
       "url":"https://dashandots.com",
       "logo":"<?= SITE_LOGO_URL ?>",
       "description":"Full-cycle software development and technology consulting. Specialising in ERP, CRM, TMS, HMS, Hotel PMS, web and mobile applications for SMEs and enterprises.",
+      "sameAs":["https://www.linkedin.com/company/dashandots-technology","https://twitter.com/dashandots"],
       <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>"email":"<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>",<?php endif; ?>
       "address":{"@type":"PostalAddress","addressLocality":"Gurugram","addressRegion":"Delhi NCR","addressCountry":"IN"},
       "areaServed":"Worldwide",
@@ -63,10 +64,11 @@ if ($heroDescription === '') {
     {
       "@type":"FAQPage",
       "mainEntity":[
+        {"@type":"Question","name":"What is custom ERP development in India?","acceptedAnswer":{"@type":"Answer","text":"Custom enterprise resource planning (ERP) development means building connected software around a company's operations. Dashandots develops ERP systems for Indian businesses, with modules such as inventory, procurement, finance, sales and approvals. Integrations, migration, source-code ownership and support are defined in the project scope and agreement."}},
         {"@type":"Question","name":"Do you work with small and mid-size businesses?","acceptedAnswer":{"@type":"Answer","text":"Yes. Our delivery model is optimised for SMEs and growing companies, while still maintaining enterprise-grade standards in architecture, security and code quality."}},
         {"@type":"Question","name":"How do you estimate cost and timeline?","acceptedAnswer":{"@type":"Answer","text":"We start with a structured discovery of your requirements, then provide a detailed estimate before any commitment. Get an indicative range using our project brief tool."}},
         {"@type":"Question","name":"Can you integrate with Tally or legacy ERP?","acceptedAnswer":{"@type":"Answer","text":"In most cases, yes. We have experience integrating with accounting tools, payment gateways, logistics APIs and legacy systems via custom connectors and APIs."}},
-        {"@type":"Question","name":"What happens after the project goes live?","acceptedAnswer":{"@type":"Answer","text":"We offer structured support and AMC options covering monitoring, bug fixes, enhancements and ongoing feature development."}},
+        {"@type":"Question","name":"What happens after the project goes live?","acceptedAnswer":{"@type":"Answer","text":"We offer support and annual maintenance contract (AMC) options. The agreement defines monitoring, bug fixes, security updates and response terms. Enhancements and new features are scoped separately unless explicitly included."}},
         {"@type":"Question","name":"What engagement models do you offer?","acceptedAnswer":{"@type":"Answer","text":"We offer three models: fixed-price projects with a clear scope and deliverables; time & material for evolving products where requirements change; and dedicated squads as an extension of your own team."}},
         {"@type":"Question","name":"Are you a software development company in Delhi, India?","acceptedAnswer":{"@type":"Answer","text":"Yes. Dashandots Technology is based in Gurugram, Delhi NCR. We are a full-cycle custom software development company serving clients across Delhi, the rest of India, and globally. Our core services include ERP development, CRM systems, mobile app development, hotel management software (PMS), hospital management software (HMS), and transport management systems (TMS)."}},
         {"@type":"Question","name":"Do you build hotel management software and property management systems (PMS)?","acceptedAnswer":{"@type":"Answer","text":"Yes. Our Hotel PMS is a complete hotel management system covering reservations, front-office, housekeeping, POS, and guest management. We build custom hotel management software tailored to boutique hotels, hotel chains, and resorts across India: fully integrated with billing, GST, and channel management."}},
@@ -129,6 +131,7 @@ if ($heroDescription === '') {
                 $text = $dot !== '' ? substr($line, 0, -1) : $line;
               ?><span class="hero-line" data-lead="<?= htmlspecialchars($heroLead) ?>"><?php echo htmlspecialchars($text) . $dot; ?></span><?php endforeach; ?></span></h1>
             <p class="hero-desc"><?php echo htmlspecialchars($heroDescription); ?></p>
+            <p class="hero-desc"><strong>Custom ERP development in India:</strong> Dashandots builds enterprise resource planning software that connects inventory, procurement, sales, finance and approvals. We plan the modules, integrations and data migration around your workflows. Explore our <a href="<?= BASE_PATH ?>/services/erp-development/">ERP development service</a> for scope, delivery and ownership details.</p>
             <div class="hero-ctas">
               <a href="#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="hero">Get Your Project Brief</a>
               <a href="#portfolio" class="btn btn-outline" data-track="cta" data-cta-location="hero">See Our Work</a>
@@ -448,8 +451,10 @@ if ($heroDescription === '') {
           <p class="section-label">Services</p>
           <h2 id="services-heading" class="section-title">Build the business platform your operations actually need.
           </h2>
-          <p class="section-sub">Start with the system you need most: ERP, CRM, portal, dashboard, mobile app, HMS, TMS,
-            or PMS. We scope it around the way your team already works.</p>
+          <p class="section-sub">Custom ERP development in India can bring finance, inventory, procurement, HR, sales,
+            approvals, dashboards, and integrations into one owned system. Start with the platform you need most:
+            ERP, CRM, portal, dashboard, mobile app, HMS, TMS, or PMS. We scope it around the way your team already
+            works.</p>
         </div>
         <div class="services-grid">
           <article class="service-card reveal">
@@ -486,6 +491,7 @@ if ($heroDescription === '') {
               <li>Custom ERP &amp; CRM implementations</li>
               <li>Workflow automation &amp; approvals</li>
               <li>Integrations with Tally &amp; third‑party tools</li>
+              <li><a href="<?= BASE_PATH ?>/services/manufacturing-erp/" style="color:var(--accent);font-weight:600">Manufacturing ERP (BOM &amp; Shop Floor) &rsaquo;</a></li>
             </ul>
             <a href="<?= BASE_PATH ?>/services/erp-development/" class="service-learn-more">Learn more &#x2192;</a>
           </article>
@@ -615,7 +621,7 @@ if ($heroDescription === '') {
                 <rect x="32" y="27" width="6" height="10" rx="1" />
                 <path d="M22 10 L22 4 M26 10 L26 4 M24 4 L24 2" />
               </svg></div>
-            <h3>Manufacturing</h3>
+            <h3><a href="<?= BASE_PATH ?>/services/manufacturing-erp/" style="color:inherit;text-decoration:none">Manufacturing</a></h3>
             <p class="sub">Production, inventory, quality, assets</p>
             <div class="challenge-box">
               <div class="label">Challenge</div>
@@ -625,6 +631,7 @@ if ($heroDescription === '') {
             </div>
             <div class="ind-tags"><span class="ind-tag">Production planning</span><span class="ind-tag">Quality
                 control</span><span class="ind-tag">Asset management</span></div>
+            <a href="<?= BASE_PATH ?>/services/manufacturing-erp/" class="service-learn-more" style="margin-top:14px">Explore Manufacturing ERP &#x2192;</a>
           </article>
           <article class="industry-card reveal reveal-delay-1">
             <div class="ind-icon" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"
@@ -856,7 +863,7 @@ if ($heroDescription === '') {
         </div>
         <div class="portfolio-more reveal">
           <a id="portfolioViewAll" class="btn btn-outline" href="<?php echo htmlspecialchars(portfolio_url()); ?>" data-track="cta" data-cta-location="portfolio-home">View all work &rarr;</a>
-          <p class="portfolio-more-note"><?php echo count($portfolios); ?> systems across <?php echo count(array_unique(array_filter(array_column($portfolios, 'industry')))); ?> industries</p>
+          <p class="portfolio-more-note"><?php echo count($portfolios); ?> portfolio entries across <?php echo count(array_unique(array_filter(array_column($portfolios, 'industry')))); ?> industries</p>
         </div>
         <div class="mid-cta reveal">
           <div>
@@ -891,8 +898,8 @@ if ($heroDescription === '') {
             <p><strong>Problem:</strong> fragmented OPD/IPD records and slow billing. <strong>Solution:</strong> HMS
               modules for registration, scheduling, billing, pharmacy, and reports. <strong>Result:</strong> staff work
               from a shared patient journey instead of disconnected registers.</p>
-            <a href="<?= BASE_PATH ?>/demo/view.php?slug=hms" class="proof-link" target="_blank" rel="noopener"
-              data-track="demo" data-demo-slug="hms">View HMS proof &rarr;</a>
+            <a href="<?= BASE_PATH ?>/demo/hms" class="proof-link" target="_blank" rel="noopener"
+              data-track="demo" data-demo-slug="hms">Explore the hospital management system demo &rarr;</a>
           </article>
           <article class="cs-card reveal reveal-delay-2 proof-card" data-track="proof-card" data-proof-type="erp">
             <p class="cs-meta">ERP · Inventory &amp; Operations</p>
@@ -901,8 +908,12 @@ if ($heroDescription === '') {
               <strong>Solution:</strong> modular ERP dashboard with role-based access. <strong>Result:</strong>
               decisions move from delayed reports to current business data.
             </p>
-            <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp" class="proof-link" target="_blank" rel="noopener"
-              data-track="demo" data-demo-slug="erp">View ERP proof &rarr;</a>
+            <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+              <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp" class="proof-link" target="_blank" rel="noopener"
+                data-track="demo" data-demo-slug="erp">View ERP proof &rarr;</a>
+              <a href="<?= BASE_PATH ?>/services/manufacturing-erp/" class="proof-link" style="color:var(--text-2)"
+                data-track="proof-card" data-proof-type="mfg-erp">Manufacturing ERP &rarr;</a>
+            </div>
           </article>
           <article class="cs-card reveal proof-card" data-track="proof-card" data-proof-type="portal">
             <p class="cs-meta">Portal · Dealers &amp; Customers</p>
@@ -957,21 +968,18 @@ if ($heroDescription === '') {
         <div class="resources-grid">
           <article class="resource-card reveal">
             <p class="res-cat">ERP · Strategy</p>
-            <h3>How SMEs can approach ERP implementation</h3>
-            <p>A practical framework for selecting, phasing, and rolling out ERP in a growing organisation without
-              disrupting operations.</p>
+            <h3><a href="<?= BASE_PATH ?>/blog/future-of-custom-erp">Custom ERP or packaged software?</a></h3>
+            <p>Compare workflow fit, migration, ownership and running costs before choosing how to build your ERP.</p>
           </article>
           <article class="resource-card reveal reveal-delay-1">
             <p class="res-cat">UX · Portals</p>
-            <h3>Designing mobile‑first B2B portals</h3>
-            <p>Principles for building portals that field teams and business partners actually enjoy using: on any
-              device, any time.</p>
+            <h3><a href="<?= BASE_PATH ?>/blog/mobile-first-design-b2b">Designing mobile-first B2B portals</a></h3>
+            <p>A practical checklist for field workflows, accessible controls, offline states and device testing.</p>
           </article>
           <article class="resource-card reveal reveal-delay-2">
             <p class="res-cat">Strategy · Build vs Buy</p>
-            <h3>When to use custom software vs off‑the‑shelf</h3>
-            <p>How to decide between customising a product and building a tailored platform; with a decision framework
-              for each scenario.</p>
+            <h3><a href="<?= BASE_PATH ?>/services/manufacturing-erp/">Planning manufacturing ERP</a></h3>
+            <p>Map materials, job cards, quality checks and integrations before choosing your factory's first release.</p>
           </article>
         </div>
       </div>
@@ -1074,27 +1082,27 @@ if ($heroDescription === '') {
               <tbody>
                 <tr>
                   <td><strong>Customization & Fit</strong></td>
-                  <td>100% tailored to your specific workflows and operations.</td>
-                  <td>Forced to adapt your business to their standard software.</td>
-                  <td>100% tailored, but highly dependent on your internal team.</td>
+                  <td>Built around the workflows agreed in your project scope.</td>
+                  <td>Standard modules with configuration and extension options that vary by product.</td>
+                  <td>Designed by your team, subject to its capacity and expertise.</td>
                 </tr>
                 <tr>
                   <td><strong>Long-term Cost (TCO)</strong></td>
-                  <td>One-time build cost + low maintenance. Very cost-effective at scale.</td>
-                  <td>Per-user/per-month fees scale exponentially as you grow.</td>
-                  <td>Extremely high (hiring, retaining, and managing developers).</td>
+                  <td>Development, hosting, support and future changes; third-party charges may apply.</td>
+                  <td>Subscription or licence fees, configuration, integrations and support.</td>
+                  <td>Engineering salaries, infrastructure, support and staff continuity.</td>
                 </tr>
                 <tr>
                   <td><strong>Speed to Market</strong></td>
-                  <td>Fast; but not instant. SaaS runs in a day for basic cases. We take weeks, but what ships is yours and fits.</td>
-                  <td>Instant (if you accept out-of-the-box limitations).</td>
-                  <td>Slowest. Months spent hiring and establishing infrastructure.</td>
+                  <td>Depends on module scope, data readiness and review cycles.</td>
+                  <td>Can be quicker when standard workflows fit; migration and training still take time.</td>
+                  <td>Depends on team availability, existing components and delivery experience.</td>
                 </tr>
                 <tr>
                   <td><strong>Ownership & IP</strong></td>
-                  <td>You own the code, the intellectual property, and your data entirely.</td>
-                  <td>Vendor lock-in. You own nothing but your exported data.</td>
-                  <td>You own it, but key knowledge leaves if your lead developer quits.</td>
+                  <td>Ownership, third-party components and handover are defined in the project agreement.</td>
+                  <td>Software use and data export rights follow the vendor's terms.</td>
+                  <td>Ownership depends on employment, contractor and component licences.</td>
                 </tr>
               </tbody>
             </table>
@@ -1112,6 +1120,17 @@ if ($heroDescription === '') {
           <h2 id="faq-heading" class="section-title">Answers to common questions.</h2>
         </div>
         <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">What is custom ERP development in India?<svg
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Custom enterprise resource planning (ERP) development means building connected software around a company's operations. Dashandots develops ERP systems for Indian businesses, with modules such as inventory, procurement, finance, sales and approvals. Integrations, migration, source-code ownership and support are defined in the project scope and agreement.</div>
+            </div>
+          </div>
           <div class="faq-item">
             <button class="faq-q" aria-expanded="false">Do you work with small and mid‑size businesses?<svg
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1158,9 +1177,7 @@ if ($heroDescription === '') {
                 <line x1="5" y1="12" x2="19" y2="12" />
               </svg></button>
             <div class="faq-a">
-              <div class="faq-a-inner">We offer structured support and AMC (Annual Maintenance Contract) options that
-                cover monitoring, bug fixes, enhancements, and ongoing feature development. You're never left alone
-                post‑launch.</div>
+              <div class="faq-a-inner">We offer support and annual maintenance contract (AMC) options. The agreement defines monitoring, bug fixes, security updates and response terms. Enhancements and new features are scoped separately unless explicitly included.</div>
             </div>
           </div>
           <div class="faq-item">

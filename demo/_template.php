@@ -199,6 +199,22 @@ $isMobileApp = ($portfolio['category'] ?? '') === 'mobile';
         </div>
       <?php endif; ?>
 
+      <?php if (($portfolio['slug'] ?? '') === 'hms'): ?>
+        <div class="demo-rich-text">
+          <h2>Hospital management system online demo: what to evaluate</h2>
+          <p>Use a fictional patient journey to compare the demo with your hospital's daily work. Note what is available to your demo account and what needs a guided walkthrough.</p>
+          <ol>
+            <li><strong>Registration and appointments:</strong> follow a sample booking and check how staff find the patient record.</li>
+            <li><strong>Clinical handover:</strong> review how a visit connects to records, prescriptions and department tasks available in the demo.</li>
+            <li><strong>Billing and reporting:</strong> trace a sample charge to a bill and identify the reports your administrators would need.</li>
+            <li><strong>Implementation scope:</strong> list missing workflows, integrations, access rules and data migration requirements before requesting a proposal.</li>
+          </ol>
+          <h3>What should you check in an HMS dashboard?</h3>
+          <p>Check whether the dashboard answers your role's daily questions: which appointments need attention, which records are incomplete, and which bills need review. Follow a sample record back to its source and check the reporting period and access permissions. Ask for a walkthrough of any view your demo account cannot access.</p>
+          <p>For a system tailored to your organisation, review our <a href="<?= BASE_PATH ?>/services/industry-systems/#hospital-management-system">hospital management software development services</a>. Confirm the modules and delivery scope separately from what is shown in the demo.</p>
+        </div>
+      <?php endif; ?>
+
       <?php if (!empty($faqs)): ?>
         <div class="demo-faq-block">
           <h2>Common questions</h2>

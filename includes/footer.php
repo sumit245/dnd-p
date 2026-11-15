@@ -34,6 +34,7 @@
         <h4>Services</h4>
         <ul>
           <li><a href="<?= BASE_PATH ?>/services/erp-development/">ERP &amp; CRM</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/manufacturing-erp/">Manufacturing ERP</a></li>
           <li><a href="<?= BASE_PATH ?>/services/industry-systems/">HMS, TMS &amp; PMS</a></li>
           <li><a href="<?= BASE_PATH ?>/services/ecommerce/">E‑commerce &amp; Portals</a></li>
           <li><a href="<?= BASE_PATH ?>/services/data-analytics/">Dashboards &amp; Analytics</a></li>
@@ -45,6 +46,7 @@
         <h4>Solutions</h4>
         <ul>
           <li><a href="<?= BASE_PATH ?>/services/erp-development/">ERP Platform</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/manufacturing-erp/">Manufacturing ERP</a></li>
           <li><a href="<?= BASE_PATH ?>/services/erp-development/">CRM Platform</a></li>
           <li><a href="<?= BASE_PATH ?>/services/industry-systems/">TMS</a></li>
           <li><a href="<?= BASE_PATH ?>/services/industry-systems/">HMS</a></li>

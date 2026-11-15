@@ -7,10 +7,29 @@
  * structured data can never drift apart.
  *
  * Answers are plain text (no HTML) because they are emitted into JSON-LD.
- * Keep every claim verifiable; this content is eligible for rich results.
+ * Keep every claim verifiable. Structured data does not guarantee rich results.
  */
 
 return [
+
+    'hms' => [
+        [
+            'q' => 'What is a hospital management system demo?',
+            'a' => 'A hospital management system demo is a sample environment for evaluating how hospital software handles patient registration, appointments, records and billing. Use it to compare a workflow with your own process before agreeing an implementation scope.',
+        ],
+        [
+            'q' => 'What should we check in an HMS dashboard?',
+            'a' => 'Start with a specific task: find an appointment, follow a patient visit, or review a bill. Check which roles can view and edit the record, how corrections are handled, and whether the report answers your operational question. Confirm any module you cannot access during a guided walkthrough.',
+        ],
+        [
+            'q' => 'What is the difference between OPD, IPD and EMR?',
+            'a' => 'OPD means outpatient department, for visits without admission. IPD means inpatient department, for admitted patients. EMR means electronic medical record, the digital record of a patient\'s clinical information. Check how records move between these workflows when evaluating an HMS.',
+        ],
+        [
+            'q' => 'What should we prepare for a hospital software walkthrough?',
+            'a' => 'Bring a list of departments, staff roles, appointment steps, billing scenarios, reports and existing systems that need to connect. Use fictional patient examples. Ask which requirements are included in the demo and which need separate configuration or development; a demo alone does not establish suitability for production use.',
+        ],
+    ],
 
     'hrmx' => [
         [

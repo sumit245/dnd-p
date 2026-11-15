@@ -32,6 +32,7 @@
   <meta property="og:title" content="<?= htmlspecialchars($page['og_title'] ?? $page['title']) ?>">
   <meta property="og:description" content="<?= htmlspecialchars($page['og_desc'] ?? $page['description']) ?>">
   <meta property="og:image" content="<?= htmlspecialchars($page['og_image']) ?>">
+  <meta property="og:image:alt" content="<?= htmlspecialchars($page['og_image_alt'] ?? ($page['og_title'] ?? $page['title'])) ?>">
   <meta property="og:site_name" content="<?= SITE_NAME ?>">
   <meta property="og:locale" content="en_IN">
 <?php if ($ogType === 'article' && !empty($page['article_section'])): ?>
@@ -52,6 +53,26 @@
   <meta name="twitter:title" content="<?= htmlspecialchars($page['og_title'] ?? $page['title']) ?>">
   <meta name="twitter:description" content="<?= htmlspecialchars($page['og_desc'] ?? $page['description']) ?>">
   <meta name="twitter:image" content="<?= htmlspecialchars($page['og_image']) ?>">
+  <meta name="twitter:image:alt" content="<?= htmlspecialchars($page['og_image_alt'] ?? ($page['og_title'] ?? $page['title'])) ?>">
+  <meta name="theme-color" content="#0b0f14">
+
+<?php
+// A lightweight WebPage entity gives AI search systems a consistent page-level
+// identity while page-specific schemas continue to describe services, articles,
+// collections, and FAQs.
+$pageSchemaUrl = rtrim((string) ($page['canonical'] ?? SITE_URL . '/'), '/') . '#webpage';
+echo schema_jsonld([
+    '@context' => 'https://schema.org',
+    '@type' => 'WebPage',
+    '@id' => $pageSchemaUrl,
+    'url' => $page['canonical'] ?? SITE_URL . '/',
+    'name' => $page['title'] ?? SITE_NAME,
+    'description' => $page['description'] ?? '',
+    'isPartOf' => ['@id' => SITE_URL . '/#website'],
+    'about' => ['@id' => SITE_URL . '/#organization'],
+    'inLanguage' => 'en-IN',
+]);
+?>
 
   <!-- Favicon -->
   <link rel="icon" href="<?= asset_url('/assets/logo-64.webp') ?>" type="image/webp">

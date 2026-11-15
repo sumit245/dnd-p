@@ -2,9 +2,9 @@
 
 > Dashandots Technology is a custom software development company based in Gurugram, India. We build enterprise-grade ERP, CRM, TMS, HMS, e-commerce and custom web/mobile applications for SMEs and growing businesses in India and internationally.
 
-We deliver end-to-end software: from requirements and UX design through development, deployment and post-launch support. Our stack spans PHP/Laravel, Node.js, React, Flutter, MySQL/PostgreSQL, and embedded firmware (ESP32, STM32, FreeRTOS). Products are built for the Indian market with GST compliance, payment gateway integration and ERP sync out of the box.
+We deliver software from requirements and UX design through development, deployment and post-launch support. Our stack spans PHP/Laravel, Node.js, React, Flutter, MySQL/PostgreSQL, and embedded firmware (ESP32, STM32, FreeRTOS). Modules, integrations, data migration, ownership and ongoing support are defined in each project scope and agreement.
 
-Target clients: small and medium enterprises, logistics and transport operators, hospitals and clinics, retail chains and manufacturers seeking affordable, robust alternatives to expensive off-the-shelf software.
+Target clients: small and medium enterprises, logistics and transport operators, hospitals and clinics, retail chains and manufacturers evaluating software for their operational workflows.
 
 ## Company
 
@@ -15,23 +15,24 @@ Target clients: small and medium enterprises, logistics and transport operators,
 
 ## Services
 
-- [Custom ERP Development](https://dashandots.com/services/erp-development/): Inventory, procurement, production planning, finance & accounting, HR & payroll, reporting dashboards; GST-compliant for Indian SMEs
+- [Custom ERP & CRM Development](https://dashandots.com/services/erp-development/): Modules, cost drivers, Tally integration prerequisites, migration and phased delivery for Indian SMEs
+- [Manufacturing ERP Systems](https://dashandots.com/services/manufacturing-erp/): Multi-level BOMs, job cards, shop-floor routing, WIP inventory, quality control, vendor procurement and machine scheduling
 - [Web & Mobile Applications](https://dashandots.com/services/web-mobile-apps/): Full-stack web apps (React, Node.js, PHP, Laravel) and Flutter mobile apps for iOS and Android; portals, dashboards, SaaS platforms
 - [E-commerce & Portals](https://dashandots.com/services/ecommerce/): B2B/B2C stores, dealer portals, multi-vendor marketplaces with GST invoicing and payment gateway integration
-- [Industry Systems (TMS, HMS, CRM)](https://dashandots.com/services/industry-systems/): Transport management, hospital management and customer relationship management systems
+- [Industry Systems (TMS, HMS, PMS)](https://dashandots.com/services/industry-systems/): Transport, hospital and hotel property management systems
 - [Data Analytics & AI](https://dashandots.com/services/data-analytics/): BI dashboards, ETL pipelines, ML forecasting, LLM workflow integrations
 - [IoT & Embedded Software](https://dashandots.com/services/iot-embedded/): Firmware (ESP32, STM32), MQTT/LoRaWAN device-cloud pipelines, OTA updates, FreeRTOS systems
 
 ## Live Product Demos
 
-- [Transport Management System demo](https://tms.dashandots.com/login): Fleet tracking, route optimisation, driver management, freight billing, trip sheets
-- [Hospital Management System demo](https://hms.dashandots.com/login): Patient registration, appointments, EMR/EHR, billing, pharmacy, laboratory, inventory
+- [Transport Management System demo overview](https://dashandots.com/demo/tms): Product overview and demo access
+- [Hospital Management System demo overview](https://dashandots.com/demo/hms): Patient workflow overview, evaluation checklist and demo access
 
 ## Blog
 
 - [Blog index](https://dashandots.com/blog/): Articles on custom software, ERP and product engineering for SMEs
-- [Future of Custom ERP Development in India](https://dashandots.com/blog/future-of-custom-erp): Where ERP for Indian SMEs is heading
-- [Why Mobile-First Design Matters for B2B](https://dashandots.com/blog/mobile-first-design-b2b): Case for mobile-first B2B products
+- [Custom ERP vs Packaged ERP: How to Decide](https://dashandots.com/blog/future-of-custom-erp): Workflow fit, total ownership cost, integration prerequisites and rollout planning
+- [Why Mobile-First Design Matters for B2B](https://dashandots.com/blog/mobile-first-design-b2b): Task design, accessible controls, offline states and field testing
 
 ## Optional
 
@@ -43,4 +44,5 @@ Target clients: small and medium enterprises, logistics and transport operators,
 ## Usage Permissions
 
 - AI search citation (ChatGPT, Perplexity, Google AI Overview, Claude): permitted
-- AI training corpus inclusion: not permitted; see robots.txt for crawler rules
+- Consult robots.txt for crawler-specific access rules, including training and grounding agents
+- The site is server-rendered PHP; core page copy, navigation, FAQs and structured data are available without client-side JavaScript.

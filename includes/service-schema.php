@@ -23,6 +23,10 @@ function service_schema_provider(): array
         'name'  => SITE_NAME,
         'url'   => SITE_URL . '/',
         'logo'  => SITE_LOGO_URL,
+        'sameAs' => [
+            'https://www.linkedin.com/company/dashandots-technology',
+            'https://twitter.com/dashandots',
+        ],
     ];
     if (defined('SITE_ADDRESS') && SITE_ADDRESS !== '') {
         $provider['address'] = [

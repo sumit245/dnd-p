@@ -48,7 +48,7 @@ function sitemap_db_lastmod(PDO $pdo, array $queries, string $fallback): string
         }
     }
 
-    return $latest ? min(date('Y-m-d', $latest), date('Y-m-d')) : $fallback;
+    return $latest ? max($fallback, min(date('Y-m-d', $latest), date('Y-m-d'))) : $fallback;
 }
 
 // Homepage hero/About copy lives in site_settings; its tiles come from portfolios.
@@ -71,6 +71,7 @@ $staticPages = [
     ['loc' => SITE_URL . '/blog/',                  'changefreq' => 'weekly',  'priority' => '0.8', 'lastmod' => $blogIndexLastmod],
     ['loc' => SITE_URL . '/portfolio',              'changefreq' => 'weekly',  'priority' => '0.8', 'lastmod' => $portfolioLastmod],
     ['loc' => SITE_URL . '/services/erp-development/',     'changefreq' => 'monthly', 'priority' => '0.8', 'lastmod' => sitemap_file_lastmod('services/erp-development/index.php', '2026-04-26')],
+    ['loc' => SITE_URL . '/services/manufacturing-erp/',   'changefreq' => 'monthly', 'priority' => '0.8', 'lastmod' => sitemap_file_lastmod('services/manufacturing-erp/index.php', '2026-10-30')],
     ['loc' => SITE_URL . '/services/web-mobile-apps/',     'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => sitemap_file_lastmod('services/web-mobile-apps/index.php', '2026-04-26')],
     ['loc' => SITE_URL . '/services/ecommerce/',           'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => sitemap_file_lastmod('services/ecommerce/index.php', '2026-04-26')],
     ['loc' => SITE_URL . '/services/industry-systems/',    'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => sitemap_file_lastmod('services/industry-systems/index.php', '2026-04-26')],
@@ -83,10 +84,7 @@ $staticPages = [
 // ── Static blog articles (blog/{slug}.php) ────────────────────────
 // lastmod comes from the file itself, not a literal: the 2024 dates these
 // carried were years out of step with every other date on the site.
-$staticBlogPages = [
-    ['slug' => 'future-of-custom-erp'],
-    ['slug' => 'mobile-first-design-b2b'],
-];
+$staticBlogPages = require __DIR__ . '/includes/static-blog-posts.php';
 
 // ── Published blog posts from DB ──────────────────────────────────
 $blogPosts = [];
@@ -94,6 +92,10 @@ $dbSlugs = [];
 try {
     $stmt = $pdo->query("SELECT slug, updated_at, created_at FROM blogs WHERE status = 'published' ORDER BY created_at DESC");
     while ($row = $stmt->fetch()) {
+        // Apache routes these slugs to PHP files; stale DB metadata must not win.
+        if (isset($staticBlogPages[$row['slug']])) {
+            continue;
+        }
         $dbSlugs[$row['slug']] = true;
         $lastmod = !empty($row['updated_at']) ? $row['updated_at'] : $row['created_at'];
         $blogPosts[] = [

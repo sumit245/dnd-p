@@ -53,7 +53,7 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
     <div class="svc-hero">
       <p class="page-label">Services &rsaquo; Data Analytics &amp; BI Dashboards</p>
       <h1>Data analytics services and BI dashboard development for clearer business decisions</h1>
-      <p class="lead">We build real-time BI dashboards, business intelligence reporting systems, automated data pipelines, and AI analytics tools that give leadership reliable visibility across operations, finance, sales, and customer activity.</p>
+      <p class="lead">Business intelligence (BI) combines data from operational systems into reports that help teams make decisions. Dashandots develops dashboards, data pipelines and reporting workflows for finance, sales, inventory and operations, with agreed metric definitions and refresh intervals.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="analytics-hero">Scope Your Dashboard</a>
         <a href="<?= BASE_PATH ?>/#contact" class="btn btn-outline" data-track="cta" data-cta-location="analytics-hero">Talk to Our Team</a>
@@ -70,8 +70,8 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
         <p>We aggregate data from your ERP, CRM, sales tools, and databases into one clean data warehouse: eliminating the "which report is correct?" problem.</p>
       </div>
       <div class="svc-feature-card">
-        <h3>Real-time BI dashboards</h3>
-        <p>Live KPI screens refreshed every few seconds. Drill down from company-level to branch, team, or individual: all without waiting for someone to run a query.</p>
+        <h3>Dashboards with Clear Refresh Times</h3>
+        <p>View key performance indicators (KPIs) by company, branch or team. Refresh frequency depends on source-system access and business needs; display the last successful update so users can judge data freshness.</p>
       </div>
       <div class="svc-feature-card">
         <h3>Business intelligence reporting automation</h3>
@@ -102,7 +102,7 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
       <li>Financial business intelligence reporting for P&amp;L, cash flow, and budget vs actuals</li>
       <li>HR &amp; workforce analytics</li>
       <li>Marketing attribution &amp; campaign performance tracking</li>
-      <li>ETL pipelines &amp; data warehouse setup</li>
+      <li>Extract, transform and load (ETL) pipelines &amp; data warehouse setup</li>
       <li>AI document processing (invoices, purchase orders, contracts)</li>
       <li>Chatbot &amp; NLP-powered internal tools</li>
       <li>Custom ML model development &amp; deployment</li>
@@ -117,6 +117,9 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
         <a href="<?= BASE_PATH ?>/portfolio" class="btn btn-outline" data-track="cta" data-cta-location="analytics-mid">See Dashboard Proof</a>
       </div>
     </div>
+
+    <h2>How do you know a dashboard is reporting the right numbers?</h2>
+    <p>Define each metric before building charts: its source, calculation, time period, filters and owner. For example, an orders report and an invoiced-revenue report answer different questions. Validate a sample against the source records, reconcile exceptions and show when data was refreshed. This creates an acceptance check for the dashboard rather than relying on its appearance.</p>
 
     <!-- TECH STACK -->
     <h2>Technology &amp; tools we use</h2>
