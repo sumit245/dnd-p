@@ -152,6 +152,15 @@ RewriteRule ^scripts/ - [F,L]
 # Database row backups written by maintenance scripts; never web-readable
 RewriteRule ^backups/ - [F,L]
 
+# Working documents committed to the repository: audits, analyses and notes.
+# They deploy with the code, and Apache was serving them as text/markdown, so
+# CONTENT-AUDIT-2026-11-15.md, GEO-ANALYSIS.md and AGENTS.md were all readable
+# over HTTP (checked 15 Nov 2026). Nothing links to them, but "unlinked" is
+# not "private": the URLs appear in commits, and crawlers follow those.
+<FilesMatch "\.(?:md|markdown|mdx)$">
+    Require all denied
+</FilesMatch>
+
 # Block dot-files (.env, .git, etc.)
 <FilesMatch "^\.">
     Order allow,deny
