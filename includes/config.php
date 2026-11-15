@@ -5,6 +5,10 @@
  * Loaded by every page before any output.
  */
 
+// Starts the output buffer that strips template indentation, so it must run
+// before a page prints anything. Non-HTML handlers are skipped there.
+require_once __DIR__ . '/html-minify.php';
+
 define('SITE_NAME', 'Dashandots Technology');
 define('SITE_URL', 'https://dashandots.com');
 // Analytics: both overridable in .env. GTM_CONTAINER_ID must be a GTM-XXXX container id
