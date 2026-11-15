@@ -49,7 +49,7 @@
           <li><a href="<?= BASE_PATH ?>/services/manufacturing-erp/">Manufacturing ERP</a></li>
           <li><a href="<?= BASE_PATH ?>/services/erp-development/">CRM Platform</a></li>
           <li><a href="<?= BASE_PATH ?>/services/industry-systems/">TMS</a></li>
-          <li><a href="<?= BASE_PATH ?>/services/industry-systems/">HMS</a></li>
+          <li><a href="<?= BASE_PATH ?>/services/hospital-management-system/">HMS</a></li>
           <li><a href="<?= BASE_PATH ?>/services/industry-systems/">Hotel PMS</a></li>
           <li><a href="<?= BASE_PATH ?>/services/data-analytics/">Business Dashboards</a></li>
         </ul>

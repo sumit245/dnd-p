@@ -977,9 +977,9 @@ if ($heroDescription === '') {
             <p>A practical checklist for field workflows, accessible controls, offline states and device testing.</p>
           </article>
           <article class="resource-card reveal reveal-delay-2">
-            <p class="res-cat">Strategy · Build vs Buy</p>
-            <h3><a href="<?= BASE_PATH ?>/services/manufacturing-erp/">Planning manufacturing ERP</a></h3>
-            <p>Map materials, job cards, quality checks and integrations before choosing your factory's first release.</p>
+            <p class="res-cat">AI · Engineering practice</p>
+            <h3><a href="<?= BASE_PATH ?>/blog/agentic-ai-software-development">Agentic AI in software development</a></h3>
+            <p>How goal-driven AI agents plan, write and test code, and the guardrails a team needs before using them.</p>
           </article>
         </div>
       </div>
