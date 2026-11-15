@@ -126,6 +126,13 @@ RewriteRule ^ 404.php [L]
 RewriteRule ^admin/run-(blog-)?migration\.php$ - [F,L]
 RewriteRule ^test_.*\.php$ - [F,L]
 
+# Stale full copy of the site left in the production document root by an older
+# deploy attempt. It served 200 and duplicated every page. Deploys do not remove
+# it (untracked directories survive) and the hosting API has no delete-file
+# operation, so this blocks it until the directory is removed in hPanel's File
+# Manager. Delete these three lines once it is gone.
+RewriteRule ^dnd-p(/|$) - [F,L]
+
 # CLI maintenance scripts (seed, migrations, smoke tests) are never web-callable
 RewriteRule ^scripts/ - [F,L]
 
