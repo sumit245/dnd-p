@@ -62,6 +62,19 @@ RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
 RewriteRule ^demo-hms\.html$ /dashandots/demo/hms [R=301,L]
 RewriteRule ^demo-hms\.html$ /demo/hms [R=301,L]
 
+# The query-string form of a demo page, which is what /demo/{slug} rewrites to
+# internally. Semrush's Keyword Strategy Builder (15 Nov 2026) listed
+# /demo/view.php?slug=erp as a page in its own right, ranking for 0 keywords
+# at position 100+, competing with /demo/erp for the same content.
+#
+# THE_REQUEST holds the original request line, so it only matches when a
+# client asked for this URL directly. The internal rewrite below does not set
+# it, and so is not caught by this rule.
+RewriteCond %{THE_REQUEST} \s/+dashandots/demo/view\.php\?slug=([a-zA-Z0-9_-]+)[\s&] [NC]
+RewriteRule ^demo/view\.php$ /dashandots/demo/%1 [R=301,L,QSD]
+RewriteCond %{THE_REQUEST} \s/+demo/view\.php\?slug=([a-zA-Z0-9_-]+)[\s&] [NC]
+RewriteRule ^demo/view\.php$ /demo/%1 [R=301,L,QSD]
+
 # Services
 RewriteCond %{HTTP_HOST} ^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
 RewriteRule ^services/erp-development/index\.html$ /dashandots/services/erp-development/ [R=301,L]

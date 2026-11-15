@@ -84,7 +84,7 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
 
     <!-- HMS -->
     <h2 id="hospital-management-system">Hospital Management System (HMS)</h2>
-    <p class="svc-body-text">A hospital management system connects registration, appointments, patient records, pharmacy and billing. Outpatient department (OPD) workflows cover visits without admission; inpatient department (IPD) workflows cover admitted patients. Review the <a href="<?= BASE_PATH ?>/demo/hms">hospital management system demo</a> and its evaluation checklist, then confirm the modules needed for your facility.</p>
+    <p class="svc-body-text">A hospital management system connects registration, appointments, patient records, pharmacy and billing. Outpatient department (OPD) workflows cover visits without admission; inpatient department (IPD) workflows cover admitted patients. Review the <a href="<?= BASE_PATH ?>/demo/hms">hospital management system demo</a> and its evaluation checklist, then confirm the modules needed for your facility. Our <a href="<?= BASE_PATH ?>/services/hospital-management-system/">hospital management software service</a> covers modules, cost drivers, integrations and rollout in full.</p>
     <ul class="svc-includes">
       <li>Patient registration &amp; OPD/IPD management</li>
       <li>Doctor scheduling &amp; appointment booking (online + in-person)</li>
@@ -106,8 +106,8 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
       <p>Use the demos to compare modules, dashboard style, and workflow depth. Then send us your current process and we will suggest the first implementation phase.</p>
       <div class="hero-actions" style="justify-content:center; margin-top:24px">
         <a href="<?= BASE_PATH ?>/demo/hms" class="btn btn-primary" target="_blank" rel="noopener" data-track="demo" data-demo-slug="hms">Hospital Management System Demo</a>
-        <a href="<?= BASE_PATH ?>/demo/view.php?slug=tms" class="btn btn-outline" target="_blank" rel="noopener" data-track="demo" data-demo-slug="tms">TMS Demo</a>
-        <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp" class="btn btn-outline" target="_blank" rel="noopener" data-track="demo" data-demo-slug="erp">ERP Demo</a>
+        <a href="<?= BASE_PATH ?>/demo/tms" class="btn btn-outline" target="_blank" rel="noopener" data-track="demo" data-demo-slug="tms">TMS Demo</a>
+        <a href="<?= BASE_PATH ?>/demo/erp" class="btn btn-outline" target="_blank" rel="noopener" data-track="demo" data-demo-slug="erp">ERP Demo</a>
       </div>
     </div>
 

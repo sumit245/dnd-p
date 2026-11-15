@@ -116,7 +116,7 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
       </div>
     </div>
 
-    <h2>CRM development: from lead to long-term customer</h2>
+    <h2>Custom CRM development services: from lead to long-term customer</h2>
     <p>A custom CRM gives your sales and support teams a single view of every prospect and customer, with the workflows they actually follow rather than a generic pipeline forced on them by off-the-shelf tools.</p>
 
     <div class="svc-feature-grid">

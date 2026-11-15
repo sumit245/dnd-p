@@ -86,7 +86,7 @@ $page['jsonld'][] = '<script type="application/ld+json">' . json_encode($faqSche
     <div class="svc-hero">
       <p class="page-label">Services &rsaquo; Manufacturing ERP</p>
       <h1>Custom manufacturing ERP development in India</h1>
-      <p class="lead">A manufacturing ERP ties together materials, work orders, stock, buying and quality records. Dashandots builds custom systems for Indian factories. We pick the modules to match the way work moves through your plant.</p>
+      <p class="lead">A manufacturing ERP ties together materials, work orders, stock, buying and quality records. Dashandots builds custom manufacturing ERP software in India, for factories that have outgrown spreadsheets and a packaged tool. We pick the modules to match the way work moves through your plant.</p>
       <div class="hero-actions">
         <a href="<?= BASE_PATH ?>/#ai-brief" class="btn btn-primary" data-track="cta" data-cta-location="mfg-hero">Scope Your Manufacturing ERP</a>
         <a href="<?= BASE_PATH ?>/demo/erp" class="btn btn-outline" target="_blank" rel="noopener" data-track="demo" data-demo-slug="erp">See ERP Demo</a>

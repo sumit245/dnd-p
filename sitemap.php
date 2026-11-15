@@ -72,6 +72,7 @@ $staticPages = [
     ['loc' => SITE_URL . '/portfolio',              'changefreq' => 'weekly',  'priority' => '0.8', 'lastmod' => $portfolioLastmod],
     ['loc' => SITE_URL . '/services/erp-development/',     'changefreq' => 'monthly', 'priority' => '0.8', 'lastmod' => sitemap_file_lastmod('services/erp-development/index.php', '2026-04-26')],
     ['loc' => SITE_URL . '/services/manufacturing-erp/',   'changefreq' => 'monthly', 'priority' => '0.8', 'lastmod' => sitemap_file_lastmod('services/manufacturing-erp/index.php', '2026-10-30')],
+    ['loc' => SITE_URL . '/services/hospital-management-system/', 'changefreq' => 'monthly', 'priority' => '0.8', 'lastmod' => sitemap_file_lastmod('services/hospital-management-system/index.php', '2026-11-15')],
     ['loc' => SITE_URL . '/services/web-mobile-apps/',     'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => sitemap_file_lastmod('services/web-mobile-apps/index.php', '2026-04-26')],
     ['loc' => SITE_URL . '/services/ecommerce/',           'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => sitemap_file_lastmod('services/ecommerce/index.php', '2026-04-26')],
     ['loc' => SITE_URL . '/services/industry-systems/',    'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => sitemap_file_lastmod('services/industry-systems/index.php', '2026-04-26')],

@@ -889,7 +889,7 @@ if ($heroDescription === '') {
             <p><strong>Problem:</strong> manual trip planning and billing delays. <strong>Solution:</strong> TMS with
               trips, route visibility, POD capture, and billing workflows. <strong>Result:</strong> dispatch work moves
               from scattered calls and sheets into one operational dashboard.</p>
-            <a href="<?= BASE_PATH ?>/demo/view.php?slug=tms" class="proof-link" target="_blank" rel="noopener"
+            <a href="<?= BASE_PATH ?>/demo/tms" class="proof-link" target="_blank" rel="noopener"
               data-track="demo" data-demo-slug="tms">View TMS proof &rarr;</a>
           </article>
           <article class="cs-card reveal reveal-delay-1 proof-card" data-track="proof-card" data-proof-type="hms">
@@ -909,7 +909,7 @@ if ($heroDescription === '') {
               decisions move from delayed reports to current business data.
             </p>
             <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
-              <a href="<?= BASE_PATH ?>/demo/view.php?slug=erp" class="proof-link" target="_blank" rel="noopener"
+              <a href="<?= BASE_PATH ?>/demo/erp" class="proof-link" target="_blank" rel="noopener"
                 data-track="demo" data-demo-slug="erp">View ERP proof &rarr;</a>
               <a href="<?= BASE_PATH ?>/services/manufacturing-erp/" class="proof-link" style="color:var(--text-2)"
                 data-track="proof-card" data-proof-type="mfg-erp">Manufacturing ERP &rarr;</a>
