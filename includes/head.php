@@ -20,7 +20,7 @@
 <?php endif; ?>
   <link rel="canonical" href="<?= htmlspecialchars($page['canonical']) ?>">
 
-<?php // Pre-rendered JSON-LD blocks a page pushed onto $page['jsonld'] (breadcrumbs, Service, SoftwareApplication…). ?>
+<?php // Pre-rendered JSON-LD blocks a page pushed onto $page['jsonld'] (breadcrumbs, Service, CreativeWork…). ?>
 <?php foreach (($page['jsonld'] ?? []) as $jsonLdBlock): ?>
 <?= $jsonLdBlock ?>
 <?php endforeach; ?>

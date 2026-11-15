@@ -94,31 +94,48 @@ $page['jsonld'][] = breadcrumb_schema_jsonld(breadcrumb_schema([
     ['name' => $portfolio['title'], 'url' => '/demo/' . $slug],
 ]));
 
-// Product pages describe software; graphics entries are design work, so they
-// get the breadcrumb only. No `offers` block anywhere: there is no public
-// price, and an invented one is worse than none.
+// Product pages describe a system we built; graphics entries are design work,
+// so they get the breadcrumb only.
+//
+// These are deliberately NOT SoftwareApplication. Google's Software App rich
+// result requires `offers` plus `aggregateRating` or `review`, and none of
+// those exist here: the systems are built to order with no list price, and we
+// publish no ratings. Semrush reported all three as missing on every /demo/
+// URL (15 pages, 15 Nov 2026). Inventing a price or a rating is a structured
+// data policy violation, so the page is described as the CreativeWork it is —
+// a case study of delivered software — which carries no commerce fields and
+// no unmet rich-result requirements.
 if (!$isGraphics) {
     require_once __DIR__ . '/../includes/service-schema.php';
 
-    $appSchema = [
-        '@context'            => 'https://schema.org',
-        '@type'               => 'SoftwareApplication',
-        '@id'                 => SITE_URL . '/demo/' . $slug . '#software',
-        'name'                => $portfolio['title'],
-        'description'         => $portfolio['short_description'],
-        'url'                 => SITE_URL . '/demo/' . $slug,
-        'applicationCategory' => 'BusinessApplication',
-        'operatingSystem'     => ($portfolio['category'] ?? '') === 'mobile' ? 'Android' : 'Web browser',
-        'provider'            => service_schema_provider(),
+    $workSchema = [
+        '@context'          => 'https://schema.org',
+        '@type'             => 'CreativeWork',
+        '@id'               => SITE_URL . '/demo/' . $slug . '#case-study',
+        'name'              => $portfolio['title'],
+        'description'       => $portfolio['short_description'],
+        'url'               => SITE_URL . '/demo/' . $slug,
+        'genre'             => 'Business software case study',
+        'about'             => ($portfolio['category'] ?? '') === 'mobile'
+            ? 'Custom Android business application'
+            : 'Custom web-based business application',
+        'creator'           => service_schema_provider(),
+        'inLanguage'        => 'en-IN',
+        'mainEntityOfPage'  => ['@id' => SITE_URL . '/demo/' . $slug . '#webpage'],
     ];
     if (!empty($page['og_image'])) {
-        $appSchema['screenshot'] = $page['og_image'];
+        $workSchema['image'] = $page['og_image'];
     }
+    // Public demo build, when one is reachable.
     if (!empty($portfolio['demo_url'])) {
-        $appSchema['installUrl'] = $portfolio['demo_url'];
+        $workSchema['workExample'] = [
+            '@type' => 'WebPage',
+            'name'  => $portfolio['title'] . ' live demo',
+            'url'   => $portfolio['demo_url'],
+        ];
     }
 
-    $page['jsonld'][] = schema_jsonld($appSchema);
+    $page['jsonld'][] = schema_jsonld($workSchema);
 }
 
 include __DIR__ . '/_template.php';
