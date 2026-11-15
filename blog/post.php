@@ -27,8 +27,45 @@ $featureImageSrc = !empty($blog['feature_image'])
 $publishedIso = date('c', strtotime($blog['created_at']));
 $modifiedIso = date('c', strtotime($blog['updated_at'] ?? $blog['created_at']));
 
-$page['title'] = $blog['title'] . ' | Dashandots Blog';
-$page['description'] = $excerpt;
+/**
+ * SERP title. Post headlines are written for the page, so they run long:
+ * the agentic-AI headline is 74 characters, and the brand suffix took the
+ * title tag to 92 (Semrush, 15 Nov 2026).
+ *
+ * Resolution order, most specific first:
+ *   1. includes/blog-seo.php: a code-reviewed override for that slug
+ *   2. generated: the brand suffix if it fits in 60 characters, otherwise
+ *      the headline trimmed on a word boundary to make room for it
+ *
+ * The suffix is never dropped. Returning the headline alone would make the
+ * title identical to the H1, which is its own Semrush warning, so a
+ * generated title always differs from the headline.
+ */
+$blogSeo = include __DIR__ . '/../includes/blog-seo.php';
+
+$blogMetaTitle = static function (string $headline): string {
+    foreach ([' | Dashandots Blog', ' | Dashandots'] as $suffix) {
+        if (mb_strlen($headline . $suffix) <= 60) {
+            return $headline . $suffix;
+        }
+    }
+
+    // ' | Dashandots' is 13 characters, so the headline gets the first 47.
+    $stem = trim(preg_replace('/\s+/', ' ', $headline));
+    $stem = mb_substr($stem, 0, 60 - 13);
+    $lastSpace = mb_strrpos($stem, ' ');
+    if ($lastSpace !== false) {
+        $stem = mb_substr($stem, 0, $lastSpace);
+    }
+    // A word-boundary cut can land on a joining word or a dangling mark.
+    $stem = preg_replace('/\s+(?:and|or|for|with|to|of|in|on|at|the|a|an|&)$/iu', '', $stem);
+    $stem = rtrim($stem, " |&,;:.\u{2013}\u{2014}-");
+
+    return $stem . ' | Dashandots';
+};
+
+$page['title'] = $blogSeo[$slug]['title'] ?? $blogMetaTitle((string)$blog['title']);
+$page['description'] = $blogSeo[$slug]['description'] ?? $excerpt;
 $page['canonical'] = $canonicalUrl;
 $page['og_title'] = $blog['title'];
 $page['og_desc'] = $excerpt;
