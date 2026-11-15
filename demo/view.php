@@ -48,6 +48,13 @@ $demoMetaTrim = static function (string $text, int $limit = 155): string {
  * Several portfolio titles are themselves descriptive sentences
  * ("TrustMeRecycle | Scrap & E-Waste Pickup App for an ISO-Certified
  * Recycler"), so appending the brand unconditionally pushed them past 100.
+ *
+ * The suffix is never dropped entirely. The title used to be returned
+ * verbatim when no suffix fit, which made it identical to the H1 on rows in
+ * the 54-60 char band (Semrush flagged crm, waba and ghumantoo-app on
+ * 15 Nov 2026). The row title is trimmed to make room instead, so a generated
+ * title always differs from the H1. Rows that deserve a query-led title get
+ * an explicit entry in includes/demo-seo.php; this is only the safety net.
  */
 $demoMetaTitle = static function (string $rowTitle) use ($demoMetaTrim): string {
     $withBrand = $rowTitle . ' | ' . SITE_NAME;
@@ -59,7 +66,15 @@ $demoMetaTitle = static function (string $rowTitle) use ($demoMetaTrim): string 
         return $short;
     }
 
-    return mb_strlen($rowTitle) <= 60 ? $rowTitle : $demoMetaTrim($rowTitle, 60);
+    // ' | Dashandots' is 13 characters, so the row title gets the first 47.
+    // Cutting on a word boundary can still land on a conjunction or a
+    // preposition ("NewGen ERP | Manufacturing ERP for uPVC &"), so trailing
+    // joining words and separators are dropped before the brand is appended.
+    $stem = $demoMetaTrim($rowTitle, 60 - 13);
+    $stem = preg_replace('/\s+(?:and|or|for|with|to|of|in|on|at|the|a|an|&)$/iu', '', $stem);
+    $stem = rtrim($stem, " |&,;:.\u{2013}\u{2014}-");
+
+    return $stem . ' | Dashandots';
 };
 
 $page['title']       = !empty($portfolio['meta_title'])

@@ -36,4 +36,30 @@ return [
         'description' => 'HRMX runs HR, attendance and payroll for 20 to 1,200+ employees. One-time build, no per-employee fee, you own the IP. Live in 8–10 weeks.',
     ],
 
+
+    // The three rows below sit in the 54-59 char band: too long for a brand
+    // suffix, short enough that the generator returned portfolios.title
+    // unchanged, so <title> and H1 came out identical (Semrush, 15 Nov 2026).
+    // These titles lead with the query instead; the H1 keeps the product name.
+
+    'crm' => [
+        // 48 chars. The product name means nothing in search; "custom CRM
+        // software" plus the market is what the page can actually rank for.
+        'title' => 'Custom CRM Software for Indian SMEs | Dashandots',
+    ],
+
+    'ghumantoo-app' => [
+        // 45 chars. Platform in the title because the row is Android-only.
+        'title'       => 'Bus Ticket Booking App (Android) | Dashandots',
+        // 137 chars. The DB copy runs to 204 and was being cut at 155.
+        'description' => 'Android bus booking app: search routes, pick seats on a visual layout, pay online and travel on a QR e-ticket with live trip status.',
+    ],
+
+    'waba' => [
+        // 53 chars. "DnD Connect" is unsearched; the API name carries it.
+        'title'       => 'WhatsApp Business API Platform for Teams | Dashandots',
+        // 141 chars. The DB copy runs to 210.
+        'description' => 'WhatsApp Business API platform on the official Meta Cloud API: shared team inbox, chatbot flows, broadcasts, templates and webhooks.',
+    ],
+
 ];
