@@ -473,7 +473,7 @@ if ($heroDescription === '') {
               <li>Native‑like mobile apps (Flutter, React Native)</li>
               <li>PWAs and admin consoles</li>
             </ul>
-            <a href="<?= BASE_PATH ?>/services/web-mobile-apps/" class="service-learn-more">Explore web &amp; mobile app development &#x2192;</a>
+            <a href="<?= BASE_PATH ?>/services/web-mobile-apps/" class="service-learn-more">Explore custom web &amp; mobile app development &#x2192;</a>
           </article>
           <article class="service-card reveal reveal-delay-1">
             <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"

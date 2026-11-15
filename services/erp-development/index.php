@@ -1,6 +1,8 @@
 <?php
 require __DIR__ . '/../../includes/config.php';
-$page['title']       = 'Custom ERP & CRM Development India | Dashandots';
+// 48 chars. 'Company' is in the query set this page is aimed at; CRM keeps
+// its place in the description and in the H2 below.
+$page['title']       = 'Custom ERP Development Company India | Dashandots';
 $page['description'] = 'Custom ERP and CRM development for Indian SMEs. Plan modules, Tally integrations, data migration and a phased rollout with Dashandots.';
 $page['keywords']    = 'custom ERP development India, ERP software development company, enterprise resource planning India, ERP for SME India, CRM development India';
 $page['canonical']   = SITE_URL . '/services/erp-development/';
