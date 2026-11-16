@@ -24,10 +24,10 @@ $page['preload_images'] = ['/assets/img/hero-corporate-bg.webp'];
 $heroTitle = trim($settings['hero_title'] ?? '');
 $heroDescription = trim($settings['hero_description'] ?? '');
 if ($heroTitle === '') {
-  $heroTitle = 'Your operations, centralised. Your data, visible. Your team, faster.';
+  $heroTitle = 'Custom ERP software for your operations. Custom CRM software for your sales team. Custom dashboards for your data.';
 }
 if ($heroDescription === '') {
-  $heroDescription = 'Dashandots builds custom ERP, CRM, dashboards, portals, and mobile apps for growing Indian businesses: scoped around how you actually work, owned by you, supported after launch.';
+  $heroDescription = 'Dashandots builds custom ERP, CRM, dashboards, portals and mobile apps for growing Indian businesses in Gurugram and Delhi NCR: scoped around how you actually work, owned by you, supported after launch.';
 }
 ?>
 <!DOCTYPE html>
@@ -50,7 +50,7 @@ if ($heroDescription === '') {
       "description":"Full-cycle software development and technology consulting. Specialising in ERP, CRM, TMS, HMS, Hotel PMS, web and mobile applications for SMEs and enterprises.",
       "sameAs":["https://www.linkedin.com/company/dashandots-technology","https://twitter.com/dashandots"],
       <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>"email":"<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>",<?php endif; ?>
-      "address":{"@type":"PostalAddress","addressLocality":"Gurugram","addressRegion":"Delhi NCR","addressCountry":"IN"},
+      "address":<?= json_encode(site_postal_address_schema(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>,
       "areaServed":"Worldwide",
       "knowsAbout":["ERP Software","CRM Software","Transport Management System","Hospital Management System","Mobile App Development","Web Development","IoT"]
     },
@@ -84,7 +84,7 @@ if ($heroDescription === '') {
       <?php if (defined('SITE_PHONE') && SITE_PHONE !== ''): ?>"telephone":"<?= htmlspecialchars(SITE_PHONE, ENT_QUOTES, 'UTF-8') ?>",<?php endif; ?>
       <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>"email":"<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>",<?php endif; ?>
       "image":"<?= SITE_LOGO_URL ?>",
-      "address":{"@type":"PostalAddress","addressLocality":"Gurugram","addressRegion":"Delhi NCR","addressCountry":"IN"},
+      "address":<?= json_encode(site_postal_address_schema(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>,
       "priceRange":"$$",
       "areaServed":"Worldwide",
       "makesOffer":[
@@ -108,7 +108,7 @@ if ($heroDescription === '') {
       <div class="container">
         <div class="hero-grid">
           <div class="hero-content reveal visible">
-            <div class="hero-tag"><span aria-hidden="true"></span>Dashboards · Mobile Apps · Custom Software
+            <div class="hero-tag"><span aria-hidden="true"></span>ERP · CRM · Dashboards · Mobile Apps
             </div>
             <?php
               // One sentence per line. If every sentence starts with the same word (e.g. "Your"), that word is
@@ -449,7 +449,7 @@ if ($heroDescription === '') {
       <div class="container">
         <div class="reveal">
           <p class="section-label">Services</p>
-          <h2 id="services-heading" class="section-title">Build the business platform your operations actually need.
+          <h2 id="services-heading" class="section-title">Build the custom ERP or CRM your operations actually need.
           </h2>
           <p class="section-sub">Custom ERP development in India can bring finance, inventory, procurement, HR, sales,
             approvals, dashboards, and integrations into one owned system. Start with the platform you need most:
@@ -491,7 +491,7 @@ if ($heroDescription === '') {
               <li>Custom ERP &amp; CRM implementations</li>
               <li>Workflow automation &amp; approvals</li>
               <li>Integrations with Tally &amp; third‑party tools</li>
-              <li><a href="<?= BASE_PATH ?>/services/manufacturing-erp/" style="color:var(--accent);font-weight:600">Manufacturing ERP (BOM &amp; Shop Floor) &rsaquo;</a></li>
+              <li><a href="<?= BASE_PATH ?>/services/manufacturing-erp/" class="u-accent-link">Manufacturing ERP (BOM &amp; Shop Floor) &rsaquo;</a></li>
             </ul>
             <a href="<?= BASE_PATH ?>/services/erp-development/" class="service-learn-more">Explore ERP &amp; CRM development &#x2192;</a>
           </article>
@@ -621,7 +621,7 @@ if ($heroDescription === '') {
                 <rect x="32" y="27" width="6" height="10" rx="1" />
                 <path d="M22 10 L22 4 M26 10 L26 4 M24 4 L24 2" />
               </svg></div>
-            <h3><a href="<?= BASE_PATH ?>/services/manufacturing-erp/" style="color:inherit;text-decoration:none">Manufacturing</a></h3>
+            <h3><a href="<?= BASE_PATH ?>/services/manufacturing-erp/" class="u-plain-link">Manufacturing</a></h3>
             <p class="sub">Production, inventory, quality, assets</p>
             <div class="challenge-box">
               <div class="label">Challenge</div>
@@ -631,7 +631,7 @@ if ($heroDescription === '') {
             </div>
             <div class="ind-tags"><span class="ind-tag">Production planning</span><span class="ind-tag">Quality
                 control</span><span class="ind-tag">Asset management</span></div>
-            <a href="<?= BASE_PATH ?>/services/manufacturing-erp/" class="service-learn-more" style="margin-top:14px">Explore Manufacturing ERP &#x2192;</a>
+            <a href="<?= BASE_PATH ?>/services/manufacturing-erp/" class="service-learn-more u-learn-more-gap">Explore Manufacturing ERP &#x2192;</a>
           </article>
           <article class="industry-card reveal reveal-delay-1">
             <div class="ind-icon" aria-hidden="true"><svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"
@@ -791,7 +791,7 @@ if ($heroDescription === '') {
         <div class="portfolio-header reveal">
           <div>
             <p class="section-label">Portfolio</p>
-            <h2 id="portfolio-heading" class="section-title">Systems we've built and shipped.</h2>
+            <h2 id="portfolio-heading" class="section-title">Custom ERP, CRM and mobile app projects we’ve shipped.</h2>
             <p class="section-sub">Real projects. Real operations. Browse by industry or try a live demo.</p>
           </div>
           <div class="portfolio-filters" role="group" aria-label="Filter portfolio by industry">
@@ -802,6 +802,24 @@ if ($heroDescription === '') {
             <a class="filter-btn filter-btn--link" href="<?php echo htmlspecialchars(portfolio_url()); ?>">More filters &rarr;</a>
           </div>
         </div>
+        <?php
+          // One stylesheet rule per tile instead of a style attribute on every card
+          // (SEO audit: "Remove Inline Styles"). The colour is data, so it cannot
+          // live in a static class, but it does not need to be an inline attribute.
+          $tileColors = [];
+          foreach (($portfolios ?? []) as $p) {
+              $slug = (string)($p['slug'] ?? '');
+              if ($slug === '') { continue; }
+              $tileColors[$slug] = portfolio_tile_color($p);
+          }
+        ?>
+        <?php if ($tileColors !== []): ?>
+          <style>
+            <?php foreach ($tileColors as $slug => $color): ?>
+            .portfolio-card[data-tile="<?= htmlspecialchars($slug, ENT_QUOTES, 'UTF-8') ?>"]{--c:<?= htmlspecialchars($color, ENT_QUOTES, 'UTF-8') ?>}
+            <?php endforeach; ?>
+          </style>
+        <?php endif; ?>
         <div class="portfolio-grid">
           <?php if (!empty($portfolios)): ?>
             <?php foreach ($portfolios as $index => $portfolio): ?>
@@ -814,9 +832,9 @@ if ($heroDescription === '') {
               <article class="portfolio-card reveal <?php echo $delayClass; ?>"
                 data-type="<?php echo htmlspecialchars($category); ?>"
                 data-industry="<?php echo htmlspecialchars($portfolio['industry'] ?? ''); ?>"
-                style="--c:<?php echo htmlspecialchars(portfolio_tile_color($portfolio)); ?>"<?php echo $index >= PORTFOLIO_HOME_MAX ? ' hidden' : ''; ?>>
-                <div class="port-thumb" style="background:none; padding: 0;">
-                  <span class="port-type" style="z-index:2;"><?php echo htmlspecialchars($badge); ?></span>
+                data-tile="<?php echo htmlspecialchars($portfolio['slug'] ?? ''); ?>"<?php echo $index >= PORTFOLIO_HOME_MAX ? ' hidden' : ''; ?>>
+                <div class="port-thumb port-thumb--bare">
+                  <span class="port-type port-type--above"><?php echo htmlspecialchars($badge); ?></span>
                   <?php if (!empty($portfolio['image_path']) && portfolio_image_meta($portfolio['image_path'])): ?>
                     <?php
                     echo portfolio_picture_html(
@@ -857,7 +875,7 @@ if ($heroDescription === '') {
               </article>
             <?php endforeach; ?>
           <?php else: ?>
-            <p style="text-align:center; grid-column: 1 / -1; padding: 40px; color: var(--text-2);">New portfolio updates
+            <p class="u-empty-note">New portfolio updates
               coming soon.</p>
           <?php endif; ?>
         </div>
@@ -908,10 +926,10 @@ if ($heroDescription === '') {
               <strong>Solution:</strong> modular ERP dashboard with role-based access. <strong>Result:</strong>
               decisions move from delayed reports to current business data.
             </p>
-            <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+            <div class="u-stack-row">
               <a href="<?= BASE_PATH ?>/demo/erp" class="proof-link" target="_blank" rel="noopener"
                 data-track="demo" data-demo-slug="erp">View ERP proof &rarr;</a>
-              <a href="<?= BASE_PATH ?>/services/manufacturing-erp/" class="proof-link" style="color:var(--text-2)"
+              <a href="<?= BASE_PATH ?>/services/manufacturing-erp/" class="proof-link u-muted-link"
                 data-track="proof-card" data-proof-type="mfg-erp">Manufacturing ERP &rarr;</a>
             </div>
           </article>
@@ -1067,7 +1085,7 @@ if ($heroDescription === '') {
 
         <!-- ═══════════════════════════════ COMPARISON TABLE ═══════════════════════════════ -->
         <div class="reveal">
-          <h3 style="margin: 60px 0 24px; font-size: 24px; text-align: center; color: var(--text-1);">How We Compare
+          <h3 class="u-compare-heading">How We Compare
           </h3>
           <div class="dnd-comparison-table-wrapper">
             <table class="dnd-comparison-table">
@@ -1115,7 +1133,7 @@ if ($heroDescription === '') {
     <!-- ═══════════════════════════════ FAQ ═══════════════════════════════ -->
     <section id="faq" aria-labelledby="faq-heading">
       <div class="container">
-        <div class="reveal" style="text-align:center">
+        <div class="reveal u-center">
           <p class="section-label">FAQ</p>
           <h2 id="faq-heading" class="section-title">Answers to common questions.</h2>
         </div>
@@ -1243,10 +1261,10 @@ if ($heroDescription === '') {
     <!-- ═══════════════════════════ AI PROJECT BRIEF & COST ESTIMATE ═══════════════════════════ -->
     <section id="ai-brief" aria-labelledby="wizard-heading">
       <div class="container">
-        <div class="reveal" style="text-align:center">
+        <div class="reveal u-center">
           <p class="section-label">AI‑Assisted Scoping</p>
           <h2 id="wizard-heading" class="section-title">Get an instant AI-generated project brief.</h2>
-          <p class="section-sub" style="margin:0 auto">Not sure where to start? Answer 5 quick questions and our AI
+          <p class="section-sub u-sub-centered">Not sure where to start? Answer 5 quick questions and our AI
             scoping assistant will draft a structured requirement brief with scope, tech stack and an indicative
             timeline; then pre‑fill your enquiry form so we can send you a tailored proposal.</p>
         </div>
@@ -1510,11 +1528,11 @@ if ($heroDescription === '') {
             <p class="wizard-pane-sub">Your details help us personalise the brief and pre-fill the enquiry form.</p>
             <div class="wizard-contact-grid">
               <div class="wiz-input-group">
-                <label for="wizName">Your name <span style="color:var(--accent)">*</span></label>
+                <label for="wizName">Your name <span class="u-req">*</span></label>
                 <input type="text" id="wizName" placeholder="e.g. Rahul Sharma" autocomplete="name">
               </div>
               <div class="wiz-input-group">
-                <label for="wizEmail">Email address <span style="color:var(--accent)">*</span></label>
+                <label for="wizEmail">Email address <span class="u-req">*</span></label>
                 <input type="email" id="wizEmail" placeholder="you@company.com" autocomplete="email">
               </div>
               <div class="wiz-input-group">
@@ -1526,7 +1544,7 @@ if ($heroDescription === '') {
                 <input type="tel" id="wizPhone" placeholder="+91 98765 43210" autocomplete="tel">
               </div>
             </div>
-            <div class="wiz-input-group" style="margin-bottom:28px">
+            <div class="wiz-input-group u-group-gap">
               <label for="wizIdea">Describe your idea in a few words</label>
               <textarea id="wizIdea"
                 placeholder="e.g. I need a fleet tracking app for my logistics company with billing and driver management…"></textarea>
@@ -1543,11 +1561,9 @@ if ($heroDescription === '') {
             <div class="wiz-result-card">
               <div class="wiz-result-header">
                 <div>
-                  <div
-                    style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px">
-                    AI-Generated Project Brief</div>
+                  <div class="u-res-label">AI-Generated Project Brief</div>
                   <div class="wiz-result-title">Project Brief for <span id="resProjectType">—</span></div>
-                  <div style="font-size:13px;color:var(--text-3);margin-top:4px" id="resClientName"></div>
+                  <div class="u-res-client" id="resClientName"></div>
                 </div>
                 <div class="wiz-badges">
                   <div class="wiz-badge">
@@ -1607,7 +1623,7 @@ if ($heroDescription === '') {
       <div class="container">
         <div class="strip-inner">
           <div>
-            <h2>Ready to centralise your business operations?</h2>
+            <h2>Ready to centralise your operations on custom software?</h2>
             <p>Tell us about your workflow and we'll respond within 48 hours with the likely approach and timeline.</p>
           </div>
           <a href="#contact" class="btn btn-white" data-track="cta" data-cta-location="contact-strip">Talk to Our Team</a>
@@ -1618,10 +1634,10 @@ if ($heroDescription === '') {
     <!-- ═══════════════════════════════ CONTACT ═══════════════════════════════ -->
     <section id="contact" aria-labelledby="contact-heading">
       <div class="container">
-        <div class="reveal" style="text-align:center;margin-bottom:16px">
+        <div class="reveal u-center u-mb-16">
           <p class="section-label">Contact</p>
           <h2 id="contact-heading" class="section-title">Tell us what's slowing you down.</h2>
-          <p class="section-sub" style="margin:0 auto">We respond within 48 hours with suggested approach and
+          <p class="section-sub u-sub-centered">We respond within 48 hours with suggested approach and
             estimated timeline. No spam. No obligation.</p>
         </div>
         <div class="contact-grid">
@@ -1635,7 +1651,7 @@ if ($heroDescription === '') {
               </div>
               <div class="form-row">
                 <div class="form-group">
-                  <label for="name">Your name <span aria-hidden="true" style="color:var(--accent)">*</span></label>
+                  <label for="name">Your name <span aria-hidden="true" class="u-req">*</span></label>
                   <input type="text" id="name" name="name" placeholder="Your full name" required autocomplete="name">
                 </div>
                 <div class="form-group">
@@ -1645,7 +1661,7 @@ if ($heroDescription === '') {
               </div>
               <div class="form-row">
                 <div class="form-group">
-                  <label for="email">Work email <span aria-hidden="true" style="color:var(--accent)">*</span></label>
+                  <label for="email">Work email <span aria-hidden="true" class="u-req">*</span></label>
                   <input type="email" id="email" name="email" placeholder="you@company.com" required
                     autocomplete="email">
                 </div>
@@ -1672,8 +1688,7 @@ if ($heroDescription === '') {
                 </select>
               </div>
               <div class="form-group">
-                <label for="message">How can we help? <span aria-hidden="true"
-                    style="color:var(--accent)">*</span></label>
+                <label for="message">How can we help? <span aria-hidden="true" class="u-req">*</span></label>
                 <textarea id="message" name="message" placeholder="Briefly describe your project, challenge, or idea…"
                   required></textarea>
               </div>
@@ -1698,8 +1713,7 @@ if ($heroDescription === '') {
                     </svg></div>
                   <div>
                     <div class="cd-label">Email</div>
-                    <div class="cd-value"><a href="mailto:<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>"
-                        data-track="cta" data-cta-location="contact-info"><?= htmlspecialchars(SITE_EMAIL) ?></a></div>
+                    <div class="cd-value"><?= site_email_link('Email us', true, 'contact-info') ?></div>
                   </div>
                 </div>
               <?php endif; ?>
@@ -1742,7 +1756,17 @@ if ($heroDescription === '') {
                     </svg></div>
                   <div>
                     <div class="cd-label">Location</div>
-                    <div class="cd-value"><?= htmlspecialchars(SITE_ADDRESS) ?></div>
+                    <div class="cd-value" itemscope itemtype="https://schema.org/PostalAddress"><?php
+                      // Structured parts when SITE_STREET is configured; otherwise the single
+                      // SITE_ADDRESS display string, so nothing is lost before the parts are set.
+                      if (SITE_STREET !== ''): ?><span itemprop="streetAddress"><?= htmlspecialchars(SITE_STREET) ?></span>, <?php
+                        if (SITE_LOCALITY !== ''): ?><span itemprop="addressLocality"><?= htmlspecialchars(SITE_LOCALITY) ?></span>, <?php endif;
+                        if (SITE_REGION !== ''): ?><span itemprop="addressRegion"><?= htmlspecialchars(SITE_REGION) ?></span><?php endif;
+                        if (SITE_POSTAL_CODE !== ''): ?> <span itemprop="postalCode"><?= htmlspecialchars(SITE_POSTAL_CODE) ?></span><?php endif;
+                        if (SITE_COUNTRY_NAME !== ''): ?>, <span itemprop="addressCountry"><?= htmlspecialchars(SITE_COUNTRY_NAME) ?></span><?php endif;
+                      else: ?><span itemprop="streetAddress"><?= htmlspecialchars(SITE_ADDRESS) ?></span><?php
+                        if (SITE_POSTAL_CODE !== ''): ?> <span itemprop="postalCode"><?= htmlspecialchars(SITE_POSTAL_CODE) ?></span><?php endif;
+                      endif; ?></div>
                   </div>
                 </div>
               <?php endif; ?>
@@ -1779,10 +1803,8 @@ if ($heroDescription === '') {
                 </div>
               </div>
             </div>
-            <div style="margin-top:8px">
-              <p
-                style="font-size:13px;color:var(--text-3);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em">
-                Follow us</p>
+            <div class="u-social-block">
+              <p class="u-eyebrow">Follow us</p>
               <div class="social-links">
                 <a href="https://www.linkedin.com/company/102707174/" target="_blank" rel="noopener noreferrer"
                   class="social-link" aria-label="LinkedIn">

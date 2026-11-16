@@ -29,8 +29,8 @@ CREATE TABLE `site_settings` (
 
 -- Insert default settings
 INSERT INTO `site_settings` (`key_name`, `value`) VALUES
-('hero_title', 'Your operations, centralised. Your data, visible. Your team, faster.'),
-('hero_description', 'Dashandots builds custom ERP, CRM, dashboards, portals, and mobile apps for growing Indian businesses: scoped around how you actually work, owned by you, supported after launch.'),
+('hero_title', 'Custom ERP software for your operations. Custom CRM software for your sales team. Custom dashboards for your data.'),
+('hero_description', 'Dashandots builds custom ERP, CRM, dashboards, portals and mobile apps for growing Indian businesses in Gurugram and Delhi NCR: scoped around how you actually work, owned by you, supported after launch.'),
 ('about_us_text', 'Dashandots Technology is a full-cycle software development and technology consulting company based in India. We combine the rigour of large enterprise IT firms with the agility and transparency that small and mid-sized businesses need.');
 
 -- --------------------------------------------------------

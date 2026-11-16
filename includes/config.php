@@ -40,7 +40,111 @@ define('SITE_PUBLIC_EMAIL', site_env('SITE_PUBLIC_EMAIL', ''));
 define('SITE_EMAIL', SITE_PUBLIC_EMAIL);
 define('SITE_PHONE', site_env('SITE_PHONE', ''));
 define('SITE_WHATSAPP_URL', site_env('SITE_WHATSAPP_URL', ''));
-define('SITE_ADDRESS', site_env('SITE_ADDRESS', ''));
+// Structured postal address. SEO/GEO crawlers and schema.org want the parts
+// separately; SITE_ADDRESS stays the human-readable display string and is
+// assembled from the parts when it is not set explicitly.
+define('SITE_STREET', site_env('SITE_STREET', ''));
+define('SITE_LOCALITY', site_env('SITE_LOCALITY', 'Gurugram'));
+define('SITE_REGION', site_env('SITE_REGION', 'Haryana'));
+define('SITE_POSTAL_CODE', site_env('SITE_POSTAL_CODE', ''));
+define('SITE_COUNTRY', site_env('SITE_COUNTRY', 'IN'));
+define('SITE_COUNTRY_NAME', site_env('SITE_COUNTRY_NAME', 'India'));
+
+if (!function_exists('site_address_parts')) {
+    /** Non-empty address components, in display order. */
+    function site_address_parts(): array
+    {
+        return array_values(array_filter([
+            SITE_STREET,
+            SITE_LOCALITY,
+            SITE_REGION,
+            SITE_POSTAL_CODE,
+            SITE_COUNTRY_NAME,
+        ], static fn($v): bool => is_string($v) && $v !== ''));
+    }
+}
+
+if (!function_exists('site_address_street_fallback')) {
+    /**
+     * Street line recovered from the single SITE_ADDRESS string, for sites that
+     * set it before the structured parts existed. Drops the segments already
+     * carried by SITE_LOCALITY / SITE_REGION / SITE_POSTAL_CODE / country, so
+     * the schema does not repeat "Gurugram" in two different fields.
+     */
+    function site_address_street_fallback(): string
+    {
+        if (!defined('SITE_ADDRESS') || SITE_ADDRESS === '') {
+            return '';
+        }
+        $known = array_filter([
+            mb_strtolower(SITE_LOCALITY),
+            mb_strtolower(SITE_REGION),
+            mb_strtolower(SITE_POSTAL_CODE),
+            mb_strtolower(SITE_COUNTRY_NAME),
+            mb_strtolower(SITE_COUNTRY),
+        ], static fn(string $v): bool => $v !== '');
+
+        $kept = [];
+        foreach (explode(',', SITE_ADDRESS) as $segment) {
+            $segment = trim($segment);
+            if ($segment === '' || in_array(mb_strtolower($segment), $known, true)) {
+                continue;
+            }
+            $kept[] = $segment;
+        }
+        return implode(', ', $kept);
+    }
+}
+
+if (!function_exists('site_postal_address_schema')) {
+    /** schema.org PostalAddress built from the configured parts. */
+    function site_postal_address_schema(): array
+    {
+        $a = ['@type' => 'PostalAddress'];
+        $street = SITE_STREET !== '' ? SITE_STREET : site_address_street_fallback();
+        if ($street !== '')          { $a['streetAddress']   = $street; }
+        if (SITE_LOCALITY !== '')    { $a['addressLocality'] = SITE_LOCALITY; }
+        if (SITE_REGION !== '')      { $a['addressRegion']   = SITE_REGION; }
+        if (SITE_POSTAL_CODE !== '') { $a['postalCode']      = SITE_POSTAL_CODE; }
+        $a['addressCountry'] = SITE_COUNTRY !== '' ? SITE_COUNTRY : 'IN';
+        return $a;
+    }
+}
+
+$siteAddressEnv = site_env('SITE_ADDRESS', '');
+define('SITE_ADDRESS', $siteAddressEnv !== '' ? $siteAddressEnv : implode(', ', site_address_parts()));
+unset($siteAddressEnv);
+if (!function_exists('site_email_link')) {
+    /**
+     * Obfuscated email anchor. The address never appears in the served HTML as
+     * plain text, so harvesters (and the "Email Privacy" audit check) find
+     * nothing; app.js rebuilds the mailto: href on load. Without JavaScript the
+     * link still works -- it falls back to the on-page contact form.
+     *
+     * @param string $label    Link text shown before JS runs.
+     * @param bool   $showAddr Replace the label with the real address after JS runs.
+     */
+    function site_email_link(string $label = 'Email us', bool $showAddr = false, string $ctaLocation = ''): string
+    {
+        if (!defined('SITE_EMAIL') || SITE_EMAIL === '' || strpos(SITE_EMAIL, '@') === false) {
+            return '';
+        }
+        [$user, $domain] = explode('@', SITE_EMAIL, 2);
+        $esc = static fn(string $v): string => htmlspecialchars($v, ENT_QUOTES, 'UTF-8');
+        $fallback = (defined('BASE_PATH') ? BASE_PATH : '') . '/#contact';
+
+        $attrs = 'class="email-obf" href="' . $esc($fallback) . '"'
+            . ' data-eu="' . $esc($user) . '" data-ed="' . $esc($domain) . '"';
+        if ($showAddr) {
+            $attrs .= ' data-email-show="1"';
+        }
+        if ($ctaLocation !== '') {
+            $attrs .= ' data-track="cta" data-cta-location="' . $esc($ctaLocation) . '"';
+        }
+        return '<a ' . $attrs . '>' . $esc($label) . '</a>';
+    }
+}
+
 define('SITE_FOUNDER_NAME', site_env('SITE_FOUNDER_NAME', ''));
 define('SITE_FOUNDER_TITLE', site_env('SITE_FOUNDER_TITLE', 'Founder, Dashandots Technology'));
 define('SITE_FOUNDER_LINKEDIN', site_env('SITE_FOUNDER_LINKEDIN', ''));

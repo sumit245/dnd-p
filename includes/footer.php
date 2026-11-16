@@ -63,7 +63,7 @@
           <li><a href="<?= BASE_PATH ?>/blog/">Blog</a></li>
           <li><a href="<?= BASE_PATH ?>/#faq">FAQ</a></li>
           <?php if (defined('SITE_EMAIL') && SITE_EMAIL !== ''): ?>
-            <li><a href="mailto:<?= htmlspecialchars(SITE_EMAIL, ENT_QUOTES, 'UTF-8') ?>" data-track="cta" data-cta-location="footer">Email</a></li>
+            <li><?= site_email_link('Email', false, 'footer') ?></li>
           <?php endif; ?>
           <?php if (defined('SITE_PHONE') && SITE_PHONE !== ''): ?>
             <li><a href="tel:<?= htmlspecialchars(preg_replace('/\s+/', '', SITE_PHONE), ENT_QUOTES, 'UTF-8') ?>" data-track="phone" data-cta-location="footer">Call</a></li>

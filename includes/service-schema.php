@@ -28,7 +28,9 @@ function service_schema_provider(): array
             'https://twitter.com/dashandots',
         ],
     ];
-    if (defined('SITE_ADDRESS') && SITE_ADDRESS !== '') {
+    if (function_exists('site_postal_address_schema')) {
+        $provider['address'] = site_postal_address_schema();
+    } elseif (defined('SITE_ADDRESS') && SITE_ADDRESS !== '') {
         $provider['address'] = [
             '@type'          => 'PostalAddress',
             'streetAddress'  => SITE_ADDRESS,

@@ -89,7 +89,13 @@ function content_image_html(string $url, string $alt, array $attrs = []): string
     $loading = $attrs['loading'] ?? 'lazy';
     $fetchpriority = $attrs['fetchpriority'] ?? '';
     $class = $attrs['class'] ?? '';
-    $style = $attrs['style'] ?? 'width:100%;height:100%;object-fit:cover';
+    // No explicit style: use the .port-media-fill class instead of an inline
+    // style attribute (SEO audit: "Remove Inline Styles"). Callers that pass
+    // their own style still get it inline.
+    $style = isset($attrs['style']) ? (string) $attrs['style'] : '';
+    if ($style === '') {
+        $class = trim($class . ' port-media-fill');
+    }
     $width = (int) ($attrs['width'] ?? 800);
     $height = (int) ($attrs['height'] ?? 450);
     $safeAlt = htmlspecialchars($alt, ENT_QUOTES, 'UTF-8');
@@ -104,15 +110,56 @@ function content_image_html(string $url, string $alt, array $attrs = []): string
     }
 
     return sprintf(
-        '<img src="%s" alt="%s" width="%d" height="%d" loading="%s" decoding="async"%s style="%s">',
+        '<img src="%s" alt="%s" width="%d" height="%d" loading="%s" decoding="async"%s%s>',
         $src,
         $safeAlt,
         $width,
         $height,
         htmlspecialchars($loading, ENT_QUOTES, 'UTF-8'),
         $extra,
-        htmlspecialchars($style, ENT_QUOTES, 'UTF-8')
+        $style !== '' ? ' style="' . htmlspecialchars($style, ENT_QUOTES, 'UTF-8') . '"' : ''
     );
+}
+
+/**
+ * Responsive WebP candidates for an image.
+ *
+ * scripts/build-image-variants.sh writes "-640.webp" / "-768.webp" /
+ * "-1024.webp" beside each
+ * source. Tiles render around 380-600px wide, so serving the full-size file to
+ * every viewport is what the audit flags as a poorly optimised image. Returns a
+ * srcset string with width descriptors, or '' when no variants exist.
+ */
+function portfolio_webp_srcset(string $webpPublic, int $intrinsicWidth): string
+{
+    static $cache = [];
+    if (isset($cache[$webpPublic])) {
+        return $cache[$webpPublic];
+    }
+
+    $candidates = [];
+    foreach ([640, 768, 1024] as $w) {
+        if ($intrinsicWidth > 0 && $w >= $intrinsicWidth) {
+            continue;
+        }
+        $variantPublic = preg_replace('/\.webp$/i', '-' . $w . '.webp', $webpPublic);
+        if (!is_string($variantPublic)) {
+            continue;
+        }
+        if (portfolio_resolve_filesystem_path($variantPublic) !== null) {
+            $candidates[] = htmlspecialchars(asset_url($variantPublic), ENT_QUOTES, 'UTF-8') . ' ' . $w . 'w';
+        }
+    }
+
+    if ($candidates === []) {
+        return $cache[$webpPublic] = '';
+    }
+
+    if ($intrinsicWidth > 0) {
+        $candidates[] = htmlspecialchars(asset_url($webpPublic), ENT_QUOTES, 'UTF-8') . ' ' . $intrinsicWidth . 'w';
+    }
+
+    return $cache[$webpPublic] = implode(', ', $candidates);
 }
 
 function portfolio_picture_html(string $url, string $alt, array $attrs = []): string
@@ -121,7 +168,13 @@ function portfolio_picture_html(string $url, string $alt, array $attrs = []): st
     $loading = $attrs['loading'] ?? 'lazy';
     $fetchpriority = $attrs['fetchpriority'] ?? '';
     $class = $attrs['class'] ?? '';
-    $style = $attrs['style'] ?? 'width:100%;height:100%;object-fit:cover';
+    // No explicit style: use the .port-media-fill class instead of an inline
+    // style attribute (SEO audit: "Remove Inline Styles"). Callers that pass
+    // their own style still get it inline.
+    $style = isset($attrs['style']) ? (string) $attrs['style'] : '';
+    if ($style === '') {
+        $class = trim($class . ' port-media-fill');
+    }
 
     $width = $meta['width'] ?? 600;
     $height = $meta['height'] ?? 400;
@@ -136,20 +189,34 @@ function portfolio_picture_html(string $url, string $alt, array $attrs = []): st
     }
 
     $img = sprintf(
-        '<img src="%s" alt="%s" width="%d" height="%d" loading="%s" decoding="async"%s style="%s">',
+        '<img src="%s" alt="%s" width="%d" height="%d" loading="%s" decoding="async"%s%s>',
         htmlspecialchars(asset_url($url), ENT_QUOTES, 'UTF-8'),
         $safeAlt,
         $width,
         $height,
         htmlspecialchars($loading, ENT_QUOTES, 'UTF-8'),
         $extra,
-        htmlspecialchars($style, ENT_QUOTES, 'UTF-8')
+        $style !== '' ? ' style="' . htmlspecialchars($style, ENT_QUOTES, 'UTF-8') . '"' : ''
     );
 
     if (!empty($meta['webp'])) {
+        $srcset = portfolio_webp_srcset($meta['webp'], $width);
+        if ($srcset === '') {
+            $srcset = htmlspecialchars(asset_url($meta['webp']), ENT_QUOTES, 'UTF-8');
+            $sizesAttr = '';
+        } else {
+            // Measured slot widths: ~91vw on phones, ~31vw up to the 1200px container
+            // cap, then a fixed ~371px column. Keep these honest -- an over-stated width
+            // makes the browser fetch the 1024px file for a 310px tile, which is the
+            // waste being fixed here.
+            $sizes = $attrs['sizes'] ?? '(max-width: 600px) 92vw, (max-width: 1248px) 31vw, 380px';
+            $sizesAttr = ' sizes="' . htmlspecialchars((string) $sizes, ENT_QUOTES, 'UTF-8') . '"';
+        }
+
         return sprintf(
-            '<picture><source srcset="%s" type="image/webp">%s</picture>',
-            htmlspecialchars(asset_url($meta['webp']), ENT_QUOTES, 'UTF-8'),
+            '<picture><source srcset="%s"%s type="image/webp">%s</picture>',
+            $srcset,
+            $sizesAttr,
             $img
         );
     }

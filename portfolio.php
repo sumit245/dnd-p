@@ -90,7 +90,13 @@ $h = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8')
         </div>
 
         <div class="pf-grid" id="pf-grid">
-          <?php $shown = 0; ?>
+          <?php
+            // Per-tile custom properties are collected here and emitted as one
+            // stylesheet below the grid, so no tile carries a style attribute
+            // (SEO audit: "Remove Inline Styles").
+            $shown = 0;
+            $tileRules = [];
+          ?>
           <?php foreach ($rows as $index => $row): ?>
             <?php
             $show = $active === 'all' || ($row['industry'] ?? '') === $active;
@@ -129,7 +135,7 @@ $h = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8')
             ?>
             <article class="pf-tile pf-tile--<?= $shape ?> reveal" data-industry="<?= $h($row['industry'] ?? '') ?>"
               data-slug="<?= $h($row['slug']) ?>" data-shape="<?= $shape ?>"
-              style="--c:<?= $h(portfolio_tile_color($row)) ?>;--reveal-delay:<?= $delay ?>ms" <?= $show ? '' : ' hidden' ?>
+              <?php $tileRules[$row['slug']] = '--c:' . portfolio_tile_color($row) . ';--reveal-delay:' . $delay . 'ms'; ?><?= $show ? '' : ' hidden' ?>
               <?= $large ? '' : ' title="' . $h($row['title']) . '"' ?>>
               <<?= $tag ?> class="pf-tile__link"<?= $link ? ' href="' . $h($link['href']) . '"' . ($link['external'] ? ' target="_blank" rel="noopener noreferrer"' : '') . ' aria-label="' . $h($ariaLbl) . '" data-track="' . ($link['external'] ? 'cta' : 'demo') . '" data-cta-location="portfolio-page" data-demo-slug="' . $h($row['slug']) . '"' : ' aria-label="' . $h($row['title']) . '"' ?>>
                 <div class="pf-tile__frame">
@@ -156,6 +162,13 @@ $h = static fn($v): string => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8')
               </<?= $tag ?>>
             </article>
           <?php endforeach; ?>
+          <?php if ($tileRules !== []): ?>
+            <style>
+              <?php foreach ($tileRules as $slug => $rule): ?>
+              .pf-tile[data-slug="<?= $h($slug) ?>"]{<?= $h($rule) ?>}
+              <?php endforeach; ?>
+            </style>
+          <?php endif; ?>
 
           <!-- CTA plate: always visible, drops into the last gap of the grid -->
           <article class="pf-tile pf-tile--c reveal" data-cta>

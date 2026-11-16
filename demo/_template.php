@@ -84,13 +84,13 @@ $isMobileApp = ($portfolio['category'] ?? '') === 'mobile';
         <p class="demo-creds-note">
           Open access: nothing to request. Log in with the details above and click through the whole system.
           This demo runs on sample data only. Need a walkthrough on your own structure? Email
-          <a href="mailto:<?= htmlspecialchars(SITE_EMAIL) ?>"><?= htmlspecialchars(SITE_EMAIL) ?></a>
+          <?= site_email_link('us', true, 'demo') ?>
           or use the <a href="<?= BASE_PATH ?>/#contact">contact form</a>.
         </p>
       <?php else: ?>
         <p class="demo-creds-note">
           <?= $isMobileApp ? 'Want a guided walkthrough or a white-labelled version for your business? Email' : 'Demo passwords are not published on this page. Email' ?>
-          <a href="mailto:<?= htmlspecialchars(SITE_EMAIL) ?>"><?= htmlspecialchars(SITE_EMAIL) ?></a>
+          <?= site_email_link('us', true, 'demo') ?>
           or use the <a href="<?= BASE_PATH ?>/#contact">contact form</a> to request full demo access.
         </p>
       <?php endif; ?>

@@ -12,6 +12,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* Rebuild obfuscated email links. The served HTML carries only the local part
+     and the domain in data attributes, so harvesters find no address; real
+     visitors get a working mailto: once this runs. Links without JS fall back
+     to the contact form via their static href. */
+  document.querySelectorAll('a.email-obf').forEach((link) => {
+    const user = link.getAttribute('data-eu');
+    const domain = link.getAttribute('data-ed');
+    if (!user || !domain) return;
+    const address = user + String.fromCharCode(64) + domain;
+    link.setAttribute('href', 'mailto:' + address);
+    if (link.getAttribute('data-email-show') === '1') {
+      link.textContent = address;
+    }
+    link.removeAttribute('data-eu');
+    link.removeAttribute('data-ed');
+  });
+
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Push to dataLayer (GTM) and, when gtag.js is loaded directly (GA4_MEASUREMENT_ID),

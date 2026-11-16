@@ -17,7 +17,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-WIDTHS=(640 1024)
+WIDTHS=(640 768 1024)
 QUALITY=82
 
 if ! command -v cwebp >/dev/null 2>&1; then
